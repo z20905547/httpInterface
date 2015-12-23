@@ -1,0 +1,125 @@
+<#include "*/basic/default.html"/>
+
+<#macro title>
+编辑资源${entity.name!''}
+</#macro>
+
+<#macro body>
+<div class="data-content">
+
+    <ol class="breadcrumb">
+        <li><span class="glyphicon  glyphicon-link"></span></li>
+        <li><a href="${base}/account/resource/list">资源管理</a></li>
+        <li class="active">编辑资源</li>
+    </ol>
+
+    <div class="panel panel-default">
+
+        <div class="panel-heading">
+            <h3 class="panel-title"><span class="glyphicon glyphicon-edit"></span> 编辑资源</h3>
+        </div>
+
+        <form action="${base}/account/resource/save" id="edit-resource-form" method="post">
+
+            <#if entity.id??>
+            <input type="hidden" id="id" name="id" value="${entity.id!''}">
+            </#if>
+
+            <div class="panel-body">
+
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-xs-6">
+                            <label for="name">资源名称:</label>
+                            <input type="text" class="form-control required" id="name" maxlength="16" name="name" value="${entity.name!''}">
+                        </div>
+                        <div class="col-xs-6">
+                            <label for="type">资源类型:</label>
+                            <select class="form-control required" name="type" id="type">
+                                <option value="">请选择...</option>
+                                <#list resourceTypes as rt>
+                                <option value="${rt.value}" <#if entity.type?? && entity.type == rt.value >selected="selected"</#if>>
+                                    ${rt.key}
+                                </option>
+                                </#list>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-xs-6">
+                            <label for="name">拦截uri:</label>
+                            <input type="text" class="form-control" maxlength="256" placeholder="用于shiro授权时要拦截的uri" id="value" name="value" value="${entity.value!''}">
+                        </div>
+                        <div class="col-xs-6">
+                            <label for="permission">访问许可表达式:</label>
+                            <input type="text" class="form-control" maxlength="64" placeholder="用于shiro对拦截的值promission" id="permission" name="permission" value="${entity.permission!''}">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-xs-6">
+                            <label for="sort">顺序值:</label>
+                            <input type="text" class="form-control number" placeholder="可以不输入，系统会自动生成" max="9999" min="0" id="sort"  name="sort" value="${entity.sort!''}">
+                        </div>
+                        <div class="col-xs-6">
+                            <label for="icon">图标cls:</label>
+                            <input type="text" class="form-control" id="icon" maxlength="32" name="icon" value="${entity.icon!''}">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <label for="fk_parent_id">所属父类:</label>
+                            <select class="form-control" name="fk_parent_id" id="fk_parent_id">
+                                <option value="">请选择...</option>
+                                <#list resources as r>
+                                <option value="${r.id}" <#if entity.fk_parent_id?? && entity.fk_parent_id == r.id>selected="selected"</#if>>
+                                    ${r.name}
+                                </option>
+                                </#list>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <label for="remark">备注:</label>
+                            <textarea rows="3" class="form-control" maxlength="512" name="remark" id="remark">${entity.remark!''}</textarea>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="panel-footer">
+
+                <@shiro.hasPermission name="resource:save">
+                <button type="submit" class="btn btn-success">
+                    <span class="glyphicon glyphicon-ok"></span> 保存
+                </button>
+
+                <button type="reset" class="btn btn-warning">
+                    <span class="glyphicon glyphicon-trash"></span> 重置
+                </button>
+                </@shiro.hasPermission>
+
+                <button type="button" class="btn btn-default" onclick="history.back();">
+                    <span class="glyphicon glyphicon-backward"></span> 返回
+                </button>
+
+            </div>
+        </form>
+
+    </div>
+</#macro>
+
+

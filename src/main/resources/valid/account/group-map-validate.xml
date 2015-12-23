@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<validate-mapper name="group">
+
+    <key name="name" alias="名称">
+        <notEmpty />
+        <length max="16" />
+    </key>
+
+</validate-mapper>

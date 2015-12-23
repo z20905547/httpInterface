@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 组数据访问映射 -->
+<mapper namespace="vfh.httpInterface.dao.account.GroupDao" >
+
+    <select id="get" resultType="hashmap">
+        SELECT
+          id as "id",
+          name as "name",
+          remark as "remark"
+        FROM
+          tb_group
+        WHERE
+          id = #{id}
+    </select>
+
+    <select id="getUserGroups" resultType="hashmap">
+        SELECT
+          g.id as "id",
+          g.name as "name",
+          g.remark as "remark"
+        FROM
+          tb_group g
+        LEFT JOIN
+          tb_group_user gu ON g.id = gu.fk_group_id
+        LEFT JOIN
+          tb_user u ON u.id = gu.fk_user_id
+        WHERE
+          u.id = #{userId}
+    </select>
+
+    <select id="find" resultType="hashmap">
+        SELECT
+          id as "id",
+          name as "name",
+          remark as "remark"
+        FROM
+          tb_group
+        <where>
+            <if test="filter.name != null and filter.name != ''">
+                <bind name="filter.name" value=" '%' + filter.name + '%' " />
+                name LIKE #{filter.name}
+            </if>
+        </where>
+        ORDER BY id DESC
+        <if test="filter.first != null and filter.last != null">
+            LIMIT #{filter.first},#{filter.last}
+        </if>
+    </select>
+
+    <select id="count" resultType="long">
+        SELECT
+          COUNT(id)
+        FROM
+          tb_group
+        <where>
+            <if test="filter.name != null and filter.name != ''">
+                <bind name="filter.name" value=" '%' + filter.name + '%' " />
+                name LIKE #{filter.name}
+            </if>
+        </where>
+    </select>
+
+    <delete id="delete">
+        DELETE FROM tb_group WHERE id = #{id}
+    </delete>
+
+    <delete id="deleteUserAssociation">
+        DELETE FROM tb_group_user WHERE fk_group_id = #{id}
+    </delete>
+
+    <delete id="deleteResourceAssociation">
+        DELETE FROM tb_group_resource WHERE fk_group_id = #{id}
+    </delete>
+
+    <update id="update">
+        <trim prefix="SET" suffixOverrides="," />
+        UPDATE
+          tb_group
+        SET
+            name=#{entity.name},
+            remark=#{entity.remark}
+        WHERE
+          id = #{entity.id}
+    </update>
+
+
+    <insert id="insert" useGeneratedKeys="true" keyProperty="entity.id">
+        INSERT INTO tb_group(
+          name,
+          remark
+        ) VALUES (
+          #{entity.name},
+          #{entity.remark}
+        )
+    </insert>
+
+    <insert id="insertUserAssociation">
+        INSERT INTO
+          tb_group_user(fk_user_id,fk_group_id)
+        VALUES
+        <foreach collection="userIds" item="userId" index="index" separator="," >
+            (#{userId}, #{id})
+        </foreach>
+    </insert>
+
+    <insert id="insertResourceAssociation">
+        INSERT INTO
+          tb_group_resource(fk_resource_id,fk_group_id)
+        VALUES
+        <foreach collection="resourceIds" item="resourceId" index="index" separator="," >
+            (#{resourceId}, #{id})
+        </foreach>
+    </insert>
+
+</mapper>

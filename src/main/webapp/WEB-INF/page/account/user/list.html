@@ -1,0 +1,197 @@
+<#include "*/basic/default.html"/>
+
+<#macro title>
+用户管理
+</#macro>
+
+<#macro head>
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        $("#selectAll").click(function () {
+            var checkbox = $(this),
+                    children = checkbox.parents("table").find("tbody input[type='checkbox']");
+
+            children.prop("checked", checkbox.is(":checked"));
+        });
+    });
+
+    function submitDeleteForm() {
+        var length = $("#user-list-form").find("input[type='checkbox'][id!='selectAll']:checked").length;
+        if (length == 0) {
+            return ;
+        }
+        bootbox.confirm("确定要删除选中的" + length + "条记录吗？", function (result) {
+            if (result) {
+                $("#user-list-form").submit();
+            }
+        });
+    }
+
+</script>
+</#macro>
+
+<#macro body>
+
+<div class="modal fade" id="search-modal" role="dialog" aria-hidden="true">
+
+    <div class="modal-dialog">
+
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title"><span class="glyphicon glyphicon-search"></span> 内容查询</h4>
+            </div>
+
+            <form id="user-search-form" action="${base}/account/user/list" method="post">
+
+                <div class="modal-body">
+
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-xs-6">
+                                <label for="username">登录帐号:</label>
+                                <input type="text" class="form-control" id="username" name="username" value="${RequestParameters.username!''}">
+                            </div>
+                            <div class="col-xs-6">
+                                <label for="nickname">昵称:</label>
+                                <input type="text" class="form-control" id="nickname" name="nickname" value="${RequestParameters.nickname!''}">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-xs-6">
+                                <label for="state">用户状态:</label>
+                                <select class="form-control" name="state" id="state">
+                                    <option value="">全部</option>
+                                    <#list states as s>
+                                        <option value="${s.value}"<#if s.value?string == RequestParameters.state!''>selected="selected"</#if>>
+                                            ${s.key}
+                                        </option>
+                                    </#list>
+                                </select>
+                            </div>
+                            <div class="col-xs-6">
+                                <label for="email">电子邮件:</label>
+                                <input type="text" class="form-control" id="email" name="email" value="${RequestParameters.email!''}">
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-success">
+                        <span class="glyphicon glyphicon-ok"></span> 确定
+                    </button>
+                    <button type="reset" class="btn btn-warning">
+                        <span class="glyphicon glyphicon-trash"></span> 重置
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="data-content">
+
+    <ol class="breadcrumb">
+        <li class="active"><span class="glyphicon glyphicon-user"></span></li>
+        <li class="active"> 用户管理</li>
+    </ol>
+
+    <#if success?has_content>
+    <div class="alert alert-success fade in">
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+        <span class="glyphicon glyphicon-ok"></span> ${success}
+    </div>
+    </#if>
+
+    <form id="user-list-form" action="${base}/account/user/delete" valid="false" method="post">
+        <div class="panel panel-default">
+
+            <div class="panel-heading">
+                <h3 class="panel-title"><span class="glyphicon glyphicon-user"></span> 用户管理</h3>
+            </div>
+
+            <div class="table-container">
+                <table class="table table-hover table-striped">
+                    <thead>
+                        <tr>
+                            <th><input type="checkbox" id="selectAll"></th>
+                            <th>登录帐号</th>
+                            <th>昵称</th>
+                            <th>电子邮件</th>
+                            <th>状态</th>
+                            <th>操作</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        <#if page.content?size == 0>
+                        <tr>
+                            <td colspan="6"> 没有记录</td>
+                        </tr>
+                        <#else>
+                            <#list page.content as r>
+                            <tr>
+                                <td><input type="checkbox" name="ids" value="${r.id}"></td>
+                                <td>${r.username!''}</td>
+                                <td>${r.nickname!''}</td>
+                                <td>${r.email!''}</td>
+                                <td>
+                                    <#list states as s>
+                                        <#if s.value = r.state>
+                                            ${s.key}
+                                            <#break />
+                                        </#if>
+                                    </#list>
+                                </td>
+                                <td>
+                                    <@shiro.hasPermission name="user:edit">
+                                    <a class="btn btn-default btn-sm" href="${base}/account/user/edit?id=${r.id}">
+                                        <span class="glyphicon glyphicon-edit"></span>
+                                    </a>
+                                    </@shiro.hasPermission>
+                                </td>
+                            </tr>
+                            </#list>
+
+                        </#if>
+
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="panel-footer">
+                <a class="btn btn-info" data-toggle="modal" data-target="#search-modal">
+                    <span class="glyphicon glyphicon-search"></span> 查询
+                </a>
+
+                <@shiro.hasPermission name="user:insert">
+                <a href="${base}/account/user/add" class="btn btn-primary">
+                    <span class="glyphicon glyphicon-plus"></span> 添加
+                </a>
+                </@shiro.hasPermission>
+
+                <@shiro.hasPermission name="user:delete">
+                <button type="button" class="btn btn-danger" onclick="submitDeleteForm();">
+                    <span class="glyphicon glyphicon-remove"></span> 删除
+                </button>
+                </@shiro.hasPermission>
+            </div>
+
+        </div>
+
+        <@pagination 'user-search-form' page />
+
+    </form>
+
+</div>
+
+</#macro>
+
+

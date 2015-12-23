@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<validate-mapper name="update-user">
+
+    <key name="email" alias="电子邮件">
+        <email/>
+        <length max="64" />
+    </key>
+
+    <key name="nickname" alias="昵称">
+        <notEmpty />
+        <length max="16" />
+    </key>
+
+    <key name="state" alias="状态">
+        <notEmpty />
+        <number />
+    </key>
+
+</validate-mapper>

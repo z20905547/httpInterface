@@ -1,0 +1,352 @@
+div, a:focus, .btn:focus {
+	outline: none;
+}
+
+.modal-md{
+	width:700px
+}
+
+.modal-header,
+.panel-title, 
+.panel > .panel-heading{
+	font-weight: bold;
+}
+
+.modal-header, 
+.panel-default > .panel-heading {
+    background-color: #4B4B4B;
+    color: #FFFFFF;
+}
+.panel-default {
+	border-color: #bbb;
+}
+
+.panel-default > .panel-heading {
+    margin: -1px;
+}
+
+.panel .table {
+    margin-bottom: 0px;
+}
+
+.table thead > tr > th, 
+.table tbody > tr > th, 
+.table tfoot > tr > th, 
+.table thead > tr > td, 
+.table tbody > tr > td, 
+.table tfoot > tr > td {
+	vertical-align:middle;
+}
+
+.table thead > tr > th {
+	border-bottom: 1px solid #DDDDDD;
+}
+
+.pagination {
+	margin: 0px;
+}
+
+.navbar-default {
+	background-color: #FFFFFF;
+    padding: 0px 10px;
+}
+.navbar-default .navbar-nav > li > a {
+	border-top: 2px solid transparent;
+	background-color:#FFFFFF;
+	padding: 8px 15px;
+	border-left: 1px solid transparent;
+	border-right: 1px solid transparent;
+}
+
+.navbar-default .navbar-nav > li > a > .nav-title,
+.navbar-default .navbar-nav > li > a > .glyphicon  {
+	display: block;
+	text-align: center;
+}
+
+.navbar-default .navbar-nav > li > a > .glyphicon {
+	font-size: 26px;
+	margin-bottom: 3px;
+}
+
+.navbar-default .navbar-nav > li > a:hover {
+	color: #555555;
+	border-left: 1px solid #EEEEEE;
+	border-right: 1px solid #EEEEEE;
+	background-color: #F8F8F8;
+	border-top: 2px solid #dcdcdc;
+}
+
+.navbar-default .navbar-nav > .active > a,
+.navbar-default .navbar-nav > .active > a:hover,
+.navbar-default .navbar-nav > .active > a:focus, 
+.navbar-default .navbar-nav > .open > a, 
+.navbar-default .navbar-nav > .open > a:hover, 
+.navbar-default .navbar-nav > .open > a:focus {
+ 	border-top: 2px solid #54B8EA;
+ 	background-color: #F6F6F6;
+ 	border-left: 1px solid #CCCCCC;
+	border-right: 1px solid #CCCCCC;
+ 	color: #222222;
+}
+
+.navbar-toggle {
+	float: left;
+	margin-left: 15px;
+}
+
+.breadcrumb {
+	border: 1px solid #e5e5e5;
+	background: #FFFFFF;
+    margin-top: 20px;
+}
+
+.breadcrumb > li, .breadcrumb > li > a {
+    color: #777;
+    text-decoration: none;
+}
+
+.breadcrumb > li, .breadcrumb > li > a:hover {
+    color: #333;
+}
+
+.breadcrumb > li.active {
+    color: #BBB;
+}
+
+.nav-tabs {
+    margin-left: -1px;
+    margin-top: -1px;
+}
+
+.nav-tabs > li > a {
+	border-top: 2px solid transparent;
+	border-radius: 0 0 0 0;
+	margin: 0px 3px;
+}
+
+.nav-tabs > li.active > a , 
+.nav-tabs > li.active > a:hover, 
+.nav-tabs > li.active > a:focus{
+	border-left: 1px solid #CCCCCC;
+	border-right: 1px solid #CCCCCC;
+    border-top: 2px solid #54B8EA;
+    color: #444444;
+}
+.nav-tabs > li > a:hover {
+	border-top: 2px solid #dcdcdc;
+	background-color: #F8F8F8;
+}
+
+.dropdown-submenu {
+	position: relative;
+}
+
+.dropdown-submenu>.dropdown-menu {
+	top: 0;
+	left: 100%;
+	margin-top: -6px;
+	margin-left: -1px;
+	border-radius: 4px;
+}
+
+.dropdown-submenu:hover>.dropdown-menu {
+	display: block;
+}
+
+.dropdown-submenu>a:after {
+	display: block;
+	content: " ";
+	float: right;
+	width: 0;
+	height: 0;
+	border-color: transparent;
+	border-style: solid;
+	border-width: 5px 0 5px 5px;
+	border-left-color: #000000;
+	margin-top: 5px;
+	margin-right: -10px;
+}
+
+.dropdown-submenu.pull-left {
+	float: none;
+}
+
+.dropdown-submenu.pull-left>.dropdown-menu {
+	left: -100%;
+	margin-left: 10px;
+	border-radius: 4px;
+}
+
+.table-container {
+	overflow: auto;
+}
+
+.table-container > .table > thead > tr > td,
+.table-container > .table > tbody > tr > td,
+.table-container > .table > tfoot > tr > td,
+.table-container > .table > thead > tr > th,
+.table-container > .table > tbody > tr > th,
+.table-container > .table > tfoot > tr > th{
+	white-space:nowrap
+}
+
+.tab-content {
+	min-height: 200px;
+}
+
+.tab-content>.tab-pane {
+	padding: 10px;
+}
+
+.modal-backdrop {
+    background-color: #FFFFFF;
+    position: fixed;
+}
+
+.modal {
+	overflow-y:auto;
+}
+
+.modal-header {
+    padding: 10px;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+}
+
+.modal-footer {
+    padding: 15px 10px;
+}
+
+.no-padding {
+	padding: 0px!important;
+}
+
+.no-margin {
+	margin: 0px!important;
+}
+
+.tree {
+    min-height:20px;
+    background-color:#fbfbfb;
+    padding: 10px;
+    overflow: auto;
+}
+
+.tree > ul {
+	padding-left: 0px;
+}
+
+.tree ul li {
+    list-style-type:none;
+    padding-top:5px;
+    position:relative;
+    white-space: nowrap;
+}
+
+.tree ul li .node {
+    border:1px solid #adadad;
+    border-radius:5px;
+    display:inline-block;
+    padding:3px 8px;
+    text-decoration:none;
+}
+
+.tree ul li .node .glyphicon {
+	margin-right: 3px;
+}
+.tree ul li .node > * {
+	vertical-align: middle;
+} 
+
+.tree > ul li ul{
+	padding-left: 25px;
+}
+
+.panel-body > .tree {
+	margin : -15px;
+}
+
+.paging-bar {
+	margin: 0px 3px 20px 3px;
+	padding: 0px 15px;
+	overflow: hidden;
+}
+
+.paging-bar > .pagination > li > a, 
+.paging-bar > .pagination > li > span {
+	border: 1px solid #bbb;
+	background-color: #f5f5f5;
+	border-top:none;
+	color: #000;
+}
+
+.paging-bar > .pagination > li:first-child > a, 
+.paging-bar > .pagination > li:first-child > span, 
+.paging-bar > .pagination > li:last-child > a, 
+.paging-bar > .pagination > li:last-child > span {
+	border-top-left-radius: 0px;
+	border-top-right-radius: 0px;
+}
+.pagination > li > a:hover, 
+.pagination > li > a:focus{
+	color: #333;
+	background-color: #e8e8e8;
+}
+
+.paging-bar > .pagination > .active > a, 
+.paging-bar > .pagination > .active > span, 
+.paging-bar > .pagination > .active > a:hover, 
+.paging-bar > .pagination > .active > span:hover, 
+.paging-bar > .pagination > .active > a:focus, 
+.paging-bar > .pagination > .active > span:focus {
+	background-color: #eee;
+	color: #000;
+	border-color: #bbb;
+	background-color: #f5f5f5;
+	box-shadow: 0px 0px 10px #bbb inset;
+}
+
+
+.paging-bar > .pagination > .disabled > span, 
+.paging-bar > .pagination > .disabled > span:hover, 
+.paging-bar > .pagination > .disabled > span:focus, 
+.paging-bar > .pagination > .disabled > a, 
+.paging-bar > .pagination > .disabled > a:hover, 
+.paging-bar > .pagination > .disabled > a:focus  {
+	color: #999;
+	background-color: #fff;
+	border-color: #ddd;
+}
+
+.panel + .paging-bar {
+	margin-top : -20px;
+}
+
+.callout {
+    padding: 20px;
+    margin: 20px 0;
+    border: 1px solid #eee;
+    border-left-width: 5px;
+    border-radius: 3px;
+    position: relative;
+}
+
+.callout-danger {
+    border-left-color: #d9534f;
+}
+.callout-warning {
+    border-left-color: #f0ad4e;
+}
+.callout-default {
+    border-left-color: #adadad;
+}
+.callout-primary {
+    border-left-color: #357ebd;
+}
+.callout-success {
+    border-left-color: #398439;
+}
+.callout-info {
+    border-left-color: #269abc;
+}

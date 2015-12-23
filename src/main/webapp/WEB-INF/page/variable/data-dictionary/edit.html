@@ -1,0 +1,103 @@
+<#include "*/basic/default.html"/>
+
+<#macro title>
+编辑数据字典
+</#macro>
+
+<#macro body>
+<div class="data-content">
+
+    <ol class="breadcrumb">
+        <li class="active"><span class="glyphicon glyphicon-list-alt"></span></li>
+        <li><a href="${base}/variable/data-dictionary/list">数据字典管理</a></li>
+        <li class="active">编辑数据字典</li>
+    </ol>
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title"><span class="glyphicon glyphicon-edit"></span> 编辑数据字典</h3>
+        </div>
+        <form action="${base}/variable/data-dictionary/save" id="edit-data-dictionary-form" method="post">
+
+            <#if entity.id??>
+            <input type="hidden" name="id" value="${entity.id!''}">
+            </#if>
+
+            <div class="panel-body">
+
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-xs-6">
+                            <label for="name">字典名称:</label>
+                            <input type="text" class="form-control required" maxlength="16" id="name" name="name" value="${entity.name!''}">
+                        </div>
+                        <div class="col-xs-6">
+                            <label for="value">字典值:</label>
+                            <input type="text" class="form-control required" maxlength="8" id="value" name="value" value="${entity.value!''}">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-xs-6">
+                            <label for="type">值类型:</label>
+                            <select class="form-control required" name="type" id="type">
+                                <option value="">请选择...</option>
+                                <#list valueTypes as vt>
+                                <option value="${vt.value.name}" <#if entity.type?? && entity.type==vt.value.name>selected="selected"</#if> >
+                                    ${vt.key}
+                                </option>
+                                </#list>
+                            </select>
+                        </div>
+                        <div class="col-xs-6">
+                            <label for="fk_category_id">所属类型:</label>
+                            <select class="form-control required" name="fk_category_id" id="fk_category_id">
+                                <option value="">请选择...</option>
+                                <#list dictionaryCategories as dc>
+                                <option value="${dc.id}" <#if entity.fk_category_id?has_content && entity.fk_category_id == dc.id>selected="selected"</#if>>
+                                    ${dc.name}
+                                </option>
+                                </#list>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <label for="remark">备注:</label>
+                            <textarea rows="3" maxlength="512" class="form-control" name="remark" id="remark">${entity.remark!''}</textarea>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="panel-footer">
+
+                <@shiro.hasPermission name="data-dictionary:save">
+                <button type="submit" class="btn btn-success">
+                    <span class="glyphicon glyphicon-ok"></span> 保存
+                </button>
+
+                <button type="reset" class="btn btn-warning">
+                    <span class="glyphicon glyphicon-trash"></span> 重置
+                </button>
+                </@shiro.hasPermission>
+
+                <button type="button" class="btn btn-default" onclick="history.back();">
+                    <span class="glyphicon glyphicon-backward"></span> 返回
+                </button>
+
+            </div>
+        </form>
+    </div>
+</div>
+</#macro>
+
+
+
+

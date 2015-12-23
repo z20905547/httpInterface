@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<validate-mapper name="resource">
+
+    <key name="name" alias="名称">
+        <notEmpty />
+        <length max="16" />
+    </key>
+
+    <key name="permission" alias="访问许可表达式">
+        <length max="64" />
+    </key>
+
+    <key name="sort" alias="顺序值">
+        <number />
+    </key>
+
+    <key name="type" alias="资源类型">
+        <notEmpty />
+        <number />
+    </key>
+
+    <key name="value" alias="拦截uri">
+        <length max="256" />
+    </key>
+
+    <key name="icon" alias="图标">
+        <length max="32" />
+    </key>
+
+</validate-mapper>

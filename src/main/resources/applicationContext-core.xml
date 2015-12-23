@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:aop="http://www.springframework.org/schema/aop"
+    xmlns:tx="http://www.springframework.org/schema/tx"
+    xmlns:cache="http://www.springframework.org/schema/cache"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans.xsd
+	http://www.springframework.org/schema/context 
+	http://www.springframework.org/schema/context/spring-context.xsd 
+	http://www.springframework.org/schema/aop 
+	http://www.springframework.org/schema/aop/spring-aop.xsd
+	http://www.springframework.org/schema/tx
+	http://www.springframework.org/schema/tx/spring-tx.xsd
+	http://www.springframework.org/schema/cache
+	http://www.springframework.org/schema/cache/spring-cache.xsd ">
+
+	<description>Spring公共配置 </description>
+
+	<!-- 定义 aop Aspect自动代理 -->
+	<aop:aspectj-autoproxy proxy-target-class="true"/>
+
+	<!-- 使用 annotation 自动注册 bean,并保证 @Required, @Autowired 的属性被注入 -->
+	<context:component-scan base-package="vfh.httpInterface">
+		<context:include-filter type="annotation" expression="org.aspectj.lang.annotation.Aspect" />
+		<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+	</context:component-scan>
+
+    <!-- map 验证的 bean -->
+    <bean id="mapValidationBeanFactory" class="net.coding.chenxiaobo.map.validation.spring.MapValidationBeanFactory" >
+        <property name="mapperLocations" value="classpath*:valid/**/*.xml" />
+    </bean>
+
+    <!-- spring 对 ehcache 的缓存工厂支持 -->
+    <bean id="ehCacheManagerFactory" class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean">
+        <property name="configLocation" value="classpath:ehcache.xml" />
+    </bean>
+
+    <!-- spring 对 ehcache 的缓存管理 -->
+    <bean id="ehCacheManager" class="org.springframework.cache.ehcache.EhCacheCacheManager">
+        <property name="cacheManager" ref="ehCacheManagerFactory"></property>
+    </bean>
+
+    <!-- 使用缓存 annotation 配置 -->
+    <cache:annotation-driven cache-manager="ehCacheManager" proxy-target-class="true" />
+
+    <!-- 数据源配置 -->
+    <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">
+        <property name="url" value="${jdbc.url}" />
+        <property name="username" value="${jdbc.username}" />
+        <property name="password" value="${jdbc.password}" />
+        <property name="driverClassName" value="${jdbc.driver}" />
+        <property name="initialSize" value="${jdbc.initial.size}" />
+        <property name="minIdle" value="${jdbc.min.idle}" />
+        <property name="maxActive" value="${jdbc.max.active}" />
+        <property name="maxWait" value="60000" />
+        <property name="timeBetweenEvictionRunsMillis" value="60000" />
+        <property name="minEvictableIdleTimeMillis" value="300000" />
+    </bean>
+
+    <!-- mybatis 配置 -->
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="dataSource" />
+        <property name="mapperLocations"  value="classpath*:mapper/**/*.xml"/>
+    </bean>
+
+    <!-- mybatis 扫描 mapper 对应类的配置 -->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="vfh.httpInterface.dao" />
+    </bean>
+
+    <!-- 事务配置 -->
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource" />
+    </bean>
+
+    <!-- 使用 annotation 定义事务 -->
+    <tx:annotation-driven transaction-manager="transactionManager" proxy-target-class="true" />
+
+    <!-- 定义演示环境的配置文件 -->
+    <beans profile="demo">
+        <context:property-placeholder ignore-resource-not-found="true" location="classpath*:/application.properties" />
+    </beans>
+
+    <!-- 定义开发环境配置文件 -->
+    <beans profile="development">
+        <context:property-placeholder ignore-resource-not-found="true" location="classpath*:/application.dev.properties" />
+    </beans>
+
+    <!-- 定义测试环境配置文件 -->
+    <beans profile="test">
+
+        <context:property-placeholder ignore-resource-not-found="true" location="classpath*:/application.test.properties" />
+
+        <!-- 运行测试环境时h2数据库的创建表 -->
+        <bean id="dataSourceInitializer" class="org.springframework.jdbc.datasource.init.DataSourceInitializer">
+            <property name="dataSource" ref="dataSource" />
+            <property name="databasePopulator">
+                <bean class="org.springframework.jdbc.datasource.init.ResourceDatabasePopulator">
+                    <property name="scripts" value="classpath:sql/h2.sql" />
+                </bean>
+            </property>
+        </bean>
+
+    </beans>
+
+</beans>

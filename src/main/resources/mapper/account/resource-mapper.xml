@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 资源数据访问映射 -->
+<mapper namespace="vfh.httpInterface.dao.account.ResourceDao" >
+
+    <select id="get" resultType="hashmap">
+        SELECT 
+          id AS "id",
+          icon AS "icon",
+          name AS "name",
+          permission AS "permission",
+          remark AS "remark",
+          sort AS "sort",
+          type AS "type",
+          value AS "value",
+          fk_parent_id AS "fk_parent_id"
+        FROM
+          tb_resource
+        WHERE 
+          id = #{id}
+    </select>
+
+    <select id="getChildren" resultType="hashmap">
+        SELECT
+          id AS "id",
+          icon AS "icon",
+          name AS "name",
+          permission AS "permission",
+          remark AS "remark",
+          sort AS "sort",
+          type AS "type",
+          value AS "value",
+          fk_parent_id AS "fk_parent_id"
+        FROM
+          tb_resource
+        WHERE
+          fk_parent_id = #{id}
+    </select>
+    
+    <select id="getAll" resultType="hashmap">
+        SELECT 
+          id AS "id",
+          icon AS "icon",
+          name AS "name",
+          permission AS "permission",
+          remark AS "remark",
+          sort AS "sort",
+          type AS "type",
+          value AS "value",
+          fk_parent_id AS "fk_parent_id"
+        FROM
+          tb_resource
+        <if test="ignore != null and ignore.length > 0">
+            WHERE id NOT IN
+            <foreach collection="ignore" item="id" index="index" open="(" separator="," close=")" >
+                #{id}
+            </foreach>
+        </if>
+    </select>
+
+    <select id="count" resultType="long">
+        SELECT
+          COUNT(id)
+        FROM
+          tb_resource
+    </select>
+
+    <select id="getUserResources" resultType="hashmap">
+      SELECT
+	    r.id AS "id",
+	    r.icon AS "icon",
+	    r.name AS "name",
+	    r.permission AS "permission",
+	    r.remark AS "remark",
+	    r.sort AS "sort",
+	    r.type AS "type",
+	    r.value AS "value",
+	    r.fk_parent_id AS "fk_parent_id"
+      FROM
+	    tb_resource r
+      LEFT JOIN
+	    tb_group_resource gr ON gr.fk_resource_id = r.id
+      LEFT JOIN
+	    tb_group g ON gr.fk_group_id = g.id
+      LEFT JOIN
+	    tb_group_user gu ON gu.fk_group_id = g.id
+      LEFT JOIN
+	    tb_user u ON gu.fk_user_id = u.id
+      WHERE
+	    u.id = #{userId}
+      GROUP BY
+        r.id
+      ORDER BY
+        r.sort
+    </select>
+
+    <select id="getGroupResources" resultType="hashmap">
+        SELECT
+	    r.id AS "id",
+	    r.icon AS "icon",
+	    r.name AS "name",
+	    r.permission AS "permission",
+	    r.remark AS "remark",
+	    r.sort AS "sort",
+	    r.type AS "type",
+	    r.value AS "value",
+	    r.fk_parent_id AS "fk_parent_id"
+      FROM
+	    tb_resource r
+      LEFT JOIN
+	    tb_group_resource gr ON gr.fk_resource_id = r.id
+      LEFT JOIN
+	    tb_group g ON gr.fk_group_id = g.id
+	  WHERE
+	    g.id = #{groupId}
+    </select>
+
+    <delete id="delete">
+        DELETE FROM tb_resource WHERE id = #{id}
+    </delete>
+
+    <delete id="deleteGroupAssociation">
+        DELETE FROM tb_group_resource WHERE fk_resource_id = #{id}
+    </delete>
+
+    <insert id="insert" useGeneratedKeys="true" keyProperty="entity.id">
+        INSERT INTO tb_resource (
+          icon,
+          name,
+          permission,
+          remark,
+          sort,
+          type,
+          value,
+          fk_parent_id
+        ) VALUES (
+          #{entity.icon},
+          #{entity.name},
+          #{entity.permission},
+          #{entity.remark},
+          #{entity.sort},
+          #{entity.type},
+          #{entity.value},
+          #{entity.fk_parent_id}
+        )
+    </insert>
+
+    <update id="update">
+        <trim prefix="SET" suffixOverrides="," />
+        UPDATE
+          tb_resource
+        SET
+          icon=#{entity.icon},
+          name=#{entity.name},
+          permission=#{entity.permission},
+          remark=#{entity.remark},
+          sort=#{entity.sort},
+          type=#{entity.type},
+          value=#{entity.value},
+          fk_parent_id=#{entity.fk_parent_id}
+        WHERE
+          id = #{entity.id}
+    </update>
+
+</mapper>

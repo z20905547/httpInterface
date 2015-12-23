@@ -1,0 +1,151 @@
+<#include "*/basic/default.html"/>
+
+<#macro title>
+编辑用户
+</#macro>
+
+<#macro head>
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        $("#selectAll").click(function () {
+            var checkbox = $(this),
+                    children = checkbox.parents("table").find("tbody input[type='checkbox']");
+
+            children.prop("checked", checkbox.is(":checked"));
+        });
+    });
+
+</script>
+</#macro>
+
+<#macro body>
+<div class="data-content">
+
+    <ol class="breadcrumb">
+        <li><span class="glyphicon glyphicon-user"></span></li>
+        <li><a href="${base}/account/user/list">用户管理</a></li>
+        <li class="active">编辑用户</li>
+    </ol>
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title"><span class="glyphicon glyphicon-edit"></span> 编辑用户</h3>
+        </div>
+        <form action="${base}/account/user/update" id="update-user-form" method="post">
+            <input type="hidden" id="id" name="id" value="${entity.id!''}">
+
+            <div class="panel-body">
+
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-xs-6">
+                            <label for="username">登录帐号:</label>
+                            <input type="text" disabled="disabled" class="form-control required" id="username" name="username" value="${entity.username!''}">
+                        </div>
+                        <div class="col-xs-6">
+                            <label for="nickname">昵称姓名:</label>
+                            <input type="text" class="form-control required" maxlength="16" id="nickname" name="nickname" value="${entity.nickname!''}">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-xs-6">
+                            <label for="state">用户状态:</label>
+                            <select class="form-control required" name="state" id="state">
+                                <option value="">请选择...</option>
+                                <#list states as s>
+                                <option value="${s.value}" <#if entity.state == s.value>selected="selected"</#if>>
+                                    ${s.key}
+                                </option>
+                                </#list>
+                            </select>
+                        </div>
+                        <div class="col-xs-6">
+                            <label for="email">电子邮件:</label>
+                            <input type="text" class="form-control email" id="email" maxlength="64" name="email" value="${entity.email!''}">
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="form-group">
+
+                    <div class="panel panel-default">
+
+                        <div class="panel-heading">
+                            <h3 class="panel-title"><span class="glyphicon glyphicon-briefcase"></span> 所在组</h3>
+                        </div>
+
+                        <div class="table-container">
+                            <table class="table table-hover table-striped">
+                                <thead>
+                                    <tr>
+                                        <th><input type="checkbox" id="selectAll"></th>
+                                        <th>名称</th>
+                                        <th>备注</th>
+                                        <th>操作</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <#if groups?size == 0>
+                                    <tr>
+                                        <td colspan="4"> 没有记录</td>
+                                    </tr>
+                                    <#else>
+                                        <#list groups as g>
+                                            <#assign isSelected = false />
+                                            <#list hasGroups as hg>
+                                                <#if hg.id == g.id>
+                                                    <#assign isSelected = true />
+                                                    <#break />
+                                                </#if>
+                                            </#list>
+                                        <tr>
+                                            <td><input type="checkbox" name="groupIds" <#if isSelected>checked="true"</#if> value="${g.id}"></td>
+                                            <td>${g.name!''}</td>
+                                            <td>${g.remark!''}</td>
+                                            <td>
+                                                <@shiro.hasPermission name="group:edit">
+                                                    <a class="btn btn-default btn-sm" href="${base}/account/group/edit?id=${g.id}">
+                                                        <span class="glyphicon glyphicon-edit"></span>
+                                                    </a>
+                                                </@shiro.hasPermission>
+                                            </td>
+                                        </tr>
+                                        </#list>
+                                    </#if>
+                                </tbody>
+                            </table>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="panel-footer">
+
+                <@shiro.hasPermission name="user:update">
+                    <button type="submit" class="btn btn-success">
+                        <span class="glyphicon glyphicon-ok"></span> 保存
+                    </button>
+
+                    <button type="reset" class="btn btn-warning">
+                        <span class="glyphicon glyphicon-trash"></span> 重置
+                    </button>
+                </@shiro.hasPermission>
+
+                <button type="button" class="btn btn-default" onclick="history.back();">
+                    <span class="glyphicon glyphicon-backward"></span> 返回
+                </button>
+
+            </div>
+        </form>
+    </div>
+</div>
+</#macro>
+

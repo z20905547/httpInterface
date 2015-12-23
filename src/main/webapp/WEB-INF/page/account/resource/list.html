@@ -1,0 +1,131 @@
+<#include "*/basic/default.html"/>
+
+<#macro title>
+资源管理
+</#macro>
+
+<#macro head>
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        $("#resource-view-form").submit(function () {
+            return $(this).find("input[type='checkbox']:checked").length > 0;
+        });
+    });
+
+    function submitDeleteForm() {
+        var length = $("#resource-view-form").find("input[type='checkbox']:checked").length
+        if (length == 0) {
+            return ;
+        }
+        bootbox.confirm("确定要删除选中的" + length + "条记录吗？", function (result) {
+            if (result) {
+                $("#resource-view-form").submit();
+            }
+        });
+    }
+
+</script>
+</#macro>
+
+<#macro recursionTree parent>
+<li>
+    <@shiro.hasPermission name="resource:edit">
+    <a class="btn btn-default btn-sm" href="${base}/account/resource/edit?id=${parent.id}">
+        <span class="glyphicon glyphicon-edit"></span>
+    </a>
+    </@shiro.hasPermission>
+    <div class="node">
+        <#if parent.icon?has_content>
+        <span class="${parent.icon!'glyphicon glyphicon-file'}"></span>
+        </#if>
+        <label class="checkbox-inline">
+            <input type="checkbox" name="ids" value="${parent.id}"> <strong>${parent.name}</strong>
+        </label>
+        <span>${parent.remark!''}</span>
+    </div>
+    <#if parent.children?size gt 0>
+        <ul>
+        <#list parent.children as c>
+            <@recursionTree c />
+        </#list>
+        </ul>
+    </#if>
+</li>
+</#macro>
+
+<#macro body>
+
+<div class="data-content">
+
+    <ol class="breadcrumb">
+        <li class="active"><span class="glyphicon  glyphicon-link"></span></li>
+        <li class="active">资源管理</li>
+    </ol>
+
+    <#if success?has_content>
+    <div class="alert alert-success fade in">
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+        <span class="glyphicon glyphicon-ok"></span> ${success}
+    </div>
+    </#if>
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title"><span class="glyphicon  glyphicon-link"></span> 资源管理</h3>
+        </div>
+        <form id="resource-view-form" action="${base}/account/resource/delete" valid="false" method="post">
+            <div class="panel-body">
+                <div class="tree">
+
+                    <div class="input-group">
+                        <div class="input-group-btn">
+                            <button type="button" class="btn btn-default" data-toggle="checkAll">
+                                <span class="glyphicon glyphicon-check"></span>
+                            </button>
+
+                            <button type="button" class="btn btn-default" data-toggle="uncheckedAll">
+                                <span class="glyphicon glyphicon glyphicon-unchecked"></span>
+                            </button>
+                            <button type="button" class="btn btn-default" data-toggle="expandAll">
+                                <span class="glyphicon glyphicon-folder-open"></span>
+                            </button>
+
+                            <button type="button" class="btn btn-default" data-toggle="collapseAll">
+                                <span class="glyphicon glyphicon-folder-close"></span>
+                            </button>
+                        </div>
+                        <input type="text" placeholder="输入关键字可以过滤不匹配的数据" data-toggle='filter' class="form-control">
+                    </div>
+
+                    <#if mapList??>
+                        <ul>
+                        <#list mapList as rl>
+							<@recursionTree rl />
+						</#list>
+                        </ul>
+                    </#if>
+
+                </div>
+            </div>
+
+            <div class="panel-footer">
+
+                <@shiro.hasPermission name="resource:save">
+                <a href="${base}/account/resource/edit" class="btn btn-primary">
+                    <span class="glyphicon glyphicon-plus"></span> 添加
+                </a>
+                </@shiro.hasPermission>
+
+                <@shiro.hasPermission name="resource:delete">
+                <button type="button" class="btn btn-danger" onclick="submitDeleteForm();">
+                    <span class="glyphicon glyphicon-remove"></span> 删除
+                </button>
+                </@shiro.hasPermission>
+
+            </div>
+        </form>
+    </div>
+</#macro>
+
+

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<validate-mapper name="data-dictionary">
+
+    <key name="name" alias="字典名称">
+        <notEmpty />
+        <length max="16" />
+    </key>
+
+    <key name="value" alias="字典值">
+        <notEmpty />
+        <length max="8" />
+    </key>
+
+    <key name="type" alias="值类型">
+        <notEmpty />
+        <length max="32" />
+    </key>
+
+    <key name="fk_category_id" alias="所属类别">
+        <notEmpty />
+        <number />
+    </key>
+
+</validate-mapper>

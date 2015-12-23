@@ -1,0 +1,163 @@
+<script type="text/javascript">
+
+	function reloadPortrait() {
+		$(".user-portrait").attr("src","${base}/account/user/get-portrait?random=" + (Math.random()*24));
+		$("#portrait-temp").attr("src","${base}/account/user/get-portrait?name=big.jpeg&random=" + (Math.random()*24));
+	}
+
+	function uploadEvent(status){
+        var data = $.parseJSON(status);
+
+		if(data.status === "success") {
+			reloadPortrait();
+		}
+
+	}
+	
+	function onUpdateProfileSuccess(result) {
+		$("#info-nickname").html("嗨，" + result.nickname);
+	}
+	
+	function changePortrait(){
+		$("#profile").addClass("hide");
+		$("#portrait").removeClass("hide");
+	}
+	
+	function changeProfile(){
+		$("#profile").removeClass("hide");
+		$("#portrait").addClass("hide");
+	}
+	
+	$(document).ready(function(){
+		
+		$("#profile-seeting").on('hidden.bs.modal', function () {
+			reloadPortrait();
+			changeProfile();
+			$(this).find("form").resetForm();
+		});
+	});
+</script>
+<div class="modal fade" id="profile-seeting" role="dialog" aria-hidden="true">
+   <div class="modal-dialog">
+     <div class="modal-content">
+     
+       <div class="modal-header">
+         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+         <h4 class="modal-title"><span class="glyphicon glyphicon-edit"></span> 用户设置</h4>
+       </div>
+       
+       <div class="modal-body">
+       
+	       <ul class="nav nav-tabs tabs-left">
+			  <li class="active"><a href="#user-seeting" data-toggle="tab">用户信息</a></li>
+			  <li><a href="#password-seeting" data-toggle="tab">修改密码</a></li>
+			</ul>
+			
+			<div class="tab-content">
+				
+				<div class="tab-pane fade in active" id="user-seeting">
+					<div id="portrait" class="hide">
+                        <object id="faust-cplus" data="${base}/resource/swf/FaustCplus.swf" id="FaustCplus" type="application/x-shockwave-flash" height="400" width="535">
+                            <param value="false" name="menu" />
+                            <param value="noScale" name="scale" />
+                            <param value="true" name="allowFullscreen" />
+                            <param value="always" name="allowScriptAccess" />
+                            <param value="transparent" name="wmode" />
+                            <param value="#FFFFFF" name="bgcolor" />
+                            <param value="pSize=300|300|80|80|60|60|40|40&jsfunc=uploadEvent&showBrow=true&uploadUrl=${base}/account/user/update-portrait" name="flashvars" />
+                        </object>
+						<hr>
+						<div class="text-right">
+							
+							<button type="button" class="btn btn-success" onclick="$('#faust-cplus').get(0).jscall_updateAvatar();">
+								<span class="glyphicon glyphicon-ok"></span> 修改
+							</button>
+							
+							<button type="button" class="btn btn-default" onclick="changeProfile();">
+								<span class="glyphicon glyphicon-backward"></span> 返回
+							</button>
+						</div>
+					</div>
+					
+					<div id="profile">
+						
+						<div class="form-group">
+							<div class="pictrue">
+								<a class="thumbnail" href="javascript:changePortrait();">
+									<img id="portrait-temp" src="${base}/account/user/get-portrait?name=big.jpeg" onerror="this.src='${base}/resource/image/empty.png';"/>
+								</a>
+							</div>
+						</div>
+						
+						<form action="${base}/account/user/update-profile" id="update-profile-form" method="post" data-ajax-submit="true" onsuccess="onUpdateProfileSuccess">
+							<div class="form-group">
+					   			<div class="row">
+					    			<div class="col-xs-6">
+										<label for="nickname">昵称:</label>
+										<input type="text" class="form-control required" maxlength="16" name="nickname" id="nickname" value="${Session['session_variable'].user.nickname!''}">
+									</div>
+									<div class="col-xs-6">
+										<label for="email">电子邮箱:</label> 
+										<input type="text" class="form-control email" name="email" maxlength="64" id="email"  value="${Session['session_variable'].user.email!''}">
+									</div>
+					   			</div>
+				   			</div>
+							
+							<hr>
+							
+							<div class="text-right">
+								
+								<button type="submit" class="btn btn-success">
+									<span class="glyphicon glyphicon-ok"></span> 保存
+								</button>
+								
+								<button type="reset" class="btn btn-danger">
+									<span class="glyphicon glyphicon-trash"></span> 重置
+								</button>
+							</div>
+						</form>
+						
+					</div>
+					
+		        </div>
+	        
+		        <div class="tab-pane fade in" id="password-seeting">
+		        	<form action="${base}/account/user/update-password" id="update-password-form" method="post" >
+		        	
+						<div class="form-group">
+							<label for="oldPassword">旧密码:</label> 
+							<input type="password" class="form-control required" maxlength="16" minlength="6" name="oldPassword" id="oldPassword" >
+						</div>
+						
+						<div class="form-group">
+							<label for="newPassword">新密码:</label> 
+							<input type="password" class="form-control required" maxlength="16" minlength="6" name="newPassword" id="newPassword" >
+						</div>
+						
+						<div class="form-group">
+							<label for=confirmPassword>新密码:</label> 
+							<input type="password" class="form-control required" maxlength="16" minlength="6" name="confirmPassword" equalTo="#newPassword" id="confirmPassword" >
+						</div>
+						
+						<hr>
+						
+						<div class="text-right">
+							<button type="submit" class="btn btn-success">
+								<span class="glyphicon glyphicon-ok"></span> 保存
+							</button>
+							
+							<button type="reset" class="btn btn-danger">
+								<span class="glyphicon glyphicon-trash"></span> 重置
+							</button>
+						</div>
+						
+					</form>
+					
+	      		</div>
+			</div>
+      	
+      	</div>
+      	
+     </div>
+   </div>
+</div>

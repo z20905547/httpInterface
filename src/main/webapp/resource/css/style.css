@@ -1,0 +1,120 @@
+body {
+    background-image: url("../image/bg.png");
+}
+
+.main-container {
+    margin-top: 80px;
+}
+
+.text {
+    height: 50px;
+    line-height: 1.5cm!important;
+    margin-right: 20px;
+}
+.info-date{
+    margin-left: -15px;
+    font-size: 15px;
+}
+
+.main-navbar {
+    background: rgba(6, 14, 20, 0.8);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0px 1px rgba(255, 255, 255, 0.3);
+    border-color: transparent;
+}
+
+.main-navbar.navbar-inverse .navbar-nav > li,
+.main-navbar.navbar-inverse .navbar-nav > li .text {
+    color: #FFFFFF;
+}
+
+.main-navbar.navbar-inverse .navbar-nav > li > a {
+    color: #AAAAAA;
+}
+
+.main-navbar a.navbar-xs:hover,
+.main-navbar a.navbar-xs:focus,
+.main-navbar.navbar-inverse .navbar-nav>.open>a,
+.main-navbar.navbar-inverse .navbar-nav>.open>a:hover,
+.main-navbar.navbar-inverse .navbar-nav>.open>a:focus {
+    background-color: transparent!important;
+    color: #CCCCCC;
+}
+
+.navbar-xs {
+    margin-left: 20px;
+    font-size: 24px;
+    margin-top: 10px;
+    color: #AAAAAA;
+}
+
+.login-container {
+    margin: 0 auto;
+    padding: 7% 0;
+    max-width: 400px;
+}
+
+.content-widget {
+    background-color: #FFFFFF;
+    border-left: 1px solid #BBBBBB;
+    border-right: 1px solid #BBBBBB;
+    border-bottom: 1px solid #BBBBBB;
+    padding: 0 1px 1px;
+    min-height: 400px;
+}
+#content-widget {
+    padding-top:5px;
+    background: #FEFEFE url(../image/grids.png);
+}
+.content-container {
+    background-color: #FFFFFF;
+    padding: 0px 10px 10px;
+    background-image: url("../image/book-cover.png");
+}
+
+.data-content {
+    margin: 0px 15px;
+}
+
+.user-portrait {
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    float: left;
+    height: 40px;
+    width: 40px;
+    margin-right: 5px;
+    margin-top: -10px;
+}
+
+.user-portrait-xs {
+    margin-right: 20px;
+    margin-top: 5px;
+}
+
+.border-black{
+    border-color: #323232;
+    box-shadow: inset 0 0 2px rgba(255,255,255,0.35),0 0 6px rgba(0,0,0,0.8);
+}
+
+.heading-background{
+    box-shadow: 0 2px 2px rgba(0,0,0,0.3);
+    background: url("../image/header-bg.png") 0 -27px !important;
+    height: 40px;
+    border-color: #323232 !important;
+    position: relative;
+    z-index: 1010;
+}
+
+.pictrue {
+    margin: 0 auto 5px;
+    width: 90px;
+}
+
+.server-exception {
+    padding: 20px;
+    width: 500px;
+    margin: 0 auto;
+}
+
+.server-exception h1{
+    font-size: 100px;
+}

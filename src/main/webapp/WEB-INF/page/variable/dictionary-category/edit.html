@@ -1,0 +1,76 @@
+<#include "*/basic/default.html"/>
+
+<#macro title>
+编辑字典类别
+</#macro>
+
+<#macro body>
+<div class="data-content">
+
+    <ol class="breadcrumb">
+        <li><span class="glyphicon glyphicon-folder-close"></span></li>
+        <li><a href="${base}/variable/dictionary-category/list">字典类别管理</a></li>
+        <li class="active">编辑字典类别</li>
+    </ol>
+
+    <div class="panel panel-default">
+
+        <div class="panel-heading">
+            <h3 class="panel-title"><span class="glyphicon glyphicon-edit"></span> 编辑字典类别</h3>
+        </div>
+
+        <form action="${base}/variable/dictionary-category/save" id="edit-dictionary-category-form" method="post">
+
+            <#if entity.id??>
+            <input type="hidden" name="id" value="${entity.id!''}">
+            </#if>
+
+            <div class="panel-body">
+
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-xs-6">
+                            <label for="name">类别名称:</label>
+                            <input type="text" class="form-control required" maxlength="32" id="name" name="name" value="${entity.name!''}">
+                        </div>
+                        <div class="col-xs-6">
+                            <label for="code">类别代码:</label>
+                            <input type="text" class="form-control required" maxlength="16" id="code" name="code" value="${entity.code!''}">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <label for="remark">备注:</label>
+                            <textarea rows="3" maxlength="512" class="form-control" name="remark" id="remark">${entity.remark!''}</textarea>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="panel-footer">
+                
+                <@shiro.hasPermission name="dictionary-category:save">
+                <button type="submit" class="btn btn-success">
+                    <span class="glyphicon glyphicon-ok"></span> 保存
+                </button>
+
+                <button type="reset" class="btn btn-warning">
+                    <span class="glyphicon glyphicon-trash"></span> 重置
+                </button>
+                </@shiro.hasPermission>
+                
+                <button type="button" class="btn btn-default" onclick="history.back();">
+                    <span class="glyphicon glyphicon-backward"></span> 返回
+                </button>
+
+            </div>
+        </form>
+
+    </div>
+</#macro>
+
+

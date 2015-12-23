@@ -1,0 +1,157 @@
+<#include "*/basic/default.html"/>
+
+<#macro title>
+组管理
+</#macro>
+
+<#macro head>
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        $("#selectAll").click(function () {
+            var checkbox = $(this),
+                    children = checkbox.parents("table").find("tbody input[type='checkbox']");
+
+            children.prop("checked", checkbox.is(":checked"));
+        });
+    });
+
+    function submitDeleteForm() {
+        var length = $("#group-list-form").find("input[type='checkbox'][id!='selectAll']:checked").length;
+        if (length == 0) {
+            return ;
+        }
+        bootbox.confirm("确定要删除选中的" + length + "条记录吗？", function (result) {
+            if (result) {
+                $("#group-list-form").submit();
+            }
+        });
+    }
+
+</script>
+</#macro>
+
+<#macro body>
+
+<div class="modal fade" id="search-modal" role="dialog" aria-hidden="true">
+
+    <div class="modal-dialog">
+
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title"><span class="glyphicon glyphicon-search"></span> 内容查询</h4>
+            </div>
+
+            <form id="group-search-form" action="${base}/account/group/list" method="post">
+
+                <input type="hidden" id="pageNumber" name="pageNumber" value="0"/>
+
+                <div class="modal-body">
+
+                    <div class="form-group">
+                        <label for="name">名称:</label>
+                        <input type="text" class="form-control" id="name" name="name" value="${RequestParameters.name!''}">
+                    </div>
+
+                </div>
+
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-success">
+                        <span class="glyphicon glyphicon-ok"></span> 确定
+                    </button>
+                    <button type="reset" class="btn btn-warning">
+                        <span class="glyphicon glyphicon-trash"></span> 重置
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="data-content">
+
+    <ol class="breadcrumb">
+        <li class="active"><span class="glyphicon glyphicon-briefcase"></li>
+        <li class="active"> 组管理</li>
+    </ol>
+
+    <#if success?has_content>
+    <div class="alert alert-success fade in">
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+        <span class="glyphicon glyphicon-ok"></span> ${success}
+    </div>
+    </#if>
+
+    <form id="group-list-form" action="${base}/account/group/delete" valid="false" method="post">
+        <div class="panel panel-default">
+
+            <div class="panel-heading">
+                <h3 class="panel-title"><span class="glyphicon glyphicon-briefcase"></span> 组管理</h3>
+            </div>
+
+            <div class="table-container">
+                <table class="table table-hover table-striped">
+                    <thead>
+                        <tr>
+                            <th><input type="checkbox" id="selectAll"></th>
+                            <th>名称</th>
+                            <th>备注</th>
+                            <th>操作</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <#if page.content?size == 0>
+                        <tr>
+                            <td colspan="4"> 没有记录</td>
+                        </tr>
+                        <#else>
+                            <#list page.content as r>
+                            <tr>
+                                <td><input type="checkbox" name="ids" value="${r.id}"></td>
+                                <td>${r.name!''}</td>
+                                <td>${r.remark!''}</td>
+                                <td>
+                                    <@shiro.hasPermission name="group:edit">
+                                    <a class="btn btn-default btn-sm" href="${base}/account/group/edit?id=${r.id}">
+                                        <span class="glyphicon glyphicon-edit"></span>
+                                    </a>
+                                    </@shiro.hasPermission>
+                                </td>
+                            </tr>
+                            </#list>
+                        </#if>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="panel-footer">
+                <a class="btn btn-info" data-toggle="modal" data-target="#search-modal">
+                    <span class="glyphicon glyphicon-search"></span> 查询
+                </a>
+
+                <@shiro.hasPermission name="group:save">
+                <a href="${base}/account/group/edit" class="btn btn-primary">
+                    <span class="glyphicon glyphicon-plus"></span> 添加
+                </a>
+                </@shiro.hasPermission>
+
+                <@shiro.hasPermission name="group:delete">
+                <button type="button" class="btn btn-danger" onclick="submitDeleteForm();">
+                    <span class="glyphicon glyphicon-remove"></span> 删除
+                </button>
+                </@shiro.hasPermission>
+            </div>
+
+        </div>
+
+        <@pagination 'group-search-form' page />
+
+    </form>
+
+</div>
+
+</#macro>
+
+

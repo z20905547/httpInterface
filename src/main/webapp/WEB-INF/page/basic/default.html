@@ -1,0 +1,130 @@
+<#assign shiro=JspTaglibs["/WEB-INF/taglib/shiro.tld"] />
+<#assign base="${request.contextPath}" />
+
+<!DOCTYPE html>
+<html>
+<head>
+
+    <title>base framework : <@title/></title>
+    <meta http-equiv="Expires" content="0">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Cache-Control" content="no-store">
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" type="text/css" href="http://cdn.staticfile.org/twitter-bootstrap/3.2.0/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="${base}/resource/css/bootstrap-theme.css">
+    <link rel="stylesheet" type="text/css" href="${base}/resource/css/style.css">
+
+    <!--[if lt IE 9]>
+    <script src="http://cdn.bootcss.com/html5shiv/3.7.0/html5shiv.min.js"></script>
+    <script src="http://cdn.bootcss.com/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script type="text/javascript" src="http://cdn.staticfile.org/jquery/1.8.3/jquery.min.js"></script>
+    <script type="text/javascript" src="http://cdn.staticfile.org/twitter-bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="http://cdn.staticfile.org/bootbox.js/4.2.0/bootbox.min.js"></script>
+
+    <script type="text/javascript" src="http://cdn.staticfile.org/jquery.form/3.50/jquery.form.min.js"></script>
+    <script type="text/javascript" src="http://cdn.staticfile.org/jquery-validate/1.12.0/jquery.validate.min.js"></script>
+    
+    <script type="text/javascript" src="${base}/resource/script/jquery.extension.js"></script>
+    <script type="text/javascript" src="${base}/resource/script/bootstrap.extension.js"></script>
+    <script type="text/javascript" src="${base}/resource/script/default.config.js"></script>
+	
+    <#if head?exists>  
+		<@head/>
+	</#if>
+
+</head>
+    <body>
+
+        <@shiro.user>
+            <#include "info.html" />
+            <#include "profile-setting.html" />
+        </@shiro.user>
+
+        <div class="main-container container">
+
+            <div class="panel panel-default border-black">
+
+                <div class="panel-heading large heading-background"></div>
+
+                <div class="content-container">
+                    <div class="content-widget">
+                        <div class="content-widget">
+                            <div class="content-widget" id="content-widget">
+
+                                <@shiro.user>
+                                    <#include "navbar.html" />
+                                </@shiro.user>
+
+                                <@body/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </body>
+</html>
+
+<#macro recursionMenu menu id=false>
+    <#if menu.children?size gt 0>
+    <ul class="dropdown-menu">
+
+        <#list menu.children as c>
+            <li <class="dropdown-submenu">
+            <a <#if id>id="${c.id}"</#if> href="${base}/${c.value?substring(1,c.value?length - 3)}">
+                <span class="${c.icon!'glyphicon glyphicon-file'}"> </span> ${c.name}
+            </a>
+            <@recursionMenu c />
+            </li>
+        </#list>
+
+    </ul>
+    </#if>
+</#macro>
+
+<#-- 分页宏pagination 将formId和page传入后自动生成分页条 -->
+<#macro pagination formId page>
+<div class="paging-bar">
+    <script type="text/javascript">
+        //跳转到指定的页面
+        function jumpToSpecificPage(pageNumber,form) {
+            $("#pageNumber").val(pageNumber);
+            $("#" + form).submit();
+        }
+    </script>
+    <ul class="pagination pull-right">
+        <#if !page.isFirst()>
+            <li>
+                <a href="javascript:;" onclick="jumpToSpecificPage(0,'${formId!''}');">首页</a>
+            </li>
+        </#if>
+        <#if page.hasPrevious()>
+            <li>
+                <a href="javascript:;" onclick="jumpToSpecificPage(${page.number - 1},'${formId!''}');">上一页</a>
+            </li>
+        </#if>
+        <#if page.hasNext()>
+            <li>
+                <a href="javascript:;" onclick="jumpToSpecificPage(${page.number + 1},'${formId!''}');">下一页</a>
+            </li>
+        </#if>
+        <#if !page.isLast()>
+            <li>
+                <a href="javascript:;" onclick="jumpToSpecificPage(${page.totalPages - 1},'${formId!''}');">尾页</a>
+            </li>
+        </#if>
+        <li>
+        <span>
+            共 ${page.totalElements} 条 ${page.number + 1} / ${page.totalPages} 页
+        </span>
+        </li>
+    </ul>
+</div>
+</#macro>
