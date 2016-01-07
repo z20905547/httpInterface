@@ -1,17 +1,20 @@
 package vfh.httpInterface.service.account;
 
-import com.google.common.collect.Lists;
-import vfh.httpInterface.commons.Page;
-import vfh.httpInterface.commons.PageRequest;
-import vfh.httpInterface.commons.SessionVariable;
-import vfh.httpInterface.commons.VariableUtils;
-import vfh.httpInterface.commons.enumeration.entity.PortraitSize;
-import vfh.httpInterface.commons.enumeration.entity.ResourceType;
-import vfh.httpInterface.commons.valid.annotation.MapValid;
-import vfh.httpInterface.dao.account.GroupDao;
-import vfh.httpInterface.dao.account.ResourceDao;
-import vfh.httpInterface.dao.account.UserDao;
-import vfh.httpInterface.service.ServiceException;
+import java.awt.Graphics2D;
+import java.awt.Image;
+import java.awt.image.BufferedImage;
+import java.awt.image.ColorModel;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import javax.imageio.ImageIO;
+
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.collections.MapUtils;
 import org.apache.commons.io.FileUtils;
@@ -24,13 +27,20 @@ import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.imageio.ImageIO;
-import java.awt.*;
-import java.awt.image.BufferedImage;
-import java.awt.image.ColorModel;
-import java.io.*;
-import java.util.List;
-import java.util.Map;
+import vfh.httpInterface.commons.Page;
+import vfh.httpInterface.commons.PageRequest;
+import vfh.httpInterface.commons.SessionVariable;
+import vfh.httpInterface.commons.StringUtil;
+import vfh.httpInterface.commons.VariableUtils;
+import vfh.httpInterface.commons.enumeration.entity.PortraitSize;
+import vfh.httpInterface.commons.enumeration.entity.ResourceType;
+import vfh.httpInterface.commons.valid.annotation.MapValid;
+import vfh.httpInterface.dao.account.GroupDao;
+import vfh.httpInterface.dao.account.ResourceDao;
+import vfh.httpInterface.dao.account.UserDao;
+import vfh.httpInterface.service.ServiceException;
+
+import com.google.common.collect.Lists;
 
 /**
  * 账户业务逻辑
@@ -50,7 +60,7 @@ public class AccountService implements InitializingBean{
 
     @Autowired
     private ResourceDao resourceDao;
-
+    Map<String, Object> returnMap=new HashMap<String, Object>();
     /**
      * 默认的用户上传头像的文件夹路径
      */
@@ -583,5 +593,27 @@ public class AccountService implements InitializingBean{
         if (!uploadPortrait.exists()) {
             uploadPortrait.mkdirs();
         }
+    }
+    /***接口调用返回json**/
+    public Map<String, Object> getUserInterface(Map params){
+    	returnMap.clear();
+    	if(StringUtil.isNotEmptyObject(params.get("userId"))){
+    		long userId=Long.parseLong(params.get("userId").toString());
+    		Map<String, Object> userInfo=userDao.get(userId);
+    		if(StringUtil.isNotEmptyMap(userInfo)){
+        		returnMap.put("returnCode", "000000");
+        		returnMap.put("data",userInfo);
+        		returnMap.put("returnMsg", "获取用户信息成功！");
+        	}else{
+        		returnMap.put("returnCode", "1111");
+        		returnMap.put("returnMsg", "获取用户信息失败！");
+        	}
+    	}else{
+    		returnMap.put("returnMsg","用户id不能为空!");
+    		returnMap.put("statusCode","1111");
+    	}
+    	
+    	
+        return returnMap;
     }
 }
