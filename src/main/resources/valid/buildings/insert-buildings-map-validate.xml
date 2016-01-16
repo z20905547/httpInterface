@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<validate-mapper name="insert-buildings">
+
+    <key name="buildingsName" alias="楼盘名称">
+        <notEmpty />
+        <length min="3" max="25" />
+    </key>
+
+    <key name="serverPhoneNum" alias="服务电话">
+        <notEmpty />
+    </key>
+
+    <key name="openDate" alias="开盘时间">
+        <notEmpty />
+    </key>
+
+    <key name="deliverDate" alias="交房时间">
+        <notEmpty />
+        <length max="16" />
+    </key>
+
+</validate-mapper>

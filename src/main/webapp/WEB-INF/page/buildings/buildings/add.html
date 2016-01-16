@@ -1,0 +1,249 @@
+<#include "*/basic/default.html"/>
+
+<#macro title>
+添加楼盘
+</#macro>
+
+<#macro head>
+<link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/jqueryui/1.10.4/css/jquery-ui.min.css">
+<script type="text/javascript" src="//cdn.bootcss.com/jqueryui/1.10.4/jquery-ui.min.js"></script>
+<script type="text/javascript" src="//cdn.bootcss.com/jqueryui/1.10.4/i18n/jquery-ui-i18n.min.js"></script>
+<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=E991373d74352818824a24dea57f156c"></script>
+<script type="text/javascript" src="http://api.map.baidu.com/library/CityList/1.2/src/CityList_min.js"></script>
+<style type="text/css">
+		body, html{
+			width: 100%;
+			height: 100%;
+			margin:0;
+			font-family:"微软雅黑";
+			font-size:14px;
+		}
+		#l-map {
+			width:100%; 
+			height:500px;
+			overflow: hidden;
+		}
+		li{
+			line-height:28px;
+		}
+		.cityList{
+			height: 320px;
+			width:372px;
+			overflow-y:auto;
+		}
+
+		.sel_container{
+			font-size:12px;
+			width:140px;
+			background:rgba(255,255,255,0.8);
+			height:30px;
+			line-height:30px;
+			padding:5px;
+		}
+		.map_popup {
+			width: 382px;
+			height: 344px;
+		}
+		.map_popup .popup_main { 
+			background:#fff;
+			border: 1px solid #8BA4D8;
+			height: 100%;
+			overflow: hidden;
+			width: 100%;
+		}
+		.map_popup .title {
+			background: url("http://map.baidu.com/img/popup_title.gif") repeat scroll 0 0 transparent;
+			color: #6688CC;
+			font-weight: bold;
+			height: 24px;
+			line-height: 25px;
+			padding-left: 7px;
+		}
+		.map_popup button {
+			background: url("http://map.baidu.com/img/popup_close.gif") no-repeat scroll 0 0 transparent;
+			cursor: pointer;
+			height: 12px;
+			position: absolute;
+			right: 4px;
+			top: 6px;
+			width: 12px;
+		}	
+	</style>
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        $("#selectAll").click(function () {
+            var checkbox = $(this),
+                    children = checkbox.parents("table").find("tbody input[type='checkbox']");
+
+            children.prop("checked", checkbox.is(":checked"));
+        });
+        $.datepicker.setDefaults($.datepicker.regional["zh-CN"]);
+        	$( ".openDate" ).datepicker({
+            	altField: "#openDate",
+                altFormat: "yy-mm-dd"
+            });
+        
+        
+        	$( ".deliverDate" ).datepicker({
+            	altField: "#deliverDate",
+                altFormat: "yy-mm-dd"
+            });
+      //百度地图API功能
+        var map = new BMap.Map("l-map");          // 创建地图实例
+        var point = new BMap.Point(110.350165,20.036658);  // 创建点坐标
+        map.centerAndZoom(point, 19);                 // 初始化地图，设置中心点坐标和地图级别
+        map.enableScrollWheelZoom();
+        map.addControl(new BMap.NavigationControl());  //添加默认缩放平移控件
+        map.addControl(new BMap.MapTypeControl());   //添加地图类型控件
+        function showInfo(e){
+        	$("#mapX").val(e.point.lng);
+        	$("#mapY").val(e.point.lat);
+        	map.clearOverlays();
+    		//alert(e.point.lng + ", " + e.point.lat);
+    		var marker = new BMap.Marker(new BMap.Point(e.point.lng, e.point.lat)); // 创建点
+    		
+    		map.addOverlay(marker);
+    	}
+        
+    	map.addEventListener("click", showInfo);
+        
+        
+       
+       
+        // 创建CityList对象，并放在citylist_container节点内
+        var myCl = new BMapLib.CityList({container : "citylist_container", map : map});
+
+        // 给城市点击时，添加相关操作
+        myCl.addEventListener("cityclick", function(e) {
+        	// 修改当前城市显示
+        	document.getElementById("curCity").innerHTML = e.name;
+
+        	// 点击后隐藏城市列表
+        	document.getElementById("cityList").style.display = "none";
+        });
+        // 给“更换城市”链接添加点击操作
+        document.getElementById("curCityText").onclick = function() {
+        	var cl = document.getElementById("cityList");
+        	if (cl.style.display == "none") {
+        		cl.style.display = "";
+        	} else {
+        		cl.style.display = "none";
+        	}	
+        };
+        // 给城市列表上的关闭按钮添加点击操作
+        document.getElementById("popup_close").onclick = function() {
+        	var cl = document.getElementById("cityList");
+        	if (cl.style.display == "none") {
+        		cl.style.display = "";
+        	} else {
+        		cl.style.display = "none";
+        	}	
+        };
+    });
+
+</script>
+</#macro>
+
+<#macro body>
+<div class="data-content">
+
+<!--     <ol class="breadcrumb"> -->
+<!--         <li><span class="glyphicon glyphicon-user"></span></li> -->
+<!--         <li><a href="${base}/account/user/list">用户管理</a></li> -->
+<!--         <li class="active">添加用户</li> -->
+<!--     </ol> -->
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title"><span class="glyphicon glyphicon-edit"></span> 添加楼盘</h3>
+        </div>
+        <form action="${base}/buildings/buildings/insert" id="create-user-form" method="post">
+            <div class="panel-body">
+
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-xs-6">
+                            <label for="buildingsName">楼盘名称:</label>
+                            <input type="text" class="form-control required" maxlength="25" minlength="4" id="buildingsName" name="buildingsName">
+                        </div>
+                        <div class="col-xs-6">
+                            <label for="serverPhoneNum">服务电话:</label>
+                            <input type="text" class="form-control required" maxlength="16" id="serverPhoneNum" name="serverPhoneNum">
+                        </div>
+                    </div>
+                </div>
+				<div class="form-group">
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <label for="address">楼盘地址:</label>
+                            <input type="text" class="form-control required" maxlength="50" minlength="5" id="address" name="address">
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-xs-6 openDate">
+                            <label for="openDate">开盘时间:</label>
+                            <input type="text" class=" form-control " autocomplete="off" id="openDate" name="openDate" readonly>
+                        </div>
+                        <div class="col-xs-6 deliverDate">
+                            <label for="deliverDate">交房时间:</label>
+                            <input type="text" class=" form-control " autocomplete="off" id="deliverDate" name="deliverDate" readonly>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-xs-6 ">
+                            <label for="mapX">经度:</label>
+                            <input type="text" class=" form-control " autocomplete="off" id="mapX" name="mapX" readonly>
+                        </div>
+                        <div class="col-xs-6 ">
+                            <label for="mapY">纬度:</label>
+                            <input type="text" class=" form-control " autocomplete="off" id="mapY" name="mapY" readonly>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+					<div class="sel_container"><strong id="curCity">海口市</strong> [<a id="curCityText" href="javascript:void(0)">更换城市</a>]</div>
+						<div class="map_popup" id="cityList" style="display:none;">
+						<div class="popup_main">
+							<div class="title">城市列表</div>
+							<div class="cityList" id="citylist_container"></div>
+							<button id="popup_close"></button>
+						</div>
+					</div>
+				</div>
+                
+				<div class="form-group mapdiv">
+					<div id="l-map"></div>
+				</div>
+				
+
+                
+
+            </div>
+
+            <div class="panel-footer">
+
+                <@shiro.hasPermission name="buildings:insert">
+                <button type="submit" class="btn btn-success">
+                    <span class="glyphicon glyphicon-ok"></span> 保存
+                </button>
+
+                <button type="reset" class="btn btn-warning">
+                    <span class="glyphicon glyphicon-trash"></span> 重置
+                </button>
+                </@shiro.hasPermission>
+
+                <button type="button" class="btn btn-default" onclick="history.back();">
+                    <span class="glyphicon glyphicon-backward"></span> 返回
+                </button>
+
+            </div>
+        </form>
+    </div>
+</div>
+</#macro>
+
