@@ -1,0 +1,81 @@
+<#include "*/basic/default.html"/>
+
+<#macro title>
+添加公告
+</#macro>
+
+<#macro head>
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        $("#selectAll").click(function () {
+            var checkbox = $(this),
+                    children = checkbox.parents("table").find("tbody input[type='checkbox']");
+
+            children.prop("checked", checkbox.is(":checked"));
+        });
+    });
+
+</script>
+</#macro>
+
+<#macro body>
+<div class="data-content">
+
+    <ol class="breadcrumb">
+        <li><span class="glyphicon glyphicon-user"></span></li>
+        <li><a href="${base}/account/notice/list">公告管理</a></li>
+        <li class="active">添加公告</li>
+    </ol>
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title"><span class="glyphicon glyphicon-edit"></span> 添加公告</h3>
+        </div>
+        <form action="${base}/account/notice/update" id="create-notice-form" method="post">
+         <input type="hidden" id="Id" name="Id" value="${entity.Id!''}">
+            <div class="panel-body">
+
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <label for="Title">公告标题:</label>
+                            <input type="text" class="form-control required" maxlength="50" minlength="6" id="Title"  name="Title"  value="${entity.Title!''}">
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <label for="Content">公告正文:</label>
+                            <textarea  class="form-control" minlength="6"  id="Content" name="Content" cols="10" rows="10"  >${entity.Content!''}</textarea>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="panel-footer">
+
+                <@shiro.hasPermission name="notice:update">
+                <button type="submit" class="btn btn-success">
+                    <span class="glyphicon glyphicon-ok"></span> 保存
+                </button>
+
+                <button type="reset" class="btn btn-warning">
+                    <span class="glyphicon glyphicon-trash"></span> 重置
+                </button>
+                </@shiro.hasPermission>
+
+                <button type="button" class="btn btn-default" onclick="history.back();">
+                    <span class="glyphicon glyphicon-backward"></span> 返回
+                </button>
+
+            </div>
+        </form>
+    </div>
+</div>
+</#macro>
+
