@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<validate-mapper name="insert-notice">
+
+    <key name="Title" alias="标题">
+        <notEmpty />
+        <length min="1" max="50" />
+    </key>
+
+    <key name="Content" alias="公告正文">
+         <notEmpty />
+       
+    </key>
+
+</validate-mapper>
