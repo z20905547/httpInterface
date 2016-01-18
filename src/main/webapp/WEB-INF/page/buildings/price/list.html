@@ -1,7 +1,7 @@
 <#include "*/basic/default.html"/>
 
 <#macro title>
-楼盘管理
+楼盘价格管理
 </#macro>
 
 <#macro head>
@@ -34,7 +34,7 @@
             }
         });
     }
-	
+
 </script>
 </#macro>
 
@@ -51,7 +51,7 @@
                 <h4 class="modal-title"><span class="glyphicon glyphicon-search"></span> 内容查询</h4>
             </div>
 
-            <form id="buildings-search-form" action="${base}/buildings/buildings/list" method="post">
+            <form id="price-search-form" action="${base}/buildings/price/list" method="post">
 
                 <div class="modal-body">
 
@@ -106,11 +106,11 @@
     </div>
     </#if>
 
-    <form id="buildings-list-form" action="${base}/buildings/buildings/delete" valid="false" method="post">
+    <form id="price-list-form" action="${base}/buildings/price/list" valid="false" method="post">
         <div class="panel panel-default">
 
             <div class="panel-heading">
-                <h3 class="panel-title"><span class="glyphicon glyphicon-flag"></span> 楼盘管理</h3>
+                <h3 class="panel-title"><span class="glyphicon glyphicon-flag"></span> 楼盘价格管理《${buildingsName}》</h3>
             </div>
 
             <div class="table-container">
@@ -118,10 +118,11 @@
                     <thead>
                         <tr>
                             <th><input type="checkbox" id="selectAll"></th>
-                            <th>楼盘名称</th>
-                            <th>开盘日期</th>
-                            <th>交房日期</th>
-                            <th>状态</th>
+                            <th>日常价</th>
+                            <th>特价</th>
+                            <th>开始日期</th>
+                            <th>结束日期</th>
+                            <th>活动名称</th>
                             <th>操作</th>
                         </tr>
                     </thead>
@@ -135,31 +136,15 @@
                             <#list page.content as r>
                             <tr>
                                 <td><input type="checkbox" name="ids" value="${r.id}"></td>
-                                <td>${r.buildings_name!''}</td>
-                                <td>${r.open_date!''}</td>
-                                <td>${r.deliver_date!''}</td>
+                                <td>${r.nomal_price!''}</td>
+                                <td>${r.discount_price!''}</td>
+                                <td>${r.start_date!''}</td>
+                                <td>${r.end_date!''}</td>
+                                <td>${r.active_name!''}</td>
                                 <td>
-                                    <#list buildingsStates as s>
-                                        <#if s.value = r.status>
-                                            ${s.key}
-                                            <#break />
-                                        </#if>
-                                    </#list>
-                                </td>
-                                <td>
-                                    <@shiro.hasPermission name="buildings:edit">
-                                    <a class="btn btn-default btn-sm" title="修改信息" href="${base}/buildings/buildings/edit?id=${r.id}">
+                                    <@shiro.hasPermission name="price:edit">
+                                    <a class="btn btn-default btn-sm" href="${base}/buildings/price/edit?id=${r.id}">
                                         <span class="glyphicon glyphicon-edit"></span>
-                                    </a>
-                                    </@shiro.hasPermission>
-                                    <@shiro.hasPermission name="price:list">
-                                    <a class="btn btn-default btn-sm blocklink" title="编辑价格" href="javascript:void(0)" data-href="${base}/buildings/price/list" data-building-id="${r.id}" data-building-name="${r.buildings_name}">
-                                        <span class="glyphicon glyphicon-jpy"></span>
-                                    </a>
-                                    </@shiro.hasPermission>
-                                    <@shiro.hasPermission name="house:list">
-                                    <a class="btn btn-default btn-sm blocklink" title="编辑户型" href="javascript:void(0)" data-href="${base}/buildings/house/list" data-building-id="${r.id}" data-building-name="${r.buildings_name}">
-                                        <span class="glyphicon glyphicon-home"></span>
                                     </a>
                                     </@shiro.hasPermission>
                                 </td>
@@ -177,22 +162,25 @@
                     <span class="glyphicon glyphicon-search"></span> 查询
                 </a>
 
-                <@shiro.hasPermission name="user:insert">
-                <a href="${base}/buildings/buildings/add" class="btn btn-primary">
+                <@shiro.hasPermission name="price:insert">
+                <a data-href="${base}/buildings/price/add" data-building-id="${buildingsId}" data-building-name="${buildingsName}" class="btn btn-primary blocklink">
                     <span class="glyphicon glyphicon-plus"></span> 添加
                 </a>
                 </@shiro.hasPermission>
 
-                <@shiro.hasPermission name="user:delete">
+                <@shiro.hasPermission name="price:delete">
                 <button type="button" class="btn btn-danger" onclick="submitDeleteForm();">
                     <span class="glyphicon glyphicon-remove"></span> 删除
                 </button>
                 </@shiro.hasPermission>
+                <a href="${base}/buildings/buildings/list" class="btn btn-default">
+                    <span class="glyphicon glyphicon-backward"></span> 返回
+                </a>
             </div>
 
         </div>
 
-        <@pagination 'buildings-search-form' page />
+        <@pagination 'price-search-form' page />
 
     </form>
 

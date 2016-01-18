@@ -7,12 +7,15 @@ import org.apache.commons.collections.MapUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.ui.Model;
 
 import vfh.httpInterface.commons.Page;
 import vfh.httpInterface.commons.PageRequest;
+import vfh.httpInterface.commons.StringUtil;
 import vfh.httpInterface.commons.VariableUtils;
 import vfh.httpInterface.commons.valid.annotation.MapValid;
 import vfh.httpInterface.dao.buildings.BuildingsMapper;
+import vfh.httpInterface.dao.buildings.BuildingsPriceMapper;
 import vfh.httpInterface.service.ServiceException;
 
 /**
@@ -26,6 +29,8 @@ import vfh.httpInterface.service.ServiceException;
 public class BuildingsService {
 	@Autowired
 	private BuildingsMapper buildingsMapper;
+	@Autowired
+	private BuildingsPriceMapper buildingsPriceMapper;
 	/**
 	 * TODO 添加楼盘
 	 * @author harry
@@ -55,11 +60,11 @@ public class BuildingsService {
 	 * @return
 	 * @create 2016年1月12日
 	 */
-	public List<Map<String, Object>> findUsers(Map<String, Object> filter) {
+	public List<Map<String, Object>> findBuildings(Map<String, Object> filter) {
 		return buildingsMapper.find(filter);
 	}
 	/**
-	 * TODO 分页获取用户列表
+	 * TODO 分页获取楼盘列表
 	 * @author harry
 	 * <b> 有问题请联系qq:359705093</b>
 	 * @param pageRequest
@@ -70,7 +75,7 @@ public class BuildingsService {
 	public Page<Map<String, Object>> findBuildingsList(PageRequest pageRequest, Map<String, Object> filter) {
         long total = buildingsMapper.count(filter);
         filter.putAll(pageRequest.getMap());
-        List<Map<String, Object>> content = findUsers(filter);
+        List<Map<String, Object>> content = findBuildings(filter);
         return new Page<Map<String, Object>>(pageRequest, content, total);
     }
 	/**
@@ -114,5 +119,18 @@ public class BuildingsService {
             	deleteBuildings(entity);
             }
         }
+    }
+	public Page<Map<String, Object>> findBuildingsPriceList(PageRequest pageRequest, Map<String, Object> filter,Model model) {
+		Long buildingsId=null;
+		if(StringUtil.isNotEmptyObject(pageRequest.getMap().get("buildingsId"))){
+			buildingsId=Long.parseLong(pageRequest.getMap().get("buildingsId").toString());
+		}
+		
+		Map buildings=buildingsMapper.get(buildingsId);
+		model.addAttribute("buildingsName",buildings.get("buildings_name").toString());
+		long total = buildingsPriceMapper.count(filter);
+        filter.putAll(pageRequest.getMap());
+        List<Map<String, Object>> content = buildingsPriceMapper.find(filter);
+        return new Page<Map<String, Object>>(pageRequest, content, total);
     }
 }

@@ -162,6 +162,11 @@
                                         <span class="glyphicon glyphicon-home"></span>
                                     </a>
                                     </@shiro.hasPermission>
+                                    <@shiro.hasPermission name="active:add">
+                                    <a class="btn btn-default btn-sm blocklink" title="添加活动" href="javascript:void(0)" data-href="${base}/buildings/active/add" data-building-id="${r.id}" data-building-name="${r.buildings_name}">
+                                        <span class="glyphicon glyphicon-gift"></span>
+                                    </a>
+                                    </@shiro.hasPermission>
                                 </td>
                             </tr>
                             </#list>

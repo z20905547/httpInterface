@@ -14,6 +14,7 @@ import vfh.httpInterface.commons.Page;
 import vfh.httpInterface.commons.PageRequest;
 import vfh.httpInterface.commons.VariableUtils;
 import vfh.httpInterface.commons.enumeration.entity.BuildingsState;
+import vfh.httpInterface.service.buildings.BuildingsPriceService;
 import vfh.httpInterface.service.buildings.BuildingsService;
 
 /**
@@ -23,40 +24,39 @@ import vfh.httpInterface.service.buildings.BuildingsService;
  * @create 2016年1月11日
  */
 @Controller
-@RequestMapping("/buildings/buildings")
-public class BuildingsController {
+@RequestMapping("/buildings/price")
+public class BuildingsPriceController {
 
     @Autowired
-    private BuildingsService buildingsService;
+    private BuildingsPriceService buildingsPriceService;
     @RequestMapping("list")
     public Page<Map<String, Object>> list(PageRequest pageRequest, @RequestParam Map<String, Object> filter,Model model) {
-    	model.addAttribute("buildingsStates", VariableUtils.getVariables(BuildingsState.class));
-    	return buildingsService.findBuildingsList(pageRequest,filter);
+    	return buildingsPriceService.findBuildingsPriceList(pageRequest,filter,model);
     }
     @RequestMapping("insert")
     public String insert(@RequestParam Map<String, Object> entity,
                          RedirectAttributes redirectAttributes) {
-    	buildingsService.insertBuildings(entity);
-        redirectAttributes.addFlashAttribute("success", "新增楼盘成功");
-        return "redirect:/buildings/buildings/list";
-    }
-    @RequestMapping("delete")
-    public String delete(@RequestParam List<Long> ids,RedirectAttributes redirectAttributes) {
-    	buildingsService.deleteBuildingsList(ids);
-        redirectAttributes.addFlashAttribute("success", "删除" + ids.size() + "条楼盘记录成功");
-        return "redirect:/buildings/buildings/list";
+    	buildingsPriceService.insertBuildingsPrice(entity);
+        redirectAttributes.addFlashAttribute("success", "新增价格成功");
+        redirectAttributes.addAttribute("buildingsId", entity.get("buildingsId"));
+        redirectAttributes.addAttribute("buildingsName", entity.get("buildingsName"));
+        return "redirect:/buildings/price/list";
     }
     @RequestMapping(value="update")
     public String update(@RequestParam Map<String, Object> entity,
                          RedirectAttributes redirectAttributes) {
-    	buildingsService.updateBuildings(entity);
-        redirectAttributes.addFlashAttribute("success", "修改楼盘信息成功");
-        return "redirect:/buildings/buildings/list";
+    	buildingsPriceService.updateBuildingsPrice(entity);
+        redirectAttributes.addFlashAttribute("success", "修改价格成功");
+        return "redirect:/buildings/price/list?buildingsId="+entity.get("buildingsId");
     }
     @RequestMapping({"edit","add"})
-    public void createOrEdit(@RequestParam(required = false)Long id,Model model) {
+    public void createOrEdit(@RequestParam(required = false)Long id,@RequestParam(required = false)Long buildingsId,
+    		@RequestParam(required = false)String buildingsName,Model model) {
         if (id != null) {
-            model.addAttribute("entity", buildingsService.getBuildings(id));
+            model.addAttribute("entity", buildingsPriceService.getBuildingsPrice(id));
+        }else{
+        	 model.addAttribute("buildingsId",buildingsId);
+        	 model.addAttribute("buildingsName",buildingsName);
         }
     }
 }
