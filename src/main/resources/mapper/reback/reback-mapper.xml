@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 用户数据访问映射 -->
+<mapper namespace="vfh.httpInterface.dao.reback.RebackDao" >
+
+  
+   <select id="count" resultType="long">
+        SELECT
+          COUNT(id)
+        FROM
+          td_reback
+          WHERE pid = #{filter.id}
+          ORDER BY id DESC
+    </select>
+    
+    <insert id="insert" useGeneratedKeys="true" keyProperty="entity.id">
+        INSERT INTO td_reback(
+          pid,
+          redate,
+          reresult
+          
+        ) VALUES (
+          #{entity.pid},
+          #{entity.redate},
+          #{entity.reresult}
+          
+        )
+    </insert>
+    <select id="find" resultType="hashmap">
+        SELECT
+            id AS "id",
+            pid AS "pid",
+            redate AS "redate",
+            reresult AS "reresult"
+        FROM
+          td_reback
+          WHERE
+          pid = #{filter.id}
+        ORDER BY id DESC
+    </select>
+    
+    <select id="findall" resultType="hashmap">
+        SELECT
+            id AS "id",
+            pid AS "pid",
+            redate AS "redate",
+            reresult AS "reresult"
+        FROM
+          td_reback
+        ORDER BY id DESC
+    </select>
+</mapper>

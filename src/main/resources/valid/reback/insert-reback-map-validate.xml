@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<validate-mapper name="insert-reback">
+
+    <key name="pid" alias="父订单">
+        <notEmpty />
+        <length min="1" max="50" />
+    </key>
+
+    <key name="redate" alias="回访时间">
+         <notEmpty /> 
+    </key>
+     <key name="reresult" alias="回访结果">
+         <notEmpty /> 
+    </key>
+</validate-mapper>

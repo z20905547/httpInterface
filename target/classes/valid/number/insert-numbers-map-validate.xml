@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<validate-mapper name="insert-numbers">
+
+    <key name="kname" alias="用户姓名">
+        <notEmpty />
+        <length min="1" max="50" />
+    </key>
+
+    <key name="ksex" alias="用户性别">
+         <notEmpty /> 
+    </key>
+    <key name="knum" alias="客户手机号">
+                <notEmpty />
+        <length min="11" max="11" />
+       
+    </key>
+    <key name="laidianrq" alias="来电日期">
+         <notEmpty />
+       
+    </key>
+    <key name="laiyuanqd" alias="来源渠道">
+         <notEmpty />
+       
+    </key>
+    <key name="dilily" alias="地理来源">
+         <notEmpty />
+    </key>
+    <key name="staff" alias="员工帐号">
+         <notEmpty />
+    </key>
+    <key name="status" alias="来电状态">
+         <notEmpty />      
+    </key>
+</validate-mapper>
