@@ -1,0 +1,149 @@
+<#include "*/basic/default.html"/>
+
+<#macro title>
+公告管理
+</#macro>
+
+<#macro head>
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        $("#selectAll").click(function () {
+            var checkbox = $(this),
+                    children = checkbox.parents("table").find("tbody input[type='checkbox']");
+
+            children.prop("checked", checkbox.is(":checked"));
+        });
+    });
+
+    function submitDeleteForm() {
+        var length = $("#user-list-form").find("input[type='checkbox'][id!='selectAll']:checked").length;
+        if (length == 0) {
+            return ;
+        }
+        bootbox.confirm("确定要删除选中的" + length + "条记录吗？", function (result) {
+            if (result) {
+                $("#user-list-form").submit();
+            }
+        });
+    }   
+    
+    
+</script>
+
+
+
+
+</#macro>
+
+<#macro body>
+
+<div class="data-content">
+
+    <ol class="breadcrumb">
+        <li class="active"><span class="glyphicon glyphicon-user"></span></li>
+        <li class="active"> 来电记录</li>
+    </ol>
+
+    <#if success?has_content>
+    <div class="alert alert-success fade in">
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+        <span class="glyphicon glyphicon-ok"></span> ${success}
+    </div>
+    </#if>
+
+    <form id="user-list-form" action="${base}/account/notice/delete" valid="false" method="post">
+        <div class="panel panel-default">
+
+            <div class="panel-heading">
+                <h3 class="panel-title"><span class="glyphicon glyphicon-user"></span> 来电管理</h3>
+            </div>
+            <div class="table-container">
+                <table class="table table-hover table-striped">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>客户姓名</th>
+                            <th>客户性别</th>
+                            <th>客户电话</th>
+                            <th>客户年龄</th>
+                            <th>来电日期</th>
+                            <th>客户微信</th>
+                            <th>来源渠道</th>
+                            <th>客户状态</th>
+                            <th>操作</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        <#if page.content?size == 0>
+                        <tr>
+                            <td colspan="6"> 没有记录</td>
+                        </tr>
+                        <#else>
+                            <#list page.content as r>
+                            <tr>
+                                <td><input type="checkbox" name="id" value="${r.id}"></td>
+                                <td>${r.kname!''}</td>
+                                 <#if r.ksex == 0>
+                                <td>男</td>
+                                <#else>
+                                <td>女</td>
+                                </#if>
+                                <td>${r.knum!''}</td>
+                                <td>${r.kage!''}</td>
+                                <td>${r.laidianrq!''}</td>
+                                <td>${r.kwxh!''}</td>
+                                <td>${r.laiyuanqd!''}</td>
+                                <#if r.status == 1>
+                                <td>成交</td>
+                                <#elseif r.status == 2>
+                                <td>维护中</td>
+                                <#else>
+                                <td>放弃</td>
+                                 </#if>
+                                <td>
+                                    <@shiro.hasPermission name="reback:list">
+                                    <a class="btn btn-default btn-sm" href="${base}/account/reback/list?id=${r.id}">
+                                        <span class="glyphicon glyphicon-edit"></span>
+                                    </a>
+                                    </@shiro.hasPermission>
+                                </td>
+                            </tr>
+                            </#list>
+
+                        </#if>
+
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="panel-footer">
+                <a class="btn btn-info" data-toggle="modal" data-target="#search-modal">
+                    <span class="glyphicon glyphicon-search"></span> 查询
+                </a>
+
+                <@shiro.hasPermission name="numbers:add">
+                <a href="${base}/account/numbers/add" class="btn btn-primary">
+                    <span class="glyphicon glyphicon-plus"></span> 添加
+                </a>
+                </@shiro.hasPermission>
+
+                <@shiro.hasPermission name="notice:delete">
+                <button type="button" class="btn btn-danger" onclick="submitDeleteForm();">
+                    <span class="glyphicon glyphicon-remove"></span> 删除
+                </button>
+                </@shiro.hasPermission>
+            </div>
+
+        </div>
+
+        <@pagination 'user-search-form' page />
+
+    </form>
+
+</div>
+
+</#macro>
+
+

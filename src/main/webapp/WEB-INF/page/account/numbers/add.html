@@ -1,0 +1,199 @@
+<#include "*/basic/default.html"/>
+
+<#macro title>
+添加公告
+</#macro>
+
+<#macro head>
+<link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/jqueryui/1.10.4/css/jquery-ui.min.css">
+<script type="text/javascript" src="//cdn.bootcss.com/jqueryui/1.10.4/jquery-ui.min.js"></script>
+<script type="text/javascript" src="//cdn.bootcss.com/jqueryui/1.10.4/i18n/jquery-ui-i18n.min.js"></script>
+<style type="text/css">
+		body, html{
+			width: 100%;
+			height: 100%;
+			margin:0;
+			font-family:"微软雅黑";
+			font-size:14px;
+		}
+		#l-map {
+			width:100%; 
+			height:500px;
+			overflow: hidden;
+		}
+		li{
+			line-height:28px;
+		}
+		.cityList{
+			height: 320px;
+			width:372px;
+			overflow-y:auto;
+		}
+
+		.sel_container{
+			font-size:12px;
+			width:140px;
+			background:rgba(255,255,255,0.8);
+			height:30px;
+			line-height:30px;
+			padding:5px;
+		}
+		.map_popup {
+			width: 382px;
+			height: 344px;
+		}
+		.map_popup .popup_main { 
+			background:#fff;
+			border: 1px solid #8BA4D8;
+			height: 100%;
+			overflow: hidden;
+			width: 100%;
+		}
+		.map_popup .title {
+			background: url("http://map.baidu.com/img/popup_title.gif") repeat scroll 0 0 transparent;
+			color: #6688CC;
+			font-weight: bold;
+			height: 24px;
+			line-height: 25px;
+			padding-left: 7px;
+		}
+		.map_popup button {
+			background: url("http://map.baidu.com/img/popup_close.gif") no-repeat scroll 0 0 transparent;
+			cursor: pointer;
+			height: 12px;
+			position: absolute;
+			right: 4px;
+			top: 6px;
+			width: 12px;
+		}	
+	</style>
+<script type="text/javascript">
+
+$(document).ready(function () {
+    $("#selectAll").click(function () {
+        var checkbox = $(this),
+                children = checkbox.parents("table").find("tbody input[type='checkbox']");
+
+        children.prop("checked", checkbox.is(":checked"));
+    });
+    $.datepicker.setDefaults($.datepicker.regional["zh-CN"]);
+
+    	$( ".laidianrq" ).datepicker({
+        	altField: "#laidianrq",
+            altFormat: "yy-mm-dd"
+        });
+
+});
+
+</script>
+</#macro>
+
+<#macro body>
+<div class="data-content">
+
+    <ol class="breadcrumb">
+        <li><span class="glyphicon glyphicon-user"></span></li>
+        <li><a href="${base}/account/numbers/list">客户管理</a></li>
+        <li class="active">添加客户</li>
+    </ol>
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title"><span class="glyphicon glyphicon-edit"></span> 客户添加</h3>
+        </div>
+        <form action="${base}/account/numbers/insert" id="create-notice-form" method="post">
+            <div class="panel-body">
+
+              <div class="form-group">
+                    <div class="row">
+                        <div class="col-xs-6">
+                            <label for="kname">客户姓名:</label>
+                            <input type="text" class="form-control required" maxlength="16" minlength="6" id="kname" name="kname">
+                        </div>
+                        <div class="col-xs-6">
+                            <label for="ksex">客户性别:</label>
+                       <select class="form-control required"  id="ksex" name="ksex">  
+                           <option value ="0">男</option>  
+                           <option value ="1">女</option>  
+                       </select> 
+                    </div>
+                    </div>
+                </div>
+
+              <div class="form-group">
+                    <div class="row">
+                        <div class="col-xs-6">
+                            <label for="knum">客户手机:</label>
+                            <input type="text" class="form-control required" maxlength="11" minlength="11" id="knum"  name="knum">
+                        </div>
+                 <div class="col-xs-6 laidianrq">
+                            <label for="laidianrq">来电时间:</label>
+                            <input type="text" class=" form-control " autocomplete="off" id="laidianrq" name="laidianrq" readonly>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-xs-6">
+                            <label for="kwxh">客户微信:</label>
+                            <input type="text" class="form-control required" maxlength="20" minlength="20" id="kwxh"  name="kwxh">
+                        </div>
+                        <div class="col-xs-6">
+                            <label for="laiyuanqd">来源渠道:</label>
+                           <input type="text" class="form-control required" maxlength="20" minlength="20" id="laiyuanqd"  name="laiyuanqd">
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-xs-6">
+                            <label for="dilily">地理来源:</label>
+                            <input type="text" class="form-control required" maxlength="20" minlength="20" id="dilily"  name="dilily">
+                        </div>
+                        <div class="col-xs-6">
+                            <label for="status">客户状态:</label>
+                       <select id="status" name="status" class="form-control required">  
+                           <option value ="1">成交</option>  
+                           <option value ="2">维护中</option>  
+                           <option value ="3">放弃</option>  
+                       </select> 
+                          
+                          
+                           </div>
+                    </div>
+                </div>
+                 <div class="form-group">
+                    <div class="row">
+                        <div class="col-xs-6">
+                            <label for="dilily">客户年龄（大概）:</label>
+                            <input type="text" class="form-control required" maxlength="20" minlength="20" id="kage"  name="kage">
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="panel-footer">
+
+                <@shiro.hasPermission name="numbers:insert">
+                <button type="submit" class="btn btn-success">
+                    <span class="glyphicon glyphicon-ok"></span> 保存
+                </button>
+
+                <button type="reset" class="btn btn-warning">
+                    <span class="glyphicon glyphicon-trash"></span> 重置
+                </button>
+                </@shiro.hasPermission>
+
+                <button type="button" class="btn btn-default" onclick="history.back();">
+                    <span class="glyphicon glyphicon-backward"></span> 返回
+                </button>
+
+            </div>
+        </form>
+    </div>
+</div>
+</#macro>
+
