@@ -14,10 +14,6 @@
     <link rel="stylesheet" type="text/css" href="<%= request.getContextPath() %>/resource/css/style.css">
     <link rel="stylesheet" type="text/css" href="<%= request.getContextPath() %>/resource/css/bootstrap-theme.css">
 
-    <!--[if lt IE 9]>
-    <script src="http://cdn.bootcss.com/html5shiv/3.7.0/html5shiv.min.js"></script>
-    <script src="http://cdn.bootcss.com/respond.js/1.3.0/respond.min.js"></script>
-    <![endif]-->
 </head>
 <body>
 	<div class="main-container container">

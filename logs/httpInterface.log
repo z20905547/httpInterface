@@ -3682,3 +3682,186 @@ net.coding.chenxiaobo.map.validation.exception.MappingMetadataNotFoundException:
 2016-01-18 06:22:32,511 [Thread-4] INFO  [org.springframework.context.support.GenericApplicationContext:862] - Closing org.springframework.context.support.GenericApplicationContext@684a26e8: startup date [Mon Jan 18 06:22:27 CST 2016]; root of context hierarchy
 2016-01-18 06:22:32,511 [Thread-4] INFO  [org.springframework.cache.ehcache.EhCacheManagerFactoryBean:181] - Shutting down EhCache CacheManager
 2016-01-18 06:22:32,511 [Thread-4] INFO  [com.alibaba.druid.pool.DruidDataSource:1370] - {dataSource-1} closed
+2016-01-18 11:08:29,075 [main] INFO  [org.springframework.test.context.support.DefaultTestContextBootstrapper:255] - Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener]
+2016-01-18 11:08:29,122 [main] INFO  [org.springframework.test.context.support.DefaultTestContextBootstrapper:181] - Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@5980072b, org.springframework.test.context.support.DependencyInjectionTestExecutionListener@6456c5f4, org.springframework.test.context.support.DirtiesContextTestExecutionListener@7cde49a2, org.springframework.test.context.transaction.TransactionalTestExecutionListener@65b46ab9, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener@27cacbd9]
+2016-01-18 11:08:29,132 [main] INFO  [org.springframework.test.context.support.DefaultTestContextBootstrapper:255] - Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener]
+2016-01-18 11:08:29,133 [main] INFO  [org.springframework.test.context.support.DefaultTestContextBootstrapper:181] - Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@53d289a4, org.springframework.test.context.support.DependencyInjectionTestExecutionListener@234a98fa, org.springframework.test.context.support.DirtiesContextTestExecutionListener@7681572f, org.springframework.test.context.transaction.TransactionalTestExecutionListener@25830b71, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener@3e643af4]
+2016-01-18 11:08:29,149 [main] INFO  [org.springframework.test.context.support.DefaultTestContextBootstrapper:255] - Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener]
+2016-01-18 11:08:29,151 [main] INFO  [org.springframework.test.context.support.DefaultTestContextBootstrapper:181] - Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@7d20b1ee, org.springframework.test.context.support.DependencyInjectionTestExecutionListener@6d81c06f, org.springframework.test.context.support.DirtiesContextTestExecutionListener@6180ef93, org.springframework.test.context.transaction.TransactionalTestExecutionListener@57f0cde7, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener@25e25cc]
+2016-01-18 11:08:29,159 [main] INFO  [org.springframework.test.context.support.DefaultTestContextBootstrapper:255] - Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener]
+2016-01-18 11:08:29,160 [main] INFO  [org.springframework.test.context.support.DefaultTestContextBootstrapper:181] - Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@76fc1719, org.springframework.test.context.support.DependencyInjectionTestExecutionListener@2050a756, org.springframework.test.context.support.DirtiesContextTestExecutionListener@f1a0fad, org.springframework.test.context.transaction.TransactionalTestExecutionListener@77fb2e99, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener@bb07c59]
+2016-01-18 11:08:29,170 [main] INFO  [org.springframework.test.context.support.DefaultTestContextBootstrapper:255] - Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener]
+2016-01-18 11:08:29,171 [main] INFO  [org.springframework.test.context.support.DefaultTestContextBootstrapper:181] - Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@146a2afc, org.springframework.test.context.support.DependencyInjectionTestExecutionListener@462c10dc, org.springframework.test.context.support.DirtiesContextTestExecutionListener@7706ff81, org.springframework.test.context.transaction.TransactionalTestExecutionListener@6c70ab33, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener@58f7d8e3]
+2016-01-18 11:08:29,365 [main] INFO  [org.springframework.beans.factory.xml.XmlBeanDefinitionReader:317] - Loading XML bean definitions from class path resource [applicationContext-core.xml]
+2016-01-18 11:08:29,973 [main] INFO  [org.springframework.context.support.GenericApplicationContext:510] - Refreshing org.springframework.context.support.GenericApplicationContext@57a41eae: startup date [Mon Jan 18 11:08:29 CST 2016]; root of context hierarchy
+2016-01-18 11:08:30,262 [main] INFO  [org.springframework.context.support.PropertySourcesPlaceholderConfigurer:172] - Loading properties file from URL [file:/D:/workspace/httpInterface/target/test-classes/application.test.properties]
+2016-01-18 11:08:30,912 [main] ERROR [com.alibaba.druid.pool.DruidDataSource:795] - testWhileIdle is true, validationQuery not set
+2016-01-18 11:08:31,176 [main] INFO  [com.alibaba.druid.pool.DruidDataSource:655] - {dataSource-1} inited
+2016-01-18 11:08:32,285 [main] INFO  [net.coding.chenxiaobo.map.validation.spring.MapValidationBeanFactory:57] - add insert-user-map-validate.xml mapper
+2016-01-18 11:08:32,288 [main] INFO  [net.coding.chenxiaobo.map.validation.spring.MapValidationBeanFactory:57] - add resource-map-validate.xml mapper
+2016-01-18 11:08:32,290 [main] INFO  [net.coding.chenxiaobo.map.validation.spring.MapValidationBeanFactory:57] - add update-user-map-validate.xml mapper
+2016-01-18 11:08:32,293 [main] INFO  [net.coding.chenxiaobo.map.validation.spring.MapValidationBeanFactory:57] - add insert-buildings-map-validate.xml mapper
+2016-01-18 11:08:32,295 [main] INFO  [net.coding.chenxiaobo.map.validation.spring.MapValidationBeanFactory:57] - add insert-price-map-validate.xml mapper
+2016-01-18 11:08:32,296 [main] INFO  [net.coding.chenxiaobo.map.validation.spring.MapValidationBeanFactory:57] - add update-buildings-active-map-validate.xml mapper
+2016-01-18 11:08:32,301 [main] INFO  [net.coding.chenxiaobo.map.validation.spring.MapValidationBeanFactory:57] - add update-price-map-validate.xml mapper
+2016-01-18 11:08:32,302 [main] INFO  [net.coding.chenxiaobo.map.validation.spring.MapValidationBeanFactory:57] - add insert-notice-map-validate.xml mapper
+2016-01-18 11:08:32,304 [main] INFO  [net.coding.chenxiaobo.map.validation.spring.MapValidationBeanFactory:57] - add update-notice-map-validate.xml mapper
+2016-01-18 11:08:32,306 [main] INFO  [net.coding.chenxiaobo.map.validation.spring.MapValidationBeanFactory:57] - add data-dictionary-map-validate.xml mapper
+2016-01-18 11:08:32,307 [main] INFO  [net.coding.chenxiaobo.map.validation.spring.MapValidationBeanFactory:57] - add dictionary-category-map-validate.xml mapper
+2016-01-18 11:08:32,388 [main] INFO  [org.springframework.cache.ehcache.EhCacheManagerFactoryBean:129] - Initializing EhCache CacheManager
+2016-01-18 11:08:32,979 [main] INFO  [org.springframework.aop.framework.CglibAopProxy:264] - Unable to proxy method [public final void org.apache.shiro.web.servlet.OncePerRequestFilter.doFilter(javax.servlet.ServletRequest,javax.servlet.ServletResponse,javax.servlet.FilterChain) throws javax.servlet.ServletException,java.io.IOException] because it is final: All calls to this method via a proxy will NOT be routed to the target instance.
+2016-01-18 11:08:33,200 [main] INFO  [org.springframework.jdbc.datasource.init.ScriptUtils:431] - Executing SQL script from class path resource [sql/h2.sql]
+2016-01-18 11:08:33,362 [main] INFO  [org.springframework.jdbc.datasource.init.ScriptUtils:490] - Executed SQL script from class path resource [sql/h2.sql] in 161 ms.
+2016-01-18 11:08:33,421 [main] INFO  [org.springframework.jdbc.datasource.init.ScriptUtils:431] - Executing SQL script from class path resource [data/cleanup-data.sql]
+2016-01-18 11:08:33,437 [main] INFO  [org.springframework.jdbc.datasource.init.ScriptUtils:490] - Executed SQL script from class path resource [data/cleanup-data.sql] in 16 ms.
+2016-01-18 11:08:33,438 [main] INFO  [org.springframework.jdbc.datasource.init.ScriptUtils:431] - Executing SQL script from class path resource [data/insert-data.sql]
+2016-01-18 11:08:33,475 [main] INFO  [org.springframework.jdbc.datasource.init.ScriptUtils:490] - Executed SQL script from class path resource [data/insert-data.sql] in 35 ms.
+2016-01-18 11:08:33,565 [main] INFO  [org.springframework.jdbc.datasource.init.ScriptUtils:431] - Executing SQL script from class path resource [data/cleanup-data.sql]
+2016-01-18 11:08:33,581 [main] INFO  [org.springframework.jdbc.datasource.init.ScriptUtils:490] - Executed SQL script from class path resource [data/cleanup-data.sql] in 15 ms.
+2016-01-18 11:08:33,582 [main] INFO  [org.springframework.jdbc.datasource.init.ScriptUtils:431] - Executing SQL script from class path resource [data/insert-data.sql]
+2016-01-18 11:08:33,615 [main] INFO  [org.springframework.jdbc.datasource.init.ScriptUtils:490] - Executed SQL script from class path resource [data/insert-data.sql] in 33 ms.
+2016-01-18 11:08:33,621 [main] INFO  [org.springframework.jdbc.datasource.init.ScriptUtils:431] - Executing SQL script from class path resource [data/cleanup-data.sql]
+2016-01-18 11:08:33,637 [main] INFO  [org.springframework.jdbc.datasource.init.ScriptUtils:490] - Executed SQL script from class path resource [data/cleanup-data.sql] in 16 ms.
+2016-01-18 11:08:33,637 [main] INFO  [org.springframework.jdbc.datasource.init.ScriptUtils:431] - Executing SQL script from class path resource [data/insert-data.sql]
+2016-01-18 11:08:33,677 [main] INFO  [org.springframework.jdbc.datasource.init.ScriptUtils:490] - Executed SQL script from class path resource [data/insert-data.sql] in 39 ms.
+2016-01-18 11:08:33,716 [main] INFO  [org.springframework.jdbc.datasource.init.ScriptUtils:431] - Executing SQL script from class path resource [data/cleanup-data.sql]
+2016-01-18 11:08:33,726 [main] INFO  [org.springframework.jdbc.datasource.init.ScriptUtils:431] - Executing SQL script from class path resource [data/insert-data.sql]
+2016-01-18 11:08:33,753 [main] INFO  [org.springframework.jdbc.datasource.init.ScriptUtils:490] - Executed SQL script from class path resource [data/insert-data.sql] in 26 ms.
+2016-01-18 11:08:33,810 [main] INFO  [org.springframework.jdbc.datasource.init.ScriptUtils:431] - Executing SQL script from class path resource [data/cleanup-data.sql]
+2016-01-18 11:08:33,821 [main] INFO  [org.springframework.jdbc.datasource.init.ScriptUtils:490] - Executed SQL script from class path resource [data/cleanup-data.sql] in 11 ms.
+2016-01-18 11:08:33,821 [main] INFO  [org.springframework.jdbc.datasource.init.ScriptUtils:431] - Executing SQL script from class path resource [data/insert-data.sql]
+2016-01-18 11:08:33,851 [main] INFO  [org.springframework.jdbc.datasource.init.ScriptUtils:490] - Executed SQL script from class path resource [data/insert-data.sql] in 28 ms.
+2016-01-18 11:08:33,917 [main] INFO  [org.springframework.jdbc.datasource.init.ScriptUtils:431] - Executing SQL script from class path resource [data/cleanup-data.sql]
+2016-01-18 11:08:33,930 [main] INFO  [org.springframework.jdbc.datasource.init.ScriptUtils:490] - Executed SQL script from class path resource [data/cleanup-data.sql] in 13 ms.
+2016-01-18 11:08:33,932 [main] INFO  [org.springframework.jdbc.datasource.init.ScriptUtils:431] - Executing SQL script from class path resource [data/insert-data.sql]
+2016-01-18 11:08:33,964 [main] INFO  [org.springframework.jdbc.datasource.init.ScriptUtils:490] - Executed SQL script from class path resource [data/insert-data.sql] in 31 ms.
+2016-01-18 11:08:33,969 [main] INFO  [org.springframework.jdbc.datasource.init.ScriptUtils:431] - Executing SQL script from class path resource [data/cleanup-data.sql]
+2016-01-18 11:08:33,983 [main] INFO  [org.springframework.jdbc.datasource.init.ScriptUtils:490] - Executed SQL script from class path resource [data/cleanup-data.sql] in 14 ms.
+2016-01-18 11:08:33,983 [main] INFO  [org.springframework.jdbc.datasource.init.ScriptUtils:431] - Executing SQL script from class path resource [data/insert-data.sql]
+2016-01-18 11:08:34,015 [main] INFO  [org.springframework.jdbc.datasource.init.ScriptUtils:490] - Executed SQL script from class path resource [data/insert-data.sql] in 31 ms.
+2016-01-18 11:08:34,033 [main] INFO  [org.springframework.jdbc.datasource.init.ScriptUtils:431] - Executing SQL script from class path resource [data/cleanup-data.sql]
+2016-01-18 11:08:34,045 [main] INFO  [org.springframework.jdbc.datasource.init.ScriptUtils:431] - Executing SQL script from class path resource [data/insert-data.sql]
+2016-01-18 11:08:34,081 [main] INFO  [org.springframework.jdbc.datasource.init.ScriptUtils:490] - Executed SQL script from class path resource [data/insert-data.sql] in 34 ms.
+2016-01-18 11:08:34,113 [main] INFO  [org.springframework.jdbc.datasource.init.ScriptUtils:431] - Executing SQL script from class path resource [data/cleanup-data.sql]
+2016-01-18 11:08:34,118 [main] INFO  [org.springframework.jdbc.datasource.init.ScriptUtils:490] - Executed SQL script from class path resource [data/cleanup-data.sql] in 4 ms.
+2016-01-18 11:08:34,118 [main] INFO  [org.springframework.jdbc.datasource.init.ScriptUtils:431] - Executing SQL script from class path resource [data/insert-data.sql]
+2016-01-18 11:08:34,138 [main] INFO  [org.springframework.jdbc.datasource.init.ScriptUtils:490] - Executed SQL script from class path resource [data/insert-data.sql] in 19 ms.
+2016-01-18 11:08:34,171 [main] INFO  [org.springframework.jdbc.datasource.init.ScriptUtils:431] - Executing SQL script from class path resource [data/cleanup-data.sql]
+2016-01-18 11:08:34,179 [main] INFO  [org.springframework.jdbc.datasource.init.ScriptUtils:490] - Executed SQL script from class path resource [data/cleanup-data.sql] in 8 ms.
+2016-01-18 11:08:34,180 [main] INFO  [org.springframework.jdbc.datasource.init.ScriptUtils:431] - Executing SQL script from class path resource [data/insert-data.sql]
+2016-01-18 11:08:34,202 [main] INFO  [org.springframework.jdbc.datasource.init.ScriptUtils:490] - Executed SQL script from class path resource [data/insert-data.sql] in 22 ms.
+2016-01-18 11:08:34,218 [main] INFO  [org.springframework.jdbc.datasource.init.ScriptUtils:431] - Executing SQL script from class path resource [data/cleanup-data.sql]
+2016-01-18 11:08:34,233 [main] INFO  [org.springframework.jdbc.datasource.init.ScriptUtils:490] - Executed SQL script from class path resource [data/cleanup-data.sql] in 13 ms.
+2016-01-18 11:08:34,236 [main] INFO  [org.springframework.jdbc.datasource.init.ScriptUtils:431] - Executing SQL script from class path resource [data/insert-data.sql]
+2016-01-18 11:08:34,262 [main] INFO  [org.springframework.jdbc.datasource.init.ScriptUtils:490] - Executed SQL script from class path resource [data/insert-data.sql] in 25 ms.
+2016-01-18 11:08:34,271 [main] INFO  [org.springframework.jdbc.datasource.init.ScriptUtils:431] - Executing SQL script from class path resource [data/cleanup-data.sql]
+2016-01-18 11:08:34,282 [main] INFO  [org.springframework.jdbc.datasource.init.ScriptUtils:431] - Executing SQL script from class path resource [data/insert-data.sql]
+2016-01-18 11:08:34,306 [main] INFO  [org.springframework.jdbc.datasource.init.ScriptUtils:490] - Executed SQL script from class path resource [data/insert-data.sql] in 22 ms.
+2016-01-18 11:08:34,319 [main] INFO  [org.springframework.jdbc.datasource.init.ScriptUtils:431] - Executing SQL script from class path resource [data/cleanup-data.sql]
+2016-01-18 11:08:34,326 [main] INFO  [org.springframework.jdbc.datasource.init.ScriptUtils:490] - Executed SQL script from class path resource [data/cleanup-data.sql] in 6 ms.
+2016-01-18 11:08:34,327 [main] INFO  [org.springframework.jdbc.datasource.init.ScriptUtils:431] - Executing SQL script from class path resource [data/insert-data.sql]
+2016-01-18 11:08:34,354 [main] INFO  [org.springframework.jdbc.datasource.init.ScriptUtils:490] - Executed SQL script from class path resource [data/insert-data.sql] in 27 ms.
+2016-01-18 11:08:34,360 [main] INFO  [org.springframework.jdbc.datasource.init.ScriptUtils:431] - Executing SQL script from class path resource [data/cleanup-data.sql]
+2016-01-18 11:08:34,368 [main] INFO  [org.springframework.jdbc.datasource.init.ScriptUtils:490] - Executed SQL script from class path resource [data/cleanup-data.sql] in 7 ms.
+2016-01-18 11:08:34,370 [main] INFO  [org.springframework.jdbc.datasource.init.ScriptUtils:431] - Executing SQL script from class path resource [data/insert-data.sql]
+2016-01-18 11:08:34,395 [main] INFO  [org.springframework.jdbc.datasource.init.ScriptUtils:490] - Executed SQL script from class path resource [data/insert-data.sql] in 24 ms.
+2016-01-18 11:08:34,412 [main] INFO  [org.springframework.jdbc.datasource.init.ScriptUtils:431] - Executing SQL script from class path resource [data/cleanup-data.sql]
+2016-01-18 11:08:34,417 [main] INFO  [org.springframework.jdbc.datasource.init.ScriptUtils:490] - Executed SQL script from class path resource [data/cleanup-data.sql] in 5 ms.
+2016-01-18 11:08:34,418 [main] INFO  [org.springframework.jdbc.datasource.init.ScriptUtils:431] - Executing SQL script from class path resource [data/insert-data.sql]
+2016-01-18 11:08:34,434 [main] INFO  [org.springframework.jdbc.datasource.init.ScriptUtils:490] - Executed SQL script from class path resource [data/insert-data.sql] in 16 ms.
+2016-01-18 11:08:34,453 [main] INFO  [org.springframework.jdbc.datasource.init.ScriptUtils:431] - Executing SQL script from class path resource [data/cleanup-data.sql]
+2016-01-18 11:08:34,463 [main] INFO  [org.springframework.jdbc.datasource.init.ScriptUtils:431] - Executing SQL script from class path resource [data/insert-data.sql]
+2016-01-18 11:08:34,479 [main] INFO  [org.springframework.jdbc.datasource.init.ScriptUtils:490] - Executed SQL script from class path resource [data/insert-data.sql] in 15 ms.
+2016-01-18 11:08:34,484 [main] INFO  [org.springframework.jdbc.datasource.init.ScriptUtils:431] - Executing SQL script from class path resource [data/cleanup-data.sql]
+2016-01-18 11:08:34,489 [main] INFO  [org.springframework.jdbc.datasource.init.ScriptUtils:490] - Executed SQL script from class path resource [data/cleanup-data.sql] in 5 ms.
+2016-01-18 11:08:34,489 [main] INFO  [org.springframework.jdbc.datasource.init.ScriptUtils:431] - Executing SQL script from class path resource [data/insert-data.sql]
+2016-01-18 11:08:34,510 [main] INFO  [org.springframework.jdbc.datasource.init.ScriptUtils:490] - Executed SQL script from class path resource [data/insert-data.sql] in 21 ms.
+2016-01-18 11:08:34,533 [main] INFO  [org.springframework.jdbc.datasource.init.ScriptUtils:431] - Executing SQL script from class path resource [data/cleanup-data.sql]
+2016-01-18 11:08:34,538 [main] INFO  [org.springframework.jdbc.datasource.init.ScriptUtils:490] - Executed SQL script from class path resource [data/cleanup-data.sql] in 5 ms.
+2016-01-18 11:08:34,538 [main] INFO  [org.springframework.jdbc.datasource.init.ScriptUtils:431] - Executing SQL script from class path resource [data/insert-data.sql]
+2016-01-18 11:08:34,556 [main] INFO  [org.springframework.jdbc.datasource.init.ScriptUtils:490] - Executed SQL script from class path resource [data/insert-data.sql] in 17 ms.
+2016-01-18 11:08:34,649 [main] INFO  [org.springframework.jdbc.datasource.init.ScriptUtils:431] - Executing SQL script from class path resource [data/cleanup-data.sql]
+2016-01-18 11:08:34,653 [main] INFO  [org.springframework.jdbc.datasource.init.ScriptUtils:490] - Executed SQL script from class path resource [data/cleanup-data.sql] in 3 ms.
+2016-01-18 11:08:34,655 [main] INFO  [org.springframework.jdbc.datasource.init.ScriptUtils:431] - Executing SQL script from class path resource [data/insert-data.sql]
+2016-01-18 11:08:34,676 [main] INFO  [org.springframework.jdbc.datasource.init.ScriptUtils:490] - Executed SQL script from class path resource [data/insert-data.sql] in 21 ms.
+2016-01-18 11:08:34,680 [main] INFO  [org.springframework.jdbc.datasource.init.ScriptUtils:431] - Executing SQL script from class path resource [data/cleanup-data.sql]
+2016-01-18 11:08:34,686 [main] INFO  [org.springframework.jdbc.datasource.init.ScriptUtils:431] - Executing SQL script from class path resource [data/insert-data.sql]
+2016-01-18 11:08:34,703 [main] INFO  [org.springframework.jdbc.datasource.init.ScriptUtils:490] - Executed SQL script from class path resource [data/insert-data.sql] in 17 ms.
+2016-01-18 11:08:34,721 [main] INFO  [org.springframework.jdbc.datasource.init.ScriptUtils:431] - Executing SQL script from class path resource [data/cleanup-data.sql]
+2016-01-18 11:08:34,735 [main] INFO  [org.springframework.jdbc.datasource.init.ScriptUtils:490] - Executed SQL script from class path resource [data/cleanup-data.sql] in 8 ms.
+2016-01-18 11:08:34,736 [main] INFO  [org.springframework.jdbc.datasource.init.ScriptUtils:431] - Executing SQL script from class path resource [data/insert-data.sql]
+2016-01-18 11:08:34,759 [main] INFO  [org.springframework.jdbc.datasource.init.ScriptUtils:490] - Executed SQL script from class path resource [data/insert-data.sql] in 20 ms.
+2016-01-18 11:08:34,776 [main] INFO  [org.springframework.jdbc.datasource.init.ScriptUtils:431] - Executing SQL script from class path resource [data/cleanup-data.sql]
+2016-01-18 11:08:34,781 [main] INFO  [org.springframework.jdbc.datasource.init.ScriptUtils:490] - Executed SQL script from class path resource [data/cleanup-data.sql] in 4 ms.
+2016-01-18 11:08:34,782 [main] INFO  [org.springframework.jdbc.datasource.init.ScriptUtils:431] - Executing SQL script from class path resource [data/insert-data.sql]
+2016-01-18 11:08:34,801 [main] INFO  [org.springframework.jdbc.datasource.init.ScriptUtils:490] - Executed SQL script from class path resource [data/insert-data.sql] in 19 ms.
+2016-01-18 11:08:34,851 [main] INFO  [org.springframework.jdbc.datasource.init.ScriptUtils:431] - Executing SQL script from class path resource [data/cleanup-data.sql]
+2016-01-18 11:08:34,861 [main] INFO  [org.springframework.jdbc.datasource.init.ScriptUtils:490] - Executed SQL script from class path resource [data/cleanup-data.sql] in 9 ms.
+2016-01-18 11:08:34,861 [main] INFO  [org.springframework.jdbc.datasource.init.ScriptUtils:431] - Executing SQL script from class path resource [data/insert-data.sql]
+2016-01-18 11:08:34,883 [main] INFO  [org.springframework.jdbc.datasource.init.ScriptUtils:490] - Executed SQL script from class path resource [data/insert-data.sql] in 18 ms.
+2016-01-18 11:08:34,890 [main] INFO  [org.springframework.jdbc.datasource.init.ScriptUtils:431] - Executing SQL script from class path resource [data/cleanup-data.sql]
+2016-01-18 11:08:34,899 [main] INFO  [org.springframework.jdbc.datasource.init.ScriptUtils:431] - Executing SQL script from class path resource [data/insert-data.sql]
+2016-01-18 11:08:34,925 [main] INFO  [org.springframework.jdbc.datasource.init.ScriptUtils:490] - Executed SQL script from class path resource [data/insert-data.sql] in 26 ms.
+2016-01-18 11:08:34,944 [main] INFO  [org.springframework.jdbc.datasource.init.ScriptUtils:431] - Executing SQL script from class path resource [data/cleanup-data.sql]
+2016-01-18 11:08:34,951 [main] INFO  [org.springframework.jdbc.datasource.init.ScriptUtils:490] - Executed SQL script from class path resource [data/cleanup-data.sql] in 4 ms.
+2016-01-18 11:08:34,951 [main] INFO  [org.springframework.jdbc.datasource.init.ScriptUtils:431] - Executing SQL script from class path resource [data/insert-data.sql]
+2016-01-18 11:08:34,970 [main] INFO  [org.springframework.jdbc.datasource.init.ScriptUtils:490] - Executed SQL script from class path resource [data/insert-data.sql] in 17 ms.
+2016-01-18 11:08:34,978 [main] INFO  [org.springframework.jdbc.datasource.init.ScriptUtils:431] - Executing SQL script from class path resource [data/cleanup-data.sql]
+2016-01-18 11:08:34,984 [main] INFO  [org.springframework.jdbc.datasource.init.ScriptUtils:490] - Executed SQL script from class path resource [data/cleanup-data.sql] in 6 ms.
+2016-01-18 11:08:34,987 [main] INFO  [org.springframework.jdbc.datasource.init.ScriptUtils:431] - Executing SQL script from class path resource [data/insert-data.sql]
+2016-01-18 11:08:35,010 [main] INFO  [org.springframework.jdbc.datasource.init.ScriptUtils:490] - Executed SQL script from class path resource [data/insert-data.sql] in 19 ms.
+2016-01-18 11:08:35,082 [main] INFO  [org.springframework.jdbc.datasource.init.ScriptUtils:431] - Executing SQL script from class path resource [data/cleanup-data.sql]
+2016-01-18 11:08:35,086 [main] INFO  [org.springframework.jdbc.datasource.init.ScriptUtils:490] - Executed SQL script from class path resource [data/cleanup-data.sql] in 4 ms.
+2016-01-18 11:08:35,086 [main] INFO  [org.springframework.jdbc.datasource.init.ScriptUtils:431] - Executing SQL script from class path resource [data/insert-data.sql]
+2016-01-18 11:08:35,106 [main] INFO  [org.springframework.jdbc.datasource.init.ScriptUtils:490] - Executed SQL script from class path resource [data/insert-data.sql] in 19 ms.
+2016-01-18 11:08:35,156 [main] INFO  [org.springframework.jdbc.datasource.init.ScriptUtils:431] - Executing SQL script from class path resource [data/cleanup-data.sql]
+2016-01-18 11:08:35,161 [main] INFO  [org.springframework.jdbc.datasource.init.ScriptUtils:431] - Executing SQL script from class path resource [data/insert-data.sql]
+2016-01-18 11:08:35,181 [main] INFO  [org.springframework.jdbc.datasource.init.ScriptUtils:490] - Executed SQL script from class path resource [data/insert-data.sql] in 19 ms.
+2016-01-18 11:08:35,215 [main] INFO  [org.springframework.jdbc.datasource.init.ScriptUtils:431] - Executing SQL script from class path resource [data/cleanup-data.sql]
+2016-01-18 11:08:35,219 [main] INFO  [org.springframework.jdbc.datasource.init.ScriptUtils:490] - Executed SQL script from class path resource [data/cleanup-data.sql] in 3 ms.
+2016-01-18 11:08:35,219 [main] INFO  [org.springframework.jdbc.datasource.init.ScriptUtils:431] - Executing SQL script from class path resource [data/insert-data.sql]
+2016-01-18 11:08:35,241 [main] INFO  [org.springframework.jdbc.datasource.init.ScriptUtils:490] - Executed SQL script from class path resource [data/insert-data.sql] in 20 ms.
+2016-01-18 11:08:35,247 [main] INFO  [org.springframework.jdbc.datasource.init.ScriptUtils:431] - Executing SQL script from class path resource [data/cleanup-data.sql]
+2016-01-18 11:08:35,255 [main] INFO  [org.springframework.jdbc.datasource.init.ScriptUtils:490] - Executed SQL script from class path resource [data/cleanup-data.sql] in 8 ms.
+2016-01-18 11:08:35,256 [main] INFO  [org.springframework.jdbc.datasource.init.ScriptUtils:431] - Executing SQL script from class path resource [data/insert-data.sql]
+2016-01-18 11:08:35,271 [main] INFO  [org.springframework.jdbc.datasource.init.ScriptUtils:490] - Executed SQL script from class path resource [data/insert-data.sql] in 15 ms.
+2016-01-18 11:08:35,292 [main] INFO  [org.springframework.jdbc.datasource.init.ScriptUtils:431] - Executing SQL script from class path resource [data/cleanup-data.sql]
+2016-01-18 11:08:35,298 [main] INFO  [org.springframework.jdbc.datasource.init.ScriptUtils:490] - Executed SQL script from class path resource [data/cleanup-data.sql] in 5 ms.
+2016-01-18 11:08:35,305 [main] INFO  [org.springframework.jdbc.datasource.init.ScriptUtils:431] - Executing SQL script from class path resource [data/insert-data.sql]
+2016-01-18 11:08:35,323 [main] INFO  [org.springframework.jdbc.datasource.init.ScriptUtils:490] - Executed SQL script from class path resource [data/insert-data.sql] in 17 ms.
+2016-01-18 11:08:35,329 [main] INFO  [org.springframework.jdbc.datasource.init.ScriptUtils:431] - Executing SQL script from class path resource [data/cleanup-data.sql]
+2016-01-18 11:08:35,334 [main] INFO  [org.springframework.jdbc.datasource.init.ScriptUtils:431] - Executing SQL script from class path resource [data/insert-data.sql]
+2016-01-18 11:08:35,352 [main] INFO  [org.springframework.jdbc.datasource.init.ScriptUtils:490] - Executed SQL script from class path resource [data/insert-data.sql] in 18 ms.
+2016-01-18 11:08:35,357 [main] INFO  [org.springframework.jdbc.datasource.init.ScriptUtils:431] - Executing SQL script from class path resource [data/cleanup-data.sql]
+2016-01-18 11:08:35,365 [main] INFO  [org.springframework.jdbc.datasource.init.ScriptUtils:490] - Executed SQL script from class path resource [data/cleanup-data.sql] in 7 ms.
+2016-01-18 11:08:35,365 [main] INFO  [org.springframework.jdbc.datasource.init.ScriptUtils:431] - Executing SQL script from class path resource [data/insert-data.sql]
+2016-01-18 11:08:35,383 [main] INFO  [org.springframework.jdbc.datasource.init.ScriptUtils:490] - Executed SQL script from class path resource [data/insert-data.sql] in 17 ms.
+2016-01-18 11:08:35,395 [main] INFO  [org.springframework.jdbc.datasource.init.ScriptUtils:431] - Executing SQL script from class path resource [data/cleanup-data.sql]
+2016-01-18 11:08:35,402 [main] INFO  [org.springframework.jdbc.datasource.init.ScriptUtils:490] - Executed SQL script from class path resource [data/cleanup-data.sql] in 4 ms.
+2016-01-18 11:08:35,402 [main] INFO  [org.springframework.jdbc.datasource.init.ScriptUtils:431] - Executing SQL script from class path resource [data/insert-data.sql]
+2016-01-18 11:08:35,420 [main] INFO  [org.springframework.jdbc.datasource.init.ScriptUtils:490] - Executed SQL script from class path resource [data/insert-data.sql] in 17 ms.
+2016-01-18 11:08:35,433 [main] INFO  [org.springframework.jdbc.datasource.init.ScriptUtils:431] - Executing SQL script from class path resource [data/cleanup-data.sql]
+2016-01-18 11:08:35,437 [main] INFO  [org.springframework.jdbc.datasource.init.ScriptUtils:490] - Executed SQL script from class path resource [data/cleanup-data.sql] in 3 ms.
+2016-01-18 11:08:35,440 [main] INFO  [org.springframework.jdbc.datasource.init.ScriptUtils:431] - Executing SQL script from class path resource [data/insert-data.sql]
+2016-01-18 11:08:35,460 [main] INFO  [org.springframework.jdbc.datasource.init.ScriptUtils:490] - Executed SQL script from class path resource [data/insert-data.sql] in 19 ms.
+2016-01-18 11:08:35,469 [main] INFO  [org.springframework.jdbc.datasource.init.ScriptUtils:431] - Executing SQL script from class path resource [data/cleanup-data.sql]
+2016-01-18 11:08:35,478 [main] INFO  [org.springframework.jdbc.datasource.init.ScriptUtils:431] - Executing SQL script from class path resource [data/insert-data.sql]
+2016-01-18 11:08:35,512 [main] INFO  [org.springframework.jdbc.datasource.init.ScriptUtils:490] - Executed SQL script from class path resource [data/insert-data.sql] in 14 ms.
+2016-01-18 11:08:35,517 [main] INFO  [org.springframework.jdbc.datasource.init.ScriptUtils:431] - Executing SQL script from class path resource [data/cleanup-data.sql]
+2016-01-18 11:08:35,521 [main] INFO  [org.springframework.jdbc.datasource.init.ScriptUtils:490] - Executed SQL script from class path resource [data/cleanup-data.sql] in 3 ms.
+2016-01-18 11:08:35,525 [main] INFO  [org.springframework.jdbc.datasource.init.ScriptUtils:431] - Executing SQL script from class path resource [data/insert-data.sql]
+2016-01-18 11:08:35,539 [main] INFO  [org.springframework.jdbc.datasource.init.ScriptUtils:490] - Executed SQL script from class path resource [data/insert-data.sql] in 13 ms.
+2016-01-18 11:08:35,553 [main] INFO  [org.springframework.jdbc.datasource.init.ScriptUtils:431] - Executing SQL script from class path resource [data/cleanup-data.sql]
+2016-01-18 11:08:35,559 [main] INFO  [org.springframework.jdbc.datasource.init.ScriptUtils:490] - Executed SQL script from class path resource [data/cleanup-data.sql] in 5 ms.
+2016-01-18 11:08:35,559 [main] INFO  [org.springframework.jdbc.datasource.init.ScriptUtils:431] - Executing SQL script from class path resource [data/insert-data.sql]
+2016-01-18 11:08:35,574 [main] INFO  [org.springframework.jdbc.datasource.init.ScriptUtils:490] - Executed SQL script from class path resource [data/insert-data.sql] in 14 ms.
+2016-01-18 11:08:35,584 [main] INFO  [org.springframework.jdbc.datasource.init.ScriptUtils:431] - Executing SQL script from class path resource [data/cleanup-data.sql]
+2016-01-18 11:08:35,590 [main] INFO  [org.springframework.jdbc.datasource.init.ScriptUtils:490] - Executed SQL script from class path resource [data/cleanup-data.sql] in 5 ms.
+2016-01-18 11:08:35,591 [main] INFO  [org.springframework.jdbc.datasource.init.ScriptUtils:431] - Executing SQL script from class path resource [data/insert-data.sql]
+2016-01-18 11:08:35,607 [main] INFO  [org.springframework.jdbc.datasource.init.ScriptUtils:490] - Executed SQL script from class path resource [data/insert-data.sql] in 16 ms.
+2016-01-18 11:08:35,615 [main] INFO  [org.springframework.jdbc.datasource.init.ScriptUtils:431] - Executing SQL script from class path resource [data/cleanup-data.sql]
+2016-01-18 11:08:35,620 [main] INFO  [org.springframework.jdbc.datasource.init.ScriptUtils:431] - Executing SQL script from class path resource [data/insert-data.sql]
+2016-01-18 11:08:35,635 [main] INFO  [org.springframework.jdbc.datasource.init.ScriptUtils:490] - Executed SQL script from class path resource [data/insert-data.sql] in 14 ms.
+2016-01-18 11:08:35,649 [Thread-4] INFO  [org.springframework.context.support.GenericApplicationContext:862] - Closing org.springframework.context.support.GenericApplicationContext@57a41eae: startup date [Mon Jan 18 11:08:29 CST 2016]; root of context hierarchy
+2016-01-18 11:08:35,652 [Thread-4] INFO  [org.springframework.cache.ehcache.EhCacheManagerFactoryBean:181] - Shutting down EhCache CacheManager
+2016-01-18 11:08:35,659 [Thread-4] INFO  [com.alibaba.druid.pool.DruidDataSource:1370] - {dataSource-1} closed
