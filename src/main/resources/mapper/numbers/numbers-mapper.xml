@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 用户数据访问映射 -->
+<mapper namespace="vfh.httpInterface.dao.numbers.NumbersDao" >
+
+  
+   <select id="count" resultType="long">
+        SELECT
+          COUNT(id)
+        FROM
+          td_numbers
+    </select>
+  
+
+    <insert id="insert" useGeneratedKeys="true" keyProperty="entity.id">
+        INSERT INTO td_numbers(
+          kname,
+          ksex,
+          kage,
+          knum,
+          kwxh,
+          laidianrq,
+          dilily,
+          status,
+          remark,
+          laiyuanqd,
+          staff
+        ) VALUES (
+          #{entity.kname},
+          #{entity.ksex},
+          #{entity.kage},
+          #{entity.knum},
+          #{entity.kwxh},
+          #{entity.laidianrq},
+          #{entity.dilily},
+          #{entity.status},
+          #{entity.remark},
+          #{entity.laiyuanqd},
+          #{entity.staff}
+          
+        )
+    </insert>
+    <select id="find" resultType="hashmap">
+        SELECT
+            id AS "id",
+            kname AS "kname",
+            ksex AS "ksex",
+            kage AS "kage",
+            knum AS "knum",
+            laidianrq AS "laidianrq",
+            kwxh AS "kwxh",
+            laiyuanqd AS "laiyuanqd",
+            dilily AS "dilily",
+            status AS "status",
+            remark AS "remark",
+            staff AS "staff"
+        FROM
+          td_numbers
+          WHERE 
+          staff = #{filter.staff}
+        ORDER BY id DESC
+    </select>
+    
+    <select id="findall" resultType="hashmap">
+        SELECT
+            id AS "id",
+            kname AS "kname",
+            ksex AS "ksex",
+            kage AS "kage",
+            knum AS "knum",
+            laidianrq AS "laidianrq",
+            kwxh AS "kwxh",
+            laiyuanqd AS "laiyuanqd",
+            dilily AS "dilily",
+            status AS "status",
+            remark AS "remark",
+            staff AS "staff"
+        FROM
+          td_numbers
+        ORDER BY id DESC
+    </select>
+</mapper>
