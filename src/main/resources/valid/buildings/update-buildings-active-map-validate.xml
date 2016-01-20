@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<validate-mapper name="update-buildings-active">
+
+  	<key name="nomalPrice" alias="市场价">
+        <notEmpty />
+    </key>
+
+    <key name="discountPrice" alias="平台价">
+        <notEmpty />
+    </key>
+
+    <key name="startDate" alias="生效日期">
+        <notEmpty />
+    </key>
+
+</validate-mapper>

@@ -28,7 +28,6 @@ public class BuildingsController {
 
     @Autowired
     private BuildingsService buildingsService;
-
     @RequestMapping("list")
     public Page<Map<String, Object>> list(PageRequest pageRequest, @RequestParam Map<String, Object> filter,Model model) {
     	model.addAttribute("buildingsStates", VariableUtils.getVariables(BuildingsState.class));

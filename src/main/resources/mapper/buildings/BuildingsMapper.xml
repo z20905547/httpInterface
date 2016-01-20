@@ -2,8 +2,9 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="vfh.httpInterface.dao.buildings.BuildingsMapper" >
   <sql id="Base_Column_List" >
-    id, city_id, area_id, map_x, map_y, developer_company_id, bulidings_name, query_keyword, 
-    create_time, update_time, status, open_date, deliver_date, server_phone_num, address
+    id, city_id, area_id, map_x, map_y, developer_company_id, buildings_name, query_keyword, 
+    create_time, update_time, status, open_date, deliver_date, server_phone_num, address,building_count, floor_space, building_space, house_count, green_rate, decoration_condition, 
+    util_type, parking_count,floor_detail,buildings_detail
   </sql>
   <select id="get" resultType="hashmap">
         SELECT 
@@ -21,15 +22,20 @@
   <insert id="insert" useGeneratedKeys="true" keyProperty="entity.id" >
     insert into tb_buildings ( city_id, area_id, 
       map_x, map_y, 
-      bulidings_name, query_keyword, create_time, 
+      buildings_name, query_keyword, create_time, 
       status, open_date, 
-      deliver_date, server_phone_num, address
+      deliver_date, server_phone_num, address,building_count, floor_space, building_space, house_count, green_rate, decoration_condition, 
+    util_type, parking_count,floor_detail,buildings_detail
       )
     values ( #{entity.cityId}, #{entity.areaId}, 
       #{entity.mapX}, #{entity.mapY}, 
       #{entity.buildingsName}, #{entity.queryKeyword}, now(), 
        #{entity.status}, #{entity.openDate}, 
-      #{entity.deliverDate}, #{entity.serverPhoneNum}, #{entity.address}
+      #{entity.deliverDate}, #{entity.serverPhoneNum}, #{entity.address},
+      #{entity.buildingCount}, #{entity.floorSpace}, 
+      #{entity.buildingSpace}, #{entity.houseCount}, #{entity.greenRate}, 
+      #{entity.decorationCondition}, #{entity.utilType}, #{entity.parkingCount}, 
+      #{entity.floorDetail}, #{entity.buildingsDetail}
       )
   </insert>
   <select id="count" resultType="long">
@@ -59,47 +65,77 @@
         UPDATE
           tb_buildings
         <set>
-	      <if test="record.cityId != null" >
+	      <if test="entity.cityId != null" >
 	        city_id = #{entity.cityId},
 	      </if>
-	      <if test="record.areaId != null" >
+	      <if test="entity.areaId != null" >
 	        area_id = #{entity.areaId},
 	      </if>
-	      <if test="record.mapX != null" >
+	      <if test="entity.mapX != null" >
 	        map_x = #{entity.mapX},
 	      </if>
-	      <if test="record.mapY != null" >
+	      <if test="entity.mapY != null" >
 	        map_y = #{entity.mapY},
 	      </if>
-	      <if test="record.developerCompanyId != null" >
+	      <if test="entity.developerCompanyId != null" >
 	        developer_company_id = #{entity.developerCompanyId},
 	      </if>
-	      <if test="record.bulidingsName != null" >
-	        bulidings_name = #{entity.bulidingsName},
+	      <if test="entity.bulidingsName != null" >
+	        bulidings_name = #{entity.buildingsName},
 	      </if>
-	      <if test="record.queryKeyword != null" >
+	      <if test="entity.queryKeyword != null" >
 	        query_keyword = #{entity.queryKeyword},
 	      </if>
-	      <if test="record.createTime != null" >
+	      <if test="entity.createTime != null" >
 	        create_time = #{entity.createTime},
 	      </if>
-	      <if test="record.updateTime != null" >
+	      <if test="entity.updateTime != null" >
 	        update_time = #{entity.updateTime},
 	      </if>
-	      <if test="record.status != null" >
+	      <if test="entity.status != null" >
 	        status = #{entity.status},
 	      </if>
-	      <if test="record.openDate != null" >
+	      <if test="entity.openDate != null" >
 	        open_date = #{entity.openDate},
 	      </if>
-	      <if test="record.deliverDate != null" >
+	      <if test="entity.deliverDate != null" >
 	        deliver_date = #{entity.deliverDate},
 	      </if>
-	      <if test="record.serverPhoneNum != null" >
+	      <if test="entity.serverPhoneNum != null" >
 	        server_phone_num = #{entity.serverPhoneNum},
 	      </if>
-	      <if test="record.address != null" >
+	      <if test="entity.address != null" >
 	        address = #{entity.address},
+	      </if>
+	      <if test="entity.buildingCount != null" >
+	        building_count = #{entity.buildingCount},
+	      </if>
+	      <if test="entity.floorSpace != null" >
+	        floor_space = #{entity.floorSpace},
+	      </if>
+	      <if test="entity.buildingSpace != null" >
+	        building_space = #{entity.buildingSpace},
+	      </if>
+	      <if test="entity.houseCount != null" >
+	        house_count = #{entity.houseCount},
+	      </if>
+	      <if test="entity.greenRate != null" >
+	        green_rate = #{entity.greenRate},
+	      </if>
+	      <if test="entity.decorationCondition != null" >
+	        decoration_condition = #{entity.decorationCondition},
+	      </if>
+	      <if test="entity.utilType != null" >
+	        util_type = #{entity.utilType},
+	      </if>
+	      <if test="entity.parkingCount != null" >
+	        parking_count = #{entity.parkingCount},
+	      </if>
+	      <if test="entity.floorDetail != null" >
+	        floor_detail = #{entity.floorDetail},
+	      </if>
+	      <if test="entity.buildingDetail != null" >
+	        building_detail = #{entity.buildingDetail},
 	      </if>
 	    </set>
         WHERE

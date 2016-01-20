@@ -1,0 +1,126 @@
+<#include "*/basic/default.html"/>
+
+<#macro title>
+添加楼盘详情
+</#macro>
+
+<#macro head>
+<script type="text/javascript" src="${base}/resource/script/bootstrap-wysiwyg.js"></script>
+
+<script type="text/javascript">
+        
+
+</script>
+</#macro>
+
+<#macro body>
+<div class="data-content">
+
+<!--     <ol class="breadcrumb"> -->
+<!--         <li><span class="glyphicon glyphicon-user"></span></li> -->
+<!--         <li><a href="${base}/account/user/list">用户管理</a></li> -->
+<!--         <li class="active">添加用户</li> -->
+<!--     </ol> -->
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title"><span class="glyphicon glyphicon-edit"></span> 添加楼盘详情</h3>
+        </div>
+        <form action="${base}/buildings/buildings/insert" id="create-user-form" method="post">
+            <div class="panel-body">
+<input name="buildingsId" type="hidden" value="${buildingsId}"/>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-xs-6">
+                            <label for="buildingCount">总栋数:</label>
+                            <input type="text" class="form-control required" maxlength="25" minlength="4" id="buildingCount" name="buildingCount">
+                        </div>
+                        <div class="col-xs-6">
+                            <label for="houseCount">总户数:</label>
+                            <input type="text" class="form-control required" maxlength="16" id="houseCount" name="houseCount">
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-xs-6">
+                            <label for="floorSpace">占地面积:</label>
+                            <input type="text" class="form-control required" maxlength="25" minlength="4" id="floorSpace" name="floorSpace">
+                        </div>
+                        <div class="col-xs-6">
+                            <label for="buildingSpace">建筑面积:</label>
+                            <input type="text" class="form-control required" maxlength="16" id="buildingSpace" name="buildingSpace">
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-xs-6">
+                            <label for="greenRate">绿化率:</label>
+                            <input type="text" class="form-control required" maxlength="25" minlength="4" id="greenRate" name="greenRate">
+                        </div>
+                        <div class="col-xs-6">
+                            <label for="utilType">期房现房:</label>
+                            <input type="text" class="form-control required" maxlength="16" id="utilType" name="utilType">
+                        </div>
+                    </div>
+                </div>
+                 <div class="form-group">
+                    <div class="row">
+                        <div class="col-xs-6">
+                            <label for="parkingCount">停车位:</label>
+                            <input type="text" class="form-control required" maxlength="25" minlength="4" id="parkingCount" name="parkingCount">
+                        </div>
+                        <div class="col-xs-6">
+                            <label for="decorationCondition">装修状况:</label>
+                            <input type="text" class="form-control required" maxlength="25" minlength="4" id="decorationCondition" name="decorationCondition">
+                        </div>
+                        
+                       
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-xs-6">
+                            <label for="floorDetail">楼层状况</label>
+                            <input type="text" class="form-control required" maxlength="16" id="floorDetail" name="floorDetail">
+                        </div>
+                    </div>
+                </div>
+                 
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <label for="buildingsDetail">楼盘简介:</label>
+                           <textarea id="editor" id="buildingsDetail" name="buildingsDetail">
+						      Go ahead&hellip;
+						    </textarea>
+                            <input type="text" class="form-control required" maxlength="25" minlength="4" id="buildingsName" name="buildingsName">
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="panel-footer">
+
+                <@shiro.hasPermission name="buildings:insert">
+                <button type="submit" class="btn btn-success">
+                    <span class="glyphicon glyphicon-ok"></span> 保存
+                </button>
+
+                <button type="reset" class="btn btn-warning">
+                    <span class="glyphicon glyphicon-trash"></span> 重置
+                </button>
+                </@shiro.hasPermission>
+
+                <button type="button" class="btn btn-default" onclick="history.back();">
+                    <span class="glyphicon glyphicon-backward"></span> 返回
+                </button>
+
+            </div>
+        </form>
+    </div>
+</div>
+</#macro>
+

@@ -5,7 +5,7 @@
     <groupId>vfh</groupId>
 	<artifactId>httpInterface</artifactId>
 	<packaging>war</packaging>
-    <version>1</version>
+    <version>0.0.1-bate</version>
 	<name>base framework</name>
 	<description>base-framework is a authority management system of java web framework, the framework ased on spring, mybatis, spring mvc, apache shiro</description>
 	<url>http://baseframework.coding.io</url>

@@ -14,6 +14,13 @@
 
             children.prop("checked", checkbox.is(":checked"));
         });
+        $(".blocklink").on("click",function(){
+    		var actionUrl=$(this).attr("data-href");
+    		var buildingsId=$(this).attr("data-building-id");
+    		var buildingsName=$(this).attr("data-building-name");
+    		$("<form action='"+actionUrl+"' method='post'>").append("<input name='buildingsId' value='"+buildingsId+"'/><input name='buildingsName' value='"+buildingsName+"'/>").submit().remove();
+    		
+    	});
     });
 
     function submitDeleteForm() {
@@ -27,7 +34,7 @@
             }
         });
     }
-
+	
 </script>
 </#macro>
 
@@ -128,7 +135,7 @@
                             <#list page.content as r>
                             <tr>
                                 <td><input type="checkbox" name="ids" value="${r.id}"></td>
-                                <td>${r.bulidings_name!''}</td>
+                                <td>${r.buildings_name!''}</td>
                                 <td>${r.open_date!''}</td>
                                 <td>${r.deliver_date!''}</td>
                                 <td>
@@ -141,8 +148,18 @@
                                 </td>
                                 <td>
                                     <@shiro.hasPermission name="buildings:edit">
-                                    <a class="btn btn-default btn-sm" href="${base}/buildings/buildings/edit?id=${r.id}">
+                                    <a class="btn btn-default btn-sm" title="修改信息" href="${base}/buildings/buildings/edit?id=${r.id}">
                                         <span class="glyphicon glyphicon-edit"></span>
+                                    </a>
+                                    </@shiro.hasPermission>
+                                    <@shiro.hasPermission name="price:list">
+                                    <a class="btn btn-default btn-sm blocklink" title="编辑价格" href="javascript:void(0)" data-href="${base}/buildings/price/list" data-building-id="${r.id}" data-building-name="${r.buildings_name}">
+                                        <span class="glyphicon glyphicon-jpy"></span>
+                                    </a>
+                                    </@shiro.hasPermission>
+                                    <@shiro.hasPermission name="house:list">
+                                    <a class="btn btn-default btn-sm blocklink" title="编辑户型" href="javascript:void(0)" data-href="${base}/buildings/house/list" data-building-id="${r.id}" data-building-name="${r.buildings_name}">
+                                        <span class="glyphicon glyphicon-home"></span>
                                     </a>
                                     </@shiro.hasPermission>
                                 </td>
@@ -175,7 +192,7 @@
 
         </div>
 
-        <@pagination 'user-search-form' page />
+        <@pagination 'buildings-search-form' page />
 
     </form>
 

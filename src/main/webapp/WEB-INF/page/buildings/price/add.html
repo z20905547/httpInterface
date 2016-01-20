@@ -1,0 +1,95 @@
+<#include "*/basic/default.html"/>
+
+<#macro title>
+添加楼盘价格
+</#macro>
+
+<#macro head>
+<link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/jqueryui/1.10.4/css/jquery-ui.min.css">
+<link rel="stylesheet" type="text/css" href="${base}/resource/css/umeditor.min.css">
+<script type="text/javascript" src="//cdn.bootcss.com/jqueryui/1.10.4/jquery-ui.min.js"></script>
+<script type="text/javascript" src="//cdn.bootcss.com/jqueryui/1.10.4/i18n/jquery-ui-i18n.min.js"></script>
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        $("#selectAll").click(function () {
+            var checkbox = $(this),
+                    children = checkbox.parents("table").find("tbody input[type='checkbox']");
+
+            children.prop("checked", checkbox.is(":checked"));
+        });
+        $.datepicker.setDefaults($.datepicker.regional["zh-CN"]);
+        	$( ".datePicker" ).datepicker({
+            	altField: "#openDate",
+                altFormat: "yy-mm-dd"
+            });                                                    
+        
+        
+    });
+
+</script>
+</#macro>
+
+<#macro body>
+<div class="data-content">
+
+<!--     <ol class="breadcrumb"> -->
+<!--         <li><span class="glyphicon glyphicon-user"></span></li> -->
+<!--         <li><a href="${base}/account/user/list">用户管理</a></li> -->
+<!--         <li class="active">添加用户</li> -->
+<!--     </ol> -->
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title"><span class="glyphicon glyphicon-edit"></span> 添加楼盘价格《${buildingsName}》</h3>
+        </div>
+        <form action="${base}/buildings/price/insert" id="create-user-form" method="post">
+            <div class="panel-body">
+<input type="hidden" name="buildingsId" value="${buildingsId}"/>
+<input type="hidden" name="buildingsName" value="${buildingsName}"/>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-xs-6">
+                            <label for="nomalPrice">市场价:</label>
+                            <input type="text" class="form-control required" id="nomalPrice" name="nomalPrice" placeholder="输入金额（可保留0-2位小数）">
+                        </div>
+                        <div class="col-xs-6">
+                            <label for="discountPrice">平台价:</label>
+                            <input type="text" class="form-control required" id="discountPrice" name="discountPrice" placeholder="输入金额（可保留0-2位小数）">
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-xs-6">
+                            <label for="startDate">开始生效日期:</label>
+                            <input type="text" class="datePicker form-control " autocomplete="off" id="startDate" name="startDate" readonly>
+                        </div>
+                    </div>
+                </div>
+                
+
+            </div>
+
+            <div class="panel-footer">
+
+                <@shiro.hasPermission name="buildings:insert">
+                <button type="submit" class="btn btn-success">
+                    <span class="glyphicon glyphicon-ok"></span> 保存
+                </button>
+
+                <button type="reset" class="btn btn-warning">
+                    <span class="glyphicon glyphicon-trash"></span> 重置
+                </button>
+                </@shiro.hasPermission>
+
+                <button type="button" class="btn btn-default" onclick="history.back();">
+                    <span class="glyphicon glyphicon-backward"></span> 返回
+                </button>
+
+            </div>
+        </form>
+    </div>
+</div>
+</#macro>
+
