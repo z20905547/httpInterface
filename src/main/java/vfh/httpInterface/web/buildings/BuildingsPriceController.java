@@ -56,6 +56,8 @@ public class BuildingsPriceController {
     		@RequestParam(required = false)String buildingsName,Model model) {
         if (id != null) {
             model.addAttribute("entity", buildingsPriceService.getBuildingsPrice(id));
+       	 model.addAttribute("buildingsId",buildingsId);
+       	 model.addAttribute("buildingsName",buildingsName);
         }else{
         	 model.addAttribute("buildingsId",buildingsId);
         	 model.addAttribute("buildingsName",buildingsName);
