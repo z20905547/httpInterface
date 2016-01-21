@@ -118,7 +118,8 @@
                     <thead>
                         <tr>
                             <th><input type="checkbox" id="selectAll"></th>
-                            <th>日常价</th>
+                            <th>起步价</th>
+                            <th>均价</th>
                             <th>特价</th>
                             <th>开始日期</th>
                             <th>结束日期</th>
@@ -136,6 +137,7 @@
                             <#list page.content as r>
                             <tr>
                                 <td><input type="checkbox" name="ids" value="${r.id}"></td>
+                                <td>${r.first_price!''}</td>
                                 <td>${r.nomal_price!''}</td>
                                 <td>${r.discount_price!''}</td>
                                 <td>${r.start_date!''}</td>

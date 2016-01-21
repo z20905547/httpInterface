@@ -1,15 +1,13 @@
-<#include "*/basic/default.html"/>
-
-<#macro title>
-添加楼盘
-</#macro>
-
+<#include "*/basic/default.html"/> <#macro title> 添加楼盘 </#macro> 
 <#macro head>
 <link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/jqueryui/1.10.4/css/jquery-ui.min.css">
 <link rel="stylesheet" type="text/css" href="${base}/resource/css/umeditor.min.css">
+<link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/jquery-ui-timepicker-addon/1.5.5/jquery-ui-timepicker-addon.min.css">
+
 <script type="text/javascript" src="//cdn.bootcss.com/jqueryui/1.10.4/jquery-ui.min.js"></script>
 <script type="text/javascript" src="//cdn.bootcss.com/jqueryui/1.10.4/i18n/jquery-ui-i18n.min.js"></script>
-//cdn.bootcss.com/jquery-ui-timepicker-addon/1.6.1/i18n/jquery-ui-timepicker-zh-CN.js
+<script type="text/javascript" src="//cdn.bootcss.com/jquery-ui-timepicker-addon/1.5.5/jquery-ui-timepicker-addon.min.js"></script>
+<script type="text/javascript" src="//cdn.bootcss.com/jquery-ui-timepicker-addon/1.6.1/i18n/jquery-ui-timepicker-zh-CN.js"></script>
 <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=E991373d74352818824a24dea57f156c"></script>
 <script type="text/javascript" src="http://api.map.baidu.com/library/CityList/1.2/src/CityList_min.js"></script>
 <script type="text/javascript" charset="utf-8" src="${base}/resource/script/umeditor.config.js"></script>
@@ -75,237 +73,334 @@
 		 #editor {overflow:auto; max-height:300px}
 		 
 		 .ui-timepicker-div .ui-widget-header { margin-bottom: 8px; }  
-.ui-timepicker-div dl { text-align: left; }  
-.ui-timepicker-div dl dt { height: 25px; margin-bottom: -25px; }  
-.ui-timepicker-div dl dd { margin: 0 10px 10px 65px; }  
-.ui-timepicker-div td { font-size: 90%; }  
-.ui-tpicker-grid-label { background: none; border: none; margin: 0; padding: 0; }  
+		.ui-timepicker-div dl { text-align: left; }  
+		.ui-timepicker-div dl dt { height: 25px; margin-bottom: -25px; }  
+		.ui-timepicker-div dl dd { margin: 0 10px 10px 65px; }  
+		.ui-timepicker-div td { font-size: 90%; }  
+		.ui-tpicker-grid-label { background: none; border: none; margin: 0; padding: 0; }  
+		.ui-datepicker{
+			z-index:1010 !important;
+		}
 	</style>
 <script type="text/javascript">
+	$(document).ready(
+			function() {
+				$("#selectAll").click(
+						function() {
+							var checkbox = $(this), children = checkbox
+									.parents("table").find(
+											"tbody input[type='checkbox']");
+							children.prop("checked", checkbox.is(":checked"));
+						});
+				$.datepicker.setDefaults($.datepicker.regional["zh-CN"]);
+				$(".datePicker").datetimepicker({
+			     	   showSecond: true,
+			    	   //showMillisec: true,
+			    	   //timeFormat: 'hh:mm:ss:l'
+			     	  timeFormat: 'hh:mm:ss'
+			       });
+				//富文本编辑器
+				var um = UM.getEditor('buildingsDetail');
+				//富文本编辑器
+				var um = UM.getEditor('around_peitao');
+				//富文本编辑器
+				var um = UM.getEditor('internal_peitao');
+				//百度地图API功能
+				var um = UM.getEditor('traffic');
+				//百度地图API功能
+				var map = new BMap.Map("l-map"); // 创建地图实例
+				var point = new BMap.Point(110.350165, 20.036658); // 创建点坐标
+				map.centerAndZoom(point, 19); // 初始化地图，设置中心点坐标和地图级别
+				map.enableScrollWheelZoom();
+				map.addControl(new BMap.NavigationControl()); //添加默认缩放平移控件
+				map.addControl(new BMap.MapTypeControl()); //添加地图类型控件
+				function showInfo(e) {
+					$("#mapX").val(e.point.lng);
+					$("#mapY").val(e.point.lat);
+					map.clearOverlays();
+					//alert(e.point.lng + ", " + e.point.lat);
+					var marker = new BMap.Marker(new BMap.Point(e.point.lng,
+							e.point.lat)); // 创建点
 
-    $(document).ready(function () {
-        $("#selectAll").click(function () {
-            var checkbox = $(this),
-                    children = checkbox.parents("table").find("tbody input[type='checkbox']");
+					map.addOverlay(marker);
+				}
 
-            children.prop("checked", checkbox.is(":checked"));
-        });
-        $.datepicker.setDefaults($.datepicker.regional["zh-CN"]);
-        $(".datePicker").datetimepicker({
-     	   showSecond: true,
-    	   //showMillisec: true,
-    	   //timeFormat: 'hh:mm:ss:l'
-     	  timeFormat: 'hh:mm:ss'
-       });
-        //富文本编辑器
-        var um = UM.getEditor('buildingsDetail');
-      //百度地图API功能
-        var map = new BMap.Map("l-map");          // 创建地图实例
-        var point = new BMap.Point(110.350165,20.036658);  // 创建点坐标
-        map.centerAndZoom(point, 19);                 // 初始化地图，设置中心点坐标和地图级别
-        map.enableScrollWheelZoom();
-        map.addControl(new BMap.NavigationControl());  //添加默认缩放平移控件
-        map.addControl(new BMap.MapTypeControl());   //添加地图类型控件
-        function showInfo(e){
-        	$("#mapX").val(e.point.lng);
-        	$("#mapY").val(e.point.lat);
-        	map.clearOverlays();
-    		//alert(e.point.lng + ", " + e.point.lat);
-    		var marker = new BMap.Marker(new BMap.Point(e.point.lng, e.point.lat)); // 创建点
-    		
-    		map.addOverlay(marker);
-    	}
-        
-    	map.addEventListener("click", showInfo);
-        
-        
-       
-       
-        // 创建CityList对象，并放在citylist_container节点内
-        var myCl = new BMapLib.CityList({container : "citylist_container", map : map});
+				map.addEventListener("click", showInfo);
 
-        // 给城市点击时，添加相关操作
-        myCl.addEventListener("cityclick", function(e) {
-        	// 修改当前城市显示
-        	document.getElementById("curCity").innerHTML = e.name;
+				// 创建CityList对象，并放在citylist_container节点内
+				var myCl = new BMapLib.CityList({
+					container : "citylist_container",
+					map : map
+				});
 
-        	// 点击后隐藏城市列表
-        	document.getElementById("cityList").style.display = "none";
-        });
-        // 给“更换城市”链接添加点击操作
-        document.getElementById("curCityText").onclick = function() {
-        	var cl = document.getElementById("cityList");
-        	if (cl.style.display == "none") {
-        		cl.style.display = "";
-        	} else {
-        		cl.style.display = "none";
-        	}	
-        };
-        // 给城市列表上的关闭按钮添加点击操作
-        document.getElementById("popup_close").onclick = function() {
-        	var cl = document.getElementById("cityList");
-        	if (cl.style.display == "none") {
-        		cl.style.display = "";
-        	} else {
-        		cl.style.display = "none";
-        	}	
-        };
-        
-        
-    });
+				// 给城市点击时，添加相关操作
+				myCl.addEventListener("cityclick", function(e) {
+					// 修改当前城市显示
+					document.getElementById("curCity").innerHTML = e.name;
 
+					// 点击后隐藏城市列表
+					document.getElementById("cityList").style.display = "none";
+				});
+				// 给“更换城市”链接添加点击操作
+				document.getElementById("curCityText").onclick = function() {
+					var cl = document.getElementById("cityList");
+					if (cl.style.display == "none") {
+						cl.style.display = "";
+					} else {
+						cl.style.display = "none";
+					}
+				};
+				// 给城市列表上的关闭按钮添加点击操作
+				document.getElementById("popup_close").onclick = function() {
+					var cl = document.getElementById("cityList");
+					if (cl.style.display == "none") {
+						cl.style.display = "";
+					} else {
+						cl.style.display = "none";
+					}
+				};
+
+			});
 </script>
-</#macro>
-
-<#macro body>
+</#macro> <#macro body>
 <div class="data-content">
 
-<!--     <ol class="breadcrumb"> -->
-<!--         <li><span class="glyphicon glyphicon-user"></span></li> -->
-<!--         <li><a href="${base}/account/user/list">用户管理</a></li> -->
-<!--         <li class="active">添加用户</li> -->
-<!--     </ol> -->
+	<!--     <ol class="breadcrumb"> -->
+	<!--         <li><span class="glyphicon glyphicon-user"></span></li> -->
+	<!--         <li><a href="${base}/account/user/list">用户管理</a></li> -->
+	<!--         <li class="active">添加用户</li> -->
+	<!--     </ol> -->
 
-    <div class="panel panel-default">
-        <div class="panel-heading">
-            <h3 class="panel-title"><span class="glyphicon glyphicon-edit"></span> 添加楼盘</h3>
-        </div>
-        <form action="${base}/buildings/buildings/insert" id="create-user-form" method="post">
-            <div class="panel-body">
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<h3 class="panel-title">
+				<span class="glyphicon glyphicon-edit"></span> 添加楼盘
+			</h3>
+		</div>
+		<form action="${base}/buildings/buildings/insert"
+			id="create-user-form" method="post">
+			<div class="panel-body">
 
-                <div class="form-group">
-                    <div class="row">
-                        <div class="col-xs-6">
-                            <label for="buildingsName">楼盘名称:</label>
-                            <input type="text" class="form-control required" maxlength="25" minlength="4" id="buildingsName" name="buildingsName" placeholder="4到25个字">
-                        </div>
-                        <div class="col-xs-6">
-                            <label for="serverPhoneNum">服务电话:</label>
-                            <input type="text" class="form-control required" maxlength="16" id="serverPhoneNum" name="serverPhoneNum" placeholder="手机或者固定电话">
-                        </div>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="row">
-                        <div class="col-xs-12">
-                            <label for="address">楼盘地址:</label>
-                            <input type="text" class="form-control required" maxlength="50" minlength="5" id="address" name="address">
-                        </div>
-                    </div>
-                </div>
 				<div class="form-group">
-                    <div class="row">
-                        <div class="col-xs-12">
-                            <input type="text" class="form-control required" maxlength="50" minlength="5" id="address" name="address" placeholder="楼盘详细地址">
-                        </div>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="row">
-                        <div class="col-xs-6 openDate">
-                            <label for="openDate">开盘时间:</label>
-                            <input type="text" class="datePicker form-control " autocomplete="off" id="openDate" name="openDate" readonly>
-                        </div>
-                        <div class="col-xs-6 deliverDate">
-                            <label for="deliverDate">交房时间:</label>
-                            <input type="text" class="datePicker form-control " autocomplete="off" id="deliverDate" name="deliverDate" readonly>
-                        </div>
-                    </div>
-                </div>
-                
+					<div class="row">
+						<div class="col-xs-6">
+							<label for="buildings_name">楼盘名称:</label> <input type="text"
+								class="form-control required" maxlength="25" minlength="4"
+								id="buildings_name" name="buildings_name" placeholder="4到25个字">
+						</div>
+						<div class="col-xs-6">
+							<label for="server_phone_num">服务电话:</label> <input type="text"
+								class="form-control required" maxlength="16" id="server_phone_num"
+								name="server_phone_num" placeholder="手机或者固定电话">
+						</div>
+					</div>
+				</div>
 				<div class="form-group">
-                    <div class="row">
-                        <div class="col-xs-6 ">
-                        
-                            <label for="buildingCount">总栋数:</label>
-                            <div class="input-group">
-                            	<input type="text" class="form-control required" id="buildingCount" name="buildingCount">
-                            	<span class="input-group-addon">栋</span>
-                            </div>
-                            
-                        </div>
-                        <div class="col-xs-6">
-                            <label for="houseCount">总户数:</label>
-                            <div class="input-group">
-	                            <input type="text" class="form-control required" id="houseCount" name="houseCount">
-	                            <span class="input-group-addon">户</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="row">
-                        <div class="col-xs-6">
-                            <label for="floorSpace">占地面积:</label>
-                            <div class="input-group">
-	                            <input type="text" class="form-control required"  id="floorSpace" name="floorSpace">
-	                            <span class="input-group-addon">平方米</span>
-	                        </div>
-                        </div>
-                        <div class="col-xs-6">
-                            <label for="buildingSpace">建筑面积:</label>
-                            <div class="input-group">
-	                            <input type="text" class="form-control required" id="buildingSpace" name="buildingSpace">
-	                            <span class="input-group-addon">平方米</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="row">
-                        <div class="col-xs-6">
-                            <label for="greenRate">绿化率:</label>
-                            <div class="input-group">
-	                            <input type="text" class="form-control required" maxlength="25" minlength="4" id="greenRate" name="greenRate" placeholder="1-100">
-	                            <span class="input-group-addon">%</span>
-	                        </div>
-                        </div>
-                        <div class="col-xs-6">
-                            <label for="utilType">期房现房:</label>
-                            <input type="text" class="form-control required" maxlength="16" id="utilType" name="utilType">
-                        </div>
-                    </div>
-                </div>
-                 <div class="form-group">
-                    <div class="row">
-                        <div class="col-xs-6">
-                            <label for="parkingCount">停车位:</label>
-                            <div class="input-group">
-	                            <input type="text" class="form-control required" maxlength="25" minlength="4" id="parkingCount" name="parkingCount">
-	                            <span class="input-group-addon">个</span>
-	                        </div>
-                        </div>
-                        <div class="col-xs-6">
-                            <label for="decorationCondition">装修状况:</label>
-                            <input type="text" class="form-control required" maxlength="25" minlength="4" id="decorationCondition" name="decorationCondition">
-                        </div>
-                        
-                       
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="row">
-                        <div class="col-xs-12">
-                            <label for="floorDetail">楼层状况</label>
-                            <input type="text" class="form-control required" maxlength="16" id="floorDetail" name="floorDetail">
-                        </div>
-                    </div>
-                </div>
-                 <div class="form-group">
-                    <div class="row">
-                        <div class="col-xs-6 ">
-                            <label for="mapX">经度:</label>
-                            <input type="text" class=" form-control " autocomplete="off" id="mapX" name="mapX" readonly>
-                        </div>
-                        <div class="col-xs-6 ">
-                            <label for="mapY">纬度:</label>
-                            <input type="text" class=" form-control " autocomplete="off" id="mapY" name="mapY" readonly>
-                        </div>
-                    </div>
-                </div>
-                <div class="form-group">
-					<div class="sel_container"><strong id="curCity">海口市</strong> [<a id="curCityText" href="javascript:void(0)">更换城市</a>]</div>
-						<div class="map_popup" id="cityList" style="display:none;">
+					<div class="row">
+						<div class="col-xs-6">
+							<label for="address">楼盘地址:</label> <input type="text"
+								class="form-control required" maxlength="50" minlength="5"
+								id="address" name="address">
+						</div>
+						<div class="col-xs-6">
+							<label for="developer_company">开发商:</label> <input type="text"
+								class="form-control required" maxlength="50" minlength="5"
+								id="developer_company" name="developer_company">
+						</div>
+					</div>
+				</div>
+
+				<div class="form-group">
+					<div class="row">
+						<div class="col-xs-6 openDate">
+							<label for="openDate">开盘时间:</label> <input type="text"
+								class="datePicker form-control " autocomplete="off"
+								id="openDate" name="openDate" readonly>
+						</div>
+						<div class="col-xs-6 deliverDate">
+							<label for="deliverDate">交房时间:</label> <input type="text"
+								class="datePicker form-control " autocomplete="off"
+								id="deliverDate" name="deliverDate" readonly>
+						</div>
+					</div>
+				</div>
+
+				<div class="form-group">
+					<div class="row">
+						<div class="col-xs-6 ">
+
+							<label for="buildingCount">总栋数:</label>
+							<div class="input-group">
+								<input type="text" class="form-control required"
+									id="buildingCount" name="buildingCount"> <span
+									class="input-group-addon">栋</span>
+							</div>
+
+						</div>
+						<div class="col-xs-6">
+							<label for="houseCount">总户数:</label>
+							<div class="input-group">
+								<input type="text" class="form-control required" id="houseCount"
+									name="houseCount"> <span class="input-group-addon">户</span>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="row">
+						<div class="col-xs-6">
+							<label for="floorSpace">占地面积:</label>
+							<div class="input-group">
+								<input type="text" class="form-control required" id="floorSpace"
+									name="floorSpace"> <span class="input-group-addon">平方米</span>
+							</div>
+						</div>
+						<div class="col-xs-6">
+							<label for="buildingSpace">建筑面积:</label>
+							<div class="input-group">
+								<input type="text" class="form-control required"
+									id="buildingSpace" name="buildingSpace"> <span
+									class="input-group-addon">平方米</span>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="row">
+						<div class="col-xs-6">
+							<label for="greenRate">绿化率:</label>
+							<div class="input-group">
+								<input type="text" class="form-control required" maxlength="25"
+									minlength="4" id="greenRate" name="greenRate"
+									placeholder="1-100"> <span class="input-group-addon">%</span>
+							</div>
+						</div>
+						<div class="col-xs-6">
+							<label for="utilType">期房现房:</label> <input type="text"
+								class="form-control required" maxlength="16" id="utilType"
+								name="utilType">
+						</div>
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="row">
+						<div class="col-xs-6">
+							<label for="parkingCount">停车位:</label>
+							<div class="input-group">
+								<input type="text" class="form-control required" maxlength="25"
+									minlength="4" id="parkingCount" name="parkingCount"> <span
+									class="input-group-addon">个</span>
+							</div>
+						</div>
+						<div class="col-xs-6">
+							<label for="decorationCondition">装修状况:</label> <input type="text"
+								class="form-control required" maxlength="25" minlength="4"
+								id="decorationCondition" name="decorationCondition">
+						</div>
+
+
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="row">
+						<div class="col-xs-6">
+							<label for="floorDetail">楼层状况:</label> <input type="text"
+								class="form-control required" maxlength="16" id="floorDetail"
+								name="floorDetail">
+						</div>
+						<div class="col-xs-6">
+							<label for="main_door">主力户型:</label>
+							<input type="text" class="form-control required" maxlength="16"
+								id="main_door" name="main_door">
+                             
+						</div>
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="row">
+						<div class="col-xs-6">
+							<label for="property_company">物业公司:</label> <input type="text"
+								class="form-control required" maxlength="16" id="property_company"
+								name="property_company">
+						</div>
+						<div class="col-xs-6">
+							<label for="wuye_fee">物业费:</label>
+							<input type="text" class="form-control required" maxlength="16"
+								id="wuye_fee" name="wuye_fee">
+                             
+						</div>
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="row">
+						<div class="col-xs-6">
+							<label for="property_company">物业类型:</label> <input type="text"
+								class="form-control required" maxlength="100" id="wuye_type"
+								name="wuye_type">
+						</div>
+						<div class="col-xs-6">
+							<label for="project_features">项目特色:</label>
+							<input type="text" class="form-control required" maxlength="100"
+								id="project_features" name="project_features">
+						</div>
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="row">
+						<div class="col-xs-12">
+							<label for="traffic">交通状况:</label> 
+							<script type="text/plain"
+								class="form-control required" maxlength="100" id="traffic"
+								name="traffic" style="width: 100%; height: 240px;">
+                            </script>
+						</div>
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="row">
+						<div class="col-xs-12">
+							<label for="around_peitao">周边配套:</label>
+							<script type="text/plain" class="form-control required"
+								id="around_peitao" name="around_peitao"
+								style="width: 100%; height: 240px;">
+                            </script>
+						</div>
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="row">
+
+						<div class="col-xs-12">
+							<label for="internal_peitao">小区配套:</label> 
+							<script
+								type="text/plain" class="form-control required"
+								id="internal_peitao" name="internal_peitao"
+								style="width: 100%; height: 240px;">
+                            </script>
+						</div>
+					</div>
+				</div>
+
+				<div class="form-group">
+					<div class="row">
+						<div class="col-xs-6 ">
+							<label for="mapX">经度:</label> <input type="text"
+								class=" form-control " autocomplete="off" id="mapX" name="mapX"
+								readonly>
+						</div>
+						<div class="col-xs-6 ">
+							<label for="mapY">纬度:</label> <input type="text"
+								class=" form-control " autocomplete="off" id="mapY" name="mapY"
+								readonly>
+						</div>
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="sel_container">
+						<strong id="curCity">海口市</strong> [<a id="curCityText"
+							href="javascript:void(0)">更换城市</a>]
+					</div>
+					<div class="map_popup" id="cityList" style="display: none;">
 						<div class="popup_main">
 							<div class="title">城市列表</div>
 							<div class="cityList" id="citylist_container"></div>
@@ -313,43 +408,45 @@
 						</div>
 					</div>
 				</div>
-                
+
 				<div class="form-group mapdiv">
 					<div id="l-map"></div>
 				</div>
-                <div class="form-group">
-                    <div class="row">
-                        <div class="col-xs-12">
-                            <label for="buildingsDetail">楼盘简介:</label>
-                            <script type="text/plain" id="buildingsDetail" name="buildingsDetail" style="width:100%;height:240px;">
+				<div class="form-group">
+					<div class="row">
+						<div class="col-xs-12">
+							<label for="buildingsDetail">楼盘简介:</label>
+							<script type="text/plain" id="buildingsDetail"
+								name="buildingsDetail" style="width: 100%; height: 240px;">
 							</script>
-                        </div>
-                    </div>
-                </div>
+						</div>
+					</div>
+				</div>
 
-                
 
-            </div>
 
-            <div class="panel-footer">
+			</div>
 
-                <@shiro.hasPermission name="buildings:insert">
-                <button type="submit" class="btn btn-success">
-                    <span class="glyphicon glyphicon-ok"></span> 保存
-                </button>
+			<div class="panel-footer">
 
-                <button type="reset" class="btn btn-warning">
-                    <span class="glyphicon glyphicon-trash"></span> 重置
-                </button>
-                </@shiro.hasPermission>
+				<@shiro.hasPermission name="buildings:insert">
+				<button type="submit" class="btn btn-success">
+					<span class="glyphicon glyphicon-ok"></span> 保存
+				</button>
 
-                <button type="button" class="btn btn-default" onclick="history.back();">
-                    <span class="glyphicon glyphicon-backward"></span> 返回
-                </button>
+				<button type="reset" class="btn btn-warning">
+					<span class="glyphicon glyphicon-trash"></span> 重置
+				</button>
+				</@shiro.hasPermission>
 
-            </div>
-        </form>
-    </div>
+				<button type="button" class="btn btn-default"
+					onclick="history.back();">
+					<span class="glyphicon glyphicon-backward"></span> 返回
+				</button>
+
+			</div>
+		</form>
+	</div>
 </div>
 </#macro>
 
