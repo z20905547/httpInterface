@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="vfh.httpInterface.dao.buildings.BuildingsPriceMapper" >
   <sql id="Base_Column_List" >
-    id, nomal_price, discount_price, active_id, building_id, start_date, end_date, create_time, 
+    id, nomal_price, discount_price, active_id, building_id, start_date, end_date, create_time, first_price,status,
     update_time
   </sql>
     <select id="get" resultType="hashmap">
@@ -20,10 +20,10 @@
   <insert id="insert" useGeneratedKeys="true" keyProperty="entity.id" >
     insert into tb_building_price ( nomal_price, discount_price, 
     active_id, building_id, 
-    start_date, end_date, create_time)
+    start_date, end_date, create_time,first_price,status)
     values ( #{entity.nomalPrice}, #{entity.discountPrice}, 
       #{entity.activeId}, #{entity.buildingId}, 
-      #{entity.startDate}, #{entity.endDate}, now()
+      #{entity.startDate}, #{entity.endDate}, now(),#{entity.first_price},'2'
       )
   </insert>
   <select id="count" resultType="long">
@@ -52,23 +52,28 @@
   <update id="update">
         update tb_building_price
 	    <set >
-	      <if test="entity.nomalPrice != null" >
-	        nomal_price = #{entity.nomalPrice},
+	      <if test="entity.nomal_price != null" >
+	        nomal_price = #{entity.nomal_price},
 	      </if>
-	      <if test="entity.discountPrice != null" >
-	        discount_price = #{entity.discountPrice},
+	      <if test="entity.discount_price != null" >
+	        discount_price = #{entity.discount_price},
 	      </if>
-	      <if test="entity.activeId != null" >
-	        active_id = #{entity.activeId},
+	      <if test="entity.active_id != null" >
+	        active_id = #{entity.active_id},
 	      </if>
-	      <if test="entity.startDate != null" >
-	        start_date = #{entity.startDate},
+	      <if test="entity.start_date != null" >
+	        start_date = #{entity.start_date},
 	      </if>
-	      <if test="entity.endDate != null" >
-	        end_date = #{entity.endDate},
+	      <if test="entity.end_date != null" >
+	        end_date = #{entity.end_date},
 	      </if>
 	        update_time = now(),
-
+	      <if test="entity.first_price != null" >
+	        first_price = #{entity.first_price},
+	      </if>
+	      <if test="entity.status != null" >
+	        status = #{entity.status},
+	      </if>
 	    </set>
         WHERE
           id = #{entity.id}
@@ -76,7 +81,7 @@
     <select id="find" resultType="hashmap">
         SELECT
            a.id, a.nomal_price, a.discount_price,a.active_id, a.building_id, a.start_date, a.end_date, a.create_time, 
-    		a.update_time,b.active_name
+    		a.update_time,b.active_name,first_price,status
         FROM
           tb_building_price a left join tb_building_active b on a.active_id=b.id
         WHERE

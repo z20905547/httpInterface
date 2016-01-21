@@ -47,6 +47,8 @@ public class BuildingsPriceController {
                          RedirectAttributes redirectAttributes) {
     	buildingsPriceService.updateBuildingsPrice(entity);
         redirectAttributes.addFlashAttribute("success", "修改价格成功");
+        redirectAttributes.addAttribute("buildingsId", entity.get("buildingsId"));
+        redirectAttributes.addAttribute("buildingsName", entity.get("buildingsName"));
         return "redirect:/buildings/price/list?buildingsId="+entity.get("buildingsId");
     }
     @RequestMapping({"edit","add"})
