@@ -78,7 +78,7 @@ $(document).ready(function () {
     });
     $.datepicker.setDefaults($.datepicker.regional["zh-CN"]);
 
-    	$( ".redate" ).datepicker({
+    	$( ".datepicker" ).datepicker({
         	altField: "#redate",
             altFormat: "yy-mm-dd"
         });
@@ -109,7 +109,7 @@ $(document).ready(function () {
                     <div class="row">
                         <div class="col-xs-6 redate">
                             <label for="redate">回访时间:</label>
-                            <input type="text" class=" form-control " autocomplete="off" id="redate" name="redate" readonly>
+                            <input type="text" class="datepicker form-control " autocomplete="off" id="redate" name="redate" readonly>
                         </div>
 
                     </div>

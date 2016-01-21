@@ -71,6 +71,8 @@
                             <th>客户微信</th>
                             <th>来源渠道</th>
                             <th>客户状态</th>
+                            <th>客户需求</th>
+                            <th>目标楼盘</th>
                             <th>操作</th>
                         </tr>
                     </thead>
@@ -95,13 +97,15 @@
                                 <td>${r.laidianrq!''}</td>
                                 <td>${r.kwxh!''}</td>
                                 <td>${r.laiyuanqd!''}</td>
-                                <#if r.status == 1>
-                                <td>成交</td>
-                                <#elseif r.status == 2>
+                                <#if r.status == 2>
                                 <td>维护中</td>
+                                <#elseif r.status == 1>
+                                <td>成交</td>
                                 <#else>
                                 <td>放弃</td>
                                  </#if>
+                                <td>${r.requirement!''}</td>
+                                <td>${r.targetbuild!''}</td>
                                 <td>
                                     <@shiro.hasPermission name="reback:list">
                                     <a class="btn btn-default btn-sm" href="${base}/account/reback/list?id=${r.id}">
