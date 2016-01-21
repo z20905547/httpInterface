@@ -21,7 +21,7 @@
     insert into tb_building_price ( nomal_price, discount_price, 
     active_id, building_id, 
     start_date, end_date, create_time,first_price,status)
-    values ( #{entity.nomalPrice}, #{entity.discountPrice}, 
+    values ( #{entity.nomalPrice}, #{entity.discount_price}, 
       #{entity.activeId}, #{entity.buildingId}, 
       #{entity.startDate}, #{entity.endDate}, now(),#{entity.first_price},'2'
       )
