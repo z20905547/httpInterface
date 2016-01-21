@@ -9,6 +9,7 @@
 <link rel="stylesheet" type="text/css" href="${base}/resource/css/umeditor.min.css">
 <script type="text/javascript" src="//cdn.bootcss.com/jqueryui/1.10.4/jquery-ui.min.js"></script>
 <script type="text/javascript" src="//cdn.bootcss.com/jqueryui/1.10.4/i18n/jquery-ui-i18n.min.js"></script>
+//cdn.bootcss.com/jquery-ui-timepicker-addon/1.6.1/i18n/jquery-ui-timepicker-zh-CN.js
 <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=E991373d74352818824a24dea57f156c"></script>
 <script type="text/javascript" src="http://api.map.baidu.com/library/CityList/1.2/src/CityList_min.js"></script>
 <script type="text/javascript" charset="utf-8" src="${base}/resource/script/umeditor.config.js"></script>
@@ -72,6 +73,13 @@
 			width: 12px;
 		}	
 		 #editor {overflow:auto; max-height:300px}
+		 
+		 .ui-timepicker-div .ui-widget-header { margin-bottom: 8px; }  
+.ui-timepicker-div dl { text-align: left; }  
+.ui-timepicker-div dl dt { height: 25px; margin-bottom: -25px; }  
+.ui-timepicker-div dl dd { margin: 0 10px 10px 65px; }  
+.ui-timepicker-div td { font-size: 90%; }  
+.ui-tpicker-grid-label { background: none; border: none; margin: 0; padding: 0; }  
 	</style>
 <script type="text/javascript">
 
@@ -83,10 +91,12 @@
             children.prop("checked", checkbox.is(":checked"));
         });
         $.datepicker.setDefaults($.datepicker.regional["zh-CN"]);
-        	$( ".datePicker" ).datepicker({
-            	altField: "#openDate",
-                altFormat: "yy-mm-dd"
-            });                                                    
+        $(".datePicker").datetimepicker({
+     	   showSecond: true,
+    	   //showMillisec: true,
+    	   //timeFormat: 'hh:mm:ss:l'
+     	  timeFormat: 'hh:mm:ss'
+       });
         //富文本编辑器
         var um = UM.getEditor('buildingsDetail');
       //百度地图API功能
