@@ -28,11 +28,12 @@ head>
 
 							children.prop("checked", checkbox.is(":checked"));
 						});
-				$.datepicker.setDefaults($.datepicker.regional["zh-CN"]);
-				$(".datePicker").datepicker({
-					altField : "#openDate",
-					altFormat : "yy-mm-dd"
-				});
+				$(".datePicker").datetimepicker({
+			     	   showSecond: true,
+			    	   //showMillisec: true,
+			    	   //timeFormat: 'hh:mm:ss:l'
+			     	  timeFormat: 'hh:mm:ss'
+			       });
 				//富文本编辑器
 				var um = UM.getEditor('buildingsDetail');
 				//富文本编辑器
