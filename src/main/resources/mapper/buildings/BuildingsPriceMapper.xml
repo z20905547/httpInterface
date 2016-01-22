@@ -7,7 +7,7 @@
   </sql>
     <select id="get" resultType="hashmap">
         SELECT 
-          <include refid="Base_Column_List" />
+          <include refid="Base_Column_List" />     
         FROM
           tb_building_price
         WHERE 
