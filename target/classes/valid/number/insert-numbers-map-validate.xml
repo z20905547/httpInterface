@@ -32,4 +32,10 @@
     <key name="status" alias="来电状态">
          <notEmpty />      
     </key>
+        <key name="targetbuild" alias="具体目标楼盘">
+         <notEmpty />      
+    </key>
+        <key name="requirement" alias="用户需求">
+         <notEmpty />      
+    </key>
 </validate-mapper>

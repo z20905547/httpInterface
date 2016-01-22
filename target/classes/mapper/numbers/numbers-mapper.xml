@@ -26,6 +26,8 @@
           status,
           remark,
           laiyuanqd,
+          requirement,
+          targetbuild,
           staff
         ) VALUES (
           #{entity.kname},
@@ -38,6 +40,8 @@
           #{entity.status},
           #{entity.remark},
           #{entity.laiyuanqd},
+          #{entity.requirement},
+          #{entity.targetbuild},
           #{entity.staff}
           
         )
@@ -55,6 +59,8 @@
             dilily AS "dilily",
             status AS "status",
             remark AS "remark",
+            requirement AS "requirement",
+            targetbuild AS "targetbuild",
             staff AS "staff"
         FROM
           td_numbers
@@ -76,6 +82,8 @@
             dilily AS "dilily",
             status AS "status",
             remark AS "remark",
+            requirement AS "requirement",
+            targetbuild AS "targetbuild",
             staff AS "staff"
         FROM
           td_numbers
