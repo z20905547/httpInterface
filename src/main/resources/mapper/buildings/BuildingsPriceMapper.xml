@@ -5,7 +5,7 @@
     id, nomal_price, discount_price, active_id, building_id, start_date, end_date, create_time, first_price,status,
     update_time
   </sql>
-    <select id="get" resultType="hashmap">
+    <select id="get" resultType="hashmap">  
         SELECT 
           <include refid="Base_Column_List" />     
         FROM
