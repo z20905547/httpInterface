@@ -86,7 +86,7 @@ public class BuildingsPriceService {
 		model.addAttribute("buildingsId",buildingsId);
 		long total = buildingsPriceMapper.count(filter);
         filter.putAll(pageRequest.getMap());
-        List<Map<String, Object>> content = buildingsPriceMapper.find(filter);
+        List<Map<String, Object>> content = buildingsPriceMapper.findBybuildId(filter);
         return new Page<Map<String, Object>>(pageRequest, content, total);
     }
 }

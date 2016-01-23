@@ -22,7 +22,7 @@
     active_id, building_id, 
     start_date, end_date, create_time,first_price,status)
     values ( #{entity.nomalPrice}, #{entity.discount_price}, 
-      #{entity.activeId}, #{entity.buildingId}, 
+      #{entity.activeId}, #{entity.buildingsId}, 
       #{entity.startDate}, #{entity.endDate}, now(),#{entity.first_price},'2'
       )
   </insert>
@@ -101,4 +101,12 @@
             LIMIT #{filter.first},#{filter.last}
         </if>
     </select>
+        <select id="findBybuildId" resultType="hashmap">  
+        SELECT 
+          <include refid="Base_Column_List" />     
+        FROM
+          tb_building_price
+        WHERE 
+          building_id = #{filter.buildingsId}
+   </select>
 </mapper>
