@@ -28,7 +28,7 @@
 			     	   showSecond: true,
 			    	   //showMillisec: true,
 			    	   //timeFormat: 'hh:mm:ss:l'
-			     	  timeFormat: 'hh:mm:ss'
+			     	  timeFormat: 'HH:mm:ss'
 			       });
 				//富文本编辑器
 				var um = UM.getEditor('buildingsDetail');
@@ -171,8 +171,8 @@
 						<div class="col-xs-6">
 							<label for="houseCount">总户数:</label>
 							<div class="input-group">
-								<input type="text" class="form-control required" id="houseCount"
-									name="houseCount"> <span class="input-group-addon">户</span>
+								<input type="text" class="form-control required" id="house_count"
+									name="house_count"> <span class="input-group-addon">户</span>
 							</div>
 						</div>
 					</div>
@@ -236,12 +236,12 @@
 					<div class="row">
 						<div class="col-xs-6">
 							<label for="floorDetail">楼层状况:</label> <input type="text"
-								class="form-control required" maxlength="16" id="floorDetail"
+								class="form-control required" maxlength="100" id="floorDetail"
 								name="floorDetail">
 						</div>
 						<div class="col-xs-6">
 							<label for="main_door">主力户型:</label>
-							<input type="text" class="form-control required" maxlength="16"
+							<input type="text" class="form-control required" maxlength="100"
 								id="main_door" name="main_door">
                              
 						</div>

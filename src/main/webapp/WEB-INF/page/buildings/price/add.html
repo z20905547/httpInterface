@@ -9,6 +9,11 @@
 <link rel="stylesheet" type="text/css" href="${base}/resource/css/umeditor.min.css">
 <script type="text/javascript" src="//cdn.bootcss.com/jqueryui/1.10.4/jquery-ui.min.js"></script>
 <script type="text/javascript" src="//cdn.bootcss.com/jqueryui/1.10.4/i18n/jquery-ui-i18n.min.js"></script>
+<script type="text/javascript" src="//cdn.bootcss.com/jquery-ui-timepicker-addon/1.5.5/jquery-ui-timepicker-addon.min.js"></script>
+<script type="text/javascript" src="//cdn.bootcss.com/jquery-ui-timepicker-addon/1.6.1/i18n/jquery-ui-timepicker-zh-CN.js"></script>
+<link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/jquery-ui-timepicker-addon/1.5.5/jquery-ui-timepicker-addon.min.css">
+
+
 <script type="text/javascript">
 
     $(document).ready(function () {
@@ -19,10 +24,10 @@
             children.prop("checked", checkbox.is(":checked"));
         });
         $.datepicker.setDefaults($.datepicker.regional["zh-CN"]);
-        	$( ".datePicker" ).datepicker({
-            	altField: "#openDate",
-                altFormat: "yy-mm-dd"
-            });                                                    
+		$(".datePicker").datetimepicker({
+	     	   showSecond: true,
+	     	  timeFormat: 'HH:mm:ss'
+	       });                                                  
         
         
     });
@@ -47,6 +52,7 @@
             <div class="panel-body">
 <input type="hidden" name="buildingsId" value="${buildingsId}"/>
 <input type="hidden" name="buildingsName" value="${buildingsName}"/>
+
                 <div class="form-group">
                     <div class="row">
                         <div class="col-xs-6">

@@ -5,68 +5,14 @@
 </#macro>
 
 <#macro head>
+<link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/jquery-ui-timepicker-addon/1.5.5/jquery-ui-timepicker-addon.min.css">
 <link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/jqueryui/1.10.4/css/jquery-ui.min.css">
 <script type="text/javascript" src="//cdn.bootcss.com/jqueryui/1.10.4/jquery-ui.min.js"></script>
 <script type="text/javascript" src="//cdn.bootcss.com/jqueryui/1.10.4/i18n/jquery-ui-i18n.min.js"></script>
-<style type="text/css">
-		body, html{
-			width: 100%;
-			height: 100%;
-			margin:0;
-			font-family:"微软雅黑";
-			font-size:14px;
-		}
-		#l-map {
-			width:100%; 
-			height:500px;
-			overflow: hidden;
-		}
-		li{
-			line-height:28px;
-		}
-		.cityList{
-			height: 320px;
-			width:372px;
-			overflow-y:auto;
-		}
+<script type="text/javascript" src="//cdn.bootcss.com/jquery-ui-timepicker-addon/1.5.5/jquery-ui-timepicker-addon.min.js"></script>
+<script type="text/javascript" src="//cdn.bootcss.com/jquery-ui-timepicker-addon/1.6.1/i18n/jquery-ui-timepicker-zh-CN.js"></script>
 
-		.sel_container{
-			font-size:12px;
-			width:140px;
-			background:rgba(255,255,255,0.8);
-			height:30px;
-			line-height:30px;
-			padding:5px;
-		}
-		.map_popup {
-			width: 382px;
-			height: 344px;
-		}
-		.map_popup .popup_main { 
-			background:#fff;
-			border: 1px solid #8BA4D8;
-			height: 100%;
-			overflow: hidden;
-			width: 100%;
-		}
-		.map_popup .title {
-			background: url("http://map.baidu.com/img/popup_title.gif") repeat scroll 0 0 transparent;
-			color: #6688CC;
-			font-weight: bold;
-			height: 24px;
-			line-height: 25px;
-			padding-left: 7px;
-		}
-		.map_popup button {
-			background: url("http://map.baidu.com/img/popup_close.gif") no-repeat scroll 0 0 transparent;
-			cursor: pointer;
-			height: 12px;
-			position: absolute;
-			right: 4px;
-			top: 6px;
-			width: 12px;
-		}	
-	</style>
+
 <script type="text/javascript">
 
 $(document).ready(function () {
@@ -77,11 +23,10 @@ $(document).ready(function () {
         children.prop("checked", checkbox.is(":checked"));
     });
     $.datepicker.setDefaults($.datepicker.regional["zh-CN"]);
-
-    	$( ".datepicker" ).datepicker({
-        	altField: "#redate",
-            altFormat: "yy-mm-dd"
-        });
+	$(".datePicker").datetimepicker({
+  	   showSecond: true,
+  	  timeFormat: 'HH:mm:ss'
+    });  
 
 });
 
@@ -90,13 +35,13 @@ $(document).ready(function () {
 
 <#macro body>
 <div class="data-content">
-
+<!-- 
     <ol class="breadcrumb">
         <li><span class="glyphicon glyphicon-user"></span></li>
         <li><a href="${base}/account/reback/list">客户管理</a></li>
         <li class="active">添加回访记录</li>
     </ol>
-
+ -->
     <div class="panel panel-default">
         <div class="panel-heading">
             <h3 class="panel-title"><span class="glyphicon glyphicon-edit"></span> 回访记录添加</h3>
@@ -107,11 +52,12 @@ $(document).ready(function () {
 
               <div class="form-group">
                     <div class="row">
-                        <div class="col-xs-6 redate">
-                            <label for="redate">回访时间:</label>
-                            <input type="text" class="datepicker form-control " autocomplete="off" id="redate" name="redate" readonly>
-                        </div>
 
+                       <div class="col-xs-6 openDate">
+							<label for="redate">回访时间:</label> <input type="text"
+								class="datePicker form-control " autocomplete="off"
+								id="redate" name="redate" readonly>
+						</div>
                     </div>
                 </div>
               <div class="form-group">

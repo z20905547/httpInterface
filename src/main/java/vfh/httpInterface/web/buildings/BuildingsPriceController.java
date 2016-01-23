@@ -31,11 +31,13 @@ public class BuildingsPriceController {
     private BuildingsPriceService buildingsPriceService;
     @RequestMapping("list")
     public Page<Map<String, Object>> list(PageRequest pageRequest, @RequestParam Map<String, Object> filter,Model model) {
+    	
     	return buildingsPriceService.findBuildingsPriceList(pageRequest,filter,model);
     }
     @RequestMapping("insert")
     public String insert(@RequestParam Map<String, Object> entity,
                          RedirectAttributes redirectAttributes) {
+
     	buildingsPriceService.insertBuildingsPrice(entity);
         redirectAttributes.addFlashAttribute("success", "新增价格成功");
         redirectAttributes.addAttribute("buildingsId", entity.get("buildingsId"));
@@ -58,6 +60,7 @@ public class BuildingsPriceController {
             model.addAttribute("entity", buildingsPriceService.getBuildingsPrice(id));
        	 model.addAttribute("buildingsId",buildingsId);
        	 model.addAttribute("buildingsName",buildingsName);
+
         }else{
         	 model.addAttribute("buildingsId",buildingsId);
         	 model.addAttribute("buildingsName",buildingsName);

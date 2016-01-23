@@ -15,4 +15,5 @@ public interface BuildingsPriceMapper {
 	public void insert(@Param("entity")Map<String,Object> entity);
 	public long count(@Param("filter")Map<String,Object> filter);
 	public List<Map<String, Object>> find(@Param("filter")Map<String, Object> filter);
+	public List<Map<String, Object>> findBybuildId(@Param("filter")Map<String, Object> filter);
 }
