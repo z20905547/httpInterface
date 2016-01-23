@@ -17,10 +17,10 @@ import vfh.httpInterface.commons.enumeration.entity.BuildingsState;
 import vfh.httpInterface.service.buildings.BuildingsPriceService;
 import vfh.httpInterface.service.buildings.BuildingsService;
 
-/**
+/**  
  * TODO 楼盘后台控制类
  * @author harry
- * <b> 有问题请联系qq:359705093</b>
+ * <b> 有问题请联系qq:359705093</b>   
  * @create 2016年1月11日
  */
 @Controller
@@ -31,11 +31,13 @@ public class BuildingsPriceController {
     private BuildingsPriceService buildingsPriceService;
     @RequestMapping("list")
     public Page<Map<String, Object>> list(PageRequest pageRequest, @RequestParam Map<String, Object> filter,Model model) {
+    	
     	return buildingsPriceService.findBuildingsPriceList(pageRequest,filter,model);
     }
     @RequestMapping("insert")
     public String insert(@RequestParam Map<String, Object> entity,
                          RedirectAttributes redirectAttributes) {
+
     	buildingsPriceService.insertBuildingsPrice(entity);
         redirectAttributes.addFlashAttribute("success", "新增价格成功");
         redirectAttributes.addAttribute("buildingsId", entity.get("buildingsId"));
@@ -56,6 +58,9 @@ public class BuildingsPriceController {
     		@RequestParam(required = false)String buildingsName,Model model) {
         if (id != null) {
             model.addAttribute("entity", buildingsPriceService.getBuildingsPrice(id));
+       	 model.addAttribute("buildingsId",buildingsId);
+       	 model.addAttribute("buildingsName",buildingsName);
+
         }else{
         	 model.addAttribute("buildingsId",buildingsId);
         	 model.addAttribute("buildingsName",buildingsName);

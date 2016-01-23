@@ -15,7 +15,6 @@
 
     <key name="deliver_date" alias="交房时间">
         <notEmpty />
-        <length max="16" />
     </key>
 
     <key name="main_door" alias="主力户型">

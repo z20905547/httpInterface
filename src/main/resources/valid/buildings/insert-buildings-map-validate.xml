@@ -2,12 +2,11 @@
 
 <validate-mapper name="insert-buildings">
 
-    <key name="buildingsName" alias="楼盘名称">
+    <key name="buildings_name" alias="楼盘名称">
         <notEmpty />
-        <length min="3" max="25" />
     </key>
 
-    <key name="serverPhoneNum" alias="服务电话">
+    <key name="server_phone_num" alias="服务电话">
         <notEmpty />
     </key>
 
@@ -17,7 +16,6 @@
 
     <key name="deliverDate" alias="交房时间">
         <notEmpty />
-        <length max="16" />
     </key>
 
     <key name="main_door" alias="主力户型">

@@ -4,7 +4,7 @@
 楼盘价格管理
 </#macro>
 
-<#macro head>
+<#macro head>  
 <script type="text/javascript">
 
     $(document).ready(function () {
@@ -112,7 +112,8 @@
             <div class="panel-heading">
                 <h3 class="panel-title"><span class="glyphicon glyphicon-flag"></span> 楼盘价格管理《${buildingsName}》</h3>
             </div>
-
+<input type="hidden" name="buildingsId" value="${buildingsId}"/>
+<input type="hidden" name="buildingsName" value="${buildingsName}"/>
             <div class="table-container">
                 <table class="table table-hover table-striped">
                     <thead>
@@ -145,7 +146,7 @@
                                 <td>${r.active_name!''}</td>
                                 <td>
                                     <@shiro.hasPermission name="price:edit">
-                                    <a class="btn btn-default btn-sm" href="${base}/buildings/price/edit?id=${r.id}">
+                                    <a class="btn btn-default btn-sm" href="${base}/buildings/price/edit?id=${r.id}&buildingsId=${buildingsId}&buildingsName=${buildingsName}">
                                         <span class="glyphicon glyphicon-edit"></span>
                                     </a>
                                     </@shiro.hasPermission>
