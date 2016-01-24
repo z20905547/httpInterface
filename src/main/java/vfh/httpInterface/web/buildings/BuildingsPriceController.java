@@ -34,6 +34,7 @@ public class BuildingsPriceController {
     public Page<Map<String, Object>> list(PageRequest pageRequest, @RequestParam Map<String, Object> filter,Model model) {
 
     	return buildingsPriceService.findBuildingsPriceList(pageRequest,filter,model);
+    	
     }
     @RequestMapping("insert")
     public String insert(@RequestParam Map<String, Object> entity,
