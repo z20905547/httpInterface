@@ -1,5 +1,6 @@
 package vfh.httpInterface.web.buildings;
 
+import java.io.UnsupportedEncodingException;
 import java.util.List;
 import java.util.Map;
 
@@ -31,7 +32,7 @@ public class BuildingsPriceController {
     private BuildingsPriceService buildingsPriceService;
     @RequestMapping("list")
     public Page<Map<String, Object>> list(PageRequest pageRequest, @RequestParam Map<String, Object> filter,Model model) {
-    	
+
     	return buildingsPriceService.findBuildingsPriceList(pageRequest,filter,model);
     }
     @RequestMapping("insert")
@@ -42,6 +43,7 @@ public class BuildingsPriceController {
         redirectAttributes.addFlashAttribute("success", "新增价格成功");
         redirectAttributes.addAttribute("buildingsId", entity.get("buildingsId"));
         redirectAttributes.addAttribute("buildingsName", entity.get("buildingsName"));
+        
         return "redirect:/buildings/price/list";
     }
     @RequestMapping(value="update")
