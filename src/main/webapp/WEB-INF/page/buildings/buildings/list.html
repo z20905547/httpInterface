@@ -154,7 +154,7 @@
                                     </@shiro.hasPermission>
                                     <@shiro.hasPermission name="price:list">
                                     <a class="btn btn-default btn-sm blocklink" title="编辑价格" href="javascript:void(0)" data-href="${base}/buildings/price/list" data-building-id="${r.id}" data-building-name="${r.buildings_name}">
-                                        <span class="glyphicon glyphicon-jpy"></span>
+                                        <span class="glyphicon glyphicon-usd"></span>
                                     </a>
                                     </@shiro.hasPermission>
                                     <@shiro.hasPermission name="house:list">
@@ -162,6 +162,9 @@
                                         <span class="glyphicon glyphicon-home"></span>
                                     </a>
                                     </@shiro.hasPermission>
+                                    <a class="btn btn-default btn-sm blocklink" title="编辑图片" href="javascript:void(0)" data-href="${base}/buildings/resource/add" data-building-id="${r.id}" data-building-name="${r.buildings_name}">
+                                        <span class="glyphicon glyphicon-picture"></span>
+                                    </a>
                                 </td>
                             </tr>
                             </#list>
