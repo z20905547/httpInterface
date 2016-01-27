@@ -27,7 +27,7 @@
       )
   </insert>
   <select id="count" resultType="long">
-    select count(*) from tb_building_price
+    select count(*) from tb_building_price 
      WHERE
           id>0
         <if test="filter.username != null and filter.username != ''">
@@ -48,6 +48,8 @@
           <bind name="filter.email" value=" '%' + filter.email + '%' " />
           AND email LIKE #{filter.email}
         </if>
+       AND building_id = #{filter.buildingsId}
+        
   </select>
   <update id="update">
         update tb_building_price
@@ -108,5 +110,7 @@
           tb_building_price
         WHERE 
           building_id = #{filter.buildingsId}
+          
+         order by id desc
    </select>
 </mapper>

@@ -324,6 +324,8 @@ public class AccountService implements InitializingBean{
     public Page<Map<String, Object>> findUsers(PageRequest pageRequest, Map<String, Object> filter) {
         long total = userDao.count(filter);
         filter.putAll(pageRequest.getMap());
+        System.out.println("kkkkkkkkkkkkkkkkkkk");
+        System.out.println(filter);
         List<Map<String, Object>> content = findUsers(filter);
         return new Page<Map<String, Object>>(pageRequest, content, total);
     }

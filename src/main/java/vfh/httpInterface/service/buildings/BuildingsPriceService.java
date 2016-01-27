@@ -29,28 +29,29 @@ public class BuildingsPriceService {
 	@Autowired
 	private BuildingsPriceMapper buildingsPriceMapper;
 	public void insertBuildingsPrice(@MapValid("insert-price") Map<String, Object> entity){
-		
+		System.out.println("lllllllllllllllll1111111----------");
 		try {
 			//如果上一条记录有价格，则先更新上条记录的结束日期为这条记录开始的前一天
 			Map<String, Object> filter=new HashMap<String, Object>();
 			filter.put("buildingsId", entity.get("buildingsId"));
-			filter.put("endDate", "2116-12-12");
+			filter.put("end_date", "2116-12-12 00:00:00");
 			List<Map<String, Object>> priceList=buildingsPriceMapper.find(filter);
+			
 			if(priceList.size()>0){
 				Map<String, Object> prePrice=priceList.get(0);
-				SimpleDateFormat sdf =   new SimpleDateFormat( "yyyy-MM-dd" );
+				SimpleDateFormat sdf =   new SimpleDateFormat( "yyyy-MM-dd HH:mm:ss" );
 				String startstr=entity.get("startDate").toString();
 				Date startData=sdf.parse(startstr);
 				startData.setTime(startData.getTime()-24*60*60*1000);
 				String preend=sdf.format(startData);
 				Map<String, Object> updateParams=new HashMap<String, Object>();
 				updateParams.put("id", prePrice.get("id"));
-				updateParams.put("endDate", preend);
+				updateParams.put("end_date", preend);
 				buildingsPriceMapper.update(updateParams);
 			}
 			
 			
-			entity.put("endDate", "2116-12-12");
+			entity.put("endDate", "2116-12-12 00:00:00");
 			entity.put("activeId", 0);
 			buildingsPriceMapper.insert(entity);
 		} catch (ParseException e) {
@@ -78,15 +79,19 @@ public class BuildingsPriceService {
     }
 	public Page<Map<String, Object>> findBuildingsPriceList(PageRequest pageRequest, Map<String, Object> filter,Model model) {
 		Long buildingsId=null;
+		String buildingsName=null;
 		if(StringUtil.isNotEmptyObject(filter.get("buildingsId"))){
 			buildingsId=Long.parseLong(filter.get("buildingsId").toString());
 		}
-		String buildingsName=filter.get("buildingsName").toString();
+		if(StringUtil.isNotEmptyObject(filter.get("buildingsId"))){
+			buildingsName=filter.get("buildingsName").toString();
+		}
 		model.addAttribute("buildingsName",buildingsName);
 		model.addAttribute("buildingsId",buildingsId);
 		long total = buildingsPriceMapper.count(filter);
         filter.putAll(pageRequest.getMap());
         List<Map<String, Object>> content = buildingsPriceMapper.findBybuildId(filter);
+
         return new Page<Map<String, Object>>(pageRequest, content, total);
     }
 }
