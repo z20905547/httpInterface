@@ -1,0 +1,165 @@
+<#include "*/basic/default.html"/>
+
+<#macro title>
+添加户型   
+</#macro>  
+
+<#macro head>
+<link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/jqueryui/1.10.4/css/jquery-ui.min.css">
+<link rel="stylesheet" type="text/css" href="${base}/resource/css/umeditor.min.css">
+<script type="text/javascript" src="//cdn.bootcss.com/jqueryui/1.10.4/jquery-ui.min.js"></script>
+<script type="text/javascript" src="//cdn.bootcss.com/jqueryui/1.10.4/i18n/jquery-ui-i18n.min.js"></script>
+<script type="text/javascript" src="//cdn.bootcss.com/jquery-ui-timepicker-addon/1.5.5/jquery-ui-timepicker-addon.min.js"></script>
+<script type="text/javascript" src="//cdn.bootcss.com/jquery-ui-timepicker-addon/1.6.1/i18n/jquery-ui-timepicker-zh-CN.js"></script>
+<link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/jquery-ui-timepicker-addon/1.5.5/jquery-ui-timepicker-addon.min.css">
+
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        $("#selectAll").click(function () {
+            var checkbox = $(this),
+                    children = checkbox.parents("table").find("tbody input[type='checkbox']");
+
+            children.prop("checked", checkbox.is(":checked"));
+        });
+        $.datepicker.setDefaults($.datepicker.regional["zh-CN"]);
+		$(".datePicker").datetimepicker({
+	     	   showSecond: true,
+	     	  timeFormat: 'HH:mm:ss'
+	       });                                                
+
+        
+    });
+    
+</script>
+</#macro>
+
+<#macro body>
+<div class="data-content">
+
+<!--     <ol class="breadcrumb"> -->
+<!--         <li><span class="glyphicon glyphicon-user"></span></li> -->
+<!--         <li><a href="${base}/account/user/list">用户管理</a></li> -->
+<!--         <li class="active">添加用户</li> -->
+<!--     </ol> -->
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title"><span class="glyphicon glyphicon-edit"></span> 修改户型《${buildingsName}》</h3>
+        </div>
+        <form action="${base}/buildings/house/update" id="create-house-form" method="post">
+        <input type="hidden" name="buildingsId" value="${entity.building_id}"/>
+        <input type="hidden" name="buildingsName" value="${buildingsName}"/>
+        <input type="hidden" name="id" value="${entity.id}"/>
+            <div class="panel-body">
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-xs-6">
+                            <label for="house_type_name">户型名称:</label>
+                            <input type="text" class="form-control required" id="house_type_name" name="house_type_name" value="${entity.house_type_name!''}"  placeholder="如 A户型">
+                        </div>
+                        <div class="col-xs-6">
+                            <label for="acreage">户型面积:</label>
+                            <input type="text" class="form-control required" id="acreage" name="acreage"  placeholder="输入面积（可保留0-2位小数）" value="${entity.acreage!''}">
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-xs-6">
+                            <label for="shi">室:</label>
+                         <select class="form-control required"  id="shi" name="shi" >  
+                        
+                                   
+                                </option>
+                           <option value ="" >—请选择-</option>
+                          <option value="${entity.shi!''}" <#if entity.shi?? >selected="selected"</#if> >${entity.shi!''}室 </option>
+                           <option value ="1">1室</option>  
+                           <option value ="2">2室</option>
+                           <option value ="3">3室</option>  
+                           <option value ="4">4室</option>  
+                           <option value ="5">1室</option>  
+                           <option value ="6">6室</option>    
+                       </select> 
+                            
+                        </div>
+                        <div class="col-xs-6">
+                            <label for="ting">厅:</label>
+                         <select class="form-control required"  id="ting" name="ting" value="${entity.ting!''}">  
+                           <option value ="" selected>—请选择-</option>
+                            <option value="${entity.ting!''}" <#if entity.ting?? >selected="selected"</#if> >${entity.ting!''}厅 </option>
+                           <option value ="1">1厅</option>  
+                           <option value ="2">2厅</option>
+                           <option value ="3">3厅</option>  
+
+  
+                       </select> </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-xs-6">
+                            <label for="chu">厨:</label>
+                              <select class="form-control required"  id="chu" name="chu" value="${entity.chu!''}" >  
+                           <option value ="" selected>—请选择-</option>
+                            <option value="${entity.chu!''}" <#if entity.chu?? >selected="selected"</#if> >${entity.chu!''}厨 </option>
+                           <option value ="1">1厨</option>  
+                           <option value ="2">2厨</option>
+                           <option value ="3">3厨</option>  
+
+  
+                       </select>  </div>
+                        <div class="col-xs-6">
+                            <label for="wei">卫:</label>
+                             <select class="form-control required"  id="wei" name="wei" value="${entity.wei!''}">  
+                           <option value ="" selected>—请选择-</option>
+                           <option value="${entity.wei!''}" <#if entity.wei?? >selected="selected"</#if> >${entity.wei!''}卫</option>
+                           <option value ="1">1卫</option>  
+                           <option value ="2">2卫</option>
+                           <option value ="3">3卫</option>  
+
+  
+                       </select>   </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-xs-6">
+                            <label for="yang">阳:</label>
+                             <select class="form-control required"  id="yang" name="yang" value="${entity.yang!''}">  
+                           <option value ="" selected>—请选择-</option>
+                           <option value="${entity.yang!''}" <#if entity.yang?? >selected="selected"</#if> >${entity.yang!''}阳 </option>
+                           <option value ="1">1阳</option>  
+                           <option value ="2">2阳</option>
+                           <option value ="3">3阳</option>  
+
+  
+                       </select>  </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="panel-footer">
+
+                
+                <button type="submit" class="btn btn-success">
+                    <span class="glyphicon glyphicon-ok"></span> 保存
+                </button>
+
+                <button type="reset" class="btn btn-warning">
+                    <span class="glyphicon glyphicon-trash"></span> 重置
+                </button>
+              
+
+                <button type="button" class="btn btn-default" onclick="history.back();">
+                    <span class="glyphicon glyphicon-backward"></span> 返回
+                </button>
+
+            </div>
+        </form>
+    </div>
+</div>
+</#macro>
+

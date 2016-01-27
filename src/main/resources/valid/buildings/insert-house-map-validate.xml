@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<validate-mapper name="insert-house">
+
+    <key name="house_type_name" alias="户型名称">
+        <notEmpty />
+    </key>
+
+    <key name="acreage" alias="户型面积">
+        <notEmpty />
+    </key>
+
+
+
+</validate-mapper>

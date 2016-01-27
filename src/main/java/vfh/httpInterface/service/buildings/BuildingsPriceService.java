@@ -29,7 +29,7 @@ public class BuildingsPriceService {
 	@Autowired
 	private BuildingsPriceMapper buildingsPriceMapper;
 	public void insertBuildingsPrice(@MapValid("insert-price") Map<String, Object> entity){
-		System.out.println("lllllllllllllllll1111111----------");
+
 		try {
 			//如果上一条记录有价格，则先更新上条记录的结束日期为这条记录开始的前一天
 			Map<String, Object> filter=new HashMap<String, Object>();
@@ -83,7 +83,7 @@ public class BuildingsPriceService {
 		if(StringUtil.isNotEmptyObject(filter.get("buildingsId"))){
 			buildingsId=Long.parseLong(filter.get("buildingsId").toString());
 		}
-		if(StringUtil.isNotEmptyObject(filter.get("buildingsId"))){
+		if(StringUtil.isNotEmptyObject(filter.get("buildingsName"))){
 			buildingsName=filter.get("buildingsName").toString();
 		}
 		model.addAttribute("buildingsName",buildingsName);
