@@ -24,7 +24,7 @@
 		    var imageurl = $(this).attr("value");
 		    if (imageurl) {
 		        $(this).fileinput({
-		        	uploadUrl: "/site/image-upload",
+		        	uploadUrl: "${base}/buildings/house/edit-huxingtu",
 		        	previewFileIcon: '<i class="fa fa-file"></i>',
 		            language : 'zh',
 		            allowedFileTypes : [ 'image' ],
@@ -34,7 +34,7 @@
 		        });
 		    } else {
 		        $(this).fileinput({
-		        	uploadUrl: "/site/image-upload",
+		        	uploadUrl: "${base}/buildings/house/edit-huxingtu",
 		        	previewFileIcon: '<i class="fa fa-file"></i>',
 		            language : 'zh',
 		            allowedFileTypes : [ 'image' ],
@@ -60,15 +60,15 @@
         </div>
         
 
-        <form action="${base}/buildings/resource/insert" id="create-user-form" method="post">
+        <form action="${base}/buildings/house/hxtInsert" id="create-user-form" method="post">
             <div class="panel-body">
-<input type="hidden" name="buildingsId" value="${buildingsId}"/>
-<input type="hidden" name="buildingsName" value="${buildingsName}"/>
+<input type="hidden" name="id" value="${id}"/>
+<input type="hidden" name="shi" value="${shi}"/>
 
                 <div class="form-group">
                     <div class="row">
                         <div class="col-xs-12">
-                        <input id="images" name="images[]" type="file" multiple class="file-loading">
+                        <input id="images" name="images[]" type="file" multiple class="file-loading" enctype="multipart/form-data" >
                         </div>
                     </div>
                 </div>

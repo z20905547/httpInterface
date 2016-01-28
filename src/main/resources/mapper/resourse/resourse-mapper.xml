@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 用户数据访问映射 -->
+<mapper namespace="vfh.httpInterface.dao.resourse.ResourseDao" >
+
+
+    
+    <insert id="hxtInsert" useGeneratedKeys="true" keyProperty="entity.id">
+        INSERT INTO tb_building_resource(
+          pid,
+          resource_path,
+          big_type,
+          sm_type,
+          is_first,
+          resource_name,
+          resource_alias,
+          resource_detail,
+          create_time,
+          update_time
+          
+        ) VALUES (
+          #{entity.pid},
+          #{entity.resource_path},
+          #{entity.big_type},
+          #{entity.sm_type},
+          #{entity.is_first},
+          #{entity.resource_name},
+          #{entity.resource_alias},
+          #{entity.resource_detail},
+          now(),
+          now()
+        )
+    </insert>
+ 
+</mapper>
