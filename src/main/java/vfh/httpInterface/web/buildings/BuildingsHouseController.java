@@ -1,8 +1,11 @@
 package vfh.httpInterface.web.buildings;
 
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.List;
 import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -10,6 +13,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import com.google.common.collect.Maps;
 
 import vfh.httpInterface.commons.Page;
 import vfh.httpInterface.commons.PageRequest;
@@ -58,17 +63,57 @@ public class BuildingsHouseController {
         return "redirect:/buildings/house/list?buildingsId="+entity.get("buildingsId");
     }
     @RequestMapping({"edit","add"})
-    public void createOrEdit(@RequestParam(required = false)Long id,@RequestParam(required = false)Long buildingsId,
-    		@RequestParam(required = false)String buildingsName,Model model) {
-        if (id != null) {
+    public void createOrEdit(@RequestParam Map<String, Object> filter,Model model) {
+
+        if (filter.get("id") != null ) {
+        	Long id = Long.parseLong(filter.get("id").toString());
             model.addAttribute("entity", buildingsHouseService.get(id));
-       	 model.addAttribute("buildingsId",buildingsId);
-       	 model.addAttribute("buildingsName",buildingsName);
+       	 model.addAttribute("buildingsId",filter.get("id"));
+       	 model.addAttribute("buildingsName",filter.get("buildingsName"));
 
 
         }else{
-        	 model.addAttribute("buildingsId",buildingsId);
-        	 model.addAttribute("buildingsName",buildingsName);
+          	 model.addAttribute("buildingsId",filter.get("id"));
+           	 model.addAttribute("buildingsName",filter.get("buildingsName"));
         }
     }
+    
+    @RequestMapping({"hxtEdit"})
+    public void hxtEdit(@RequestParam Map<String, Object> filter,Model model) {
+
+        if (filter.get("id") != null && filter.get("buildingsName") != null) {
+
+       	model.addAttribute("buildingsName",filter.get("buildingsName").toString());
+    	model.addAttribute("id",filter.get("id").toString());
+    	model.addAttribute("shi",filter.get("shi").toString());
+        }else{
+        	 
+        	 model.addAttribute("buildingsName",filter.get("buildingsName").toString());
+        }
+    }
+
+    @RequestMapping("hxtInsert")
+    
+    
+    public Map<String, Object> hxtInsert(HttpServletRequest request,@RequestParam Map<String, Object> filter,Model model) throws IOException {
+    	// httpURLConnection.setRequestProperty("content-type", "text/html");
+    	System.out.println("opppppppppppppppppppp");
+    	//System.out.println(request.getInputStream().available());
+    	//int len = request.getContentLength();
+    	
+    	System.out.println("llllllllllllll");
+    	System.out.println(request.getParameterMap());
+    	//System.out.println("len: " + len + "<br>");
+
+    	buildingsHouseService.insertHuxingtu(request.getInputStream(),filter,model);
+
+    	Map<String, Object> result = Maps.newHashMap();
+    	
+        result.put("status", "success");
+
+        return result;
+        
+        
+    }
+
 }

@@ -16,9 +16,10 @@
         });
         $(".blocklink").on("click",function(){
     		var actionUrl=$(this).attr("data-href");
-    		var buildingsId=$(this).attr("data-building-id");
+    		var id=$(this).attr("data-house-id");
+    		var shi=$(this).attr("data-shi");
     		var buildingsName=$(this).attr("data-building-name");
-    		$("<form action='"+actionUrl+"' method='post'>").append("<input name='buildingsId' value='"+buildingsId+"'/><input name='buildingsName' value='"+buildingsName+"'/>").submit().remove();
+    		$("<form action='"+actionUrl+"' method='post'>").append("<input name='id' value='"+id+"'/><input name='buildingsName' value='"+buildingsName+"'/><input name='shi' value='"+shi+"'/>").submit().remove();
     		
     	});
     });
@@ -106,8 +107,9 @@
     </div>
     </#if>
 
-    <form id="house-list-form" action="${base}/buildings/price/list" valid="false" method="post">
+    <form id="house-list-form" action="${base}/buildings/house/hxtInsert" valid="false" method="post">
         <div class="panel panel-default">
+
 
             <div class="panel-heading">
                 <h3 class="panel-title"><span class="glyphicon glyphicon-flag"></span> 户型管理《${buildingsName}》</h3>
@@ -141,10 +143,10 @@
 
                                 <td>
                                     
-                                    <a class="btn btn-default btn-sm" href="${base}/buildings/house/edit?id=${r.id!''}&buildingsName=${buildingsName}"  >
+                                    <a class="btn btn-default btn-sm blocklink" data-href="${base}/buildings/house/edit" data-house-id="${r.id}" data-building-name="${buildingsName}"  >
                                         <span class="glyphicon glyphicon-edit"></span>
                                     </a>
-                                    <a class="btn btn-default btn-sm blocklink" title="编辑图片" href="javascript:void(0)" data-href="${base}/buildings/resource/add" data-building-id="${r.id}">
+                                    <a class="btn btn-default btn-sm blocklink" title="编辑图片" href="javascript:void(0)" data-href="${base}/buildings/house/hxtEdit" data-house-id="${r.id}" data-shi="${r.shi}" data-building-name="${buildingsName}">
                                         <span class="glyphicon glyphicon-picture"></span>
                                     </a>
                                 </td>
