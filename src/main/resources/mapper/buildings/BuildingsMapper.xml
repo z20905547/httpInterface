@@ -7,7 +7,7 @@
 		create_time, update_time, status, open_date, deliver_date, server_phone_num,
 		address,building_count, floor_space, building_space, house_count,
 		green_rate, decoration_condition,
-		util_type, parking_count,floor_detail,buildings_detail,main_door,around_peitao,internal_peitao,traffic,wuye_fee,property_company,wuye_type,project_features
+		util_type, parking_count,floor_detail,buildings_detail,main_door,around_peitao,internal_peitao,traffic,wuye_fee,property_company,wuye_type,project_features,ratio
 	</sql>
 	<select id="get" resultType="hashmap">
 		SELECT
@@ -29,7 +29,7 @@
 		status, open_date,
 		deliver_date, server_phone_num, address,building_count, floor_space,
 		building_space, house_count, green_rate, decoration_condition,
-		util_type, parking_count,floor_detail,buildings_detail,main_door,around_peitao,internal_peitao,traffic,wuye_fee,developer_company,property_company,wuye_type,project_features
+		util_type, parking_count,floor_detail,buildings_detail,main_door,around_peitao,internal_peitao,traffic,wuye_fee,developer_company,property_company,wuye_type,project_features,ratio
 		)
 		values ( #{entity.cityId}, #{entity.areaId},
 		#{entity.mapX}, #{entity.mapY},
@@ -41,7 +41,7 @@
 		#{entity.decorationCondition}, #{entity.utilType},
 		#{entity.parkingCount},
 		#{entity.floorDetail}, #{entity.buildingsDetail}, #{entity.main_door},#{entity.around_peitao},#{entity.around_peitao},
-		#{entity.traffic},#{entity.wuye_fee},#{entity.developer_company}, #{entity.property_company}, #{entity.wuye_type}, #{entity.project_features}
+		#{entity.traffic},#{entity.wuye_fee},#{entity.developer_company}, #{entity.property_company}, #{entity.wuye_type}, #{entity.project_features}, #{entity.ratio}
 		)
 	</insert>
 	<select id="count" resultType="long">
@@ -158,7 +158,9 @@
 			<if test="entity.property_company != null">
 				property_company = #{entity.property_company},
 			</if>
-
+			<if test="entity.ratio != null">
+				ratio = #{entity.ratio},
+			</if>
 		</set>
 		WHERE
 		id = #{entity.id}
