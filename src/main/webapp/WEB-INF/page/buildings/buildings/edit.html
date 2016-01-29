@@ -147,12 +147,12 @@ head>
 						<div class="col-xs-6 openDate">
 							<label for="open_date">开盘时间:</label> <input type="text"
 								class="datePicker form-control " autocomplete="off"
-								id="open_date" name="open_date" value="${entity.open_date!''}" readonly>
+								id="open_date" name="open_date" value="${entity.open_date!''}" >
 						</div>
 						<div class="col-xs-6 deliverDate">
 							<label for="deliver_date">交房时间:</label> <input type="text"
 								class="datePicker form-control " autocomplete="off"
-								id="deliver_date" name="deliver_date" value="${entity.deliver_date!''}" readonly>
+								id="deliver_date" name="deliver_date" value="${entity.deliver_date!''}" >
 						</div>
 					</div>
 				</div>
@@ -277,6 +277,25 @@ head>
 						</div>
 					</div>
 				</div>
+								<div class="form-group">
+					<div class="row">
+						<div class="col-xs-6">
+							<label for="ratio">容积率:</label> <input type="text"
+								class="form-control required" maxlength="100" id="ratio"
+								name="ratio" value="${entity.ratio!''}">
+						</div>
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="row">
+						<div class="col-xs-12">
+							<label for="buildings_detail">楼盘简介:</label>
+							<script type="text/plain" id="buildings_detail"
+								name="buildings_detail" style="width: 100%; height: 240px;" value="${entity.buildings_detail!''}">
+							</script>
+						</div>
+					</div>
+				</div>
 				<div class="form-group">
 					<div class="row">
 						<div class="col-xs-12">
@@ -344,16 +363,7 @@ head>
 				<div class="form-group mapdiv">
 					<div id="l-map"></div>
 				</div>
-				<div class="form-group">
-					<div class="row">
-						<div class="col-xs-12">
-							<label for="buildings_detail">楼盘简介:</label>
-							<script type="text/plain" id="buildings_detail"
-								name="buildings_detail" style="width: 100%; height: 240px;" value="${entity.buildings_detail!''}">
-							</script>
-						</div>
-					</div>
-				</div>
+
 
 
 

@@ -36,6 +36,8 @@
     <key name="project_features" alias="项目特色">
         <notEmpty />
     </key>
-
+    <key name="ratio" alias="容积率">
+        <notEmpty />
+    </key>
 
 </validate-mapper>
