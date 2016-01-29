@@ -105,7 +105,7 @@ head>
 	<div class="panel panel-default">
 		<div class="panel-heading">
 			<h3 class="panel-title">
-				<span class="glyphicon glyphicon-edit"></span> 添加楼盘
+				<span class="glyphicon glyphicon-edit"></span> 编辑楼盘
 			</h3>
 		</div>
 		<form action="${base}/buildings/buildings/update"
@@ -256,10 +256,13 @@ head>
 								name="property_company" value="${entity.property_company!''}">
 						</div>
 						<div class="col-xs-6">
-							<label for="wuye_fee">物业费:</label>
-							<input type="text" class="form-control required" maxlength="16"
-								id="wuye_fee" name="wuye_fee" value="${entity.wuye_fee!''}">
-                             
+								<label for="wuye_fee">物业费:</label>
+							<div class="input-group">
+								<input type="text" class="form-control required"
+									id="wuye_fee" name="wuye_fee" value="${entity.wuye_fee!''}"> <span
+									class="input-group-addon" >元/㎡·月</span>
+							</div>
+						
 						</div>
 					</div>
 				</div>
@@ -291,7 +294,7 @@ head>
 						<div class="col-xs-12">
 							<label for="buildings_detail">楼盘简介:</label>
 							<script type="text/plain" id="buildings_detail"
-								name="buildings_detail" style="width: 100%; height: 240px;" value="${entity.buildings_detail!''}">
+								name="buildings_detail" style="width: 100%; height: 240px;" >${entity.buildings_detail!''}
 							</script>
 						</div>
 					</div>
@@ -302,7 +305,7 @@ head>
 							<label for="traffic">交通状况:</label> 
 							<script type="text/plain"
 								class="form-control required" maxlength="100" id="traffic"
-								name="traffic" style="width: 100%; height: 240px;" value="${entity.traffic!''}">
+								name="traffic" style="width: 100%; height: 240px;">${entity.traffic!''}
                             </script>
 						</div>
 					</div>
@@ -313,7 +316,7 @@ head>
 							<label for="around_peitao">周边配套:</label>
 							<script type="text/plain" class="form-control required"
 								id="around_peitao" name="around_peitao"
-								style="width: 100%; height: 240px;" value="${entity.around_peitao!''}">
+								style="width: 100%; height: 240px;" >${entity.around_peitao!''}
                             </script>
 						</div>
 					</div>
@@ -326,7 +329,7 @@ head>
 							<script
 								type="text/plain" class="form-control required"
 								id="internal_peitao" name="internal_peitao"
-								style="width: 100%; height: 240px;" value="${entity.internal_peitao!''}">
+								style="width: 100%; height: 240px;" >${entity.internal_peitao!''}
                             </script>
 						</div>
 					</div>
