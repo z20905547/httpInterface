@@ -6,16 +6,4 @@
         <notEmpty />
     </key>
 
-    <key name="discount_price" alias="特价">
-        <notEmpty />
-    </key>
-
-    <key name="startDate" alias="生效日期">
-        <notEmpty />
-    </key>
-    <key name="first_price" alias="起步价">
-        <notEmpty />
-    </key>
-
-
 </validate-mapper>
