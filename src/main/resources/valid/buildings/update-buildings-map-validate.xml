@@ -5,37 +5,4 @@
         <notEmpty />
     </key>
 
-    <key name="server_phone_num" alias="服务电话">
-        <notEmpty />
-    </key>
-
-    <key name="open_date" alias="开盘时间">
-        <notEmpty />
-    </key>
-
-    <key name="deliver_date" alias="交房时间">
-        <notEmpty />
-    </key>
-
-    <key name="main_door" alias="主力户型">
-        <notEmpty />
-    </key>
-    <key name="around_peitao" alias="周边配套">
-        <notEmpty />
-    </key>
-    <key name="internal_peitao" alias="小区配套">
-        <notEmpty />
-    </key>
-    <key name="traffic" alias="交通状况">
-        <notEmpty />
-    </key>
-        <key name="wuye_type" alias="物业类型">
-        <notEmpty />
-    </key>
-    <key name="project_features" alias="项目特色">
-        <notEmpty />
-    </key>
-
-
-
 </validate-mapper>

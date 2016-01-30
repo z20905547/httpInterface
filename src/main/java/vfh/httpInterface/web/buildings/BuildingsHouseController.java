@@ -99,13 +99,23 @@ public class BuildingsHouseController {
     	// httpURLConnection.setRequestProperty("content-type", "text/html");
     	System.out.println("opppppppppppppppppppp");
     	//System.out.println(request.getInputStream().available());
-    	//int len = request.getContentLength();
+    	int len = request.getContentLength();
+    	
     	
     	System.out.println("llllllllllllll");
     	System.out.println(request.getParameterMap());
     	//System.out.println("len: " + len + "<br>");
 
-    	buildingsHouseService.insertHuxingtu(request.getInputStream(),filter,model);
+    	try{
+    		buildingsHouseService.insertHuxingtu(request.getInputStream(),filter,model);
+    		
+    		int ret = 0;
+    		ret =1;
+    	}catch(Exception e)
+    	{
+    		e.printStackTrace();
+    	}
+    	
 
     	Map<String, Object> result = Maps.newHashMap();
     	

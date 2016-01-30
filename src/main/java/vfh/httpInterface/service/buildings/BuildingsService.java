@@ -40,6 +40,8 @@ public class BuildingsService {
 	 */
 	public void insertBuildings(@MapValid("insert-buildings") Map<String, Object> entity){
 		entity.put("status", 0);
+        if(entity.get("open_date").equals("")) entity.put("open_date", null);
+        if(entity.get("deliver_date").equals("")) entity.put("deliver_date", null);
 		buildingsMapper.insert(entity);
 	}
 	/**
@@ -50,6 +52,8 @@ public class BuildingsService {
 	 * @create 2016年1月12日
 	 */
 	public void updateBuildings(@MapValid("update-buildings")Map<String, Object> entity){
+        if(entity.get("open_date").equals("")) entity.put("open_date", null);
+        if(entity.get("deliver_date").equals("")) entity.put("deliver_date", null);
 		buildingsMapper.update(entity);
 	}
 	/**
