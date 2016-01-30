@@ -1,17 +1,13 @@
 <#include "*/basic/default.html"/> <#macro title> 添加楼盘 </#macro> <#macro
 head>
-<link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/jqueryui/1.10.4/css/jquery-ui.min.css">
+
 <link rel="stylesheet" type="text/css" href="${base}/resource/css/umeditor.min.css">
-<script type="text/javascript" src="//cdn.bootcss.com/jqueryui/1.10.4/jquery-ui.min.js"></script>
-<script type="text/javascript" src="//cdn.bootcss.com/jqueryui/1.10.4/i18n/jquery-ui-i18n.min.js"></script>
+<link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/jquery-datetimepicker/2.4.5/jquery.datetimepicker.min.css">
+<script type="text/javascript" src="//cdn.bootcss.com/jquery-datetimepicker/2.4.5/jquery.datetimepicker.min.js"></script> 
 <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=E991373d74352818824a24dea57f156c"></script>
 <script type="text/javascript" src="http://api.map.baidu.com/library/CityList/1.2/src/CityList_min.js"></script>
 <script type="text/javascript" charset="utf-8" src="${base}/resource/script/umeditor.config.js"></script>
 <script type="text/javascript" charset="utf-8" src="${base}/resource/script/umeditor.min.js"></script>
-
-<script type="text/javascript" src="//cdn.bootcss.com/jquery-ui-timepicker-addon/1.5.5/jquery-ui-timepicker-addon.min.js"></script>
-<script type="text/javascript" src="//cdn.bootcss.com/jquery-ui-timepicker-addon/1.6.1/i18n/jquery-ui-timepicker-zh-CN.js"></script>
-<link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/jquery-ui-timepicker-addon/1.5.5/jquery-ui-timepicker-addon.min.css">
 
 
 <script type="text/javascript">
@@ -25,13 +21,12 @@ head>
 
 							children.prop("checked", checkbox.is(":checked"));
 						});
-				$.datepicker.setDefaults($.datepicker.regional["zh-CN"]);
 				$(".datePicker").datetimepicker({
-			     	   showSecond: true,
-			     	  timeFormat: 'HH:mm:ss'
+					lang:'ch',
+					format:"Y-m-d"
 			       });
 				//富文本编辑器
-				var um = UM.getEditor('buildings_detail');
+				var um = UM.getEditor('buildingsDetail');
 				//富文本编辑器
 				var um = UM.getEditor('around_peitao');
 				//富文本编辑器
@@ -117,64 +112,41 @@ head>
 					<div class="row">
 						<div class="col-xs-6">
 							<label for="buildings_name">楼盘名称:</label> <input type="text"
-								class="form-control required" maxlength="25" minlength="4"
-								id="buildings_name" name="buildings_name" placeholder="4到25个字" value="${entity.buildings_name!''}">
-						</div>      
+								class="form-control required" 
+								id="buildings_name" name="buildings_name" value="${entity.buildings_name!''}">
+						</div>
 						<div class="col-xs-6">
 							<label for="server_phone_num">服务电话:</label> <input type="text"
 								class="form-control required" maxlength="16" id="server_phone_num"
-								name="server_phone_num" value="${entity.server_phone_num!''}" placeholder="手机或者固定电话">
+								name="server_phone_num" placeholder="手机或者固定电话" value="${entity.server_phone_num!''}">
 						</div>
 					</div>
 				</div>
 				<div class="form-group">
 					<div class="row">
 						<div class="col-xs-6">
-							<label for="address">楼盘地址:</label> <input type="text"
-								class="form-control required" maxlength="50" minlength="5"
-								id="address" name="address" value="${entity.address!''}">
+							<label for="project_features">项目特色:</label>
+							<input type="text" class="form-control" maxlength="100"
+								id="project_features" name="project_features" value="${entity.project_features!''}">
 						</div>
 						<div class="col-xs-6">
-							<label for="developer_company">开发商:</label> <input type="text"
-								class="form-control required" maxlength="50" minlength="5"
-								id="developer_company" name="developer_company" value="${entity.developer_company!''}">
+							<label for="property_company">物业类型:</label> <input type="text"
+								class="form-control" maxlength="100" id="wuye_type"
+								name="wuye_type" value="${entity.wuye_type!''}">
 						</div>
 					</div>
 				</div>
-
 				<div class="form-group">
 					<div class="row">
-						<div class="col-xs-6 openDate">
+						<div class="col-xs-6 open_date">
 							<label for="open_date">开盘时间:</label> <input type="text"
-								class="datePicker form-control " autocomplete="off"
-								id="open_date" name="open_date" value="${entity.open_date!''}" >
+								class="datePicker form-control dateISO" autocomplete="off"
+								id="open_date" name="open_date" value="${entity.open_date!''}">
 						</div>
 						<div class="col-xs-6 deliverDate">
 							<label for="deliver_date">交房时间:</label> <input type="text"
-								class="datePicker form-control " autocomplete="off"
-								id="deliver_date" name="deliver_date" value="${entity.deliver_date!''}" >
-						</div>
-					</div>
-				</div>
-
-				<div class="form-group">
-					<div class="row">
-						<div class="col-xs-6 ">
-
-							<label for="building_count">总栋数:</label>
-							<div class="input-group">
-								<input type="text" class="form-control required"
-									id="building_count" name="building_count" value="${entity.building_count!''}"> <span
-									class="input-group-addon" >栋</span>
-							</div>
-
-						</div>
-						<div class="col-xs-6">
-							<label for="house_count">总户数:</label>
-							<div class="input-group">
-								<input type="text" class="form-control required" id="house_count"
-									name="house_count" value="${entity.house_count!''}"> <span class="input-group-addon">户</span>
-							</div>
+								class="datePicker form-control dateISO" autocomplete="off"
+								id="deliver_date" name="deliver_date" value="${entity.deliver_date!''}">
 						</div>
 					</div>
 				</div>
@@ -183,16 +155,37 @@ head>
 						<div class="col-xs-6">
 							<label for="floor_space">占地面积:</label>
 							<div class="input-group">
-								<input type="text" class="form-control required" id="floor_space"
+								<input type="text" class="form-control number" id="floorSpace"
 									name="floor_space" value="${entity.floor_space!''}"> <span class="input-group-addon">平方米</span>
 							</div>
 						</div>
 						<div class="col-xs-6">
 							<label for="building_space">建筑面积:</label>
 							<div class="input-group">
-								<input type="text" class="form-control required"
+								<input type="text" class="form-control number"
 									id="building_space" name="building_space" value="${entity.building_space!''}"> <span
-									class="input-group-addon" >平方米</span>
+									class="input-group-addon">平方米</span>
+							</div>   
+						</div>
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="row">
+						<div class="col-xs-6 ">
+
+							<label for="building_count">总栋数:</label>
+							<div class="input-group">
+								<input type="text" class="form-control"
+									id="building_count" name="building_count" value="${entity.building_count!''}"> <span
+									class="input-group-addon">栋</span>
+							</div>
+
+						</div>
+						<div class="col-xs-6">
+							<label for="house_count">总套数:</label>
+							<div class="input-group">
+								<input type="text" class="form-control" id="house_count"
+									name="house_count" value="${entity.house_count!''}"> <span class="input-group-addon">户</span>
 							</div>
 						</div>
 					</div>
@@ -200,18 +193,32 @@ head>
 				<div class="form-group">
 					<div class="row">
 						<div class="col-xs-6">
+							<label for="ratio">容积率:</label> <input type="text"
+								class="form-control number" maxlength="100" id="ratio"
+								name="ratio" value="${entity.ratio!''}">
+						</div>
+						<div class="col-xs-6">
 							<label for="green_rate">绿化率:</label>
 							<div class="input-group">
-								<input type="text" class="form-control required" maxlength="25"
-									minlength="4" id="green_rate" name="green_rate"
+								<input type="text" class="form-control number"  id="green_rate" name="green_rate"
 									placeholder="1-100" value="${entity.green_rate!''}"> <span class="input-group-addon">%</span>
 							</div>
 						</div>
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="row">
+						<div class="col-xs-6">
+							<label for="decoration_condition">装修状况:</label> <input type="text"
+								class="form-control "
+								id="decoration_condition" name="decoration_condition" value="${entity.decoration_condition!''}">
+						</div>
 						<div class="col-xs-6">
 							<label for="util_type">期房现房:</label> <input type="text"
-								class="form-control required" maxlength="16" id="util_type"
+								class="form-control "  id="utilType"
 								name="util_type" value="${entity.util_type!''}">
 						</div>
+
 					</div>
 				</div>
 				<div class="form-group">
@@ -219,30 +226,61 @@ head>
 						<div class="col-xs-6">
 							<label for="parking_count">停车位:</label>
 							<div class="input-group">
-								<input type="text" class="form-control required" maxlength="25"
-									minlength="4" id="parking_count" name="parking_count" value="${entity.parking_count!''}"> <span
+								<input type="text" class="form-control digits"  id="parking_count" name="parking_count" value="${entity.parking_count!''}"> <span
 									class="input-group-addon" >个</span>
 							</div>
 						</div>
-						<div class="col-xs-6">
-							<label for="decoration_condition">装修状况:</label> <input type="text"
-								class="form-control required" maxlength="25" minlength="4"
-								id="decoration_condition" name="decoration_condition" value="${entity.decoration_condition!''}">
+                        <div class="col-xs-6">
+							<label for="right_years">产权年限:</label>
+							<div class="input-group">
+								<input type="text" class="form-control digits"  id="right_years" name="right_years" value="${entity.right_years!''}"> <span
+									class="input-group-addon">年</span>
+							</div>
 						</div>
-
-
+					</div>
+				</div>
+				<div class="form-group">
+				<div class="row">
+					<div class="col-xs-6">
+							<label for="wuye_fee">物业费:</label>
+							<div class="input-group">
+							<input type="text" class="form-control number" 
+								id="wuye_fee" name="wuye_fee" value="${entity.wuye_fee!''}"><span
+									class="input-group-addon" >元/㎡·月</span>   
+                             </div>
+					</div>
+					<div class="row">
+						<div class="col-xs-6">
+							<label for="property_company">物业公司:</label> <input type="text"
+								class="form-control "  id="property_company" value="${entity.property_company!''}"
+								name="property_company">
+						</div>
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="row">
+						<div class="col-xs-6">
+							<label for="address">楼盘地址:</label> <input type="text"
+								class="form-control "
+								id="address" name="address" value="${entity.address!''}">
+						</div>
+						<div class="col-xs-6">
+							<label for="developer_company">开发商:</label> <input type="text"
+								class="form-control " 
+								id="developer_company" name="developer_company" value="${entity.developer_company!''}">
+						</div>
 					</div>
 				</div>
 				<div class="form-group">
 					<div class="row">
 						<div class="col-xs-6">
 							<label for="floor_detail">楼层状况:</label> <input type="text"
-								class="form-control required" maxlength="16" id="floor_detail"
+								class="form-control "  id="floor_detail"
 								name="floor_detail" value="${entity.floor_detail!''}">
 						</div>
 						<div class="col-xs-6">
 							<label for="main_door">主力户型:</label>
-							<input type="text" class="form-control required" maxlength="16"
+							<input type="text" class="form-control" 
 								id="main_door" name="main_door" value="${entity.main_door!''}">
                              
 						</div>
@@ -251,50 +289,18 @@ head>
 				<div class="form-group">
 					<div class="row">
 						<div class="col-xs-6">
-							<label for="property_company">物业公司:</label> <input type="text"
-								class="form-control required" maxlength="16" id="property_company"
-								name="property_company" value="${entity.property_company!''}">
-						</div>
-						<div class="col-xs-6">
-								<label for="wuye_fee">物业费:</label>
-							<div class="input-group">
-								<input type="text" class="form-control required"
-									id="wuye_fee" name="wuye_fee" value="${entity.wuye_fee!''}"> <span
-									class="input-group-addon" >元/㎡·月</span>  
-							</div>
-						
-						</div>
-					</div>
-				</div>
-				<div class="form-group">
-					<div class="row">
-						<div class="col-xs-6">
-							<label for="property_company">物业类型:</label> <input type="text"
-								class="form-control required" maxlength="100" id="wuye_type"
-								name="wuye_type" value="${entity.wuye_type!''}">
-						</div>
-						<div class="col-xs-6">
-							<label for="project_features">项目特色:</label>
-							<input type="text" class="form-control required" maxlength="100"
-								id="project_features" name="project_features" value="${entity.project_features!''}">
-						</div>
-					</div>
-				</div>
-								<div class="form-group">
-					<div class="row">
-						<div class="col-xs-6">
-							<label for="ratio">容积率:</label> <input type="text"
-								class="form-control required" maxlength="100" id="ratio"
-								name="ratio" value="${entity.ratio!''}">
+							<label for="yushouzhenghao">预售证号:</label> <input type="text"
+								class="form-control "  id="yushouzhenghao"
+								name="yushouzhenghao" value="${entity.yushouzhenghao!''}">
 						</div>
 					</div>
 				</div>
 				<div class="form-group">
 					<div class="row">
 						<div class="col-xs-12">
-							<label for="buildings_detail">楼盘简介:</label>
-							<script type="text/plain" id="buildings_detail"
-								name="buildings_detail" style="width: 100%; height: 240px;" >${entity.buildings_detail!''}
+							<label for="buildingsDetail">楼盘简介:</label>
+							<script type="text/plain" id="buildingsDetail"
+								name="buildingsDetail" style="width: 100%; height: 240px;">${entity.buildings_detail!''}
 							</script>
 						</div>
 					</div>
@@ -302,21 +308,10 @@ head>
 				<div class="form-group">
 					<div class="row">
 						<div class="col-xs-12">
-							<label for="traffic">交通状况:</label> 
-							<script type="text/plain"
-								class="form-control required" maxlength="100" id="traffic"
-								name="traffic" style="width: 100%; height: 240px;">${entity.traffic!''}
-                            </script>
-						</div>
-					</div>
-				</div>
-				<div class="form-group">
-					<div class="row">
-						<div class="col-xs-12">
 							<label for="around_peitao">周边配套:</label>
-							<script type="text/plain" class="form-control required"
+							<script type="text/plain" class="form-control"
 								id="around_peitao" name="around_peitao"
-								style="width: 100%; height: 240px;" >${entity.around_peitao!''}
+								style="width: 100%; height: 240px;">${entity.around_peitao!''}
                             </script>
 						</div>
 					</div>
@@ -327,24 +322,34 @@ head>
 						<div class="col-xs-12">
 							<label for="internal_peitao">小区配套:</label> 
 							<script
-								type="text/plain" class="form-control required"
+								type="text/plain" class="form-control"
 								id="internal_peitao" name="internal_peitao"
-								style="width: 100%; height: 240px;" >${entity.internal_peitao!''}
+								style="width: 100%; height: 240px;">${entity.internal_peitao!''}
                             </script>
 						</div>
 					</div>
 				</div>
-
+				<div class="form-group">
+					<div class="row">
+						<div class="col-xs-12">
+							<label for="traffic">交通状况:</label> 
+							<script type="text/plain"
+								class="form-control" maxlength="100" id="traffic"
+								name="traffic" style="width: 100%; height: 240px;">${entity.traffic!''}
+                            </script>
+						</div>
+					</div>
+				</div>
 				<div class="form-group">
 					<div class="row">
 						<div class="col-xs-6 ">
-							<label for="map_x">经度:</label> <input type="text"
-								class=" form-control " autocomplete="off" id="map_x" name="map_x" value="${entity.map_x!''}"
+							<label for="mapX">经度:</label> <input type="text"
+								class=" form-control " autocomplete="off" id="mapX" name="mapX" value="${entity.mapX!''}"
 								readonly>
-						</div>    
+						</div>
 						<div class="col-xs-6 ">
-							<label for="map_y">纬度:</label> <input type="text"
-								class=" form-control " autocomplete="off" id="map_y" name="map_y" value="${entity.map_y!''}"
+							<label for="mapY">纬度:</label> <input type="text"
+								class=" form-control " autocomplete="off" id="mapY" name="mapY" value="${entity.mapY!''}"
 								readonly>
 						</div>
 					</div>

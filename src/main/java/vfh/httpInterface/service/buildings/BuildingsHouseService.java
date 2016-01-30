@@ -138,9 +138,10 @@ public class BuildingsHouseService {
 		        System.out.println(originalPicPath);
 		        
 		       // if(is.available()!=0){
-		        	  System.out.println(is.available());
+		        	  //System.out.println(is.available());
 		        //	}
-				  IOUtils.copy(is, new FileOutputStream(originalPicPath));
+				  int ret = IOUtils.copy(is, new FileOutputStream(originalPicPath));
+				  System.out.println(ret);
 
 		      //  scaleImage(originalPicPath, portraitPath, PortraitSize.MIDDLE);
 		      //  scaleImage(originalPicPath, portraitPath, PortraitSize.SMALL);
