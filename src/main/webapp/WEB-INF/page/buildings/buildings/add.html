@@ -116,8 +116,8 @@
 					<div class="row">
 						<div class="col-xs-6">
 							<label for="buildings_name">楼盘名称:</label> <input type="text"
-								class="form-control required" maxlength="25" minlength="4"
-								id="buildings_name" name="buildings_name" placeholder="4到25个字">
+								class="form-control required" 
+								id="buildings_name" name="buildings_name" >
 						</div>
 						<div class="col-xs-6">
 							<label for="server_phone_num">服务电话:</label> <input type="text"
@@ -129,18 +129,17 @@
 				<div class="form-group">
 					<div class="row">
 						<div class="col-xs-6">
-							<label for="address">楼盘地址:</label> <input type="text"
-								class="form-control required" maxlength="50" minlength="5"
-								id="address" name="address">
+							<label for="project_features">项目特色:</label>
+							<input type="text" class="form-control required" maxlength="100"
+								id="project_features" name="project_features">
 						</div>
 						<div class="col-xs-6">
-							<label for="developer_company">开发商:</label> <input type="text"
-								class="form-control required" maxlength="50" minlength="5"
-								id="developer_company" name="developer_company">
+							<label for="property_company">物业类型:</label> <input type="text"
+								class="form-control required" maxlength="100" id="wuye_type"
+								name="wuye_type">
 						</div>
 					</div>
 				</div>
-
 				<div class="form-group">
 					<div class="row">
 						<div class="col-xs-6 openDate">
@@ -152,28 +151,6 @@
 							<label for="deliverDate">交房时间:</label> <input type="text"
 								class="datePicker form-control " autocomplete="off"
 								id="deliverDate" name="deliverDate" >
-						</div>
-					</div>
-				</div>
-
-				<div class="form-group">
-					<div class="row">
-						<div class="col-xs-6 ">
-
-							<label for="buildingCount">总栋数:</label>
-							<div class="input-group">
-								<input type="text" class="form-control required"
-									id="buildingCount" name="buildingCount"> <span
-									class="input-group-addon">栋</span>
-							</div>
-
-						</div>
-						<div class="col-xs-6">
-							<label for="houseCount">总户数:</label>
-							<div class="input-group">
-								<input type="text" class="form-control required" id="house_count"
-									name="house_count"> <span class="input-group-addon">户</span>
-							</div>
 						</div>
 					</div>
 				</div>
@@ -198,6 +175,32 @@
 				</div>
 				<div class="form-group">
 					<div class="row">
+						<div class="col-xs-6 ">
+
+							<label for="buildingCount">总栋数:</label>
+							<div class="input-group">
+								<input type="text" class="form-control required"
+									id="buildingCount" name="buildingCount"> <span
+									class="input-group-addon">栋</span>
+							</div>
+
+						</div>
+						<div class="col-xs-6">
+							<label for="houseCount">总套数:</label>
+							<div class="input-group">
+								<input type="text" class="form-control required" id="house_count"
+									name="house_count"> <span class="input-group-addon">户</span>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="row">
+						<div class="col-xs-6">
+							<label for="ratio">容积率:</label> <input type="text"
+								class="form-control required" maxlength="100" id="ratio"
+								name="ratio">
+						</div>
 						<div class="col-xs-6">
 							<label for="greenRate">绿化率:</label>
 							<div class="input-group">
@@ -206,11 +209,21 @@
 									placeholder="1-100"> <span class="input-group-addon">%</span>
 							</div>
 						</div>
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="row">
+						<div class="col-xs-6">
+							<label for="decorationCondition">装修状况:</label> <input type="text"
+								class="form-control required"
+								id="decorationCondition" name="decorationCondition">
+						</div>
 						<div class="col-xs-6">
 							<label for="utilType">期房现房:</label> <input type="text"
-								class="form-control required" maxlength="16" id="utilType"
+								class="form-control required"  id="utilType"
 								name="utilType">
 						</div>
+
 					</div>
 				</div>
 				<div class="form-group">
@@ -218,18 +231,42 @@
 						<div class="col-xs-6">
 							<label for="parkingCount">停车位:</label>
 							<div class="input-group">
-								<input type="text" class="form-control required" maxlength="25"
-									minlength="4" id="parkingCount" name="parkingCount"> <span
+								<input type="text" class="form-control required"  id="parkingCount" name="parkingCount"> <span
 									class="input-group-addon">个</span>
 							</div>
 						</div>
+
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-xs-6">
+							<label for="wuye_fee">物业费:</label>
+							<div class="input-group">
+							<input type="text" class="form-control required" maxlength="16"
+								id="wuye_fee" name="wuye_fee"><span
+									class="input-group-addon" >元/㎡·月</span>   
+                             </div>
+					</div>
+					<div class="row">
 						<div class="col-xs-6">
-							<label for="decorationCondition">装修状况:</label> <input type="text"
-								class="form-control required" maxlength="25" minlength="4"
-								id="decorationCondition" name="decorationCondition">
+							<label for="property_company">物业公司:</label> <input type="text"
+								class="form-control required" maxlength="16" id="property_company"
+								name="property_company">
 						</div>
-
-
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="row">
+						<div class="col-xs-6">
+							<label for="address">楼盘地址:</label> <input type="text"
+								class="form-control required" maxlength="50" minlength="5"
+								id="address" name="address">
+						</div>
+						<div class="col-xs-6">
+							<label for="developer_company">开发商:</label> <input type="text"
+								class="form-control required" maxlength="50" minlength="5"
+								id="developer_company" name="developer_company">
+						</div>
 					</div>
 				</div>
 				<div class="form-group">
@@ -247,47 +284,7 @@
 						</div>
 					</div>
 				</div>
-				<div class="form-group">
-					<div class="row">
-						<div class="col-xs-6">
-							<label for="property_company">物业公司:</label> <input type="text"
-								class="form-control required" maxlength="16" id="property_company"
-								name="property_company">
-						</div>
-						<div class="col-xs-6">
-							<label for="wuye_fee">物业费:</label>
-							<div class="input-group">
-							<input type="text" class="form-control required" maxlength="16"
-								id="wuye_fee" name="wuye_fee"><span
-									class="input-group-addon" >元/㎡·月</span>   
-                             </div>
-						</div>
-					</div>
-				</div>
-				<div class="form-group">
-					<div class="row">
-						<div class="col-xs-6">
-							<label for="property_company">物业类型:</label> <input type="text"
-								class="form-control required" maxlength="100" id="wuye_type"
-								name="wuye_type">
-						</div>
-						<div class="col-xs-6">
-							<label for="project_features">项目特色:</label>
-							<input type="text" class="form-control required" maxlength="100"
-								id="project_features" name="project_features">
-						</div>
-					</div>
-				</div>
-				<div class="form-group">
-					<div class="row">
-						<div class="col-xs-6">
-							<label for="ratio">容积率:</label> <input type="text"
-								class="form-control required" maxlength="100" id="ratio"
-								name="ratio">
-						</div>
-					</div>
-				</div>
-				
+
 				<div class="form-group">
 					<div class="row">
 						<div class="col-xs-12">
@@ -295,17 +292,6 @@
 							<script type="text/plain" id="buildingsDetail"
 								name="buildingsDetail" style="width: 100%; height: 240px;">
 							</script>
-						</div>
-					</div>
-				</div>
-				<div class="form-group">
-					<div class="row">
-						<div class="col-xs-12">
-							<label for="traffic">交通状况:</label> 
-							<script type="text/plain"
-								class="form-control required" maxlength="100" id="traffic"
-								name="traffic" style="width: 100%; height: 240px;">
-                            </script>
 						</div>
 					</div>
 				</div>
@@ -333,7 +319,17 @@
 						</div>
 					</div>
 				</div>
-
+				<div class="form-group">
+					<div class="row">
+						<div class="col-xs-12">
+							<label for="traffic">交通状况:</label> 
+							<script type="text/plain"
+								class="form-control required" maxlength="100" id="traffic"
+								name="traffic" style="width: 100%; height: 240px;">
+                            </script>
+						</div>
+					</div>
+				</div>
 				<div class="form-group">
 					<div class="row">
 						<div class="col-xs-6 ">
