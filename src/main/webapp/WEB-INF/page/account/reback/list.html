@@ -52,7 +52,8 @@
     </div>
     </#if>
 
-    <form id="user-list-form" action="${base}/account/reback/delete" valid="false" method="post">
+    <form id="reback-list-form" action="${base}/account/reback/delete" valid="false" method="post">
+    <input type="hidden" id="pageNumber" name="pageNumber" value="0"/>
         <div class="panel panel-default">
 
             <div class="panel-heading">
@@ -116,7 +117,7 @@
 
         </div>
 
-        <@pagination 'user-search-form' page />
+        <@pagination 'reback-list-form' page />
 
     </form>
 
