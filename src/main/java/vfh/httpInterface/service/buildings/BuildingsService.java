@@ -42,6 +42,8 @@ public class BuildingsService {
 		entity.put("status", 0);
         if(entity.get("open_date").equals("")) entity.put("open_date", null);
         if(entity.get("deliver_date").equals("")) entity.put("deliver_date", null);
+        if(entity.get("cityId").equals("--请选择--")) entity.put("cityId", null);
+        if(entity.get("areaId").equals("--请选择--")) entity.put("areaId", null);
 		buildingsMapper.insert(entity);
 	}
 	/**
@@ -54,6 +56,8 @@ public class BuildingsService {
 	public void updateBuildings(@MapValid("update-buildings")Map<String, Object> entity){
         if(entity.get("open_date").equals("")) entity.put("open_date", null);
         if(entity.get("deliver_date").equals("")) entity.put("deliver_date", null);
+        if(entity.get("cityId").equals("--请选择--")) entity.put("cityId", null);
+        if(entity.get("areaId").equals("--请选择--")) entity.put("areaId", null);
 		buildingsMapper.update(entity);
 	}
 	/**
