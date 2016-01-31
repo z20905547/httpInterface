@@ -11,17 +11,10 @@
 <script type="text/javascript" src="http://api.map.baidu.com/library/CityList/1.2/src/CityList_min.js"></script>
 <script type="text/javascript" charset="utf-8" src="${base}/resource/script/umeditor.config.js"></script>
 <script type="text/javascript" charset="utf-8" src="${base}/resource/script/umeditor.min.js"></script>
-
+<script type="text/javascript" src="${base}/resource/script/area.js"></script>
 <script type="text/javascript">
 	$(document).ready(
 			function() {
-				$("#selectAll").click(
-						function() {
-							var checkbox = $(this), children = checkbox
-									.parents("table").find(
-											"tbody input[type='checkbox']");
-							children.prop("checked", checkbox.is(":checked"));
-						});
 			//	$.datepicker.setDefaults($.datepicker.regional["zh-CN"]);
 				$(".datePicker").datetimepicker({
 					lang:'ch',
@@ -87,7 +80,21 @@
 						cl.style.display = "none";
 					}
 				};
-
+				//省市下拉框
+				var proObj=$(".proId");
+				var cityObj=$(".cityId");
+				var areaObj=$(".areaId");
+				
+				getSubList(100000,460000,proObj);
+				getSubList(460000,460100,cityObj);
+				getSubList(460100,0,areaObj);
+				proObj.on("change",function(){
+					getSubList($(this).val(),0,cityObj)
+					getSubList(0,0,areaObj)
+				});
+				cityObj.on("change",function(){
+					getSubList($(this).val(),0,areaObj)
+				});
 			});
 </script>
 </#macro> <#macro body>
@@ -120,6 +127,25 @@
 							<label for="server_phone_num">服务电话:</label> <input type="text"
 								class="form-control required" maxlength="16" id="server_phone_num"
 								name="server_phone_num" placeholder="手机或者固定电话">
+						</div>
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="row">
+						<div class="col-xs-4">
+							<label for="proId">省/市:</label>
+							<select name="proId" class="form-control required proId" >
+							</select>
+						</div>
+						<div class="col-xs-4">
+							<label for="cityId">市/县:</label>
+							<select name="cityId" class="form-control required cityId" >
+							</select>
+						</div>
+						<div class="col-xs-4">
+							<label for="areaId">县/区:</label>
+							<select name="areaId" class="form-control required areaId" >
+							</select>
 						</div>
 					</div>
 				</div>

@@ -1,13 +1,16 @@
 eclipse.preferences.version=1
 encoding//src/main/java=UTF-8
 encoding//src/main/resources=UTF-8
+encoding//src/main/webapp/WEB-INF/page/account/group/edit.html=utf-8
+encoding//src/main/webapp/WEB-INF/page/account/user/add.html=utf-8
 encoding//src/main/webapp/WEB-INF/page/account/user/list.html=utf-8
 encoding//src/main/webapp/WEB-INF/page/basic/info.html=utf-8
 encoding//src/main/webapp/WEB-INF/page/basic/profile-setting.html=utf-8
 encoding//src/main/webapp/WEB-INF/page/buildings/buildings/add.html=utf-8
-encoding//src/main/webapp/WEB-INF/page/buildings/buildings/addImages.html=UTF-8
+encoding//src/main/webapp/WEB-INF/page/buildings/buildings/addImages.html=gbk
 encoding//src/main/webapp/WEB-INF/page/buildings/buildings/edit.html=utf-8
 encoding//src/main/webapp/WEB-INF/page/buildings/buildings/list.html=utf-8
+encoding//src/main/webapp/WEB-INF/page/buildings/house/hxtEdit.html=utf-8
 encoding//src/main/webapp/WEB-INF/page/buildings/price/add.html=utf-8
 encoding//src/main/webapp/WEB-INF/page/buildings/price/edit.html=utf-8
 encoding//src/main/webapp/WEB-INF/page/buildings/price/list.html=utf-8
