@@ -95,7 +95,7 @@ public class BuildingsService {
 	 * @return
 	 * @create 2016年1月12日
 	 */
-	public Map<String, Object> getBuildings(Long id) {
+	public Map<String, Object> getBuildings(Long id) { 
 		if (null ==buildingsMapper.get(id).get("city_id") || "".equals(buildingsMapper.get(id).get("city_id"))) {
 			buildingsMapper.get(id).put("city_id", "wu");
 		}
