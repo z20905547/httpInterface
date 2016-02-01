@@ -84,6 +84,7 @@ public class BuildingsService {
         long total = buildingsMapper.count(filter);
         filter.putAll(pageRequest.getMap());
         List<Map<String, Object>> content = findBuildings(filter);
+
         return new Page<Map<String, Object>>(pageRequest, content, total);
     }
 	/**
@@ -94,7 +95,14 @@ public class BuildingsService {
 	 * @return
 	 * @create 2016年1月12日
 	 */
-	public Map<String, Object> getBuildings(Long id) {
+	public Map<String, Object> getBuildings(Long id) { 
+		if (null ==buildingsMapper.get(id).get("city_id") || "".equals(buildingsMapper.get(id).get("city_id"))) {
+			buildingsMapper.get(id).put("city_id", "wu");
+		}
+		if (null ==buildingsMapper.get(id).get("area_id") || "".equals(buildingsMapper.get(id).get("area_id"))) {
+			buildingsMapper.get(id).put("area_id", "wu");
+		}
+
         return buildingsMapper.get(id);
     }
 	/**

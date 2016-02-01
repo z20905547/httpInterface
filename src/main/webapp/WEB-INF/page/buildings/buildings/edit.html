@@ -92,8 +92,21 @@ head>
 				var areaObj=$(".areaId");
 				
 				getSubList(100000,460000,proObj);
-				getSubList(460000,460100,cityObj);
-				getSubList(460100,0,areaObj);
+				//判断是否存在市县
+				var city_id = ${entity.city_id!''};
+				var area_id = "${entity.area_id!''}";
+				if(city_id == 'wu') {
+					getSubList(460000,460100,cityObj);
+				}else {
+					getSubList(460000,${entity.city_id},cityObj);
+				};
+				
+				if(area_id == 'wu' ){
+					getSubList(${entity.city_id},0,areaObj);
+				}else {
+					getSubList(${entity.city_id},${entity.area_id!''},areaObj);
+					};
+				//点击后加载上来的列表
 				proObj.on("change",function(){
 					getSubList($(this).val(),0,cityObj)
 					getSubList(0,0,areaObj)
@@ -101,6 +114,9 @@ head>
 				cityObj.on("change",function(){
 					getSubList($(this).val(),0,areaObj)
 				});
+				
+
+				
 			});
 </script>
 </#macro> <#macro body>
@@ -148,11 +164,13 @@ head>
 						<div class="col-xs-4">
 							<label for="cityId">市/县:</label>
 							<select name="cityId" class="form-control required cityId" >
+
 							</select>
 						</div>
 						<div class="col-xs-4">
 							<label for="areaId">县/区:</label>
 							<select name="areaId" class="form-control required areaId" >
+
 							</select>
 						</div>
 					</div>
