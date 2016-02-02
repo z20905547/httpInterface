@@ -50,7 +50,7 @@
     update_time
     )
     values ( #{entity.house_type_name}, #{entity.acreage}, 
-      #{entity.buildingsId}, 
+      #{entity.building_id}, 
       #{entity.ting}, #{entity.shi}, #{entity.chu},#{entity.wei},#{entity.yang},now(),now()
       )
   </insert>

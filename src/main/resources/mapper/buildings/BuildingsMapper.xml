@@ -90,10 +90,10 @@
 		tb_buildings
 		<set>
 			<if test="entity.city_id != null">
-				city_id = #{entity.city_id},
+				city_id = #{entity.cityId},
 			</if>
 			<if test="entity.area_id != null">
-				area_id = #{entity.area_id},
+				area_id = #{entity.areaId},
 			</if>
 			<if test="entity.map_x != null">
 				map_x = #{entity.map_x},

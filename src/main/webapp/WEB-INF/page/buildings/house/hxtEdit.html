@@ -60,7 +60,7 @@
         </div>
         
 
-        <form action="${base}/buildings/house/hxtInsert" id="create-user-form" method="post">
+        <form enctype="multipart/form-data" action="${base}/buildings/house/hxtInsert" id="create-user-form" method="post">
             <div class="panel-body">
 <input type="hidden" name="id" value="${id}"/>
 <input type="hidden" name="shi" value="${shi}"/>
@@ -68,7 +68,7 @@
                 <div class="form-group">
                     <div class="row">
                         <div class="col-xs-12">
-                        <input id="images" name="images[]" type="file" multiple class="file-loading" enctype="multipart/form-data" >
+                        <input id="images" name="images[]" type="file" multiple class="file-loading" >
                         </div>
                     </div>
                 </div>
