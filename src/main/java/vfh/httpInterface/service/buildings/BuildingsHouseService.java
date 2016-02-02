@@ -100,48 +100,72 @@ public class BuildingsHouseService {
     }
 	
 	
-	public Page<Map<String, Object>> insertHuxingtu (InputStream is, Map<String, Object> filter,Model model) throws IOException {
-        Map<String, Object> entity = SessionVariable.getCurrentSessionVariable().getUser();
+	public void insertHuxingtu (InputStream is, Map<String, Object> filter,Model model) throws IOException {
+       // Map<String, Object> entity = SessionVariable.getCurrentSessionVariable().getUser();
 		
 
-        File file = new File(DEFAULT_USER_UPLOAD_PORTRAIT_PATH + File.separator);
+        File file = new File(DEFAULT_USER_UPLOAD_PORTRAIT_PATH +filter.get("id")+ File.separator);
+        if (!file.exists() || !file.isDirectory()) {
+            file.deleteOnExit();
+            file.mkdirs();
+        }
 
+        String portraitPath = file.getAbsolutePath() + File.separator;
+        String originalPicPath = portraitPath + PortraitSize.BIG.getName();
+        IOUtils.copy(is, new FileOutputStream(originalPicPath));
 
-			if (filter !=null) {
+ //       scaleImage(originalPicPath, portraitPath, PortraitSize.MIDDLE);
+ //       scaleImage(originalPicPath, portraitPath, PortraitSize.SMALL);
+
+//			if (filter !=null) {
 				
-				Long pid = Long.parseLong( filter.get("id").toString());
-				String shi = filter.get("shi").toString();
-				String big_type = "1";
-				String sm_type = shi;
-				String fileName = filter.get("images[]").toString();
-				String resource_path = DEFAULT_USER_UPLOAD_PORTRAIT_PATH;
-				// 要保存文件的文件名
-				String resource_name = resourceService.generateFileName() + "u" + pid
-						+ resourceService.getFileNamePostfix(fileName);
-
-				SimpleDateFormat sdf =   new SimpleDateFormat( "yyyyMMdd" );
-				String startstr=sdf.format(new Date()).toString();
-
-				entity.put("pid", pid);
-				entity.put("shi", shi);
-				entity.put("big_type", big_type);
-				entity.put("sm_type", sm_type);
-				entity.put("resource_name", resource_name);
-				entity.put("resource_path", resource_path);
+//				Long pid = Long.parseLong( filter.get("id").toString());
+//				String shi = filter.get("shi").toString();
+//				String big_type = "1";
+//				String sm_type = shi;
+//				String fileName = filter.get("images[]").toString();
+//				String resource_path = DEFAULT_USER_UPLOAD_PORTRAIT_PATH;
+//				// 要保存文件的文件名
+//				String resource_name = resourceService.generateFileName() + "u" + pid
+//						+ resourceService.getFileNamePostfix(fileName);
+//
+//				SimpleDateFormat sdf =   new SimpleDateFormat( "yyyyMMdd" );
+//				String startstr=sdf.format(new Date()).toString();
+//
+//				entity.put("pid", pid);
+//				entity.put("shi", shi);
+//				entity.put("big_type", big_type);
+//				entity.put("sm_type", sm_type);
+//				entity.put("resource_name", resource_name);
+//				entity.put("resource_path", resource_path);
+//				
+//				
+        
+        
+        
+//				resourseDao.hxtInsert(entity); 
+//				String portraitPath = file.getAbsolutePath() + File.separator;
+////				  String originalPicPath = portraitPath + resource_name;				  
+//				String originalPicPath = portraitPath + "123.jpg";
 				
 				
-				resourseDao.hxtInsert(entity); 
-				String portraitPath = file.getAbsolutePath() + File.separator;
-				  String originalPicPath = portraitPath + resource_name;
-		        System.out.println("ooooooooooooooooooooooo");
-		        System.out.println(portraitPath);
-		        System.out.println(originalPicPath);
-		        
+//		        System.out.println("ooooooooooooooooooooooo");
+//		        System.out.println(portraitPath);
+//		        System.out.println(originalPicPath);
+//		        FileInputStream flieStream =    new FileInputStream(originalPicPath)   ;
+//		        FileOutputStream fos = new FileOutputStream("b.txt");
+//		        is =  new FileInputStream(originalPicPath);
+//		        byte[] b = new byte[1024];
+//		        while((is.read(b)) != -1){
+//		        fos.write(b);
+//		        }
+//		        is.close();
+//		        fos.close();
 		       // if(is.available()!=0){
 		        	  //System.out.println(is.available());
 		        //	}
-				  int ret = IOUtils.copy(is, new FileOutputStream(originalPicPath));
-				  System.out.println(ret);
+				 //  IOUtils.copy(is, new FileOutputStream(originalPicPath));
+//				  System.out.println(ret);
 
 		      //  scaleImage(originalPicPath, portraitPath, PortraitSize.MIDDLE);
 		      //  scaleImage(originalPicPath, portraitPath, PortraitSize.SMALL);
@@ -173,9 +197,8 @@ public class BuildingsHouseService {
 //				log.throwing(Level.ERROR, e);
 //			}
 				
-			}
+//			}
 
-		return null;
     }
 	
 	   /**

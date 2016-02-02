@@ -109,35 +109,18 @@ public class BuildingsHouseController {
     }
 
     @RequestMapping("hxtInsert")
-    
-    
-    public Map<String, Object> hxtInsert(HttpServletRequest request,@RequestParam Map<String, Object> filter,Model model) throws IOException {
-    	// httpURLConnection.setRequestProperty("content-type", "text/html");
-    	System.out.println("opppppppppppppppppppp");
-    	//System.out.println(request.getInputStream().available());
-    	int len = request.getContentLength();
-    	
-    	
-    	System.out.println("llllllllllllll");
-    	System.out.println(request.getParameterMap());
-    	//System.out.println("len: " + len + "<br>");
+    public void hxtInsert(HttpServletRequest request,@RequestParam Map<String, Object> filter,Model model) throws IOException {
 
-    	try{
+//System.out.println("dddddddddddd");
+System.out.println(request.getInputStream().available());
     		buildingsHouseService.insertHuxingtu(request.getInputStream(),filter,model);
-    		
-    		int ret = 0;
-    		ret =1;
-    	}catch(Exception e)
-    	{
-    		e.printStackTrace();
-    	}
-    	
 
-    	Map<String, Object> result = Maps.newHashMap();
-    	
-        result.put("status", "success");
 
-        return result;
+//    	Map<String, Object> result = Maps.newHashMap();
+//    	
+//        result.put("status", "success");
+//
+//        return result;
         
         
     }
