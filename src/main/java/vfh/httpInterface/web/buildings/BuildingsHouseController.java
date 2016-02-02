@@ -48,7 +48,7 @@ public class BuildingsHouseController {
 
     	buildingsHouseService.insertBuildingsHouse(entity);
         redirectAttributes.addFlashAttribute("success", "新增价格成功");
-        redirectAttributes.addAttribute("buildingsId", entity.get("buildingsId"));
+        redirectAttributes.addAttribute("buildingsId", entity.get("building_id"));
         redirectAttributes.addAttribute("buildingsName", entity.get("buildingsName"));
         
         return "redirect:/buildings/house/list";
@@ -62,13 +62,30 @@ public class BuildingsHouseController {
        redirectAttributes.addAttribute("buildingsName", entity.get("buildingsName"));
         return "redirect:/buildings/house/list?buildingsId="+entity.get("buildingsId");
     }
-    @RequestMapping({"edit","add"})
+    @RequestMapping({"edit"})
     public void createOrEdit(@RequestParam Map<String, Object> filter,Model model) {
 
         if (filter.get("id") != null ) {
+
         	Long id = Long.parseLong(filter.get("id").toString());
             model.addAttribute("entity", buildingsHouseService.get(id));
        	 model.addAttribute("buildingsId",filter.get("id"));
+       	 model.addAttribute("buildingsName",filter.get("buildingsName"));
+
+
+        }else{
+          	 model.addAttribute("building_id",filter.get("id"));
+           	 model.addAttribute("buildingsName",filter.get("buildingsName"));
+        }
+    }
+    @RequestMapping({"add"})
+    public void create(@RequestParam Map<String, Object> filter,Model model) {
+
+        if (filter.get("bid") != null ) {
+
+        //	Long id = Long.parseLong(filter.get("bid").toString());
+         //   model.addAttribute("entity", buildingsHouseService.get(id));
+       	 model.addAttribute("building_id",filter.get("bid"));
        	 model.addAttribute("buildingsName",filter.get("buildingsName"));
 
 
@@ -77,7 +94,6 @@ public class BuildingsHouseController {
            	 model.addAttribute("buildingsName",filter.get("buildingsName"));
         }
     }
-    
     @RequestMapping({"hxtEdit"})
     public void hxtEdit(@RequestParam Map<String, Object> filter,Model model) {
 
