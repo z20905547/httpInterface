@@ -1,5 +1,6 @@
 package vfh.httpInterface.service.buildings;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -31,6 +32,7 @@ public class BuildingsService {
 	private BuildingsMapper buildingsMapper;
 	@Autowired
 	private BuildingsPriceMapper buildingsPriceMapper;
+	Map<String, Object> returnMap=new HashMap<String, Object>();
 	/**
 	 * TODO 添加楼盘
 	 * @author harry
@@ -137,4 +139,34 @@ public class BuildingsService {
         List<Map<String, Object>> content = buildingsPriceMapper.find(filter);
         return new Page<Map<String, Object>>(pageRequest, content, total);
     }
+	/**
+	 * TODO 查询楼盘详情列表
+	 * @author harry
+	 * <b> 有问题请联系qq:359705093</b>
+	 * @param params
+	 * @return
+	 * @create 2016年2月1日
+	 */
+	public Map<String, Object> findDetailList(Map<String, Object> filter){
+		returnMap.clear();
+		Map<String, Object> pagedata=new HashMap<String, Object>();
+		//查总条数
+		long total = buildingsMapper.findDetailCount(filter);
+		
+		//输入参数当前页，每页记录数，城市id
+		List<Map<String, Object>> buildingsDetailList=buildingsMapper.findDetailList(filter);
+		if(StringUtil.isNotEmptyList(buildingsDetailList)){
+			pagedata.put("total", total);
+			pagedata.put("list", buildingsDetailList);
+    		returnMap.put("returnCode", "000000");
+    		returnMap.put("data",pagedata);
+    		returnMap.put("returnMsg", "获取楼盘列表！");
+    	}else{
+    		returnMap.put("returnCode", "1111");
+    		returnMap.put("returnMsg", "获取楼盘列表失败！");
+    	}
+		
+		
+	    return returnMap;
+	}
 }

@@ -222,4 +222,34 @@
 			LIMIT #{filter.first},#{filter.last}
 		</if>
 	</select>
+	<select id="findDetailList" resultType="hashmap">
+	    SELECT b.buildings_name,b.server_phone_num,a.*,c.resource_path,c.resource_name,c.resource_alias 
+	    FROM tb_building_active a 
+	    LEFT JOIN tb_buildings b ON a.buildings_id=b.id 
+	    LEFT JOIN tb_building_resource c ON c.big_type=1 AND c.sm_type=1 AND c.pid=b.id 
+	    WHERE a.active_status=1 
+	    	<if test="filter.now != null and filter.now != ''">
+				AND a.start_date<=NOW() AND NOW()<=a.end_date 
+			</if>
+			<if test="filter.startdata != null and filter.startdata != ''">
+				AND date_format(a.start_date,'%Y-%m-%d')=#{filter.startdata} 
+			</if>
+	    	 AND b.city_id=#{filter.cityId} and b.status=0
+	    ORDER BY a.end_date 
+	    limit #{filter.first},#{filter.last}
+	</select>
+	<select id="findDetailCount" resultType="long">
+	    SELECT count(*)
+	    FROM tb_building_active a 
+	    LEFT JOIN tb_buildings b ON a.buildings_id=b.id 
+	    LEFT JOIN tb_building_resource c ON c.big_type=1 AND c.sm_type=1 AND c.pid=b.id 
+	    WHERE a.active_status=1 
+	    	<if test="filter.now != null and filter.now != ''">
+				AND a.start_date<=NOW() AND NOW()<=a.end_date 
+			</if>
+			<if test="filter.startdata != null and filter.startdata != ''">
+				AND date_format(a.start_date,'%Y-%m-%d')=#{filter.startdata} 
+			</if>
+	    	 AND b.city_id=#{filter.cityId} and b.status=0 
+	</select>
 </mapper>
