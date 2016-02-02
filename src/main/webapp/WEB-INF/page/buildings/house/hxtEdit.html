@@ -24,23 +24,23 @@
 		    var imageurl = $(this).attr("value");
 		    if (imageurl) {
 		        $(this).fileinput({
-		        	uploadUrl: "${base}/buildings/house/edit-huxingtu",
+		        	uploadUrl: "/httpInterface/buildings/house/hxtInsert", 
 		        	previewFileIcon: '<i class="fa fa-file"></i>',
 		            language : 'zh',
 		            allowedFileTypes : [ 'image' ],
 		            allowedFileExtensions : [ 'jpg', 'png', 'gif' ],
-		            maxFileSize : 2000,
+		            maxFileSize : 4000,
 		            maxFileCount: 10
 		        });
 		    } else {
 		        $(this).fileinput({
-		        	uploadUrl: "${base}/buildings/house/edit-huxingtu",
+		        	uploadUrl: "/httpInterface/buildings/house/hxtInsert",
 		        	previewFileIcon: '<i class="fa fa-file"></i>',
 		            language : 'zh',
 		            allowedFileTypes : [ 'image' ],
 		            allowedFileExtensions : [ 'jpg', 'png', 'gif' ],
 		            maxFileCount: 10,
-		            maxFileSize : 2000
+		            maxFileSize : 4000
 		        });
 		    }
 
