@@ -114,6 +114,7 @@
             </div>
 <input type="hidden" name="buildingsId" value="${buildingsId}"/>
 <input type="hidden" name="buildingsName" value="${buildingsName}"/>
+<input type="hidden" id="pageNumber" name="pageNumber" value="0"/>
             <div class="table-container">
                 <table class="table table-hover table-striped">
                     <thead>
@@ -183,7 +184,7 @@
 
         </div>
 
-        <@pagination 'price-search-form' page />
+        <@pagination 'price-list-form' page />
 
     </form>
 
