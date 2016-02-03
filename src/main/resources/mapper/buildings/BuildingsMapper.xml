@@ -180,13 +180,13 @@
 				ratio = #{entity.ratio},
 			</if>
 			<if test="entity.ratio != null">
-				ratio = #{entity.right_years},
+				right_years = #{entity.right_years},
 			</if>
 			<if test="entity.buildings_detail != null">
-				ratio = #{entity.buildings_detail},
+				buildings_detail = #{entity.buildings_detail},
 			</if>
 			<if test="entity.ratio != null">
-				ratio = #{entity.yushouzhenghao}
+				yushouzhenghao = #{entity.yushouzhenghao}
 			</if>
 		</set>
 		WHERE
