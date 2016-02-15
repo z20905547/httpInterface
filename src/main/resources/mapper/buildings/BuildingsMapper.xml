@@ -89,10 +89,10 @@
 		UPDATE
 		tb_buildings
 		<set>
-			<if test="entity.city_id != null">
+			<if test="entity.cityId != null">
 				city_id = #{entity.cityId},
 			</if>
-			<if test="entity.area_id != null">
+			<if test="entity.areaId != null">
 				area_id = #{entity.areaId},
 			</if>
 			<if test="entity.map_x != null">
