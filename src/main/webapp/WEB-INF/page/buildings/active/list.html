@@ -144,11 +144,12 @@
                                 <td>${r.active_price!''}</td>
                                 <td>${r.active_detail!''}</td>
                                 <td>
-                                    
                                     <a class="btn btn-default btn-sm" href="${base}/buildings/active/edit?id=${r.id}&buildingsName=${buildingsName}&buildings_id=${buildings_id}">
                                         <span class="glyphicon glyphicon-edit"></span>
                                     </a>
-                                    
+                                    <a class="btn btn-default btn-sm" href="${base}/buildings/active/acPicEdit?id=${r.id}&buildingsName=${buildingsName}&buildings_id=${buildings_id}">
+                                        <span class="glyphicon glyphicon-picture"></span>
+                                    </a>
                                 </td>
                             </tr>
                             </#list>

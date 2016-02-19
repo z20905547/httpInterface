@@ -114,7 +114,7 @@
 
 
             <div class="panel-heading">
-                <h3 class="panel-title"><span class="glyphicon glyphicon-flag"></span> 户型管理《${buildingsName}》</h3>
+                <h3 class="panel-title"><span class="glyphicon glyphicon-flag"></span> 户型管理《${buildingsName}》${buildingsId}</h3>
             </div>
             <div class="table-container">
                 <table class="table table-hover table-striped">
@@ -148,7 +148,7 @@
                                     <a class="btn btn-default btn-sm blocklink" data-href="${base}/buildings/house/edit" data-house-id="${r.id}" data-building-name="${buildingsName}"  >
                                         <span class="glyphicon glyphicon-edit"></span>
                                     </a>
-                                    <a class="btn btn-default btn-sm blocklink" title="编辑图片" href="javascript:void(0)" data-href="${base}/buildings/house/hxtEdit" data-house-id="${r.id}" data-shi="${r.shi}" data-building-name="${buildingsName}">
+                                    <a class="btn btn-default btn-sm blocklink" title="编辑图片" href="javascript:void(0)" data-href="${base}/buildings/house/hxtEdit?buildings_id=${buildingsId}" data-house-id="${r.id}" data-shi="${r.shi}" data-building-name="${buildingsName}">
                                         <span class="glyphicon glyphicon-picture"></span>
                                     </a>
                                 </td>

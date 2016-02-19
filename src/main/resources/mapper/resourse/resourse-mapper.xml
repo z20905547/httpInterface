@@ -7,8 +7,9 @@
 
 
     
-    <insert id="hxtInsert" useGeneratedKeys="true" keyProperty="entity.id">
+    <insert id="Insert" useGeneratedKeys="true" keyProperty="entity.id">
         INSERT INTO tb_building_resource(
+          buildings_id,
           pid,
           resource_path,
           big_type,
@@ -21,6 +22,7 @@
           update_time
           
         ) VALUES (
+         #{entity.buildings_id},
           #{entity.pid},
           #{entity.resource_path},
           #{entity.big_type},
@@ -33,5 +35,25 @@
           now()
         )
     </insert>
+ 
+ 
+    <select id="get" resultType="hashmap">
+        SELECT 
+          buildings_id,
+          pid,
+          resource_path,
+          big_type,
+          sm_type,
+          is_first,
+          resource_name,
+          resource_alias,
+          resource_detail,
+          create_time,
+          update_time
+        FROM
+          tb_building_resource
+        WHERE 
+          pid = #{id}
+    </select>
  
 </mapper>
