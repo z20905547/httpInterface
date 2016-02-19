@@ -4,11 +4,14 @@ import java.io.UnsupportedEncodingException;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import vfh.httpInterface.commons.Page;
@@ -70,5 +73,34 @@ public class BuildingsActiveController {
         	 model.addAttribute("buildings_id",buildings_id);
         	 model.addAttribute("buildingsName",buildingsName);
         }
+    }
+    
+    @RequestMapping({"acPicEdit"})
+    public void acPicEdit(@RequestParam Map<String, Object> filter,Model model) {
+
+        if (filter.get("id") != null && filter.get("buildingsName") != null) {
+
+       	model.addAttribute("buildingsName",filter.get("buildingsName").toString());
+       	model.addAttribute("buildings_id",filter.get("buildings_id").toString());
+    	model.addAttribute("id",filter.get("id").toString());
+    //	model.addAttribute("shi",filter.get("shi").toString());
+    //	Map<String, Object> hxt = buildingsHouseService.getHuxingtuById(Long.parseLong(filter.get("id").toString()));
+//    	if(null != hxt) {
+//    		String resource_path = (String) hxt.get("resource_path");
+//    		String resource_name = (String) hxt.get("resource_name");
+//    		String hxtSrc = resource_path + resource_name;
+//    		model.addAttribute("hxtSrc",hxtSrc);
+//    	}
+    	//model.addAttribute("hxtsrc","");
+        }else{
+        	model.addAttribute("buildings_id",filter.get("buildings_id").toString());
+        	 model.addAttribute("buildingsName",filter.get("buildingsName").toString());
+        }
+    }
+    @ResponseBody
+    @RequestMapping({"acPicInsert"})
+    public void acPicInsert(HttpServletRequest request) throws Exception {
+
+    	buildingsActiveService.insertAcPic(request);   
     }
 }

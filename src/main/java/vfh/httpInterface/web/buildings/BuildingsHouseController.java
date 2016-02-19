@@ -1,17 +1,29 @@
 package vfh.httpInterface.web.buildings;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.fileupload.FileItem;
+import org.apache.commons.fileupload.disk.DiskFileItemFactory;
+import org.apache.commons.fileupload.servlet.ServletFileUpload;
+import org.apache.commons.io.FileUtils;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.google.common.collect.Maps;
@@ -102,27 +114,52 @@ public class BuildingsHouseController {
        	model.addAttribute("buildingsName",filter.get("buildingsName").toString());
     	model.addAttribute("id",filter.get("id").toString());
     	model.addAttribute("shi",filter.get("shi").toString());
+    	model.addAttribute("buildings_id",filter.get("buildings_id").toString());
+//    	Map<String, Object> hxt = buildingsHouseService.getHuxingtuById(Long.parseLong(filter.get("id").toString()));
+//    	if(null != hxt) {
+//    		String resource_path = (String) hxt.get("resource_path");
+//    		String resource_name = (String) hxt.get("resource_name");
+//    		String hxtSrc = resource_path + resource_name;
+//    		model.addAttribute("hxtSrc",hxtSrc);
+//    	}
+    	//model.addAttribute("hxtsrc","");
         }else{
-        	 
+        	model.addAttribute("buildings_id",filter.get("buildings_id").toString());
         	 model.addAttribute("buildingsName",filter.get("buildingsName").toString());
         }
     }
+    @ResponseBody
+    @RequestMapping({"hxtInsert"})
+    public void hxtInsert(HttpServletRequest request) throws Exception {
 
-    @RequestMapping("hxtInsert")
-    public void hxtInsert(HttpServletRequest request,@RequestParam Map<String, Object> filter,Model model) throws IOException {
-
-//System.out.println("dddddddddddd");
-System.out.println(request.getInputStream().available());
-    		buildingsHouseService.insertHuxingtu(request.getInputStream(),filter,model);
-
-
-//    	Map<String, Object> result = Maps.newHashMap();
-//    	
-//        result.put("status", "success");
-//
-//        return result;
-        
-        
+    		buildingsHouseService.insertHuxingtu(request);   
     }
+    
+    @RequestMapping({"picEdit"})
+    public void picEdit(@RequestParam Map<String, Object> filter,Model model) {
 
+        if (filter.get("id") != null && filter.get("buildingsName") != null) {
+
+       	model.addAttribute("buildingsName",filter.get("buildingsName").toString());
+    	model.addAttribute("id",filter.get("id").toString());
+       	model.addAttribute("buildings_id",filter.get("buildings_id").toString());
+//      查询图片 展示出来  有问题暂时注释
+//    	Map<String, Object> hxt = buildingsHouseService.getHuxingtuById(Long.parseLong(filter.get("id").toString()));
+//    	if(null != hxt) {
+//    		String resource_path = (String) hxt.get("resource_path");
+//    		String resource_name = (String) hxt.get("resource_name");
+//    		String hxtSrc = resource_path + resource_name;
+//    		model.addAttribute("hxtSrc",hxtSrc);
+//    	}
+        }else{
+            	model.addAttribute("buildings_id",filter.get("buildings_id").toString());
+        	 model.addAttribute("buildingsName",filter.get("buildingsName").toString());
+        }
+    }
+    @ResponseBody
+    @RequestMapping({"picInsert"})
+    public void picInsert(HttpServletRequest request) throws Exception {
+
+    		buildingsHouseService.insertPicture(request);   
+    }
 }

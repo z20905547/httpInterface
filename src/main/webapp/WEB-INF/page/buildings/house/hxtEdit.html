@@ -20,11 +20,12 @@
 
     $(document).ready(function () {
         //图片上传
+
 		$('input[type=file]').each(function() {
 		    var imageurl = $(this).attr("value");
 		    if (imageurl) {
 		        $(this).fileinput({
-		        	uploadUrl: "/httpInterface/buildings/house/hxtInsert", 
+		        	uploadUrl: "/httpInterface/buildings/house/hxtInsert?id=${id}&shi=${shi}&buildings_id=${buildings_id}", 
 		        	previewFileIcon: '<i class="fa fa-file"></i>',
 		            language : 'zh',
 		            allowedFileTypes : [ 'image' ],
@@ -34,12 +35,13 @@
 		        });
 		    } else {
 		        $(this).fileinput({
-		        	uploadUrl: "/httpInterface/buildings/house/hxtInsert",
+		        	uploadUrl: "/httpInterface/buildings/house/hxtInsert?id=${id}&shi=${shi}&buildings_id=${buildings_id}",
 		        	previewFileIcon: '<i class="fa fa-file"></i>',
 		            language : 'zh',
 		            allowedFileTypes : [ 'image' ],
 		            allowedFileExtensions : [ 'jpg', 'png', 'gif' ],
 		            maxFileCount: 10,
+		            enctype: 'multipart/form-data',
 		            maxFileSize : 4000
 		        });
 		    }
@@ -47,6 +49,7 @@
 		});
         
     });
+    
 
 </script>
 </#macro>
@@ -54,39 +57,30 @@
 <#macro body>
 <div class="data-content">
 
+
+
+
+
     <div class="panel panel-default">
         <div class="panel-heading">
             <h3 class="panel-title"><span class="glyphicon glyphicon-edit"></span> 添加户型图《${buildingsName}》</h3>
         </div>
-        
 
         <form enctype="multipart/form-data" action="${base}/buildings/house/hxtInsert" id="create-user-form" method="post">
             <div class="panel-body">
 <input type="hidden" name="id" value="${id}"/>
 <input type="hidden" name="shi" value="${shi}"/>
-
+                
                 <div class="form-group">
                     <div class="row">
                         <div class="col-xs-12">
-                        <input id="images" name="images[]" type="file" multiple class="file-loading" >
+                        <input type="file" name="image" id="image" multiple class="file-loading" value="" />
                         </div>
                     </div>
                 </div>
-                
-
             </div>
 
             <div class="panel-footer">
-
-                <@shiro.hasPermission name="buildings:insert">
-                <button type="submit" class="btn btn-success">
-                    <span class="glyphicon glyphicon-ok"></span> 保存
-                </button>
-
-                <button type="reset" class="btn btn-warning">
-                    <span class="glyphicon glyphicon-trash"></span> 重置
-                </button>
-                </@shiro.hasPermission>
 
                 <button type="button" class="btn btn-default" onclick="history.back();">
                     <span class="glyphicon glyphicon-backward"></span> 返回
