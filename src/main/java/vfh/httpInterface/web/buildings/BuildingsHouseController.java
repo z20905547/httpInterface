@@ -152,7 +152,7 @@ public class BuildingsHouseController {
 //    		model.addAttribute("hxtSrc",hxtSrc);
 //    	}
         }else{
-            	model.addAttribute("buildings_id",filter.get("buildings_id").toString());
+            	model.addAttribute("buildings_id",filter.get("buildingsId").toString());
         	 model.addAttribute("buildingsName",filter.get("buildingsName").toString());
         }
     }
