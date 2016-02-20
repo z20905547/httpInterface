@@ -54,7 +54,7 @@ public class BuildingsHouseController {
     	return buildingsHouseService.findBybuildId(pageRequest,filter,model);
     	
     }
-    @RequestMapping("insert")
+    @RequestMapping("insert")   
     public String insert(@RequestParam Map<String, Object> entity,
                          RedirectAttributes redirectAttributes) {
 

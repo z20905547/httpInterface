@@ -14,7 +14,7 @@ import java.util.Map;
 public interface ResourseDao {
 
     
-    public void Insert(@Param("entity")Map<String,Object> entity);
+    public void Insert(@Param("entity")Map<String,Object> entity); 
     /**
      * 获取户型图路径
      *

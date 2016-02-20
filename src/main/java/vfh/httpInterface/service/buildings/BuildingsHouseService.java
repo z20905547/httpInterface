@@ -111,7 +111,7 @@ public class BuildingsHouseService {
 	    }
 	
 	//添加户型图
-	public void insertHuxingtu (HttpServletRequest request) throws IOException {
+	public void insertHuxingtu (HttpServletRequest request) throws IOException { 
 
 		Map<String, Object> entity = SessionVariable.getCurrentSessionVariable().getUser();
 		
