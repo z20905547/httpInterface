@@ -18,14 +18,14 @@
 
 <script type="text/javascript">
 
-    $(document).ready(function () {
+    $(document).ready(function () { 
         //图片上传
 
 		$('input[type=file]').each(function() {
 		    var imageurl = $(this).attr("value");
 		    if (imageurl) {
 		        $(this).fileinput({
-		        	uploadUrl: "/httpInterface/buildings/active/acPicInsert?id=${id}&buildings_id=${buildings_id}", 
+		        	uploadUrl: "${base}/buildings/active/acPicInsert?id=${id}&buildings_id=${buildings_id}", 
 		        	previewFileIcon: '<i class="fa fa-file"></i>',
 		            language : 'zh',
 		            allowedFileTypes : [ 'image' ],
@@ -35,7 +35,7 @@
 		        });
 		    } else {
 		        $(this).fileinput({
-		        	uploadUrl: "/httpInterface/buildings/active/acPicInsert?id=${id}&buildings_id=${buildings_id}",
+		        	uploadUrl: "${base}/buildings/active/acPicInsert?id=${id}&buildings_id=${buildings_id}",
 		        	previewFileIcon: '<i class="fa fa-file"></i>',
 		            language : 'zh',
 		            allowedFileTypes : [ 'image' ],
