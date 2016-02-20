@@ -25,7 +25,7 @@
 		    var imageurl = $(this).attr("value");
 		    if (imageurl) {
 		        $(this).fileinput({
-		        	uploadUrl: "/httpInterface/buildings/house/hxtInsert?id=${id}&shi=${shi}&buildings_id=${buildings_id}", 
+		        	uploadUrl: "${base}/buildings/house/hxtInsert?id=${id}&shi=${shi}&buildings_id=${buildings_id}", 
 		        	previewFileIcon: '<i class="fa fa-file"></i>',
 		            language : 'zh',
 		            allowedFileTypes : [ 'image' ],
@@ -35,7 +35,7 @@
 		        });
 		    } else {
 		        $(this).fileinput({
-		        	uploadUrl: "/httpInterface/buildings/house/hxtInsert?id=${id}&shi=${shi}&buildings_id=${buildings_id}",
+		        	uploadUrl: "${base}/buildings/house/hxtInsert?id=${id}&shi=${shi}&buildings_id=${buildings_id}",
 		        	previewFileIcon: '<i class="fa fa-file"></i>',
 		            language : 'zh',
 		            allowedFileTypes : [ 'image' ],
