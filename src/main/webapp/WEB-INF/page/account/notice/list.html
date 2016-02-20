@@ -48,7 +48,8 @@
     </div>
     </#if>
 
-    <form id="user-list-form" action="${base}/account/notice/delete" valid="false" method="post">
+    <form id="notice-list-form" action="${base}/account/notice/delete" valid="false" method="post">
+        <input type="hidden" id="pageNumber" name="pageNumber" value="0"/>
         <div class="panel panel-default">
 
             <div class="panel-heading">
@@ -114,7 +115,7 @@
 
         </div>
 
-        <@pagination 'user-search-form' page />
+        <@pagination 'notice-list-form' page />
 
     </form>
 

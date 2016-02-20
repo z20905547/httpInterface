@@ -2,11 +2,12 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="vfh.httpInterface.dao.buildings.BuildingActiveMapper" >
   <sql id="Base_Column_List" >
-    id, active_name, active_type, start_date, end_date, create_time, update_time, active_price,active_detail
+    id, active_name, active_type, start_date, end_date, create_time, update_time, active_detail, active_price,active_status,
+    buildings_id
   </sql>
-  <select id="get" resultType="hashmap">
+    <select id="get" resultType="hashmap">  
         SELECT 
-          <include refid="Base_Column_List" />
+          <include refid="Base_Column_List" />     
         FROM
           tb_building_active
         WHERE 
@@ -16,60 +17,53 @@
     delete from tb_building_active
     where id = #{id}
   </delete>
-   <insert id="insert" useGeneratedKeys="true" keyProperty="entity.id" >
-    insert into tb_building_active ( active_name, active_type, start_date, start_date,
-     create_time, active_price,active_detail
-      )
-    values ( #{entity.activeName}, #{entity.activeType}, 
-      #{entity.startDate}, #{entity.startDate}, 
-      now(), #{entity.activePrice}, #{entity.activeDetail}
-      )
+  <insert id="insert" useGeneratedKeys="true" keyProperty="entity.id" >
+	insert into tb_building_active ( active_name, active_type, start_date,
+	end_date, create_time, update_time, active_detail,
+	active_price,active_status,
+	buildings_id)
+	values ( #{entity.active_name}, #{entity.active_type},
+	#{entity.start_date}, #{entity.end_date},
+	now(), now(),
+	#{entity.active_detail},#{entity.active_price},#{entity.active_status},#{entity.buildings_id}
+	)
   </insert>
   <select id="count" resultType="long">
-    select count(*) from tb_building_active
+    select count(*) from tb_building_active 
      WHERE
-          id>0
-        <if test="filter.username != null and filter.username != ''">
-          <bind name="filter.username" value=" '%' + filter.username + '%' " />
-          AND username LIKE #{filter.username}
-        </if>
-
-        <if test="filter.nickname != null and filter.nickname != ''">
-          <bind name="filter.nickname" value=" '%' + filter.nickname + '%' " />
-          AND nickname LIKE #{filter.nickname}
-        </if>
-
-        <if test="filter.state != null and filter.state != ''">
-          AND state = #{filter.state}
-        </if>
-
-        <if test="filter.email != null and filter.email != ''">
-          <bind name="filter.email" value=" '%' + filter.email + '%' " />
-          AND email LIKE #{filter.email}
-        </if>
+           buildings_id = #{filter.buildings_id}
+        
   </select>
- <update id="update">
-        UPDATE
-          tb_buildings
-        <set>
-	      <if test="entity.activeName != null" >
-       		active_name = #{entity.activeName},
+  <update id="update">
+        update tb_building_active
+	    <set >
+	      <if test="entity.active_name != null and entity.active_name != ''" >
+	        active_name = #{entity.active_name},
 	      </if>
-	      <if test="entity.activeType != null" >
-	        active_type = #{entity.activeType},
+	      <if test="entity.active_type != null and entity.active_type != ''" >
+	        active_type = #{entity.active_type},
 	      </if>
-	      <if test="entity.startDate != null" >
-	        start_date = #{entity.startDate},
+	      <if test="entity.start_date != null and entity.start_date != ''" >
+	        start_date = #{entity.start_date},
 	      </if>
-	      <if test="entity.endDate != null" >
-	        end_date = #{entity.endDate},
+	      <if test="entity.end_date != null and entity.end_date != ''" >
+	        end_date = #{entity.end_date},
+	      </if>
+	      <if test="entity.create_time != null and entity.create_time != ''" >
+	        create_time = #{entity.create_time},
 	      </if>
 	        update_time = now(),
-	      <if test="entity.activePrice != null" >
-	        active_price = #{entity.activePrice},
+	      <if test="entity.active_detail != null and entity.active_detail != ''" >
+	        active_detail = #{entity.active_detail},
 	      </if>
-	      <if test="entity.activeDetail != null" >
-	        active_detail = #{entity.activeDetail},
+	      <if test="entity.active_price != null and entity.active_price != ''" >
+	        active_price = #{entity.active_price},
+	      </if>
+	      <if test="entity.active_status != null  and entity.active_status != ''" >
+	        active_status = #{entity.active_status},
+	      </if>
+	      <if test="entity.buildings_id != null and entity.buildings_id != ''" >
+	        buildings_id = #{entity.buildings_id},
 	      </if>
 	    </set>
         WHERE
@@ -77,32 +71,16 @@
     </update>
     <select id="find" resultType="hashmap">
         SELECT
-           <include refid="Base_Column_List" />
+           id, active_name, active_type, start_date, end_date, create_time, update_time, active_detail, active_price,active_status,
+    buildings_id
         FROM
-          tb_buildings
+          tb_building_active 
         WHERE
-          id>0
-        <if test="filter.username != null and filter.username != ''">
-            <bind name="filter.username" value=" '%' + filter.username + '%' " />
-            AND username LIKE #{filter.username}
-        </if>
-
-        <if test="filter.nickname != null and filter.nickname != ''">
-            <bind name="filter.nickname" value=" '%' + filter.nickname + '%' " />
-            AND nickname LIKE #{filter.nickname}
-        </if>
-
-        <if test="filter.state != null and filter.state != ''">
-            AND state = #{filter.state}
-        </if>
-
-        <if test="filter.email != null and filter.email != ''">
-            <bind name="filter.email" value=" '%' + filter.email + '%' " />
-            AND email LIKE #{filter.email}
-        </if>
+             buildings_id = #{filter.buildings_id}
         ORDER BY id DESC
         <if test="filter.first != null and filter.last != null">
             LIMIT #{filter.first},#{filter.last}
         </if>
     </select>
+ 
 </mapper>

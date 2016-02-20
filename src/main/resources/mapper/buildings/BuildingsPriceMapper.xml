@@ -23,7 +23,7 @@
     start_date, end_date, create_time,first_price,status)
     values ( #{entity.nomalPrice}, #{entity.discount_price}, 
       #{entity.activeId}, #{entity.buildingsId}, 
-      #{entity.startDate}, #{entity.endDate}, now(),#{entity.first_price},'2'
+      #{entity.start_date}, #{entity.end_date}, now(),#{entity.first_price},'2'
       )
   </insert>
   <select id="count" resultType="long">

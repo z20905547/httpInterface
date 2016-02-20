@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<validate-mapper name="update-active">
+
+    <key name="active_name" alias="活动名称">
+        <notEmpty />
+    </key>
+
+    <key name="start_date" alias="活动开始时间">
+        <notEmpty />
+    </key>
+
+    <key name="end_date" alias="活动截止时间">
+        <notEmpty />
+    </key>
+
+</validate-mapper>

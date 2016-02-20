@@ -52,27 +52,18 @@
             </div>
 
             <form id="buildings-search-form" action="${base}/buildings/buildings/list" method="post">
-
+<input type="hidden" id="pageNumber" name="pageNumber" value="0"/>
                 <div class="modal-body">
 
                     <div class="form-group">
                         <div class="row">
                             <div class="col-xs-6">
-                                <label for="username">登录帐号:</label>
-                                <input type="text" class="form-control" id="username" name="username" value="${RequestParameters.username!''}">
+                                <label for="username">楼盘名称:</label>
+                                <input type="text" class="form-control" id="buildings_name" name="buildings_name" value="${RequestParameters.buildings_name!''}">
                             </div>
                             <div class="col-xs-6">
-                                <label for="nickname">昵称:</label>
-                                <input type="text" class="form-control" id="nickname" name="nickname" value="${RequestParameters.nickname!''}">
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <div class="row">
-                            <div class="col-xs-6">
-                                <label for="email">电子邮件:</label>
-                                <input type="text" class="form-control" id="email" name="email" value="${RequestParameters.email!''}">
+                                <label for="nickname">开发商名称:</label>
+                                <input type="text" class="form-control" id="developer_company" name="developer_company" value="${RequestParameters.developer_company!''}">
                             </div>
                         </div>
                     </div>
@@ -162,8 +153,11 @@
                                         <span class="glyphicon glyphicon-home"></span>
                                     </a>
                                     </@shiro.hasPermission>
-                                    <a class="btn btn-default btn-sm blocklink" title="编辑图片" href="javascript:void(0)" data-href="${base}/buildings/resource/add" data-building-id="${r.id}" data-building-name="${r.buildings_name}">
+                                    <a class="btn btn-default btn-sm blocklink" title="编辑图片" href="javascript:void(0)" data-href="${base}/buildings/house/picEdit" data-building-id="${r.id}" data-building-name="${r.buildings_name}">
                                         <span class="glyphicon glyphicon-picture"></span>
+                                    </a>
+                                    <a class="btn btn-default btn-sm blocklink" title="活动添加" href="javascript:void(0)" data-href="${base}/buildings/active/list" data-building-id="${r.id}" data-building-name="${r.buildings_name}">
+                                        <span class="glyphicon glyphicon-time"></span>
                                     </a>
                                 </td>
                             </tr>
@@ -177,7 +171,7 @@
 
             <div class="panel-footer">    
                 <a class="btn btn-info" data-toggle="modal" data-target="#search-modal">
-                    <span class="glyphicon glyphicon-search"></span> 查询
+                    <span class="glyphicon glyphicon-search"></span> 查询 
                 </a>
 
                 <@shiro.hasPermission name="user:insert">

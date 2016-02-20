@@ -13,6 +13,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import vfh.httpInterface.commons.Page;
 import vfh.httpInterface.commons.PageRequest;
 import vfh.httpInterface.commons.VariableUtils;
+import vfh.httpInterface.commons.enumeration.FieldType;
 import vfh.httpInterface.commons.enumeration.entity.BuildingsState;
 import vfh.httpInterface.service.buildings.BuildingsService;
 
@@ -31,6 +32,7 @@ public class BuildingsController {
     @RequestMapping("list")
     public Page<Map<String, Object>> list(PageRequest pageRequest, @RequestParam Map<String, Object> filter,Model model) {
     	model.addAttribute("buildingsStates", VariableUtils.getVariables(BuildingsState.class));
+
     	return buildingsService.findBuildingsList(pageRequest,filter);
     }
     @RequestMapping("insert")
@@ -49,6 +51,8 @@ public class BuildingsController {
     @RequestMapping(value="update")
     public String update(@RequestParam Map<String, Object> entity,
                          RedirectAttributes redirectAttributes) {
+    	System.out.println("lllllllllllll");
+    	System.out.println(entity);
     	buildingsService.updateBuildings(entity);
         redirectAttributes.addFlashAttribute("success", "修改楼盘信息成功");
         return "redirect:/buildings/buildings/list";
@@ -56,6 +60,8 @@ public class BuildingsController {
     @RequestMapping({"edit","add"})
     public void createOrEdit(@RequestParam(required = false)Long id,Model model) {
         if (id != null) {
+       
+        	
             model.addAttribute("entity", buildingsService.getBuildings(id));
         }
     }

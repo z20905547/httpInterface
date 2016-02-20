@@ -5,8 +5,6 @@ import java.util.Map;
 
 import org.apache.ibatis.annotations.Param;
 
-import vfh.httpInterface.model.BuildingActive;
-import vfh.httpInterface.model.BuildingActiveExample;
 
 public interface BuildingActiveMapper {
 	public Map<String, Object> get(@Param("id")Long id);
@@ -15,4 +13,5 @@ public interface BuildingActiveMapper {
 	public void insert(@Param("entity")Map<String,Object> entity);
 	public long count(@Param("filter")Map<String,Object> filter);
 	public List<Map<String, Object>> find(@Param("filter")Map<String, Object> filter);
+
 }

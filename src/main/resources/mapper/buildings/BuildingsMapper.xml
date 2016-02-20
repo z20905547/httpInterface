@@ -89,11 +89,11 @@
 		UPDATE
 		tb_buildings
 		<set>
-			<if test="entity.city_id != null">
-				city_id = #{entity.city_id},
+			<if test="entity.cityId != null">
+				city_id = #{entity.cityId},
 			</if>
-			<if test="entity.area_id != null">
-				area_id = #{entity.area_id},
+			<if test="entity.areaId != null">
+				area_id = #{entity.areaId},
 			</if>
 			<if test="entity.map_x != null">
 				map_x = #{entity.map_x},
@@ -180,13 +180,13 @@
 				ratio = #{entity.ratio},
 			</if>
 			<if test="entity.ratio != null">
-				ratio = #{entity.right_years},
+				right_years = #{entity.right_years},
 			</if>
 			<if test="entity.buildings_detail != null">
-				ratio = #{entity.buildings_detail},
+				buildings_detail = #{entity.buildings_detail},
 			</if>
 			<if test="entity.ratio != null">
-				ratio = #{entity.yushouzhenghao}
+				yushouzhenghao = #{entity.yushouzhenghao}
 			</if>
 		</set>
 		WHERE
@@ -199,24 +199,16 @@
 		tb_buildings
 		WHERE
 		id>0
-		<if test="filter.username != null and filter.username != ''">
-			<bind name="filter.username" value=" '%' + filter.username + '%' " />
-			AND username LIKE #{filter.username}
+		<if test="filter.buildings_name != null and filter.buildings_name != ''">
+			<bind name="filter.buildings_name" value=" '%' + filter.buildings_name + '%' " />
+			AND buildings_name LIKE #{filter.buildings_name}
 		</if>
 
-		<if test="filter.nickname != null and filter.nickname != ''">
-			<bind name="filter.nickname" value=" '%' + filter.nickname + '%' " />
-			AND nickname LIKE #{filter.nickname}
+		<if test="filter.developer_company != null and filter.developer_company != ''">
+			<bind name="filter.developer_company" value=" '%' + filter.developer_company + '%' " />
+			AND developer_company LIKE #{filter.developer_company}
 		</if>
 
-		<if test="filter.state != null and filter.state != ''">
-			AND state = #{filter.state}
-		</if>
-
-		<if test="filter.email != null and filter.email != ''">
-			<bind name="filter.email" value=" '%' + filter.email + '%' " />
-			AND email LIKE #{filter.email}
-		</if>
 		ORDER BY id DESC
 		<if test="filter.first != null and filter.last != null">
 			LIMIT #{filter.first},#{filter.last}

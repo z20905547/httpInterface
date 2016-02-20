@@ -44,6 +44,8 @@ public class BuildingsService {
 		entity.put("status", 0);
         if(entity.get("open_date").equals("")) entity.put("open_date", null);
         if(entity.get("deliver_date").equals("")) entity.put("deliver_date", null);
+        if(entity.get("cityId").equals("--请选择--")) entity.put("cityId", null);
+        if(entity.get("areaId").equals("--请选择--")) entity.put("areaId", null);
 		buildingsMapper.insert(entity);
 	}
 	/**
@@ -56,6 +58,8 @@ public class BuildingsService {
 	public void updateBuildings(@MapValid("update-buildings")Map<String, Object> entity){
         if(entity.get("open_date").equals("")) entity.put("open_date", null);
         if(entity.get("deliver_date").equals("")) entity.put("deliver_date", null);
+        if(entity.get("cityId").equals("--请选择--")) entity.put("cityId", null);
+        if(entity.get("areaId").equals("--请选择--")) entity.put("areaId", null);
 		buildingsMapper.update(entity);
 	}
 	/**
@@ -82,6 +86,7 @@ public class BuildingsService {
         long total = buildingsMapper.count(filter);
         filter.putAll(pageRequest.getMap());
         List<Map<String, Object>> content = findBuildings(filter);
+
         return new Page<Map<String, Object>>(pageRequest, content, total);
     }
 	/**
@@ -92,7 +97,14 @@ public class BuildingsService {
 	 * @return
 	 * @create 2016年1月12日
 	 */
-	public Map<String, Object> getBuildings(Long id) {
+	public Map<String, Object> getBuildings(Long id) { 
+		if (null ==buildingsMapper.get(id).get("city_id") || "".equals(buildingsMapper.get(id).get("city_id"))) {
+			buildingsMapper.get(id).put("city_id", "wu");
+		}
+		if (null ==buildingsMapper.get(id).get("area_id") || "".equals(buildingsMapper.get(id).get("area_id"))) {
+			buildingsMapper.get(id).put("area_id", "wu");
+		}
+
         return buildingsMapper.get(id);
     }
 	/**

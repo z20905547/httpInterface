@@ -5,7 +5,6 @@
 </#macro>
 
 <#macro head>
-
 <link rel="stylesheet" type="text/css" href="${base}/resource/css/umeditor.min.css">
 <link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/jquery-datetimepicker/2.4.5/jquery.datetimepicker.min.css">
 <script type="text/javascript" src="//cdn.bootcss.com/jquery-datetimepicker/2.4.5/jquery.datetimepicker.min.js"></script> 
@@ -26,6 +25,10 @@
 			
 			});
 </script>
+
+   //开始日期必须大于等于当前日期
+   //截止日期必须大于开始时间
+</script>
 </#macro>
 
 <#macro body>
@@ -41,20 +44,21 @@
         <div class="panel-heading">
             <h3 class="panel-title"><span class="glyphicon glyphicon-edit"></span> 添加活动《${buildingsName}》</h3>
         </div>
-        <form action="${base}/buildings/active/insert" id="create-active-form" method="post">
+        <form action="${base}/buildings/active/update" id="create-active-form" method="post">
             <div class="panel-body">
+
+<input type="hidden" name="id" value="${entity.id!''}"/>
 <input type="hidden" name="buildings_id" value="${buildings_id}"/>
 <input type="hidden" name="buildingsName" value="${buildingsName}"/>
-
                 <div class="form-group">
                     <div class="row">
                         <div class="col-xs-6">
                             <label for="active_name">活动名称:</label>
-                            <input type="text" class="form-control required" id="active_name" name="active_name" >
+                            <input type="text" class="form-control required" id="active_name" name="active_name" value="${entity.active_name!''}">
                         </div>
                         <div class="col-xs-6">
                             <label for="active_price">活动价格:</label>
-                            <input type="text" class="form-control required number" id="active_price" name="active_price" placeholder="输入金额（可保留0-2位小数）">
+                            <input type="text" class="form-control required number" id="active_price" name="active_price" placeholder="输入金额（可保留0-2位小数）" value="${entity.active_price!''}">
                         </div>
                     </div>
                 </div>
@@ -62,20 +66,20 @@
                     <div class="row">
                         <div class="col-xs-6">
                             <label for="start_date">活动生效日期:</label>
-                            <input type="text" class="datePicker form-control required dateISO" autocomplete="off" id="start_date" name="start_date" >
+                            <input type="text" class="datePicker form-control required dateISO" autocomplete="off" id="start_date" name="start_date" value="${entity.start_date!''}">
                         </div>
                         <div class="col-xs-6">
                             <label for="end_date">活动截止日期:</label>
-                            <input type="text" class="datePicker form-control required dateISO" autocomplete="off" id="end_date" name="end_date" >
+                            <input type="text" class="datePicker form-control required dateISO" autocomplete="off" id="end_date" name="end_date" value="${entity.end_date!''}">
                         </div>
                     </div>
                 </div>
                 <div class="form-group">
 						<div class="col-xs-12">
-							<label for="active_detail">活动详情:</label>
-							<script type="text/plain" class="form-control required"
+							<label for="around_peitao">活动详情:</label>
+							<script type="text/plain" class="form-control"
 								id="active_detail" name="active_detail"
-								style="width: 100%; height: 240px;">
+								style="width: 100%; height: 240px;">${entity.active_detail!''}
                             </script>
 						</div>
                 </div>
