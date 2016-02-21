@@ -78,7 +78,7 @@ public class BuildingsHouseService {
 			+ File.separator + "upload_buildings" + File.separator;
 
 	/**
-	 * logo.png 路径   src\main\webapp\resource\image
+	 * logo.png 路径  
 	 */
 	public static final String DEFAULT_LOGO_PATH = "."
 			+ File.separator + "src" + File.separator +"main"+ File.separator +"webapp"+ File.separator +"resource"+ File.separator +"image"+ File.separator;
