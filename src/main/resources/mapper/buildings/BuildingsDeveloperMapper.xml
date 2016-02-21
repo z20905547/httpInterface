@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="vfh.httpInterface.dao.buildings.BuildingsDeveloperMapper">
+<sql id="Base_Column_List">
+		id, city_id, area_id, map_x, map_y, developer_company,
+		buildings_name,
+		query_keyword,
+		create_time, update_time, status,
+		open_date, deliver_date, server_phone_num,
+		address,building_count,
+		floor_space, building_space, house_count,
+		green_rate,
+		decoration_condition,
+		util_type,
+		parking_count,floor_detail,buildings_detail,main_door,around_peitao,internal_peitao,traffic,wuye_fee,property_company,wuye_type,project_features,ratio,right_years,yushouzhenghao
+	</sql>
+	
+	<select id="count" resultType="long">
+		select count(*) from tb_buildings
+		WHERE
+		id = #{filter.id}
+	</select>
+	<select id="get" resultType="hashmap">
+		SELECT
+		id,bid,username 
+		FROM
+		tb_bid_uname
+		WHERE
+		username = #{username}
+	</select>
+
+	<select id="find" resultType="hashmap">
+		SELECT
+		<include refid="Base_Column_List" />
+		FROM
+		tb_buildings
+		WHERE
+		id = #{filter.id}
+	</select>
+</mapper>
