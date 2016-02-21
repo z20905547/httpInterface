@@ -588,6 +588,7 @@ public class BuildingsHouseService {
 	}
 
 //添加水印
+	@SuppressWarnings("restriction")
 	public void pressImage(String targetImg, String fileType) throws FileNotFoundException {
 
 		try {
@@ -606,7 +607,7 @@ public class BuildingsHouseService {
 					+ "logo.png"); 
 	        
 	        //得到Image对象。
-	        Image img = imgIcon.getImage();
+	        Image img = imgIcon.getImage(); 
 	        
 	        //将小图片绘到大图片上。
 	        //5,300 .表示你的小图片在大图片上的位置。
