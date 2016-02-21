@@ -594,10 +594,7 @@ public class BuildingsHouseService {
 		try {
 			InputStream inputStream = new FileInputStream(targetImg);
 
-			//通过JPEG图象流创建JPEG数据流解码器
-	        JPEGImageDecoder jpegDecoder = JPEGCodec.createJPEGDecoder(inputStream);
-	        //解码当前JPEG数据流，返回BufferedImage对象
-	        BufferedImage buffImg = jpegDecoder.decodeAsBufferedImage();
+			BufferedImage buffImg = ImageIO.read(inputStream);
 	        //得到画笔对象
 	        Graphics g = buffImg.getGraphics();
 	        
