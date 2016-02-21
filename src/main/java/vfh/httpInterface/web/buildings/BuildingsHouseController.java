@@ -57,7 +57,7 @@ public class BuildingsHouseController {
     @RequestMapping("insert")   
     public String insert(@RequestParam Map<String, Object> entity,
                          RedirectAttributes redirectAttributes) {
-
+  
     	buildingsHouseService.insertBuildingsHouse(entity);
         redirectAttributes.addFlashAttribute("success", "新增价格成功");
         redirectAttributes.addAttribute("buildingsId", entity.get("building_id"));
