@@ -2,7 +2,7 @@ package vfh.httpInterface.service.buildings;
 
 import java.awt.Graphics2D;
 import java.awt.Image;
-import java.awt.image.BufferedImage;
+import java.awt.image.BufferedImage;  
 import java.awt.image.ColorModel;
 import java.io.File;
 import java.io.FileInputStream;
