@@ -10,25 +10,19 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.OutputStream;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
 import javax.imageio.ImageIO;
-import javax.servlet.ServletInputStream;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.swing.ImageIcon;
 
 import org.apache.commons.collections.MapUtils;
-import org.apache.commons.io.FileUtils;
-import org.apache.commons.io.IOUtils;
+
 import org.apache.commons.lang.StringUtils;
-import org.apache.commons.lang3.time.DateFormatUtils;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -46,19 +40,10 @@ import vfh.httpInterface.commons.valid.annotation.MapValid;
 import vfh.httpInterface.dao.buildings.BuildingsHouseMapper;
 import vfh.httpInterface.dao.resourse.ResourseDao;
 import vfh.httpInterface.service.resource.ResourceService;
-import java.awt.Color;
-import java.awt.Font;
 import java.awt.Graphics;
-import java.awt.Image;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.FileOutputStream;
-import javax.imageio.ImageIO;
 
-import com.sun.image.codec.jpeg.ImageFormatException;
-import com.sun.image.codec.jpeg.JPEGCodec;
-import com.sun.image.codec.jpeg.JPEGImageDecoder;
-import com.sun.image.codec.jpeg.JPEGImageEncoder;
+
+
 
 @Service
 @Transactional
