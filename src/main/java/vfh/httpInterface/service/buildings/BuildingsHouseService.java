@@ -158,7 +158,7 @@ public class BuildingsHouseService {
 						+ buildings_id + File.separator + "huxingtu"
 						+ File.separator + id + File.separator + tempName;
 				file.transferTo(uploadfile);// 开始上传
-				pressImage(originalPicPath,fileType);
+			//	pressImage(originalPicPath,fileType);
 				// 图片信息入库
 				Long pid = Long.parseLong(id);
 				String big_type = "1";
