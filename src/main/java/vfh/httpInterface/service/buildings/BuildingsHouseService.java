@@ -77,6 +77,13 @@ public class BuildingsHouseService {
 	public static final String DEFAULT_USER_UPLOAD_PORTRAIT_PATH = "."
 			+ File.separator + "upload_buildings" + File.separator;
 
+	/**
+	 * logo.png 路径   src\main\webapp\resource\image
+	 */
+	public static final String DEFAULT_LOGO_PATH = "."
+			+ File.separator + "src" + File.separator +"main"+ File.separator +"webapp"+ File.separator +"resource"+ File.separator +"image"+ File.separator;
+	
+	
 	public void insertBuildingsHouse(
 			@MapValid("insert-house") Map<String, Object> entity) {
 
@@ -595,7 +602,7 @@ public class BuildingsHouseService {
 	        
 	        //创建你要附加的图象。
 	        //2.jpg是你的小图片的路径
-	        ImageIcon imgIcon = new ImageIcon(DEFAULT_USER_UPLOAD_PORTRAIT_PATH
+	        ImageIcon imgIcon = new ImageIcon(DEFAULT_LOGO_PATH
 					+ "logo.png"); 
 	        
 	        //得到Image对象。
