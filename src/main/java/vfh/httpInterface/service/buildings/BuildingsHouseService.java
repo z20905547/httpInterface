@@ -613,15 +613,14 @@ public class BuildingsHouseService {
 	        //5,300 .表示你的小图片在大图片上的位置。
 	        g.drawImage(img,10,10,132,51,null);
 	      
-	        OutputStream os = new FileOutputStream(targetImg);
+	       
 	        
 	        //创键编码器，用于编码内存中的图象数据。
 	        
-	        JPEGImageEncoder en = JPEGCodec.createJPEGEncoder(os);
-	        en.encode(buffImg);
+	        ImageIO.write(buffImg, "jpeg", new FileOutputStream(targetImg));
 	        
 	        inputStream.close();
-	        os.close();
+	      
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
