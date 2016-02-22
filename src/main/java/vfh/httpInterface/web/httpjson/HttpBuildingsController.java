@@ -22,7 +22,7 @@ public class HttpBuildingsController {
     private BuildingsService buildingsService;
 	@RequestMapping("/getBuildingsDetailList")
 	@ResponseBody
-	public void getSubAreaList(HttpServletRequest request,HttpServletResponse response){
+	public void getBuildingsDetailList(HttpServletRequest request,HttpServletResponse response){
 		Map res = new HashMap();
 		Map params = RequestParamUtil.requestToMap(request);
 		Map m =  buildingsService.findDetailList(params);
