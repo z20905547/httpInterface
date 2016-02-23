@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="vfh.httpInterface.dao.buildings.BuildingActiveMapper" >
   <sql id="Base_Column_List" >
-    id, active_name, active_type, start_date, end_date, create_time, update_time, active_detail, active_price,active_status,
+    id, active_name, active_jianjie, active_type, start_date, end_date, create_time, update_time, active_detail, active_price,active_status,
     buildings_id
   </sql>
     <select id="get" resultType="hashmap">  
@@ -18,11 +18,11 @@
     where id = #{id}
   </delete>
   <insert id="insert" useGeneratedKeys="true" keyProperty="entity.id" >
-	insert into tb_building_active ( active_name, active_type, start_date,
+	insert into tb_building_active ( active_name, active_jianjie, active_type, start_date,
 	end_date, create_time, update_time, active_detail,
 	active_price,active_status,
 	buildings_id)
-	values ( #{entity.active_name}, #{entity.active_type},
+	values ( #{entity.active_name}, #{entity.active_jianjie}, #{entity.active_type},
 	#{entity.start_date}, #{entity.end_date},
 	now(), now(),
 	#{entity.active_detail},#{entity.active_price},#{entity.active_status},#{entity.buildings_id}
@@ -39,6 +39,9 @@
 	    <set >
 	      <if test="entity.active_name != null and entity.active_name != ''" >
 	        active_name = #{entity.active_name},
+	      </if>
+	      <if test="entity.active_name != null and entity.active_name != ''" >
+	        active_name = #{entity.active_jianjie},
 	      </if>
 	      <if test="entity.active_type != null and entity.active_type != ''" >
 	        active_type = #{entity.active_type},
@@ -71,7 +74,7 @@
     </update>
     <select id="find" resultType="hashmap">
         SELECT
-           id, active_name, active_type, start_date, end_date, create_time, update_time, active_detail, active_price,active_status,
+           id, active_name, active_jianjie, active_type, start_date, end_date, create_time, update_time, active_detail, active_price,active_status,
     buildings_id
         FROM
           tb_building_active 

@@ -39,7 +39,9 @@ public class BuildingsDeveloperController {
     	 Map<String,Object> user = SessionVariable.getCurrentSessionVariable().getUser();
     	 Map<String,Object> bid = buildingsDeveloperService.getBidByUname(user.get("username").toString());
     	model.addAttribute("buildingsStates", VariableUtils.getVariables(BuildingsState.class));
-    	 if(null != bid.get("bid")){
+    	 if( bid == null){
+    		 filter.put("id", 0);
+    	 }else {
     	 filter.put("id", bid.get("bid"));
     	 }
     	return buildingsDeveloperService.findBuildingsList(pageRequest,filter);
