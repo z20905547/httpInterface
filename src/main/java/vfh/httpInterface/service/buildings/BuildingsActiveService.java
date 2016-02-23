@@ -63,7 +63,7 @@ public class BuildingsActiveService {
 	public void insertBuildingsActive(
 			@MapValid("insert-active") Map<String, Object> entity) {
 
-		try {
+		try { 
 			// 如果上一条特价记录存在特价且时间尚未结束，则先更新上条记录的结束日期为这条记录开始的前一天
 			// 如果上一条特价记录已经截止，则不做任何处理
 			Map<String, Object> filter = new HashMap<String, Object>();

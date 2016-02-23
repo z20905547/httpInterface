@@ -523,7 +523,7 @@ public class BuildingsHouseService {
 				entity.put("sm_type", sm_type);
 				entity.put("buildings_id", buildings_id);
 				entity.put("resource_name", resource_name);
-				entity.put("resource_path", resource_path);
+				entity.put("resource_path", resource_path); 
 				resourseDao.Insert(entity);
 
 				// String portraitPath = DEFAULT_USER_UPLOAD_PORTRAIT_PATH +id+
