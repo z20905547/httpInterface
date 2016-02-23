@@ -226,6 +226,9 @@
 		<if test="filter.startdata != null and filter.startdata != ''">
 			AND date_format(a.start_date,'%Y-%m-%d')=#{filter.startdata}
 		</if>
+		<if test="filter.proId != null and filter.proId != ''">
+			AND b.province_id=#{filter.proId}
+		</if>
 		<if test="filter.cityId != null and filter.cityId != ''">
 			AND b.city_id=#{filter.cityId}
 		</if>
