@@ -19,7 +19,7 @@
 			//	$.datepicker.setDefaults($.datepicker.regional["zh-CN"]);
 				$(".datePicker").datetimepicker({
 					lang:'ch',
-					format:"Y-m-d H:m:s"
+					format:"Y-m-d"
 			       });
 				//富文本编辑器
 				var um = UM.getEditor('active_detail');
@@ -62,11 +62,11 @@
                     <div class="row">
                         <div class="col-xs-6">
                             <label for="start_date">活动生效日期:</label>
-                            <input type="text" class="datePicker form-control required date" autocomplete="off" id="start_date" name="start_date" >
+                            <input type="text" class="datePicker form-control required dateISO" autocomplete="off" id="start_date" name="start_date" >
                         </div>
                         <div class="col-xs-6">
                             <label for="end_date">活动截止日期:</label>
-                            <input type="text" class="datePicker form-control required date" autocomplete="off" id="end_date" name="end_date" >
+                            <input type="text" class="datePicker form-control required dateISO" autocomplete="off" id="end_date" name="end_date" >
                         </div>
                     </div>
                 </div>

@@ -59,16 +59,14 @@ public class BuildingsHouseService {
 	/**
 	 * 户型图存放目录
 	 */
-	public static final String DEFAULT_USER_UPLOAD_PORTRAIT_PATH = "."+
-			 File.separator + "upload_buildings" + File.separator;
+	public static final String DEFAULT_USER_UPLOAD_PORTRAIT_PATH = "."
+			+ File.separator + "upload_buildings" + File.separator;
 
-	public static final String DEFAULT_USER_UPLOAD_PORTRAIT_PATH2 = 
-			 File.separator + "upload_buildings" + File.separator;
 	/**
 	 * logo.png 路径  
 	 */
-	public static final String DEFAULT_LOGO_PATH ="."+ 
-			 File.separator + "src" + File.separator +"main"+ File.separator +"webapp"+ File.separator +"resource"+ File.separator +"image"+ File.separator;
+	public static final String DEFAULT_LOGO_PATH = "."
+			+ File.separator + "src" + File.separator +"main"+ File.separator +"webapp"+ File.separator +"resource"+ File.separator +"image"+ File.separator;
 	
 	
 	public void insertBuildingsHouse(
@@ -160,13 +158,13 @@ public class BuildingsHouseService {
 						+ buildings_id + File.separator + "huxingtu"
 						+ File.separator + id + File.separator + tempName;
 				file.transferTo(uploadfile);// 开始上传
-				pressImage(originalPicPath,fileType);
+			//	pressImage(originalPicPath,fileType);
 				// 图片信息入库
 				Long pid = Long.parseLong(id);
 				String big_type = "1";
 				String sm_type = shi;
 
-				String resource_path = DEFAULT_USER_UPLOAD_PORTRAIT_PATH2 + id
+				String resource_path = DEFAULT_USER_UPLOAD_PORTRAIT_PATH + id
 						+ File.separator + "huxingtu" + File.separator + shi
 						+ File.separator;
 				// 要保存文件的文件名
@@ -238,19 +236,15 @@ public class BuildingsHouseService {
 					// 图片信息入库
 					// 图片大类：1：户型图；2：楼盘相册;3：地产logo，4：地产广告，5：banner，6：活动宣传图
 
-					resource_path = DEFAULT_USER_UPLOAD_PORTRAIT_PATH2
+					resource_path = DEFAULT_USER_UPLOAD_PORTRAIT_PATH
 							+ buildings_id + File.separator + "xgt"
 							+ File.separator;
-					originalPicPath = DEFAULT_USER_UPLOAD_PORTRAIT_PATH
-							+ buildings_id + File.separator + "xgt"
-							+ File.separator + tempName;
 				}
 
 				// 开始上传
 				file21.transferTo(uploadfile);
-				// 图片加水印
 				pressImage(originalPicPath,fileType);
-				
+				// 图片加水印
 
 				// 要保存文件的文件名
 				String resource_name = tempName;
@@ -296,12 +290,9 @@ public class BuildingsHouseService {
 					// 图片信息入库
 					// 图片大类：1：户型图；2：楼盘相册;3：地产logo，4：地产广告，5：banner，6：活动宣传图
 
-					resource_path = DEFAULT_USER_UPLOAD_PORTRAIT_PATH2
+					resource_path = DEFAULT_USER_UPLOAD_PORTRAIT_PATH
 							+ buildings_id + File.separator + "jtt"
 							+ File.separator;
-					originalPicPath = DEFAULT_USER_UPLOAD_PORTRAIT_PATH
-							+ buildings_id + File.separator + "jtt"
-							+ File.separator + tempName;
 				}
 
 				// 开始上传
@@ -350,18 +341,14 @@ public class BuildingsHouseService {
 					// 图片信息入库
 					// 图片大类：1：户型图；2：楼盘相册;3：地产logo，4：地产广告，5：banner，6：活动宣传图
 
-					resource_path = DEFAULT_USER_UPLOAD_PORTRAIT_PATH2
+					resource_path = DEFAULT_USER_UPLOAD_PORTRAIT_PATH
 							+ buildings_id + File.separator + "sjt"
 							+ File.separator;
-					originalPicPath = DEFAULT_USER_UPLOAD_PORTRAIT_PATH
-							+ buildings_id + File.separator + "sjt"
-							+ File.separator + tempName;
 				}
 
 				// 开始上传
 				file23.transferTo(uploadfile);
-                //添加水印
-				pressImage(originalPicPath,fileType);
+
 				// 要保存文件的文件名
 				String resource_name = tempName;
 				pressImage(originalPicPath,fileType);
@@ -406,12 +393,9 @@ public class BuildingsHouseService {
 					// 图片信息入库
 					// 图片大类：1：户型图；2：楼盘相册;3：地产logo，4：地产广告，5：banner，6：活动宣传图
 
-					resource_path = DEFAULT_USER_UPLOAD_PORTRAIT_PATH2
+					resource_path = DEFAULT_USER_UPLOAD_PORTRAIT_PATH
 							+ buildings_id + File.separator + "ybj"
 							+ File.separator;
-					originalPicPath = DEFAULT_USER_UPLOAD_PORTRAIT_PATH
-							+ buildings_id + File.separator + "ybj"
-							+ File.separator + tempName;
 				}
 
 				// 开始上传
@@ -440,7 +424,7 @@ public class BuildingsHouseService {
 		}
 
 		if (null != file30 && !file30.isEmpty()) { // logo
-			//String uuid = UUID.randomUUID().toString();
+			String uuid = UUID.randomUUID().toString();
 			String fileName = file30.getOriginalFilename();
 			String sm_type = "30";
 			big_type = "3";
@@ -448,7 +432,7 @@ public class BuildingsHouseService {
 
 				String fileType = fileName.substring(fileName.lastIndexOf("."));
 				// 使用字符替换图片名称，防止乱码
-				String tempName = "logo"
+				String tempName = sm_type + "_" + uuid.substring(1, 10)
 						+ fileType;
 				uploadfile = new File(DEFAULT_USER_UPLOAD_PORTRAIT_PATH
 						+ buildings_id + File.separator + "logo"
@@ -461,10 +445,12 @@ public class BuildingsHouseService {
 					// 图片信息入库
 					// 图片大类：1：户型图；2：楼盘相册;3：地产logo，4：地产广告，5：banner，6：活动宣传图
 
-					resource_path = DEFAULT_USER_UPLOAD_PORTRAIT_PATH2
+					resource_path = DEFAULT_USER_UPLOAD_PORTRAIT_PATH
 							+ buildings_id + File.separator + "logo"
 							+ File.separator;
-					
+					originalPicPath = DEFAULT_USER_UPLOAD_PORTRAIT_PATH
+							+ buildings_id + File.separator + "logo"
+							+ File.separator + tempName;
 				}
 
 				// 开始上传
@@ -514,7 +500,7 @@ public class BuildingsHouseService {
 					// 图片信息入库
 					// 图片大类：1：户型图；2：楼盘相册;3：地产logo，4：地产广告，5：banner，6：活动宣传图
 
-					resource_path = DEFAULT_USER_UPLOAD_PORTRAIT_PATH2
+					resource_path = DEFAULT_USER_UPLOAD_PORTRAIT_PATH
 							+ buildings_id + File.separator + "xct"
 							+ File.separator;
 				}
