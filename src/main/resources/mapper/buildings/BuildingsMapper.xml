@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="vfh.httpInterface.dao.buildings.BuildingsMapper">
 	<sql id="Base_Column_List">
-		id, city_id, area_id, map_x, map_y, developer_company,
+		id,province_id, city_id, area_id, map_x, map_y, developer_company,
 		buildings_name,
 		query_keyword,
 		create_time, update_time, status,
@@ -29,7 +29,7 @@
 	</delete>
 	<insert id="insert" useGeneratedKeys="true" keyProperty="entity.id">
 		insert
-		into tb_buildings ( city_id, area_id,
+		into tb_buildings ( province_id,city_id, area_id,
 		map_x, map_y,
 		buildings_name,
 		query_keyword, create_time,
@@ -41,7 +41,7 @@
 		util_type,
 		parking_count,floor_detail,buildings_detail,main_door,around_peitao,internal_peitao,traffic,wuye_fee,developer_company,property_company,wuye_type,project_features,ratio,right_years,yushouzhenghao
 		)
-		values ( #{entity.cityId}, #{entity.areaId},
+		values ( #{entity.proId},#{entity.cityId}, #{entity.areaId},
 		#{entity.mapX},
 		#{entity.mapY},
 		#{entity.buildings_name}, #{entity.queryKeyword},
@@ -89,6 +89,9 @@
 		UPDATE
 		tb_buildings
 		<set>
+			<if test="entity.proId != null">
+				city_id = #{entity.proId},
+			</if>
 			<if test="entity.cityId != null">
 				city_id = #{entity.cityId},
 			</if>
