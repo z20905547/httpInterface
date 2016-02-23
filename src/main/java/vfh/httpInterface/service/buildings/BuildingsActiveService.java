@@ -49,7 +49,9 @@ public class BuildingsActiveService {
 	/**
      * 活动图存放目录
      */
-    public static final String DEFAULT_USER_UPLOAD_PORTRAIT_PATH = "." + File.separator + "upload_buildings" + File.separator;
+    public static final String DEFAULT_USER_UPLOAD_PORTRAIT_PATH = "./upload_buildings/" ;
+	
+    public static final String DEFAULT_USER_UPLOAD_PORTRAIT_PATH2 =  "/upload_buildings/" ;
 	
 	@Autowired
 	private BuildingActiveMapper buildingActiveMapper;
@@ -195,7 +197,7 @@ public class BuildingsActiveService {
 	            // 使用字符替换图片名称，防止乱码
 	            String tempName = id +"_"+ uuid.substring(1, 10) + fileType;
 
-	            File uploadfile = new File(DEFAULT_USER_UPLOAD_PORTRAIT_PATH +buildings_id+ File.separator + "huodongtu" + File.separator+ id + File.separator+ tempName);// 上传地址
+	            File uploadfile = new File(DEFAULT_USER_UPLOAD_PORTRAIT_PATH +buildings_id + "/huodongtu/" +  id +"/"+ tempName);// 上传地址
 
 	            if (!uploadfile.exists() || !uploadfile.isDirectory()) {
 	            	uploadfile.deleteOnExit();
@@ -210,7 +212,7 @@ public class BuildingsActiveService {
 				String big_type = "6";
 				
 				
-				String resource_path = DEFAULT_USER_UPLOAD_PORTRAIT_PATH +buildings_id+ File.separator + "huodongtu" + File.separator+ id + File.separator;
+				String resource_path = DEFAULT_USER_UPLOAD_PORTRAIT_PATH2 +buildings_id+ "/huodongtu/" +  id + "/";
 				// 要保存文件的文件名
 				String resource_name = tempName;
 
