@@ -164,7 +164,10 @@ public class BuildingsService {
 		Map<String, Object> pagedata=new HashMap<String, Object>();
 		//查总条数
 		long total = buildingsMapper.findDetailCount(filter);
-		
+		if(StringUtil.isNotEmptyObject(filter.get("first"))&&StringUtil.isNotEmptyObject(filter.get("last"))){
+			filter.put("first", Integer.parseInt(filter.get("first").toString()));
+			filter.put("last", Integer.parseInt(filter.get("last").toString()));
+		}
 		//输入参数当前页，每页记录数，城市id
 		List<Map<String, Object>> buildingsDetailList=buildingsMapper.findDetailList(filter);
 		if(StringUtil.isNotEmptyList(buildingsDetailList)){
