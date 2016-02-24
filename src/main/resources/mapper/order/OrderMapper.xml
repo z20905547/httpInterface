@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="vfh.httpInterface.dao.order.OrderDao">
+	<sql id="Base_Column_List">
+		id,customer_name, customer_num, buildings_id, buildings_name, other_Req, create_date	
+	</sql>
+	<insert id="insert" useGeneratedKeys="true" keyProperty="entity.id">
+		insert
+		into tb_order ( 
+		customer_name, 
+		customer_num, 
+		buildings_id, 
+		buildings_name, 
+		other_Req, 
+		create_date
+		)
+		values ( 
+		#{entity.customer_name},
+		#{entity.customer_num}, 
+		#{entity.buildings_id},
+		#{entity.buildings_name},
+		#{entity.other_Req},
+		now()
+		)
+	</insert>
+	<select id="count" resultType="long">
+		select count(*) from tb_order
+		WHERE
+		id>0
+		<if test="filter.customer_name != null and filter.customer_name != ''">
+			AND customer_name LIKE #{filter.customer_name}
+		</if>
+
+		<if test="filter.customer_num != null and filter.customer_num != ''">
+			AND customer_num LIKE #{filter.customer_num}
+		</if>
+
+		<if test="filter.buildings_name != null and filter.buildings_name != ''">
+		<bind name="filter.buildings_name" value=" '%' + filter.buildings_name + '%' " />
+			AND buildings_name = #{filter.buildings_name}
+		</if>
+
+		<if test="filter.startDate != null and filter.startDate != '' and filter.endDate != null and filter.endDate != ''">
+			AND create_date  between #{filter.startDate} and #{filter.endDate}
+		</if>
+	</select>
+	
+	<select id="find" resultType="hashmap">
+		SELECT
+		<include refid="Base_Column_List" />
+		FROM
+		tb_order
+		WHERE
+		id>0
+		<if test="filter.customer_name != null and filter.customer_name != ''">
+			<bind name="filter.username" value=" '%' + filter.username + '%' " />
+			AND customer_name LIKE #{filter.customer_name}
+		</if>
+
+		<if test="filter.customer_num != null and filter.customer_num != ''">
+			<bind name="filter.customer_num" value=" '%' + filter.customer_num + '%' " />
+			AND customer_num LIKE #{filter.customer_num}
+		</if>
+
+		<if test="filter.buildings_name != null and filter.buildings_name != ''">
+			AND buildings_name = #{filter.buildings_name}
+		</if>
+
+		<if test="filter.startDate != null and filter.startDate != '' and filter.endDate != null and filter.endDate != ''">
+			
+			AND create_date  between #{filter.startDate} and #{filter.endDate}
+		</if>
+
+		ORDER BY id DESC
+		<if test="filter.first != null and filter.last != null">
+			LIMIT #{filter.first},#{filter.last}
+		</if>
+	</select>
+</mapper>
