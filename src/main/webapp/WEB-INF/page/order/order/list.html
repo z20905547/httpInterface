@@ -1,0 +1,159 @@
+<#include "*/basic/default.html"/>
+
+<#macro title>
+楼盘管理
+</#macro>
+
+<#macro head>
+<link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/jquery-datetimepicker/2.4.5/jquery.datetimepicker.min.css">
+<script type="text/javascript" src="//cdn.bootcss.com/jquery-datetimepicker/2.4.5/jquery.datetimepicker.min.js"></script> 
+
+<script type="text/javascript">
+	$(document).ready(
+			function() {
+			//	$.datepicker.setDefaults($.datepicker.regional["zh-CN"]);
+				$(".datePicker").datetimepicker({
+					lang:'ch',
+					format:"Y-m-d H:m:s"
+			       });
+				//富文本编辑器
+				var um = UM.getEditor('active_detail');
+			
+			});
+</script>
+   
+</#macro>
+
+<#macro body>
+
+<div class="modal fade" id="search-modal" role="dialog" aria-hidden="true">
+
+    <div class="modal-dialog">
+
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title"><span class="glyphicon glyphicon-search"></span> 内容查询</h4>
+            </div>
+
+            <form id="order-search-form" action="${base}/order/order/list" method="post">
+<input type="hidden" id="pageNumber" name="pageNumber" value="0"/>
+                <div class="modal-body">
+
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-xs-6">
+                                <label for="startDate">开始时间:</label>
+                                <input type="text" class="datePicker form-control" id="startDate" name="startDate" >
+                            </div>
+                            <div class="col-xs-6">
+                                <label for="endDate">结束时间:</label>
+                                <input type="text" class="datePicker form-control" id="endDate" name="endDate" >
+                            </div>
+                        </div>
+                    </div>
+                     <div class="form-group">
+                        <div class="row">
+                            <div class="col-xs-6">
+                                <label for="customer_num">客户手机:</label>
+                                <input type="text" class="form-control" id="customer_num" name="customer_num" >
+                            </div>
+                            <div class="col-xs-6">
+                                <label for="buildings_name">目标楼盘:</label>
+                                <input type="text" class="form-control" id="buildings_name" name="buildings_name" >
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-success">
+                        <span class="glyphicon glyphicon-ok"></span> 确定
+                    </button>
+                    <button type="reset" class="btn btn-warning">
+                        <span class="glyphicon glyphicon-trash"></span> 重置
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="data-content">
+
+<!--     <ol class="breadcrumb"> -->
+<!--         <li class="active"><span class="glyphicon glyphicon-flag"></span></li> -->
+<!--         <li class="active"> 楼盘管理</li> -->
+<!--     </ol> -->
+
+    <#if success?has_content>
+    <div class="alert alert-success fade in">
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+        <span class="glyphicon glyphicon-ok"></span> ${success}
+    </div>
+    </#if>
+
+    <form id="buildings-list-form" action="${base}/order/order/delete" valid="false" method="post">
+        <div class="panel panel-default">
+
+            <div class="panel-heading">
+                <h3 class="panel-title"><span class="glyphicon glyphicon-flag"></span> 预约管理</h3>
+            </div>
+
+            <div class="table-container">
+                <table class="table table-hover table-striped">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>客户姓名</th>
+                            <th>客户手机号</th>
+                            <th>楼盘名称</th>
+                            <th>创建时间</th>
+                            <th>其他要求</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        <#if page.content?size == 0>
+                        <tr>
+                            <td colspan="6"> 没有记录</td>
+                        </tr>
+                        <#else>
+                            <#list page.content as r>
+                            <tr>
+                                <td><input type="checkbox" name="ids" value="${r.id}"></td>
+                                <td>${r.customer_name!''}</td>
+                                <td>${r.customer_num!''}</td>
+                                <td>${r.buildings_name!''}</td>
+                                <td>${r.create_date!''}</td>
+                                <td>${r.other_Req!''}</td>
+                               
+                            </tr>
+                            </#list>
+
+                        </#if>
+
+                    </tbody>
+                </table>
+            </div> 
+
+            <div class="panel-footer">    
+                <a class="btn btn-info" data-toggle="modal" data-target="#search-modal">
+                    <span class="glyphicon glyphicon-search"></span> 查询 
+                </a>
+
+            </div>
+
+        </div>
+
+        <@pagination 'order-search-form' page />
+
+    </form>
+
+</div>
+
+</#macro>
+
+

@@ -51,8 +51,6 @@ public class BuildingsController {
     @RequestMapping(value="update")
     public String update(@RequestParam Map<String, Object> entity,
                          RedirectAttributes redirectAttributes) {
-    	System.out.println("lllllllllllll");
-    	System.out.println(entity);
     	buildingsService.updateBuildings(entity);
         redirectAttributes.addFlashAttribute("success", "修改楼盘信息成功");
         return "redirect:/buildings/buildings/list";
