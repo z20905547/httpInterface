@@ -59,7 +59,7 @@ public class BuildingsHouseService {
 	/**
 	 * 户型图存放目录
 	 */
-	public static final String DEFAULT_USER_UPLOAD_PORTRAIT_PATH = "./src/main/webapp/resource/upload_buildings/" ;
+	public static final String DEFAULT_USER_UPLOAD_PORTRAIT_PATH = "/vfh/apache-tomcat-7.0.67/webapps/management/resource/upload_buildings/" ;
 
 	public static final String DEFAULT_USER_UPLOAD_PORTRAIT_PATH2 = 
 			 "/resource/upload_buildings/" ;
