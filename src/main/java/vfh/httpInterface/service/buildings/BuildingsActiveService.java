@@ -49,9 +49,9 @@ public class BuildingsActiveService {
 	/**
      * 活动图存放目录 
      */
-    public static final String DEFAULT_USER_UPLOAD_PORTRAIT_PATH = "./upload_buildings/" ;
+    public static final String DEFAULT_USER_UPLOAD_PORTRAIT_PATH = "./src/main/webapp/resource/upload_buildings/" ;
 	
-    public static final String DEFAULT_USER_UPLOAD_PORTRAIT_PATH2 =  "/upload_buildings/" ;
+    public static final String DEFAULT_USER_UPLOAD_PORTRAIT_PATH2 =  "/resource/upload_buildings/" ;
 	
 	@Autowired 
 	private BuildingActiveMapper buildingActiveMapper;

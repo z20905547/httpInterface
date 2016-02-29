@@ -65,5 +65,15 @@ public interface NoticeDao {
      * @param entity 组实体 Map
      */
     public List<Map<String, Object>> find(@Param("filter")Map<String, Object> filter);
+    
+	/**
+	 * TODO 多表联合查询所有符合条件的楼盘详细信息
+	 * @author harry
+	 * <b> 有问题请联系qq:359705093</b>
+	 * @param filter
+	 * @return
+	 * @create 2016年2月2日
+	 */
+	public List<Map<String, Object>> findnoticeListFive(@Param("filter")Map<String, Object> filter);
 
 }

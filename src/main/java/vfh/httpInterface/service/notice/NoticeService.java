@@ -149,5 +149,35 @@ public class NoticeService {
     public List<Map<String, Object>> findNotices(Map<String, Object> filter) {
         return noticeDao.find(filter);
     }
+    
+    
+	/**
+	 * TODO 查询公告列表
+	 * @author harry
+	 * <b> 有问题请联系qq:359705093</b>
+	 * @param params
+	 * @return
+	 * @create 2016年2月1日
+	 */
+	public Map<String, Object> findNoticeList(Map<String, Object> filter){
+		returnMap.clear();
+		Map<String, Object> pagedata=new HashMap<String, Object>();
+
+		//输入参数当前页，每页记录数，城市id
+		List<Map<String, Object>> noticeList5=noticeDao.findnoticeListFive(filter);
+		if(StringUtil.isNotEmptyList(noticeList5)){
+			
+			pagedata.put("list", noticeList5);
+    		returnMap.put("returnCode", "000000");
+    		returnMap.put("data",pagedata);
+    		returnMap.put("returnMsg", "获取楼盘列表！");
+    	}else{
+    		returnMap.put("returnCode", "1111");
+    		returnMap.put("returnMsg", "获取楼盘列表失败！");
+    	}
+		
+		
+	    return returnMap;
+	}
    
 }
