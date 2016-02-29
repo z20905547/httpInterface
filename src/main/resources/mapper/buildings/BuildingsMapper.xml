@@ -218,7 +218,11 @@
 		</if>
 	</select>
 	   <select id="findDetailList" resultType="hashmap">
-		SELECT b.buildings_name,b.server_phone_num,a.*,c.resource_path,c.resource_name,c.resource_alias, c.buildings_id,d.nomal_price ,d.discount_price
+		SELECT b.buildings_name,
+		       b.server_phone_num,a.*,
+               c.resource_name,
+               d.nomal_price ,
+               d.discount_price	
 		FROM tb_building_active a
 		LEFT JOIN tb_buildings b ON a.buildings_id=b.id
 		LEFT JOIN tb_building_resource c ON  c.sm_type =30 AND c.buildings_id=b.id
