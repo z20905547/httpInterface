@@ -218,11 +218,12 @@
 		</if>
 	</select>
 	   <select id="findDetailList" resultType="hashmap">
-		SELECT b.buildings_name,b.server_phone_num,a.*,c.resource_path,c.resource_name,c.resource_alias
+		SELECT b.buildings_name,b.server_phone_num,a.*,c.resource_path,c.resource_name,c.resource_alias, c.buildings_id,d.nomal_price ,d.discount_price
 		FROM tb_building_active a
 		LEFT JOIN tb_buildings b ON a.buildings_id=b.id
-		LEFT JOIN tb_building_resource c ON c.big_type=1 AND c.sm_type=1 AND c.pid=b.id
-		WHERE a.id>0
+		LEFT JOIN tb_building_resource c ON  c.sm_type =30 AND c.buildings_id=b.id
+		LEFT JOIN tb_building_price d ON d.building_id=b.id AND d.start_date &lt;=NOW() AND d.end_date &gt;=NOW()
+	   	WHERE a.id>0
 		<if test="filter.now != null and filter.now != ''">
 			AND a.start_date &lt;=now() AND a.end_date &gt;=now()
 		</if>
@@ -245,7 +246,8 @@
 	    SELECT count(*)
 	    FROM tb_building_active a
 	    LEFT JOIN tb_buildings b ON a.buildings_id=b.id
-	    LEFT JOIN tb_building_resource c ON c.big_type=1 AND c.sm_type=1 AND c.pid=b.id
+	    LEFT JOIN tb_building_resource c ON c.big_type=3 AND c.sm_type=30 AND c.buildings_id=b.id
+	    LEFT JOIN tb_building_price d ON d.building_id=b.id AND d.start_date &lt;=NOW() AND d.end_date &gt;=NOW()
 	    WHERE a.active_status=1
 	    	<if test="filter.now != null and filter.now != ''">
 				AND a.start_date &lt;=NOW() AND a.end_date &gt;=NOW()
