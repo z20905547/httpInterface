@@ -217,4 +217,17 @@
 			LIMIT #{filter.first},#{filter.last}
 		</if>
 	</select>
+	<select id="getMoreDetail" resultType="hashmap">
+		SELECT
+		a.*,b.resource_path logo_path,b.resource_name logo_name,c.resource_path ad_path,c.resource_name ad_name,
+		d.first_price,d.nomal_price,d.discount_price,d.active_id
+		FROM
+		tb_buildings a
+		left join tb_building_resource b on b.buildings_id=a.id and b.bit_type=3 and b.sm_type=30
+		left join tb_building_resource c on b.buildings_id=a.id and b.bit_type=3 and b.sm_type=31
+		left join tb_building_price d on d.building_id=a.id and d.start_date &lt;= now() and d.end_date &gt;= now()
+		WHERE
+		a.id = #{buildingsId}
+	</select>
+	
 </mapper>

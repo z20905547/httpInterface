@@ -184,4 +184,27 @@ public class BuildingsService {
 		
 	    return returnMap;
 	}
+	/**
+	 * TODO 查询楼盘详情
+	 * @author harry
+	 * <b> 有问题请联系qq:359705093</b>
+	 * @param filter
+	 * @return
+	 * @create 2016年2月25日
+	 */
+	public Map<String, Object> findBulidingsDetail(Long buildingsId){
+		returnMap.clear();
+		//输入参数当前页，每页记录数，城市id
+		Map<String, Object> buildingsDetail=buildingsMapper.getMoreDetail(buildingsId);
+		if(StringUtil.isNotEmptyMap(buildingsDetail)){
+    		returnMap.put("returnCode", "000000");
+    		returnMap.put("data",buildingsDetail);
+    		returnMap.put("returnMsg", "获取楼盘信息成功！");
+    	}else{
+    		returnMap.put("returnCode", "1111");
+    		returnMap.put("returnMsg", "获取楼盘信息失败！");
+    	}
+	    return returnMap;
+	}
+	
 }
