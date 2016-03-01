@@ -66,5 +66,15 @@
           tb_notice
         ORDER BY id DESC
     </select>
-
+    <select id="findnoticeListFive" resultType="hashmap">
+        SELECT
+            Id AS "Id",
+            Title AS "Title",
+            Content AS "Content",
+            DATE_FORMAT(MessageDate,'%M %D,%Y') AS "MessageDate",
+            author AS "author"
+        FROM
+          tb_notice
+        ORDER BY id DESC  LIMIT 5
+    </select>
 </mapper>

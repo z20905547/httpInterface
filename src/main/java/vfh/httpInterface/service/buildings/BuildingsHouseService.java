@@ -59,10 +59,10 @@ public class BuildingsHouseService {
 	/**
 	 * 户型图存放目录
 	 */
-	public static final String DEFAULT_USER_UPLOAD_PORTRAIT_PATH = "./upload_buildings/" ;
+	public static final String DEFAULT_USER_UPLOAD_PORTRAIT_PATH = "/vfh/apache-tomcat-7.0.67/webapps/management/resource/upload_buildings/" ;
 
 	public static final String DEFAULT_USER_UPLOAD_PORTRAIT_PATH2 = 
-			 "/upload_buildings/" ;
+			 "/resource/upload_buildings/" ;
 	/**
 	 * logo.png 路径  
 	 */
@@ -449,6 +449,26 @@ public class BuildingsHouseService {
 						+ buildings_id +  "/logo/"
 						+ tempName);// 上传地址
 
+				resource_path = DEFAULT_USER_UPLOAD_PORTRAIT_PATH2
+						+ buildings_id +  "/logo/"
+						;
+				if (uploadfile.isFile() && uploadfile.exists()) {  //文件夹中存在文件则表示已经入库过，则不再入库记录
+
+				}else {
+					
+					// 要保存文件的文件名
+					String resource_name = tempName;
+
+					entity.put("big_type", big_type);
+					entity.put("sm_type", sm_type);
+					entity.put("buildings_id", buildings_id);
+					entity.put("resource_name", resource_name);
+					entity.put("resource_path", resource_path);
+					resourseDao.Insert(entity);
+				}
+				
+				
+				
 				if (!uploadfile.exists() || !uploadfile.isDirectory()) {
 					uploadfile.deleteOnExit();
 					uploadfile.mkdirs();
@@ -456,24 +476,14 @@ public class BuildingsHouseService {
 					// 图片信息入库
 					// 图片大类：1：户型图；2：楼盘相册;3：地产logo，4：地产广告，5：banner，6：活动宣传图
 
-					resource_path = DEFAULT_USER_UPLOAD_PORTRAIT_PATH2
-							+ buildings_id +  "/logo/"
-							;
+				
 					
 				}
 
 				// 开始上传
 				file30.transferTo(uploadfile);
 
-				// 要保存文件的文件名
-				String resource_name = tempName;
-
-				entity.put("big_type", big_type);
-				entity.put("sm_type", sm_type);
-				entity.put("buildings_id", buildings_id);
-				entity.put("resource_name", resource_name);
-				entity.put("resource_path", resource_path);
-				resourseDao.Insert(entity);
+				
 
 				// String portraitPath = DEFAULT_USER_UPLOAD_PORTRAIT_PATH +id+
 				// File.separator + "huxingtu" + File.separator+ shi +
@@ -496,12 +506,28 @@ public class BuildingsHouseService {
 
 				String fileType = fileName.substring(fileName.lastIndexOf("."));
 				// 使用字符替换图片名称，防止乱码
-				String tempName = sm_type + "_" + uuid.substring(1, 10)
+				String tempName = "xct"
 						+ fileType;
 				uploadfile = new File(DEFAULT_USER_UPLOAD_PORTRAIT_PATH
 						+ buildings_id + "/xct/"
 						+  tempName);// 上传地址
+				resource_path = DEFAULT_USER_UPLOAD_PORTRAIT_PATH2
+						+ buildings_id + "/xct/";
+				if (uploadfile.isFile() && uploadfile.exists()) {  //文件夹中存在文件则表示已经入库过，则不再入库记录
+                 //判断是否存在文件
+				}else {//如果不存在则记录入库
+					// 要保存文件的文件名
+					String resource_name = tempName;
 
+					entity.put("big_type", big_type);
+					entity.put("sm_type", sm_type);
+					entity.put("buildings_id", buildings_id);
+					entity.put("resource_name", resource_name);
+					entity.put("resource_path", resource_path);  
+					resourseDao.Insert(entity);
+				}
+				
+				
 				if (!uploadfile.exists() || !uploadfile.isDirectory()) {
 					uploadfile.deleteOnExit();
 					uploadfile.mkdirs();
@@ -509,22 +535,13 @@ public class BuildingsHouseService {
 					// 图片信息入库
 					// 图片大类：1：户型图；2：楼盘相册;3：地产logo，4：地产广告，5：banner，6：活动宣传图
 
-					resource_path = DEFAULT_USER_UPLOAD_PORTRAIT_PATH2
-							+ buildings_id + "/xct/";
+				
 				}
 
 				// 开始上传
 				file31.transferTo(uploadfile);
 
-				// 要保存文件的文件名
-				String resource_name = tempName;
-
-				entity.put("big_type", big_type);
-				entity.put("sm_type", sm_type);
-				entity.put("buildings_id", buildings_id);
-				entity.put("resource_name", resource_name);
-				entity.put("resource_path", resource_path);  
-				resourseDao.Insert(entity);
+				
 
 				// String portraitPath = DEFAULT_USER_UPLOAD_PORTRAIT_PATH +id+
 				// File.separator + "huxingtu" + File.separator+ shi +
