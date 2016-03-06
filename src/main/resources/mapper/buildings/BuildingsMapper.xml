@@ -269,7 +269,7 @@
 		FROM
 		tb_buildings a
 		left join tb_building_resource b on b.buildings_id=a.id and b.big_type=3 and b.sm_type=30
-		left join tb_building_resource c on b.buildings_id=a.id and b.big_type=3 and b.sm_type=31
+		left join tb_building_resource c on c.buildings_id=a.id and c.big_type=3 and c.sm_type=31
 		left join tb_building_price d on d.building_id=a.id and d.start_date &lt;= now() and d.end_date &gt;= now()
 		left join tb_building_active e on e.buildings_id=a.id and e.start_date &lt;= now() and e.end_date &gt;= now()
 		WHERE

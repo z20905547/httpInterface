@@ -5,7 +5,9 @@
 <!-- 用户数据访问映射 -->
 <mapper namespace="vfh.httpInterface.dao.resourse.ResourseDao" >
 
-
+ <sql id="Base_Column_List" >
+    id, resource_path, resource_name, resource_alias, create_time, update_time
+  </sql>
     
     <insert id="Insert" useGeneratedKeys="true" keyProperty="entity.id">
         INSERT INTO tb_building_resource(
@@ -55,5 +57,41 @@
         WHERE 
           pid = #{id}
     </select>
- 
+   <select id="count" resultType="long">
+		select count(*) from tb_building_resource
+		WHERE
+		id>0
+		<if test="filter.buildingsId != null and filter.buildingsId != ''">
+			AND buildings_id = #{filter.buildingsId}
+		</if>
+
+		<if test="filter.bigType != null and filter.bigType != ''">
+			AND big_type = #{filter.bigType}
+		</if>
+		<if test="filter.smType != null and filter.smType != ''">
+			AND sm_type = #{filter.smType}
+		</if>
+	</select>
+	<select id="find" resultType="hashmap">
+		SELECT
+		<include refid="Base_Column_List" />
+		FROM
+		tb_building_resource
+		WHERE
+		id>0
+		<if test="filter.buildingsId != null and filter.buildingsId != ''">
+			AND buildings_id = #{filter.buildingsId}
+		</if>
+
+		<if test="filter.bigType != null and filter.bigType != ''">
+			AND big_type = #{filter.bigType}
+		</if>
+		<if test="filter.smType != null and filter.smType != ''">
+			AND sm_type = #{filter.smType}
+		</if>
+		ORDER BY id DESC
+		<if test="filter.first != null and filter.last != null">
+			LIMIT #{filter.first},#{filter.last}
+		</if>
+	</select>
 </mapper>

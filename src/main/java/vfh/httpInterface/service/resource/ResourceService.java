@@ -1,23 +1,5 @@
 package vfh.httpInterface.service.resource;
 
-import java.util.List;
-import java.util.Map;
-
-import org.apache.commons.collections.MapUtils;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-import org.springframework.ui.Model;
-
-import vfh.httpInterface.commons.Page;
-import vfh.httpInterface.commons.PageRequest;
-import vfh.httpInterface.commons.StringUtil;
-import vfh.httpInterface.commons.VariableUtils;
-import vfh.httpInterface.commons.valid.annotation.MapValid;
-import vfh.httpInterface.dao.buildings.BuildingsMapper;
-import vfh.httpInterface.dao.buildings.BuildingsPriceMapper;
-import vfh.httpInterface.service.ServiceException;
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -25,10 +7,20 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import javax.servlet.http.HttpServletResponse;
+
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import vfh.httpInterface.commons.StringUtil;
+import vfh.httpInterface.dao.resourse.ResourseDao;
 
 /**
  * TODO 资源管理表
@@ -40,10 +32,8 @@ import org.springframework.stereotype.Service;
 @Transactional
 public class ResourceService {
 	@Autowired
-	private BuildingsMapper buildingsMapper;
-	@Autowired
-	private BuildingsPriceMapper buildingsPriceMapper;
-	
+	private ResourseDao resourseDao;
+	Map<String, Object> returnMap=new HashMap<String, Object>();
 	/**
 	 * <p>上传保存文件</p>
 	 * @param destBasedir 文件保存路径
@@ -265,7 +255,49 @@ public class ResourceService {
 		return fileName.contains(".") ? fileName.substring(fileName.lastIndexOf(".")) : "";
 	}
 
-	
+	/**
+	 * TODO 条件查询资源列表
+	 * @author harry
+	 * <b> 有问题请联系qq:359705093</b>
+	 * @param filter
+	 * @return
+	 * @create 2016年3月1日
+	 */
+	public List<Map<String, Object>> findResource(Map<String, Object> filter) {
+		return resourseDao.find(filter);
+	}
+	/**
+	 * TODO 封装列表
+	 * @author harry
+	 * <b> 有问题请联系qq:359705093</b>
+	 * @param filter
+	 * @return
+	 * @create 2016年3月1日
+	 */
+	public Map<String, Object> findResourceList(Map<String, Object> filter){
+		returnMap.clear();
+		Map<String, Object> pagedata=new HashMap<String, Object>();
+		//查总条数
+		long total = resourseDao.count(filter);
+		if(StringUtil.isNotEmptyObject(filter.get("first"))&&StringUtil.isNotEmptyObject(filter.get("last"))){
+			filter.put("first", Integer.parseInt(filter.get("first").toString()));
+			filter.put("last", Integer.parseInt(filter.get("last").toString()));
+		}
+		List<Map<String, Object>> resourceList=resourseDao.find(filter);
+		if(StringUtil.isNotEmptyList(resourceList)){
+			pagedata.put("total", total);
+			pagedata.put("list", resourceList);
+    		returnMap.put("returnCode", "000000");
+    		returnMap.put("data",pagedata);
+    		returnMap.put("returnMsg", "获取资源列表！");
+    	}else{
+    		returnMap.put("returnCode", "1111");
+    		returnMap.put("returnMsg", "获取资源列表失败！");
+    	}
+		
+		
+	    return returnMap;
+	}
 
 
 }
