@@ -83,5 +83,14 @@ public interface BuildingsMapper {
 	 * @create 2016年2月2日
 	 */
 	public long findDetailCount(@Param("filter")Map<String,Object> filter);
+	/**
+	 * TODO 多表查询楼盘信息
+	 * @author harry
+	 * <b> 有问题请联系qq:359705093</b>
+	 * @param id
+	 * @return
+	 * @create 2016年2月25日
+	 */
+	public Map<String, Object> getMoreDetail(@Param("buildingsId")Long buildingsId);
 	
 }
