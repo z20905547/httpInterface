@@ -6,7 +6,15 @@
 <mapper namespace="vfh.httpInterface.dao.resourse.ResourseDao" >
 
  <sql id="Base_Column_List" >
-    id, resource_path, resource_name, resource_alias, create_time, update_time
+    id,buildings_id,resource_path,
+          big_type,
+          sm_type,
+          is_first,
+          resource_name,
+          resource_alias,
+          resource_detail,
+          create_time,
+          update_time
   </sql>
     
     <insert id="Insert" useGeneratedKeys="true" keyProperty="entity.id">
