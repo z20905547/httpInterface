@@ -170,6 +170,7 @@ public class BuildingsHouseService {
 				String resource_name = tempName;
 
 				entity.put("pid", pid);
+				entity.put("buildings_id", buildings_id);
 				entity.put("shi", shi);
 				entity.put("big_type", big_type);
 				entity.put("sm_type", sm_type);
