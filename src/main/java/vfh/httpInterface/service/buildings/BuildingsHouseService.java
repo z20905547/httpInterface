@@ -402,8 +402,7 @@ public class BuildingsHouseService {
 					// 图片大类：1：户型图；2：楼盘相册;3：地产logo，4：地产广告，5：banner，6：活动宣传图
 
 					resource_path = DEFAULT_USER_UPLOAD_PORTRAIT_PATH2
-							+ buildings_id +  "/ybj/"
-							+  tempName;
+							+ buildings_id +  "/ybj/";
 					originalPicPath = DEFAULT_USER_UPLOAD_PORTRAIT_PATH
 							+ buildings_id +  "/ybj/"
 							+  tempName;
