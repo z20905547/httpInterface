@@ -49,10 +49,14 @@ public class BuildingsActiveService {
 	/**
      * 活动图存放目录 
      */
-    public static final String DEFAULT_USER_UPLOAD_PORTRAIT_PATH = "./src/main/webapp/resource/upload_buildings/" ;
-	
-    public static final String DEFAULT_USER_UPLOAD_PORTRAIT_PATH2 =  "/resource/upload_buildings/" ;
-	
+   // 本地
+   // public static final String DEFAULT_USER_UPLOAD_PORTRAIT_PATH = "./src/main/webapp/resource/upload_buildings/" ;
+   // public static final String DEFAULT_USER_UPLOAD_PORTRAIT_PATH2 =  "/resource/upload_buildings/" ;
+  
+	//正式环境
+	public static final String DEFAULT_USER_UPLOAD_PORTRAIT_PATH = "/vfh/apache-tomcat-7.0.67/webapps/management/resource/upload_buildings/" ;
+	public static final String DEFAULT_USER_UPLOAD_PORTRAIT_PATH2 = 
+			 "/resource/upload_buildings/" ;
 	@Autowired 
 	private BuildingActiveMapper buildingActiveMapper;
 	@Autowired
@@ -178,7 +182,7 @@ public class BuildingsActiveService {
 		return new Page<Map<String, Object>>(pageRequest, content, total);
 	}
 	
-	//添加效果图
+	//添加活动图
 		public void insertAcPic (HttpServletRequest request) throws IOException {
 
 			Map<String, Object> entity = SessionVariable.getCurrentSessionVariable().getUser();
