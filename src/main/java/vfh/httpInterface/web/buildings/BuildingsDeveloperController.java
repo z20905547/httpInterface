@@ -37,13 +37,14 @@ public class BuildingsDeveloperController {
     @RequestMapping("list")
     public Page<Map<String, Object>> list(PageRequest pageRequest, @RequestParam Map<String, Object> filter,Model model) {
     	 Map<String,Object> user = SessionVariable.getCurrentSessionVariable().getUser();
-    	 Map<String,Object> bid = buildingsDeveloperService.getBidByUname(user.get("username").toString());
+//    	 Map<String,Object> bid = buildingsDeveloperService.getBidByUname(user.get("username").toString());
     	model.addAttribute("buildingsStates", VariableUtils.getVariables(BuildingsState.class));
-    	 if( bid == null){
-    		 filter.put("id", 0);
-    	 }else {
-    	 filter.put("id", bid.get("bid"));
-    	 }
+//    	 if( bid == null){
+//    		 filter.put("id", 0);
+//    	 }else {
+//    	 filter.put("id", bid.get("bid")); user.get("username").toString()
+//    	 }
+    	filter.put("username", user.get("username").toString()); 
     	return buildingsDeveloperService.findBuildingsList(pageRequest,filter);
     }
 }
