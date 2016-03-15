@@ -5,13 +5,6 @@
 </#macro>  
 
 <#macro head>
-<link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/jqueryui/1.10.4/css/jquery-ui.min.css">
-<link rel="stylesheet" type="text/css" href="${base}/resource/css/umeditor.min.css">
-<script type="text/javascript" src="//cdn.bootcss.com/jqueryui/1.10.4/jquery-ui.min.js"></script>
-<script type="text/javascript" src="//cdn.bootcss.com/jqueryui/1.10.4/i18n/jquery-ui-i18n.min.js"></script>
-<script type="text/javascript" src="//cdn.bootcss.com/jquery-ui-timepicker-addon/1.5.5/jquery-ui-timepicker-addon.min.js"></script>
-<script type="text/javascript" src="//cdn.bootcss.com/jquery-ui-timepicker-addon/1.6.1/i18n/jquery-ui-timepicker-zh-CN.js"></script>
-<link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/jquery-ui-timepicker-addon/1.5.5/jquery-ui-timepicker-addon.min.css">
 
 
 <script type="text/javascript">
@@ -68,8 +61,8 @@
                     <div class="row">
                         <div class="col-xs-6">
                             <label for="shi">室:</label>
-                         <select class="form-control required"  id="shi" name="shi">  
-                           <option value ="" selected>—请选择-</option>
+                         <select class="form-control "  id="shi" name="shi">  
+                           <option value ="0" selected>0室</option>
                            <option value ="1">1室</option>  
                            <option value ="2">2室</option>
                            <option value ="3">3室</option>  
@@ -81,8 +74,8 @@
                         </div>
                         <div class="col-xs-6">
                             <label for="ting">厅:</label>
-                         <select class="form-control required"  id="ting" name="ting">  
-                           <option value ="" selected>—请选择-</option>
+                         <select class="form-control"  id="ting" name="ting">  
+                           <option value ="0" selected>0厅</option>
                            <option value ="1">1厅</option>  
                            <option value ="2">2厅</option>
                            <option value ="3">3厅</option>  
@@ -96,7 +89,7 @@
                         <div class="col-xs-6">
                             <label for="chu">厨:</label>
                               <select class="form-control required"  id="chu" name="chu">  
-                           <option value ="" selected>—请选择-</option>
+                           <option value ="0" selected>0厨</option>
                            <option value ="1">1厨</option>  
                            <option value ="2">2厨</option>
                            <option value ="3">3厨</option>  
@@ -106,7 +99,7 @@
                         <div class="col-xs-6">
                             <label for="wei">卫:</label>
                              <select class="form-control required"  id="wei" name="wei">  
-                           <option value ="" selected>—请选择-</option>
+                           <option value ="0" selected>0卫</option>
                            <option value ="1">1卫</option>  
                            <option value ="2">2卫</option>
                            <option value ="3">3卫</option>  
@@ -120,7 +113,7 @@
                         <div class="col-xs-6">
                             <label for="yang">阳:</label>
                              <select class="form-control required"  id="yang" name="yang">  
-                           <option value ="" selected>—请选择-</option>
+                           <option value ="0" selected>0阳</option>
                            <option value ="1">1阳</option>  
                            <option value ="2">2阳</option>
                            <option value ="3">3阳</option>  
