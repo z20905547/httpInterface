@@ -98,10 +98,11 @@
                                 </td>
                                 <td>
 
-
-                                    <a class="btn btn-default btn-sm blocklink" title="活动添加" href="javascript:void(0)" data-href="${base}/buildings/active/list" data-building-id="${r.id}" data-building-name="${r.buildings_name}">
+                                <@shiro.hasPermission name="developer:edit">
+                                    <a class="btn btn-default btn-sm blocklink" title="活动添加" href="javascript:void(0)" data-href="${base}/buildings/developer/list2" data-building-id="${r.id}" data-building-name="${r.buildings_name}">
                                         <span class="glyphicon glyphicon-time"></span>
                                     </a>
+                                </@shiro.hasPermission>
                                 </td>
                             </tr>
                             </#list>
