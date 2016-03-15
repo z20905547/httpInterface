@@ -31,10 +31,10 @@
 
 	<select id="find" resultType="hashmap">
 		SELECT
-		<include refid="Base_Column_List" />
+		a.*
 		FROM
-		tb_buildings
+		tb_buildings a , tb_bid_uname b
 		WHERE
-		id = #{filter.id}
+		 a.id = b.bid AND b.username =#{filter.username}
 	</select>
 </mapper>

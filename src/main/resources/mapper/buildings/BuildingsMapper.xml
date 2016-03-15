@@ -66,24 +66,21 @@
 		select count(*) from tb_buildings
 		WHERE
 		id>0
-		<if test="filter.username != null and filter.username != ''">
-			<bind name="filter.username" value=" '%' + filter.username + '%' " />
-			AND username LIKE #{filter.username}
+        <if test="filter.buildings_name != null and filter.buildings_name != ''">
+			<bind name="filter.buildings_name" value=" '%' + filter.buildings_name + '%' " />
+			AND buildings_name LIKE #{filter.buildings_name}
 		</if>
 
-		<if test="filter.nickname != null and filter.nickname != ''">
-			<bind name="filter.nickname" value=" '%' + filter.nickname + '%' " />
-			AND nickname LIKE #{filter.nickname}
+		<if test="filter.developer_company != null and filter.developer_company != ''">
+			<bind name="filter.developer_company" value=" '%' + filter.developer_company + '%' " />
+			AND developer_company LIKE #{filter.developer_company}
+		</if>
+        <if test="filter.city_id != null and filter.city_id != ''">
+			<bind name="filter.city_id" value=" '%' + filter.city_id + '%' " />
+			AND city_id LIKE #{filter.city_id}
 		</if>
 
-		<if test="filter.state != null and filter.state != ''">
-			AND state = #{filter.state}
-		</if>
 
-		<if test="filter.email != null and filter.email != ''">
-			<bind name="filter.email" value=" '%' + filter.email + '%' " />
-			AND email LIKE #{filter.email}
-		</if>
 	</select>
 	<update id="update">
 		UPDATE
@@ -211,7 +208,10 @@
 			<bind name="filter.developer_company" value=" '%' + filter.developer_company + '%' " />
 			AND developer_company LIKE #{filter.developer_company}
 		</if>
-
+        <if test="filter.city_id != null and filter.city_id != ''">
+			<bind name="filter.city_id" value=" '%' + filter.city_id + '%' " />
+			AND city_id LIKE #{filter.city_id}
+		</if>
 		ORDER BY id DESC
 		<if test="filter.first != null and filter.last != null">
 			LIMIT #{filter.first},#{filter.last}
