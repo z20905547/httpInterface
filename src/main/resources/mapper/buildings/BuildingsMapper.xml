@@ -226,7 +226,7 @@
 		FROM tb_building_active a
 		LEFT JOIN tb_buildings b ON a.buildings_id=b.id
 		LEFT JOIN tb_building_resource c ON  c.sm_type =30 AND c.buildings_id=b.id
-		LEFT JOIN tb_building_price d ON d.building_id=b.id AND d.start_date &lt;=NOW() AND d.end_date &gt;=NOW()
+		LEFT JOIN tb_building_price d ON d.building_id=b.id 
 	   	WHERE a.id>0
 		<if test="filter.now != null and filter.now != ''">
 			AND a.start_date &lt;=now() AND a.end_date &gt;=now()
