@@ -213,7 +213,7 @@ public class BuildingsHouseService {
 		MultipartFile file24 = mRequest.getFile("image24");
 		MultipartFile file30 = mRequest.getFile("image30");
 		MultipartFile file31 = mRequest.getFile("image31");
-
+		MultipartFile file40 = mRequest.getFile("image40");
 		if (null != file21 && !file21.isEmpty()) { // 效果图
 			String uuid = UUID.randomUUID().toString();
 			String fileName = file21.getOriginalFilename();
@@ -552,6 +552,52 @@ public class BuildingsHouseService {
 				// PortraitSize.MIDDLE);
 				// scaleImage(originalPicPath, portraitPath,
 				// PortraitSize.SMALL);
+			}
+		}
+		
+		if (null != file40 && !file40.isEmpty()) { // 地产宣传图
+			String uuid = UUID.randomUUID().toString();
+			String fileName = file40.getOriginalFilename();
+			String sm_type = "40";
+			big_type = "4";
+			if (StringUtils.isNotBlank(fileName)) {// 因为最后一个添加的控件没有上传相应的内容
+
+				String fileType = fileName.substring(fileName.lastIndexOf("."));
+				// 使用字符替换图片名称，防止乱码
+				String tempName = "ldt"
+						+ fileType;
+				uploadfile = new File(DEFAULT_USER_UPLOAD_PORTRAIT_PATH
+						+ buildings_id + "/ldt/"
+						+  tempName);// 上传地址
+				resource_path = DEFAULT_USER_UPLOAD_PORTRAIT_PATH2
+						+ buildings_id + "/ldt/";
+				if (uploadfile.isFile() && uploadfile.exists()) {  //文件夹中存在文件则表示已经入库过，则不再入库记录
+                 //判断是否存在文件
+				}else {//如果不存在则记录入库
+					// 要保存文件的文件名
+					String resource_name = tempName;
+
+					entity.put("big_type", big_type);
+					entity.put("sm_type", sm_type);
+					entity.put("buildings_id", buildings_id);
+					entity.put("resource_name", resource_name);
+					entity.put("resource_path", resource_path);  
+					resourseDao.Insert(entity);
+				}
+				
+				
+				if (!uploadfile.exists() || !uploadfile.isDirectory()) {
+					uploadfile.deleteOnExit();
+					uploadfile.mkdirs();
+
+					// 图片信息入库
+					// 图片大类：1：户型图；2：楼盘相册;3：地产logo，4：地产广告，5：banner，6：活动宣传图
+
+				
+				}
+
+				// 开始上传
+				file40.transferTo(uploadfile);
 			}
 		}
 	}

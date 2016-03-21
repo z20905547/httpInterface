@@ -1,20 +1,19 @@
-<#include "*/basic/default.html"/>
-
-<#macro title>
-添加楼盘价格
-</#macro>
+<#include "*/basic/default.html"/> <#macro title> 添加楼盘价格 </#macro>
 
 <#macro head>
 
 
 
 
-<script type="text/javascript" src="//cdn.bootcss.com/bootstrap-fileinput/4.3.0/js/fileinput.min.js"></script>
-<script type="text/javascript" src="//cdn.bootcss.com/bootstrap-fileinput/4.3.0/js/fileinput_locale_zh.min.js"></script>
+<script type="text/javascript"
+	src="//cdn.bootcss.com/bootstrap-fileinput/4.3.0/js/fileinput.min.js"></script>
+<script type="text/javascript"
+	src="//cdn.bootcss.com/bootstrap-fileinput/4.3.0/js/fileinput_locale_zh.min.js"></script>
 <!-- //cdn.bootcss.com/bootstrap-fileinput/4.3.0/img/loading.gif -->
 <!-- //cdn.bootcss.com/bootstrap-fileinput/4.3.0/img/loading-sm.gif -->
 
-<link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/bootstrap-fileinput/4.3.0/css/fileinput.min.css">
+<link rel="stylesheet" type="text/css"
+	href="//cdn.bootcss.com/bootstrap-fileinput/4.3.0/css/fileinput.min.css">
 
 <script type="text/javascript">
 
@@ -52,118 +51,156 @@
     
 
 </script>
-</#macro>
-
-<#macro body>
+</#macro> <#macro body>
 <div class="data-content">
-    <div class="panel panel-default">
-        <div class="panel-heading">
-            <h3 class="panel-title"><span class="glyphicon glyphicon-edit"></span> 添加活动图《${buildingsName}》 </h3>
-        </div>
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<h3 class="panel-title">
+				<span class="glyphicon glyphicon-edit"></span>
+				添加活动图《${buildingsName}》
+			</h3>
+		</div>
 
-        <form enctype="multipart/form-data" action="${base}/buildings/house/picInsert" id="create-user-form" method="post">
-            <div class="panel-body">
+		<form enctype="multipart/form-data"
+			action="${base}/buildings/house/picInsert" id="create-user-form"
+			method="post">
+			<div class="panel-body">
 
-<input type="hidden" name="buildings_id" value="${buildings_id}"/>    
-<input type="hidden" name="sm_type" value="23"/>             
-                <div class="form-group">
-                    <div class="row">
-                        <div class="col-xs-12">
-                        <label for="acreage">实景图:</label>
-                        <input type="file" name="image23" id="image23" multiple class="file-loading" value="" />
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </form>
-        
-        <form enctype="multipart/form-data" action="${base}/buildings/house/picInsert" id="create-user-form" method="post">
-            <div class="panel-body">
+				<input type="hidden" name="buildings_id" value="${buildings_id}" />
+				<input type="hidden" name="sm_type" value="23" />
+				<div class="form-group">
+					<div class="row">
+						<div class="col-xs-12">
+							<label for="acreage">实景图:</label> <input type="file"
+								name="image23" id="image23" multiple class="file-loading"
+								value="" />
+						</div>
+					</div>
+				</div>
+			</div>
+		</form>
 
-<input type="hidden" name="buildings_id" value="${buildings_id}"/> 
-<input type="hidden" name="sm_type" value="21"/>                
-                <div class="form-group">
-                    <div class="row">
-                        <div class="col-xs-12">
-                        <label for="acreage">效果图:</label>
-                        <input type="file" name="image21" id="image21" multiple class="file-loading" value="" />
-                        </div>
-                    </div>
-                </div>
-            </div>
+		<form enctype="multipart/form-data"
+			action="${base}/buildings/house/picInsert" id="create-user-form"
+			method="post">
+			<div class="panel-body">
 
-        </form>
-                <form enctype="multipart/form-data" action="${base}/buildings/house/picInsert" id="create-user-form" method="post">
-            <div class="panel-body">
+				<input type="hidden" name="buildings_id" value="${buildings_id}" />
+				<input type="hidden" name="sm_type" value="21" />
+				<div class="form-group">
+					<div class="row">
+						<div class="col-xs-12">
+							<label for="acreage">效果图:</label> <input type="file"
+								name="image21" id="image21" multiple class="file-loading"
+								value="" />
+						</div>
+					</div>
+				</div>
+			</div>
 
-<input type="hidden" name="buildings_id" value="${buildings_id}"/> 
-<input type="hidden" name="sm_type" value="24"/>                
-                <div class="form-group">
-                    <div class="row">
-                        <div class="col-xs-12">
-                        <label for="acreage">样板间:</label>
-                        <input type="file" name="image24" id="image24" multiple class="file-loading" value="" />
-                        </div>
-                    </div>
-                </div>
-            </div>
+		</form>
+		<form enctype="multipart/form-data"
+			action="${base}/buildings/house/picInsert" id="create-user-form"
+			method="post">
+			<div class="panel-body">
 
-        </form>
-         <form enctype="multipart/form-data" action="${base}/buildings/house/picInsert" id="create-user-form" method="post">
-            <div class="panel-body">
+				<input type="hidden" name="buildings_id" value="${buildings_id}" />
+				<input type="hidden" name="sm_type" value="24" />
+				<div class="form-group">
+					<div class="row">
+						<div class="col-xs-12">
+							<label for="acreage">样板间:</label> <input type="file"
+								name="image24" id="image24" multiple class="file-loading"
+								value="" />
+						</div>
+					</div>
+				</div>
+			</div>
 
-<input type="hidden" name="buildings_id" value="${buildings_id}"/> 
-<input type="hidden" name="sm_type" value="31"/>                
-                <div class="form-group">
-                    <div class="row">
-                        <div class="col-xs-12">
-                        <label for="acreage">地产宣传图:</label>
-                        <input type="file" name="image31" id="image31" multiple class="file-loading" value="" />
-                        </div>
-                    </div>
-                </div>
-            </div>
+		</form>
+		<form enctype="multipart/form-data"
+			action="${base}/buildings/house/picInsert" id="create-user-form"
+			method="post">
+			<div class="panel-body">
 
-        </form>
-                <form enctype="multipart/form-data" action="${base}/buildings/house/picInsert" id="create-user-form" method="post">
-            <div class="panel-body">
-<input type="hidden" name="buildings_id" value="${buildings_id}"/> 
-<input type="hidden" name="sm_type" value="30"/>                
-                <div class="form-group">
-                    <div class="row">
-                        <div class="col-xs-12">
-                        <label for="acreage">地产logo:</label>
-                        <input type="file" name="image30" id="image30" multiple class="file-loading" value="" />
-                        </div>
-                    </div>
-                </div>
-            </div>
+				<input type="hidden" name="buildings_id" value="${buildings_id}" />
+				<input type="hidden" name="sm_type" value="31" />
+				<div class="form-group">
+					<div class="row">
+						<div class="col-xs-12">
+							<label for="acreage">地产宣传图:</label> <input type="file"
+								name="image31" id="image31" multiple class="file-loading"
+								value="" />
+						</div>
+					</div>
+				</div>
+			</div>
 
-        </form> 
-                <form enctype="multipart/form-data" action="${base}/buildings/house/picInsert" id="create-user-form" method="post">
-            <div class="panel-body">
+		</form>
+		<form enctype="multipart/form-data"
+			action="${base}/buildings/house/picInsert" id="create-user-form"
+			method="post">
+			<div class="panel-body">
+				<input type="hidden" name="buildings_id" value="${buildings_id}" />
+				<input type="hidden" name="sm_type" value="30" />
+				<div class="form-group">
+					<div class="row">
+						<div class="col-xs-12">
+							<label for="acreage">地产logo:</label> <input type="file"
+								name="image30" id="image30" multiple class="file-loading"
+								value="" />
+						</div>
+					</div>
+				</div>
+			</div>
+		</form>
+		<form enctype="multipart/form-data"
+			action="${base}/buildings/house/picInsert" id="create-user-form"
+			method="post">
+			<div class="panel-body">
+				<input type="hidden" name="buildings_id" value="${buildings_id}" />
+				<input type="hidden" name="sm_type" value="30" />
+				<div class="form-group">
+					<div class="row">
+						<div class="col-xs-12">
+							<label for="acreage">楼栋图:</label> <input type="file"
+								name="image40" id="image40" multiple class="file-loading"
+								value="" />
+						</div>
+					</div>
+				</div>
+			</div>
+		</form>
+		
+		
+		<form enctype="multipart/form-data"
+			action="${base}/buildings/house/picInsert" id="create-user-form"
+			method="post">
+			<div class="panel-body">
 
-<input type="hidden" name="buildings_id" value="${buildings_id}"/>  
-<input type="hidden" name="sm_type" value="22"/>             
-                <div class="form-group">
-                    <div class="row">
-                        <div class="col-xs-12">
-                        <label for="acreage">交通图:</label>
-                        <input type="file" name="image22" id="image22" multiple class="file-loading" value="" />
-                        </div>
-                    </div>
-                </div>
-            </div>
+				<input type="hidden" name="buildings_id" value="${buildings_id}" />
+				<input type="hidden" name="sm_type" value="22" />
+				<div class="form-group">
+					<div class="row">
+						<div class="col-xs-12">
+							<label for="acreage">交通图:</label> <input type="file"
+								name="image22" id="image22" multiple class="file-loading"
+								value="" />
+						</div>
+					</div>
+				</div>
+			</div>
 
-            <div class="panel-footer">
+			<div class="panel-footer">
 
-                <button type="button" class="btn btn-default" onclick="history.back();">
-                    <span class="glyphicon glyphicon-backward"></span> 返回
-                </button>
+				<button type="button" class="btn btn-default"
+					onclick="history.back();">
+					<span class="glyphicon glyphicon-backward"></span> 返回
+				</button>
 
-            </div>
-        </form>
-    </div>
+			</div>
+		</form>
+	</div>
 </div>
 </#macro>
 
