@@ -12,7 +12,7 @@
 		green_rate,
 		decoration_condition,
 		util_type,
-		parking_count,floor_detail,buildings_detail,main_door,around_peitao,internal_peitao,traffic,wuye_fee,property_company,wuye_type,project_features,ratio,right_years,yushouzhenghao
+		parking_count,floor_detail,buildings_detail,main_door,around_peitao,internal_peitao,traffic,wuye_fee,property_company,wuye_type,project_features,ratio,right_years,yushouzhenghao,dianping
 	</sql>
 	<select id="get" resultType="hashmap">
 		SELECT
@@ -39,7 +39,7 @@
 		building_space,
 		house_count, green_rate, decoration_condition,
 		util_type,
-		parking_count,floor_detail,buildings_detail,main_door,around_peitao,internal_peitao,traffic,wuye_fee,developer_company,property_company,wuye_type,project_features,ratio,right_years,yushouzhenghao
+		parking_count,floor_detail,buildings_detail,main_door,around_peitao,internal_peitao,traffic,wuye_fee,developer_company,property_company,wuye_type,project_features,ratio,right_years,yushouzhenghao,dianping
 		)
 		values ( #{entity.proId},#{entity.cityId}, #{entity.areaId},
 		#{entity.mapX},
@@ -59,7 +59,8 @@
 		#{entity.traffic},#{entity.wuye_fee},#{entity.developer_company},
 		#{entity.property_company}, #{entity.wuye_type},
 		#{entity.project_features}, #{entity.ratio}, #{entity.right_years},
-		#{entity.yushouzhenghao}
+		#{entity.yushouzhenghao},
+		#{entity.dianping}  
 		)
 	</insert>
 	<select id="count" resultType="long">
@@ -186,7 +187,10 @@
 				buildings_detail = #{entity.buildings_detail},
 			</if>
 			<if test="entity.ratio != null">
-				yushouzhenghao = #{entity.yushouzhenghao}
+				yushouzhenghao = #{entity.yushouzhenghao},
+			</if>
+			<if test="entity.ratio != null">
+				dianping = #{entity.dianping}
 			</if>
 		</set>
 		WHERE
@@ -222,7 +226,8 @@
 		       b.server_phone_num,a.*,
                c.resource_name,
                d.nomal_price ,
-               d.discount_price	
+               d.discount_price
+               	
 		FROM tb_building_active a
 		LEFT JOIN tb_buildings b ON a.buildings_id=b.id
 		LEFT JOIN tb_building_resource c ON  c.sm_type =30 AND c.buildings_id=b.id
