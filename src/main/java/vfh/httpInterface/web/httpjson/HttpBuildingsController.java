@@ -38,9 +38,12 @@ public class HttpBuildingsController {
 	}
 	@RequestMapping("/getBuildingsDetail")
 	@ResponseBody
-	public void getBuildingsDetail(HttpServletRequest request,HttpServletResponse response,@RequestParam(required = false)Long buildingsId){
+	public void getBuildingsDetail(HttpServletRequest request,HttpServletResponse response,@RequestParam(required = false)Long buildingsId,@RequestParam(required = false)Long pid){
+		
+		Map params = RequestParamUtil.requestToMap(request);
+		
 		Map res = new HashMap();
-		Map m =  buildingsService.findBulidingsDetail(buildingsId);
+		Map m =  buildingsService.findBulidingsDetail(buildingsId,pid);
 		if("000000".equals(m.get("returnCode"))){
 			res.put("data", m.get("data"));
 			res.put("statusCode","0000");

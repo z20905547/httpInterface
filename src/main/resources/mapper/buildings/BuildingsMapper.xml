@@ -268,7 +268,7 @@
 	   </select>
 	<select id="getMoreDetail" resultType="hashmap">
 		SELECT
-		a.*,a.id buildings_id,   b.resource_path logo_path,b.resource_name logo_name,c.resource_path ad_path,c.resource_name ad_name,
+		a.*,a.id buildings_id, f.resource_path  tj_path, f.resource_name  tj_name,  b.resource_path logo_path,b.resource_name logo_name,c.resource_path ad_path,c.resource_name ad_name,
 		d.first_price,d.nomal_price,d.discount_price,e.active_name,e.active_detail,e.active_price,e.end_date,
 		e.start_date,e.active_jianjie
 		FROM
@@ -277,7 +277,9 @@
 		left join tb_building_resource c on c.buildings_id=a.id and c.big_type=3 and c.sm_type=31
 		left join tb_building_price d on d.building_id=a.id 
 		left join tb_building_active e on e.buildings_id=a.id 
+		LEFT JOIN tb_building_resource f ON f.buildings_id=a.id AND f.sm_type=33 AND f.pid=#{pid}
 		WHERE
 		a.id = #{buildingsId}
+		
 	</select>
 </mapper>
