@@ -192,10 +192,10 @@ public class BuildingsService {
 	 * @return
 	 * @create 2016年2月25日
 	 */
-	public Map<String, Object> findBulidingsDetail(Long buildingsId){
+	public Map<String, Object> findBulidingsDetail(Long buildingsId,Long pid){
 		returnMap.clear();
 		//输入参数当前页，每页记录数，城市id
-		Map<String, Object> buildingsDetail=buildingsMapper.getMoreDetail(buildingsId);
+		Map<String, Object> buildingsDetail=buildingsMapper.getMoreDetail(buildingsId,pid);
 		if(StringUtil.isNotEmptyMap(buildingsDetail)){
     		returnMap.put("returnCode", "000000");
     		returnMap.put("data",buildingsDetail);

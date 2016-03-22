@@ -55,28 +55,35 @@
 <input type="hidden" name="id" value="${entity.id!''}"/>
                 <div class="form-group">
                     <div class="row">
-                        <div class="col-xs-6">
+                        <div class="col-xs-4">
+                            <label for="first_price">起步价:</label>
+                            <input type="text" class="form-control number" id="first_price" name="first_price"  value="${entity.first_price!''}" placeholder="输入金额（可保留0-2位小数）">
+                        </div>
+                        <div class="col-xs-4">
                             <label for="nomal_price">市场均价:</label>
-                            <input type="text" class="form-control required" id="nomal_price" name="nomal_price" value="${entity.nomal_price!''}" placeholder="输入金额（可保留0-2位小数）">
+                            <input type="text" class="form-control required number" id="nomal_price" name="nomal_price" value="${entity.nomal_price!''}" placeholder="输入金额（可保留0-2位小数）">
                         </div>
-                        <div class="col-xs-6">
+                        <div class="col-xs-4">
                             <label for="discount_price">平台特价:</label>
-                            <input type="text" class="form-control required" id="discount_price" name="discount_price" value="${entity.discount_price!''}" placeholder="输入金额（可保留0-2位小数）">
+                            <input type="text" class="form-control number" id="discount_price" name="discount_price" value="${entity.discount_price!''}" placeholder="输入金额（可保留0-2位小数）">
                         </div>
+
                     </div>
                 </div>
                 <div class="form-group">
                     <div class="row">
-                        <div class="col-xs-6">
-                            <label for="first_price">起步价:</label>
-                            <input type="text" class="form-control required" id="first_price" name="first_price" value="${entity.first_price!''}" placeholder="输入金额（可保留0-2位小数）">
-                        </div>
+
                         <div class="col-xs-6">
                             <label for="start_date">开始生效日期:</label>
-                            <input type="text" class="datePicker form-control " autocomplete="off" id="start_date" value="${entity.start_date!''}" name="start_date" readonly>
+                            <input type="text" class="datePicker form-control dateISO" autocomplete="off" id="start_date" name="start_date" value="${entity.start_date!''}" >
+                        </div>
+                        <div class="col-xs-6">
+                            <label for="end_date">特价截止日期:</label>
+                            <input type="text" class="datePicker form-control dateISO" autocomplete="off" id="end_date" name="end_date" value="${entity.end_date!''}" >
                         </div>
                     </div>
                 </div>
+
                 <div class="form-group">
                     <div class="row">
 

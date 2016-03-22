@@ -91,6 +91,6 @@ public interface BuildingsMapper {
 	 * @return
 	 * @create 2016年2月25日
 	 */
-	public Map<String, Object> getMoreDetail(@Param("buildingsId")Long buildingsId);
+	public Map<String, Object> getMoreDetail(@Param("buildingsId")Long buildingsId,@Param("pid")Long pid);
 	
 }
