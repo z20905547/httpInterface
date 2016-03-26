@@ -243,6 +243,16 @@
 		<if test="filter.cityId != null and filter.cityId != ''">
 			AND b.city_id=#{filter.cityId}
 		</if>
+		<if test="filter.buildings_name != null and filter.buildings_name != ''">
+			<bind name="filter.buildings_name" value=" '%' + filter.buildings_name + '%' " />
+			AND b.buildings_name LIKE #{filter.buildings_name}
+		</if>
+		<if test="filter.city_id != null and filter.city_id != ''">
+			AND b.city_id LIKE #{filter.city_id}
+		</if>
+		<if test="filter.area_id != null and filter.area_id != ''">
+			AND b.area_id LIKE #{filter.area_id}
+		</if>
 		AND b.status=0
 		ORDER BY a.end_date desc
 	    <if test="filter.first != null and filter.last != null">
@@ -263,6 +273,16 @@
 		</if>
 		<if test="filter.cityId != null and filter.cityId != ''">
 			AND b.city_id=#{filter.cityId}
+		</if>
+		<if test="filter.buildings_name != null and filter.buildings_name != ''">
+			<bind name="filter.buildings_name" value=" '%' + filter.buildings_name + '%' " />
+			AND b.buildings_name LIKE #{filter.buildings_name}
+		</if>
+		<if test="filter.city_id != null and filter.city_id != ''">
+			AND b.city_id LIKE #{filter.city_id}
+		</if>
+		<if test="filter.area_id != null and filter.area_id != ''">
+			AND b.area_id LIKE #{filter.area_id}
 		</if>
 		AND b.status=0
 	   </select>

@@ -163,6 +163,10 @@ public class BuildingsService {
 		returnMap.clear();
 		Map<String, Object> pagedata=new HashMap<String, Object>();
 		//查总条数
+		if("undefined".equals(filter.get("buildings_name"))  || "请输入楼盘名称".equals(filter.get("buildings_name"))) filter.put("buildings_name", "");
+		if("undefined".equals(filter.get("proId"))) filter.put("proId", "");
+		if("undefined".equals(filter.get("city_id"))) filter.put("city_id", "");
+		if("undefined".equals(filter.get("area_id"))) filter.put("area_id", "");
 		long total = buildingsMapper.findDetailCount(filter);
 		if(StringUtil.isNotEmptyObject(filter.get("first"))&&StringUtil.isNotEmptyObject(filter.get("last"))){
 			filter.put("first", Integer.parseInt(filter.get("first").toString()));
