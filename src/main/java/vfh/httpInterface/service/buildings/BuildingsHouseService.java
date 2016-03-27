@@ -66,7 +66,7 @@ public class BuildingsHouseService {
 	/**
 	 * logo.png 路径  
 	 */
-	public static final String DEFAULT_LOGO_PATH ="./src/main/webapp/resource/image/";
+	public static final String DEFAULT_LOGO_PATH ="/vfh/apache-tomcat-7.0.67/webapps/management/resource/upload_buildings/";
 	
 	
 	public void insertBuildingsHouse(
@@ -651,8 +651,15 @@ public class BuildingsHouseService {
 			InputStream inputStream = new FileInputStream(targetImg);
 
 			BufferedImage buffImg = ImageIO.read(inputStream);
-	        //得到画笔对象
-	        Graphics g = buffImg.getGraphics();
+			
+			int wideth = buffImg.getWidth(null); 
+			int height = buffImg.getHeight(null); 
+			BufferedImage image = new BufferedImage(wideth, height, BufferedImage.TYPE_INT_RGB); 
+			//得到画笔对象
+			Graphics2D g = image.createGraphics(); 
+			   g.drawImage(buffImg, 0, 0, wideth, height, null); 
+	        
+	        
 	        
 	        //创建你要附加的图象。
 	        //2.jpg是你的小图片的路径
@@ -662,9 +669,12 @@ public class BuildingsHouseService {
 	        //得到Image对象。
 	        Image img = imgIcon.getImage(); 
 	        
+	        int wideth_biao = img.getWidth(null); 
+	        int height_biao = img.getHeight(null); 
 	        //将小图片绘到大图片上。
 	        //5,300 .表示你的小图片在大图片上的位置。
-	        g.drawImage(img,10,10,132,51,null);
+	      //水印在右下角显示 
+	        g.drawImage(buffImg, (wideth - wideth_biao) ,(height - height_biao) , wideth_biao, height_biao, null); 
 	      
 	       
 	        
