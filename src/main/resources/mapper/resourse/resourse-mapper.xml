@@ -66,37 +66,39 @@
           pid = #{id}
     </select>
    <select id="count" resultType="long">
-		select count(*) from tb_building_resource a,tb_building_house_type b
+		select count(*) from tb_building_resource a 
+		LEFT JOIN tb_building_house_type b ON a.buildings_id=b.building_id AND a.pid=b.id
 		WHERE
-		a.buildings_id=b.building_id AND a.pid=b.id
+		a.id>0 
 		<if test="filter.buildingsId != null and filter.buildingsId != ''">
-			AND buildings_id = #{filter.buildingsId}
+			AND a.buildings_id = #{filter.buildingsId}
 		</if>
 
 		<if test="filter.bigType != null and filter.bigType != ''">
-			AND big_type = #{filter.bigType}
+			AND a.big_type = #{filter.bigType}
 		</if>
 		<if test="filter.smType != null and filter.smType != ''">
-			AND sm_type = #{filter.smType}
+			AND a.sm_type = #{filter.smType}
 		</if>
 	</select>
 	<select id="find" resultType="hashmap">
 		SELECT
 		a.*,  b.house_type_name  house_type_name,  CONCAT(b.shi,'室',b.ting,'厅',b.chu,'厨',b.wei,'卫',b.yang,'阳',' ',b.`acreage`,'㎡') tingshi
 		FROM
-		tb_building_resource a,tb_building_house_type b
+		tb_building_resource a
+        LEFT JOIN tb_building_house_type b ON a.buildings_id=b.building_id AND a.pid=b.id
 		WHERE
-		a.buildings_id=b.building_id AND a.pid=b.id
+		a.id>0 
 		
 		<if test="filter.buildingsId != null and filter.buildingsId != ''">
-			AND buildings_id = #{filter.buildingsId}
+			AND a.buildings_id = #{filter.buildingsId}
 		</if>
 
 		<if test="filter.bigType != null and filter.bigType != ''">
-			AND big_type = #{filter.bigType}
+			AND a.big_type = #{filter.bigType}
 		</if>
 		<if test="filter.smType != null and filter.smType != ''">
-			AND sm_type = #{filter.smType}
+			AND a.sm_type = #{filter.smType}
 		</if>
 		ORDER BY id DESC
 		<if test="filter.first != null and filter.last != null">
