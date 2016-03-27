@@ -1,11 +1,13 @@
 package vfh.httpInterface.service.buildings;
 
+import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.awt.image.ColorModel;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -20,6 +22,7 @@ import java.util.UUID;
 
 import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletRequest;
+import javax.swing.ImageIcon;
 
 import org.apache.commons.collections.MapUtils;
 import org.apache.commons.lang.StringUtils;
@@ -54,9 +57,21 @@ public class BuildingsActiveService {
    // public static final String DEFAULT_USER_UPLOAD_PORTRAIT_PATH2 =  "/resource/upload_buildings/" ;
   
 	//正式环境
-	public static final String DEFAULT_USER_UPLOAD_PORTRAIT_PATH = "/vfh/apache-tomcat-7.0.67/webapps/management/resource/upload_buildings/" ;
+//	public static final String DEFAULT_USER_UPLOAD_PORTRAIT_PATH = "/vfh/apache-tomcat-7.0.67/webapps/management/resource/upload_buildings/" ;
+//	public static final String DEFAULT_USER_UPLOAD_PORTRAIT_PATH2 = 
+//			 "/resource/upload_buildings/" ;
+//	 //水印logo 
+//	public static final String DEFAULT_LOGO_PATH ="/vfh/apache-tomcat-7.0.67/webapps/management/resource/upload_buildings/";
+
+	//本地路径
+	public static final String DEFAULT_USER_UPLOAD_PORTRAIT_PATH = "./upload_buildings/" ;
+
 	public static final String DEFAULT_USER_UPLOAD_PORTRAIT_PATH2 = 
-			 "/resource/upload_buildings/" ;
+			 "./resource/upload_buildings/" ;
+	//logo
+	public static final String DEFAULT_LOGO_PATH ="./upload_buildings/";
+	
+	
 	@Autowired 
 	private BuildingActiveMapper buildingActiveMapper;
 	@Autowired
@@ -186,48 +201,60 @@ public class BuildingsActiveService {
 		public void insertAcPic (HttpServletRequest request) throws IOException {
 
 			Map<String, Object> entity = SessionVariable.getCurrentSessionVariable().getUser();
-			
+			String originalPicPath  = null;
+			String resource_path = null;
 	        String id = request.getParameter("id");
 	       // String buildings_id = request.getParameter("buildings_id");
 	        Long buildings_id = Long.parseLong( request.getParameter("buildings_id"));
 			MultipartHttpServletRequest mRequest = (MultipartHttpServletRequest) request;//request强制转换注意
 	    	MultipartFile file = mRequest.getFile("image");
 	        if (!file.isEmpty()) {
-	        	String uuid = UUID.randomUUID().toString();
+	        	
 	          String fileName = file.getOriginalFilename();
 	          if (StringUtils.isNotBlank(fileName)) {// 因为最后一个添加的控件没有上传相应的内容
 
 	            String fileType = fileName.substring(fileName.lastIndexOf("."));
 	            // 使用字符替换图片名称，防止乱码
-	            String tempName = id +"_"+ uuid.substring(1, 10) + fileType;
+	            String tempName = "hdt" + fileType;
 
-	            File uploadfile = new File(DEFAULT_USER_UPLOAD_PORTRAIT_PATH +buildings_id + "/huodongtu/" +  id +"/"+ tempName);// 上传地址
+	            File uploadfile = new File(DEFAULT_USER_UPLOAD_PORTRAIT_PATH +buildings_id + "/hdt/" +  id +"/"+ tempName);// 上传地址
 
+				if (uploadfile.isFile() && uploadfile.exists()) {  //文件夹中存在文件则表示已经入库过，则不再入库记录
+
+				}else {
+					
+					// 图片信息入库
+		            Long pid = Long.parseLong( id);
+					String big_type = "6";
+					resource_path = DEFAULT_USER_UPLOAD_PORTRAIT_PATH2 +buildings_id+ "/hdt/" +  id + "/";
+					// 要保存文件的文件名
+					String resource_name = tempName;
+
+
+					entity.put("pid", pid);
+					entity.put("buildings_id", buildings_id);
+					entity.put("big_type", big_type);
+					entity.put("sm_type", "33");
+					entity.put("resource_name", resource_name);
+					entity.put("resource_path", resource_path);
+					resourseDao.Insert(entity); 
+				}
+	            
 	            if (!uploadfile.exists() || !uploadfile.isDirectory()) {
 	            	uploadfile.deleteOnExit();
 	            	uploadfile.mkdirs();
+	            	
+	            	resource_path = DEFAULT_USER_UPLOAD_PORTRAIT_PATH2
+							+ buildings_id + "/hdt/" +  id + "/";
+					originalPicPath = DEFAULT_USER_UPLOAD_PORTRAIT_PATH
+							+ buildings_id+ "/hdt/" +  id + "/"
+							+ tempName;
 	            }
 	          
 	            file.transferTo(uploadfile);// 开始上传
-	           
-	            // 图片信息入库
-	            Long pid = Long.parseLong( id);
-	           
-				String big_type = "6";
-				
-				
-				String resource_path = DEFAULT_USER_UPLOAD_PORTRAIT_PATH2 +buildings_id+ "/huodongtu/" +  id + "/";
-				// 要保存文件的文件名
-				String resource_name = tempName;
-
-
-				entity.put("pid", pid);
-				entity.put("buildings_id", buildings_id);
-				entity.put("big_type", big_type);
-				entity.put("sm_type", "33");
-				entity.put("resource_name", resource_name);
-				entity.put("resource_path", resource_path);
-				resourseDao.Insert(entity); 
+	            //添加水印
+				pressImage(originalPicPath,fileType);
+	            
 	            
 //	            String portraitPath = DEFAULT_USER_UPLOAD_PORTRAIT_PATH +id+ File.separator + "huxingtu" + File.separator+ shi + File.separator;
 //	            String originalPicPath = uploadfile.getAbsolutePath();
@@ -274,4 +301,52 @@ public class BuildingsActiveService {
 
 	        return result;
 	    }
+	    
+	  //添加水印
+		@SuppressWarnings("restriction")
+		public void pressImage(String targetImg, String fileType) throws FileNotFoundException {
+
+			try {
+				InputStream inputStream = new FileInputStream(targetImg);
+
+				BufferedImage buffImg = ImageIO.read(inputStream);
+				   int wideth = buffImg.getWidth(null); 
+				   int height = buffImg.getHeight(null);
+				   
+				   System.out.println("llllllllllllllllllllllllllllll");
+				   System.out.println(wideth);
+				   System.out.println(height);
+		        //得到画笔对象
+		        Graphics g = buffImg.getGraphics();
+		        
+		        //创建你要附加的图象。
+		        //2.jpg是你的小图片的路径
+		        ImageIcon imgIcon = new ImageIcon(DEFAULT_LOGO_PATH
+						+ "logo.png"); 
+		      
+		        //得到Image对象。
+		        Image img = imgIcon.getImage(); 
+		        int wideth_biao = img.getWidth(null); 
+		        int height_biao = img.getHeight(null); 
+		        System.out.println("kkkkkkkkkkkkkkkk");
+				   System.out.println(wideth_biao);
+				   System.out.println(height_biao);
+		        //将小图片绘到大图片上。
+		        //5,300 .表示你的小图片在大图片上的位置。
+		        g.drawImage(img,(wideth - wideth_biao) ,(height - height_biao) , wideth_biao, height_biao, null);
+		      
+		       
+		        
+		        //创键编码器，用于编码内存中的图象数据。
+		        
+		        ImageIO.write(buffImg, "jpeg", new FileOutputStream(targetImg));
+		        
+		        inputStream.close();
+		      
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+		}
 }
