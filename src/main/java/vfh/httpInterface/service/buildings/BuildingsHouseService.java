@@ -59,21 +59,21 @@ public class BuildingsHouseService {
 	/**
 	 * 户型图存放目录
 	 */
-//	public static final String DEFAULT_USER_UPLOAD_PORTRAIT_PATH = "/vfh/apache-tomcat-7.0.67/webapps/management/resource/upload_buildings/" ;
-//
-//	public static final String DEFAULT_USER_UPLOAD_PORTRAIT_PATH2 = 
-//			 "/resource/upload_buildings/" ;
-//    //水印logo 
-//	public static final String DEFAULT_LOGO_PATH ="/vfh/apache-tomcat-7.0.67/webapps/management/resource/upload_buildings/";
-//	
-	
-	//本地路径
-	public static final String DEFAULT_USER_UPLOAD_PORTRAIT_PATH = "./upload_buildings/" ;
+	public static final String DEFAULT_USER_UPLOAD_PORTRAIT_PATH = "/vfh/apache-tomcat-7.0.67/webapps/management/resource/upload_buildings/" ;
 
 	public static final String DEFAULT_USER_UPLOAD_PORTRAIT_PATH2 = 
-			 "./resource/upload_buildings/" ;
-	//logo
-	public static final String DEFAULT_LOGO_PATH ="./upload_buildings/";
+			 "/resource/upload_buildings/" ;
+    //水印logo 
+	public static final String DEFAULT_LOGO_PATH ="/vfh/apache-tomcat-7.0.67/webapps/management/resource/upload_buildings/";
+	
+	
+	//本地路径
+//	public static final String DEFAULT_USER_UPLOAD_PORTRAIT_PATH = "./upload_buildings/" ;
+//
+//	public static final String DEFAULT_USER_UPLOAD_PORTRAIT_PATH2 = 
+//			 "./resource/upload_buildings/" ;
+//	//logo
+//	public static final String DEFAULT_LOGO_PATH ="./upload_buildings/";
 	
 	
 	
