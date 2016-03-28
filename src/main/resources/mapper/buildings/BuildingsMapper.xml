@@ -225,7 +225,7 @@
 		SELECT b.buildings_name,
 		       b.server_phone_num,a.*,
                c.resource_name,
-               d.nomal_price ,
+               d.first_price ,
                d.discount_price
                	
 		FROM tb_building_active a
@@ -254,7 +254,7 @@
 			AND b.area_id LIKE #{filter.area_id}
 		</if>
 		AND b.status=0
-		ORDER BY a.end_date desc
+		ORDER BY a.create_time desc
 	    <if test="filter.first != null and filter.last != null">
 			LIMIT	#{filter.first},#{filter.last}
 		</if>
@@ -289,7 +289,7 @@
 	<select id="getMoreDetail" resultType="hashmap">
 		SELECT
 		a.*,a.id buildings_id, f.resource_path  tj_path, f.resource_name  tj_name,  b.resource_path logo_path,b.resource_name logo_name,c.resource_path ad_path,c.resource_name ad_name,
-		d.first_price,d.nomal_price,d.discount_price,e.active_name,e.active_detail,e.active_price,e.end_date,
+		d.first_price,d.first_price,d.discount_price,e.active_name,e.active_detail,e.active_price,e.end_date,
 		e.start_date,e.active_jianjie
 		FROM
 		tb_buildings a
