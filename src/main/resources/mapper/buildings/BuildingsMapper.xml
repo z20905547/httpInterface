@@ -286,7 +286,7 @@
 		</if>
 		AND b.status=0
 	   </select>
-	<select id="getMoreDetail" resultType="hashmap">
+	<select id="getMoreDetail" resultType="hashmap"> 
 		SELECT
 		a.*,a.id buildings_id, f.resource_path  tj_path, f.resource_name  tj_name,  b.resource_path logo_path,b.resource_name logo_name,c.resource_path ad_path,c.resource_name ad_name,
 		d.first_price,d.first_price,d.discount_price,e.active_name,e.active_detail,e.active_price,e.end_date,
