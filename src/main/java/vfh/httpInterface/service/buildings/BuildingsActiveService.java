@@ -326,21 +326,28 @@ public class BuildingsActiveService {
 		        Image img = imgIcon.getImage(); 
 		        int wideth_biao = img.getWidth(null); 
 		        int height_biao = img.getHeight(null); 
-
 		        //将小图片绘到大图片上。
 		        //5,300 .表示你的小图片在大图片上的位置。
 		        g.drawImage(img,(wideth - wideth_biao) ,(height - height_biao) , wideth_biao, height_biao, null);
 		      
+		        
+		        
+		        g.dispose();
+		        
+		        
 		        //创键编码器，用于编码内存中的图象数据。
 		        os = new FileOutputStream(targetImg); 
-		        ImageIO.write(buffImg, "jpeg", new FileOutputStream(targetImg));
+		        
+		        ImageIO.write(buffImg, "jpeg", os );
 		        
 		        inputStream.close();
+		        
+		         
 		      
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-			}finally {     
+			} finally {     
 	            try {     
 	                if (null != os)     
 	                    os.close();     
@@ -348,6 +355,5 @@ public class BuildingsActiveService {
 	                e.printStackTrace();     
 	            } 
 			}
-
 		}
 }
