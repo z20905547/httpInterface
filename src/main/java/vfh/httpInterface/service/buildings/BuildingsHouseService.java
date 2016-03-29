@@ -10,6 +10,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -658,7 +659,7 @@ public class BuildingsHouseService {
 //添加水印
 	@SuppressWarnings("restriction")
 	public void pressImage(String targetImg, String fileType) throws FileNotFoundException {
-
+		OutputStream os = null;
 		try {
 			InputStream inputStream = new FileInputStream(targetImg);
 
@@ -666,9 +667,6 @@ public class BuildingsHouseService {
 			   int wideth = buffImg.getWidth(null); 
 			   int height = buffImg.getHeight(null);
 			   
-			   System.out.println("llllllllllllllllllllllllllllll");
-			   System.out.println(wideth);
-			   System.out.println(height);
 	        //得到画笔对象
 	        Graphics g = buffImg.getGraphics();
 	        
@@ -681,25 +679,34 @@ public class BuildingsHouseService {
 	        Image img = imgIcon.getImage(); 
 	        int wideth_biao = img.getWidth(null); 
 	        int height_biao = img.getHeight(null); 
-	        System.out.println("kkkkkkkkkkkkkkkk");
-			   System.out.println(wideth_biao);
-			   System.out.println(height_biao);
 	        //将小图片绘到大图片上。
 	        //5,300 .表示你的小图片在大图片上的位置。
 	        g.drawImage(img,(wideth - wideth_biao) ,(height - height_biao) , wideth_biao, height_biao, null);
 	      
-	       
+	        
+	        
+	        g.dispose();
+	        
 	        
 	        //创键编码器，用于编码内存中的图象数据。
+	        os = new FileOutputStream(targetImg); 
 	        
-	        ImageIO.write(buffImg, "jpeg", new FileOutputStream(targetImg));
+	        ImageIO.write(buffImg, "jpeg", os );
 	        
 	        inputStream.close();
+	        
+	         
 	      
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} finally {     
+            try {     
+                if (null != os)     
+                    os.close();     
+            } catch (Exception e) {     
+                e.printStackTrace();     
+            } 
 		}
-
 	}
 }
