@@ -242,7 +242,7 @@ public class BuildingsActiveService {
 				}
 	            
 	            if (!uploadfile.exists() || !uploadfile.isDirectory()) {
-	            	uploadfile.deleteOnExit();
+	            
 	            	uploadfile.mkdirs();
 	            	
 	            	resource_path = DEFAULT_USER_UPLOAD_PORTRAIT_PATH2
