@@ -164,7 +164,7 @@ public class BuildingsHouseService {
 						 + id + "/" + tempName);// 上传地址
 
 				if (!uploadfile.exists() || !uploadfile.isDirectory()) {
-					uploadfile.deleteOnExit();
+					//uploadfile.deleteOnExit();
 					uploadfile.mkdirs();
 				}
 				originalPicPath = DEFAULT_USER_UPLOAD_PORTRAIT_PATH
@@ -177,7 +177,7 @@ public class BuildingsHouseService {
 				String big_type = "1";
 				String sm_type = shi;
 
-				String resource_path = DEFAULT_USER_UPLOAD_PORTRAIT_PATH2 + + buildings_id + "/huxingtu/"
+				String resource_path = DEFAULT_USER_UPLOAD_PORTRAIT_PATH2 +  buildings_id + "/huxingtu/"
 						 + id + "/";
 				// 要保存文件的文件名
 				String resource_name = tempName;
