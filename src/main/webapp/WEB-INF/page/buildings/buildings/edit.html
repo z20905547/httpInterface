@@ -27,7 +27,7 @@ head>
 					format:"Y-m-d"
 			       });
 				//富文本编辑器
-				var um = UM.getEditor('buildingsDetail');
+				var um = UM.getEditor('buildings_detail');
 				//富文本编辑器
 				var um = UM.getEditor('around_peitao');
 				//富文本编辑器
@@ -94,7 +94,7 @@ head>
 				
 				getSubList(100000,460000,proObj);
 				//判断是否存在市县
-				var city_id = ${entity.city_id!''};
+				var city_id = "${entity.city_id!''}";
 				var area_id = "${entity.area_id!''}";
 				if(city_id == 'wu') {
 					getSubList(460000,460100,cityObj);
@@ -103,7 +103,7 @@ head>
 				};
 				
 				if(area_id == 'wu' ){
-					getSubList(${entity.city_id},0,areaObj);
+					getSubList(460100,0,areaObj);
 				}else {
 					getSubList(${entity.city_id},${entity.area_id!''},areaObj);
 					};
@@ -353,8 +353,8 @@ head>
 					<div class="row">
 						<div class="col-xs-12">
 							<label for="buildingsDetail">楼盘简介:</label>
-							<script type="text/plain" id="buildingsDetail"
-								name="buildingsDetail" style="width: 100%; height: 240px;">${entity.buildings_detail!''}
+							<script type="text/plain" id="buildings_detail"
+								name="buildings_detail" style="width: 100%; height: 240px;">${entity.buildings_detail!''}
 							</script>
 						</div>
 					</div>

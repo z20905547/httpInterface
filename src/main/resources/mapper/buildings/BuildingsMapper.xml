@@ -180,7 +180,7 @@
 			<if test="entity.ratio != null">
 				ratio = #{entity.ratio},
 			</if>
-			<if test="entity.ratio != null">
+			<if test="entity.right_years != null">
 				right_years = #{entity.right_years},
 			</if>
 			<if test="entity.buildings_detail != null">
