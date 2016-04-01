@@ -164,7 +164,7 @@ public class BuildingsHouseService {
 						 + id + "/" + tempName);// 上传地址
 
 				if (!uploadfile.exists() || !uploadfile.isDirectory()) {
-					//uploadfile.deleteOnExit();
+					
 					uploadfile.mkdirs();
 				}
 				originalPicPath = DEFAULT_USER_UPLOAD_PORTRAIT_PATH
@@ -243,7 +243,7 @@ public class BuildingsHouseService {
 						+ "/" + tempName);// 上传地址
 
 				if (!uploadfile.exists() || !uploadfile.isDirectory()) {
-					uploadfile.deleteOnExit();
+				
 					uploadfile.mkdirs();
 
 					// 图片信息入库
@@ -301,7 +301,7 @@ public class BuildingsHouseService {
 						 + tempName);// 上传地址
 
 				if (!uploadfile.exists() || !uploadfile.isDirectory()) {
-					uploadfile.deleteOnExit();
+				
 					uploadfile.mkdirs();
 
 					// 图片信息入库
@@ -354,7 +354,7 @@ public class BuildingsHouseService {
 						+ tempName);// 上传地址
 
 				if (!uploadfile.exists() || !uploadfile.isDirectory()) {
-					uploadfile.deleteOnExit();
+					
 					uploadfile.mkdirs();
 
 					// 图片信息入库
@@ -409,7 +409,7 @@ public class BuildingsHouseService {
 						+  tempName);// 上传地址
 
 				if (!uploadfile.exists() || !uploadfile.isDirectory()) {
-					uploadfile.deleteOnExit();
+				
 					uploadfile.mkdirs();
 
 					// 图片信息入库
@@ -483,7 +483,7 @@ public class BuildingsHouseService {
 				
 				
 				if (!uploadfile.exists() || !uploadfile.isDirectory()) {
-					uploadfile.deleteOnExit();
+				
 					uploadfile.mkdirs();
 
 					// 图片信息入库
@@ -542,7 +542,7 @@ public class BuildingsHouseService {
 				
 				
 				if (!uploadfile.exists() || !uploadfile.isDirectory()) {
-					uploadfile.deleteOnExit();
+				
 					uploadfile.mkdirs();
 
 					// 图片信息入库
@@ -600,7 +600,7 @@ public class BuildingsHouseService {
 				
 				
 				if (!uploadfile.exists() || !uploadfile.isDirectory()) {
-					uploadfile.deleteOnExit();
+				
 					uploadfile.mkdirs();
 
 					// 图片信息入库
