@@ -42,58 +42,6 @@
 
 <#macro body>
 
-<div class="modal fade" id="search-modal" role="dialog" aria-hidden="true">
-
-    <div class="modal-dialog">
-
-        <div class="modal-content">
-
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title"><span class="glyphicon glyphicon-search"></span> 内容查询</h4>
-            </div>
-
-            <form id="house-search-form" action="${base}/buildings/house/list" method="post">
-    <input type="hidden" id="pageNumber" name="pageNumber" value="0"/>
-                <div class="modal-body">
-
-                    <div class="form-group">
-                        <div class="row">
-                            <div class="col-xs-6">
-                                <label for="username">登录帐号:</label>
-                                <input type="text" class="form-control" id="username" name="username" value="${RequestParameters.username!''}">
-                            </div>
-                            <div class="col-xs-6">
-                                <label for="nickname">昵称:</label>
-                                <input type="text" class="form-control" id="nickname" name="nickname" value="${RequestParameters.nickname!''}">
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <div class="row">
-                            <div class="col-xs-6">
-                                <label for="email">电子邮件:</label>
-                                <input type="text" class="form-control" id="email" name="email" value="${RequestParameters.email!''}">
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-
-                <div class="modal-footer">
-                    <button type="submit" class="btn btn-success">
-                        <span class="glyphicon glyphicon-ok"></span> 确定
-                    </button>
-                    <button type="reset" class="btn btn-warning">
-                        <span class="glyphicon glyphicon-trash"></span> 重置
-                    </button>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
-
 <div class="data-content">
 
 <!--     <ol class="breadcrumb"> -->
@@ -108,8 +56,10 @@
     </div>
     </#if>
 
-    <form id="house-list-form" action="${base}/buildings/house/hxtInsert" valid="false" method="post">
+    <form id="house-list-form" action="${base}/buildings/house/list" valid="false" method="post">
     <input type="hidden" id="pageNumber" name="pageNumber" value="0"/>
+    <input type="hidden" name="buildingsId" value="${buildingsId}"/>
+<input type="hidden" name="buildingsName" value="${buildingsName}"/>
         <div class="panel panel-default">
 
 
