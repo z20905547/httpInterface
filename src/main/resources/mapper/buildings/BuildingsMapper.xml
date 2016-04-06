@@ -55,7 +55,7 @@
 		#{entity.parkingCount},
 		#{entity.floorDetail},
 		#{entity.buildingsDetail},
-		#{entity.main_door},#{entity.around_peitao},#{entity.around_peitao},
+		#{entity.main_door},#{entity.around_peitao},#{entity.internal_peitao},
 		#{entity.traffic},#{entity.wuye_fee},#{entity.developer_company},
 		#{entity.property_company}, #{entity.wuye_type},
 		#{entity.project_features}, #{entity.ratio}, #{entity.right_years},
