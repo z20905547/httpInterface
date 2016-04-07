@@ -75,7 +75,7 @@ public class BuildingsHouseService {
 //			 "./resource/upload_buildings/" ;
 //	//logo
 //	public static final String DEFAULT_LOGO_PATH ="./upload_buildings/";
-	
+//	
 	
 	
 	
@@ -172,6 +172,10 @@ public class BuildingsHouseService {
 						 + id + "/" + tempName;
 				file.transferTo(uploadfile);// 开始上传
 				pressImage(originalPicPath,fileType);
+				//缩小图片
+				scale(originalPicPath,DEFAULT_USER_UPLOAD_PORTRAIT_PATH
+						+ buildings_id + "/huxingtu/"
+						 + id + "/" ,tempName);
 				// 图片信息入库
 				Long pid = Long.parseLong(id);
 				String big_type = "1";
@@ -261,7 +265,10 @@ public class BuildingsHouseService {
 				file21.transferTo(uploadfile);
 				// 图片加水印
 				pressImage(originalPicPath,fileType);
-				
+				//
+				scale(originalPicPath,DEFAULT_USER_UPLOAD_PORTRAIT_PATH
+						+ buildings_id +  "/xgt"
+						+ "/" ,tempName);
 
 				// 要保存文件的文件名
 				String resource_name = tempName;
@@ -317,6 +324,9 @@ public class BuildingsHouseService {
 				// 开始上传
 				file22.transferTo(uploadfile);
 				pressImage(originalPicPath,fileType);
+				//缩小图片
+				scale(originalPicPath,DEFAULT_USER_UPLOAD_PORTRAIT_PATH
+						+ buildings_id +  "/jtt/" ,tempName);
 				// 要保存文件的文件名
 				String resource_name = tempName;
 
@@ -371,6 +381,9 @@ public class BuildingsHouseService {
 				file23.transferTo(uploadfile);
                 //添加水印
 				pressImage(originalPicPath,fileType);
+				//缩小图片
+				scale(originalPicPath,DEFAULT_USER_UPLOAD_PORTRAIT_PATH
+						+ buildings_id + "/sjt/" ,tempName);
 				// 要保存文件的文件名
 				String resource_name = tempName;
 				pressImage(originalPicPath,fileType);
@@ -425,6 +438,9 @@ public class BuildingsHouseService {
 				// 开始上传
 				file24.transferTo(uploadfile);
 				pressImage(originalPicPath,fileType);
+				//缩小图片
+				scale(originalPicPath,DEFAULT_USER_UPLOAD_PORTRAIT_PATH
+						+ buildings_id +  "/ybj/" ,tempName);
 				// 要保存文件的文件名
 				String resource_name = tempName;
 
@@ -709,4 +725,47 @@ public class BuildingsHouseService {
             } 
 		}
 	}
+	
+	  /**
+     * 缩放图像（按比例缩放）
+     * @param srcImageFile 源图像文件地址
+     * @param result 缩放后的图像地址
+     * @param scale 缩放比例
+     * @param flag 缩放选择:true 放大; false 缩小;
+     */
+    public final static void scale(String targetImg,String targetImgNoName, String tempName
+            ) {
+    	FileOutputStream out=null;
+		try {
+			
+			InputStream inputStream = new FileInputStream(targetImg);
+
+			BufferedImage buffImg = ImageIO.read(inputStream);
+			   int wideth = buffImg.getWidth(null); 
+			   int height = buffImg.getHeight(null);
+	       int newWideth = 255;
+	       int newHeight = (height * 255)/wideth;
+			   
+			   BufferedImage tag = new BufferedImage(newWideth, newHeight,
+		                  BufferedImage.TYPE_INT_RGB);
+		           tag.getGraphics().drawImage(buffImg, 0, 0, newWideth, newHeight, null); 
+		           String newimg = "sm_"+tempName;
+		           out = new FileOutputStream(targetImgNoName + newimg);
+		           
+		            ImageIO.write(tag, "jpeg", out );
+			        inputStream.close();
+		            out.close();
+	      
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {     
+            try {     
+                if (null != out)     
+                	out.close();     
+            } catch (Exception e) {     
+                e.printStackTrace();     
+            } 
+		}
+    }
 }
