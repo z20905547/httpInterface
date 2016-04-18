@@ -36,4 +36,23 @@ public class HttpNoticeController {
 		res.put("returnMsg",m.get("returnMsg"));
 		RequestParamUtil.responseWriter(request, response, res);
 	}
+	
+	@RequestMapping("/getNoticedetail")
+	@ResponseBody
+	public void getNoticedetail(HttpServletRequest request,HttpServletResponse response){
+		Map res = new HashMap();
+		Map params = RequestParamUtil.requestToMap(request);
+		Long Id =Long.parseLong(params.get("Id").toString());
+		Map m =  noticeService.getNoticeforWeb(Id);
+		if("000000".equals(m.get("returnCode"))){
+			res.put("data", m.get("data"));
+			res.put("statusCode","0000");
+		}else{
+			res.put("statusCode","1111");
+		}
+		res.put("returnMsg",m.get("returnMsg"));
+		RequestParamUtil.responseWriter(request, response, res);
+	}
+	
+	
 }

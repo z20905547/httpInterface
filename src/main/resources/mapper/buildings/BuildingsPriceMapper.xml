@@ -57,7 +57,7 @@
 	      <if test="entity.nomal_price != null" >
 	        nomal_price = #{entity.nomal_price},
 	      </if>
-	      <if test="entity.discount_price != null" >
+	      <if test="entity.discount_price != null and entity.discount_price != ''" >
 	        discount_price = #{entity.discount_price},
 	      </if>
 	      <if test="entity.active_id != null" >

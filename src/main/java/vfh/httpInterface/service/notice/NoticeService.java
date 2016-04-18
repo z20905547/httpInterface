@@ -180,4 +180,21 @@ public class NoticeService {
 	    return returnMap;
 	}
    
+	
+	
+	public Map<String, Object> getNoticeforWeb(Long Id){
+		returnMap.clear();
+		
+		Map<String, Object> noticeDetail=noticeDao.getNoticeByID(Id);
+		if(StringUtil.isNotEmptyMap(noticeDetail)){
+    		returnMap.put("returnCode", "000000");
+    		returnMap.put("data",noticeDetail);
+    		returnMap.put("returnMsg", "获取楼盘信息成功！");
+    	}else{
+    		returnMap.put("returnCode", "1111");
+    		returnMap.put("returnMsg", "获取楼盘信息失败！");
+    	}
+	    return returnMap;
+	}
+   
 }
