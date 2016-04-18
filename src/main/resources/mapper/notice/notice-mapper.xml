@@ -10,7 +10,7 @@
             Id AS "Id",
             Title AS "Title",
             Content AS "Content",
-            MessageDate AS "MessageDate",
+            DATE_FORMAT(MessageDate,'%M %D,%Y') AS "MessageDate",
             author AS "author"
           FROM
             tb_notice
