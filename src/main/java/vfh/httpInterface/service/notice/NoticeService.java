@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.imageio.ImageIO;
+import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.collections.MapUtils;
@@ -26,6 +27,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import vfh.httpInterface.commons.Page;
 import vfh.httpInterface.commons.PageRequest;
@@ -52,7 +55,13 @@ import com.google.common.collect.Lists;
 @Transactional
 @SuppressWarnings({"SpringJavaAutowiringInspection", "ResultOfMethodCallIgnored"})
 public class NoticeService {
-
+	// 本地
+//	    public static final String DEFAULT_USER_UPLOAD_PORTRAIT_PATH = "./src/main/webapp/resource/upload_buildings/news/" ;
+//	    public static final String DEFAULT_USER_UPLOAD_PORTRAIT_PATH2 =  "/resource/upload_buildings/news/" ;
+	  
+		//正式环境
+		public static final String DEFAULT_USER_UPLOAD_PORTRAIT_PATH = "/vfh/apache-tomcat-7.0.67/webapps/management/resource/upload_buildings/news/" ;
+		public static final String DEFAULT_USER_UPLOAD_PORTRAIT_PATH2 = "/resource/upload_buildings/news/" ;
     @Autowired
     private NoticeDao noticeDao;
     Map<String, Object> returnMap=new HashMap<String, Object>();
@@ -196,5 +205,38 @@ public class NoticeService {
     	}
 	    return returnMap;
 	}
-   
+	//添加文章图片
+	public void addNoticePic (HttpServletRequest request) throws IOException {
+
+
+        Long id = Long.parseLong( request.getParameter("id"));
+		MultipartHttpServletRequest mRequest = (MultipartHttpServletRequest) request;//request强制转换注意
+    	MultipartFile file = mRequest.getFile("image");
+        if (!file.isEmpty()) {
+        	
+          String fileName = file.getOriginalFilename();
+          if (StringUtils.isNotBlank(fileName)) {// 因为最后一个添加的控件没有上传相应的内容
+
+            String fileType = fileName.substring(fileName.lastIndexOf("."));
+            // 使用字符替换图片名称，防止乱码
+            String tempName = "fm" + fileType;
+
+            File uploadfile = new File(DEFAULT_USER_UPLOAD_PORTRAIT_PATH +id +"/"+ tempName);// 上传地址
+            
+            if (!uploadfile.exists() || !uploadfile.isDirectory()) {
+            
+            	uploadfile.mkdirs();
+            	
+            }
+          
+            file.transferTo(uploadfile);// 开始上传
+            
+            
+//            String portraitPath = DEFAULT_USER_UPLOAD_PORTRAIT_PATH +id+ File.separator + "huxingtu" + File.separator+ shi + File.separator;
+//            String originalPicPath = uploadfile.getAbsolutePath();
+//            
+//            scaleImage(originalPicPath, portraitPath, PortraitSize.MIDDLE);
+//            scaleImage(originalPicPath, portraitPath, PortraitSize.SMALL);
+          }}
+	}
 }
