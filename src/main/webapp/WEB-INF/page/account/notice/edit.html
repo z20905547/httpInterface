@@ -3,6 +3,9 @@
 <#macro title>
 添加公告
 </#macro>
+<script type="text/javascript" src="//cdn.bootcss.com/bootstrap-fileinput/4.3.0/js/fileinput.min.js"></script>
+<script type="text/javascript" src="//cdn.bootcss.com/bootstrap-fileinput/4.3.0/js/fileinput_locale_zh.min.js"></script>
+<link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/bootstrap-fileinput/4.3.0/css/fileinput.min.css">
 <script type="text/javascript" charset="utf-8" src="${base}/resource/script/umeditor.config.js"></script>
 <script type="text/javascript" charset="utf-8" src="${base}/resource/script/umeditor.min.js"></script>
 <link rel="stylesheet" type="text/css" href="${base}/resource/css/umeditor.min.css">
@@ -12,18 +15,46 @@
 var um = UM.getEditor('Content');
 </script>
 <#macro head>
+
+
 <script type="text/javascript">
 
     $(document).ready(function () {
-        $("#selectAll").click(function () {
-            var checkbox = $(this),
-                    children = checkbox.parents("table").find("tbody input[type='checkbox']");
+        //图片上传
 
-            children.prop("checked", checkbox.is(":checked"));
-        });
+		$('input[type=file]').each(function() { 
+		    var imageurl = $(this).attr("value");
+		    if (imageurl) {
+		        $(this).fileinput({ 
+		        	uploadUrl: "${base}/account/notice/addNoticePic?id=${entity.Id}", 
+		        	previewFileIcon: '<i class="fa fa-file"></i>',
+		            language : 'zh',
+		            allowedFileTypes : [ 'image' ],
+		            allowedFileExtensions : [ 'jpg', 'png', 'gif' ],
+		            maxFileSize : 4000,
+		            maxFileCount: 10
+		        });
+		    } else {
+		        $(this).fileinput({
+		        	uploadUrl: "${base}/account/notice/addNoticePic?id=${entity.Id}",
+		        	previewFileIcon: '<i class="fa fa-file"></i>',
+		            language : 'zh',
+		            allowedFileTypes : [ 'image' ],
+		            allowedFileExtensions : [ 'jpg', 'png', 'gif' ],
+		            maxFileCount: 10,
+		            enctype: 'multipart/form-data',
+		            maxFileSize : 4000
+		        });
+		    }
+
+		});
+        
     });
+    
 
 </script>
+
+
 </#macro>
 
 <#macro body>
@@ -39,6 +70,22 @@ var um = UM.getEditor('Content');
         <div class="panel-heading">
             <h3 class="panel-title"><span class="glyphicon glyphicon-edit"></span> 添加公告</h3>
         </div>
+        
+               <form enctype="multipart/form-data" action="${base}/account/notice/update" id="create-user-form" method="post">
+            <div class="panel-body">
+ <input type="hidden" id="Id" name="Id" value="${entity.Id!''}">
+                
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-xs-12">
+                        <input type="file" name="image" id="image" multiple class="file-loading" value="" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </form>
+        
         <form action="${base}/account/notice/update" id="create-notice-form" method="post">
          <input type="hidden" id="Id" name="Id" value="${entity.Id!''}">
             <div class="panel-body">

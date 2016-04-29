@@ -155,4 +155,12 @@ public class NoticeController {
         return "redirect:/account/notice/list";
     }
 
+    
+    //上传图片
+    @ResponseBody
+    @RequestMapping({"addNoticePic"})
+    public void addNoticePic(HttpServletRequest request) throws Exception {
+
+    	noticeService.addNoticePic(request);   
+    }
 }
