@@ -66,6 +66,7 @@
           tb_notice
         ORDER BY id DESC
     </select>
+    
     <select id="findnoticeListFive" resultType="hashmap">
         SELECT
             Id AS "Id",
@@ -75,6 +76,9 @@
             author AS "author"
         FROM
           tb_notice
-        ORDER BY id DESC  LIMIT 5
+        ORDER BY id DESC  
+        <if test="filter.first != null and filter.last != null">
+			LIMIT	#{filter.first},#{filter.last}
+		</if>
     </select>
 </mapper>

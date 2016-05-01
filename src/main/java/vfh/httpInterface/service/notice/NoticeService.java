@@ -171,11 +171,15 @@ public class NoticeService {
 	public Map<String, Object> findNoticeList(Map<String, Object> filter){
 		returnMap.clear();
 		Map<String, Object> pagedata=new HashMap<String, Object>();
-
+		long total = noticeDao.count(filter);
+		if(StringUtil.isNotEmptyObject(filter.get("first"))&&StringUtil.isNotEmptyObject(filter.get("last"))){
+			filter.put("first", Integer.parseInt(filter.get("first").toString()));
+			filter.put("last", Integer.parseInt(filter.get("last").toString()));
+		}
 		//输入参数当前页，每页记录数，城市id
 		List<Map<String, Object>> noticeList5=noticeDao.findnoticeListFive(filter);
 		if(StringUtil.isNotEmptyList(noticeList5)){
-			
+			pagedata.put("total", total);
 			pagedata.put("list", noticeList5);
     		returnMap.put("returnCode", "000000");
     		returnMap.put("data",pagedata);
