@@ -107,8 +107,16 @@
                     <thead>
                         <tr>
                             <th></th>
+                            <th>订单类别</th>
                             <th>客户姓名</th>
+                            <th>性别</th>
                             <th>客户手机号</th>
+                            <th>意向区域</th>
+                            <th>房屋类型</th>
+                            <th>户型</th>
+                            <th>面积</th>
+                            <th>预算</th>
+                             <th>装修要求</th>
                             <th>楼盘名称</th>
                             <th>创建时间</th>
                             <th>其他要求</th>
@@ -124,8 +132,16 @@
                             <#list page.content as r>
                             <tr>
                                 <td><input type="checkbox" name="ids" value="${r.id}"></td>
+                                <td>${r.ordertype!''}</td>
                                 <td>${r.customer_name!''}</td>
+                                <td>${r.sexy!''}</td>
                                 <td>${r.customer_num!''}</td>
+                                <td>${r.city!''}</td>
+                                <td>${r.housetype!''}</td>
+                                <td>${r.huxing!''}</td>
+                                <td>${r.mianji!''}</td>
+                                <td>${r.yusuan!''}</td>
+                                <td>${r.zhuangxiu!''}</td>
                                 <td>${r.buildings_name!''}</td>
                                 <td>${r.create_date!''}</td>
                                 <td>${r.other_Req!''}</td>
