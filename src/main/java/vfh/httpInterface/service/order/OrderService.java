@@ -38,7 +38,7 @@ public class OrderService {
         return new Page<Map<String, Object>>(pageRequest, content, total);
     }
 	
-	public void insert(@MapValid("insert-order") Map<String, Object> entity){
+	public void insert(Map<String, Object> entity){
 		 orderDao.insert(entity);
 	}
 
