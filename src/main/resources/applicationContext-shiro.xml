@@ -38,6 +38,7 @@
 
    <!-- 考虑到集群，使用DefaultWebSessionManager来做sessionManager -->
     <bean id="sessionManager" class="org.apache.shiro.web.session.mgt.DefaultWebSessionManager">
+        <property name="globalSessionTimeout" value="3600000"/>
     	<!-- 使用EnterpriseCacheSessionDAO，解决session同步问题 -->
     	<property name="sessionDAO" ref="sessionDAO" />
     </bean>
