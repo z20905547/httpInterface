@@ -5,37 +5,92 @@
 </#macro>
 
 <#macro head>
+
 <script type="text/javascript">
+	$(document).ready(
+			
+			
+			function() {
+				$(".blocklink").on("click",function(){
+		    		var actionUrl=$(this).attr("data-href");
+		    		var buildingsId=$(this).attr("data-building-id");
+		    		var buildingsName=$(this).attr("data-building-name");
+		    		$("<form action='"+actionUrl+"' method='post'>").append("<input name='buildingsId' value='"+buildingsId+"'/><input name='buildingsName' value='"+buildingsName+"'/>").submit().remove();
+		    		
+		    	});
+				//省市下拉框
+				var proObj=$(".proId");
+				var cityObj=$(".city_id");
+				var areaObj=$(".area_id");
+				
+				getSubList(100000,460000,proObj);
 
-    $(document).ready(function () {
-        $("#selectAll").click(function () {
-            var checkbox = $(this),
-                    children = checkbox.parents("table").find("tbody input[type='checkbox']");
+				//判断是否存在市县
+				var city_id = "${city_id!'0'}";
+				var area_id = "${area_id!'0'}";
 
-            children.prop("checked", checkbox.is(":checked"));
-        });
-        $(".blocklink").on("click",function(){
-    		var actionUrl=$(this).attr("data-href");
-    		var buildingsId=$(this).attr("data-building-id");
-    		var buildingsName=$(this).attr("data-building-name");
-    		$("<form action='"+actionUrl+"' method='post'>").append("<input name='buildingsId' value='"+buildingsId+"'/><input name='buildingsName' value='"+buildingsName+"'/>").submit().remove();
-    		
-    	});
-    });
-
-    function submitDeleteForm() {
-        var length = $("#buildings-list-form").find("input[type='checkbox'][id!='selectAll']:checked").length;
-        if (length == 0) {
-            return ;
-        }
-        bootbox.confirm("确定要删除选中的" + length + "条记录吗？", function (result) {
-            if (result) {
-                $("#buildings-list-form").submit();
-            }
-        });
-    }
+				if(city_id =="") city_id="wu";
+				if(area_id =="") area_id="wu";
+				if(city_id == 'wu') {
+					getSubList(460000,0,cityObj);
+				}else {
+					getSubList(460000,city_id,cityObj);
+				};
+				
+				if(area_id == 'wu' ){
+					getSubList(460100,0,areaObj);
+				}else {
+					getSubList(city_id,area_id,areaObj);
+					};
+				
+				
+				
+				
+				
+				proObj.on("change",function(){
+					getSubList($(this).val(),0,cityObj)
+					getSubList(0,0,areaObj)
+				});
+				cityObj.on("change",function(){
+					getSubList($(this).val(),0,areaObj)
+				});
+			});
 	
+	function getSubList(pid,id,obj){
+		obj.html("");
+		obj.val("");
+		obj.append("<option value=''>--请选择--</option>");
+		if(!pid){
+			return;
+		}
+		var url="/httpInterface/jsondata/area/getSubAreaList";
+		var params={parentId:pid};
+		$.ajax({
+			type: 'get',
+			url:url,
+			async: false,
+			dataType: 'jsonp',
+			data:params,
+			success:function(data){
+				if(data.statusCode=="0000"){
+					var sublist=data.data;
+					for(var i=0;i<sublist.length;i++){
+						if(id&&sublist[i].area_id==id){
+							obj.append("<option value='"+sublist[i].area_id+"' selected>"+sublist[i].area_name+"</option>");
+						}else{
+							obj.append("<option value='"+sublist[i].area_id+"'>"+sublist[i].area_name+"</option>");
+						}
+					}
+				}
+				
+			},
+			error:function(data){
+				alert("网络错误");
+			}
+		});
+	}
 </script>
+
 </#macro>
 
 <#macro body>
@@ -51,7 +106,7 @@
                 <h4 class="modal-title"><span class="glyphicon glyphicon-search"></span> 内容查询</h4>
             </div>
 
-            <form id="buildings-search-form" action="${base}/buildings/buildings/list" method="post">
+            <form id="buildings-search-form" action="${base}/buildings/buildings/list" method="post" >
 <input type="hidden" id="pageNumber" name="pageNumber" value="0"/>
                 <div class="modal-body">
 
@@ -65,30 +120,21 @@
                                 <label for="nickname">开发商名称:</label>
                                 <input type="text" class="form-control" id="developer_company" name="developer_company" value="${RequestParameters.developer_company!''}">
                             </div>
-                             <div class="col-xs-6">
-                                <label for="city_id">区域（市）:</label>
-                                <select class="form-control "  id="city_id" name="city_id">  
-                           <option value ="" selected></option>
-                           <option value ="460100" >海口市</option>
-                           <option value ="460200">三亚市</option>  
-                           <option value ="469001">五指山市</option>
-                           <option value ="460400">琼海市</option>  
-                           <option value ="460220">儋州市</option>  
-                           <option value ="460600">文昌市</option>  
-                           <option value ="460700">万宁市</option>    
-                           <option value ="460300">东方市</option>  
-                           <option value ="460800">定安县</option>  
-                           <option value ="460900">屯昌县</option>  
-                           <option value ="460500">澄迈县</option>  
-                           <option value ="460110">临高县</option> 
-                           <option value ="460120">白沙</option> 
-                           <option value ="460130">昌江</option> 
-                           <option value ="460140">乐东</option>    
-                           <option value ="460150">陵水</option>  
-                           <option value ="460160">保亭</option>
-                           <option value ="460170">琼中</option>
-                           <option value ="460221">白马井</option>
-                       </select>  </div>
+                           <div class="col-xs-4">
+							<label for="proId">省/市:</label>
+							<select name="proId" class="form-control  proId " >
+							</select>
+						</div>
+						<div class="col-xs-4">
+							<label for="city_id">市/县:</label>
+							<select name="city_id" class="form-control  city_id" >
+							</select>
+						</div>
+						<div class="col-xs-4">
+							<label for="area_id">县/区:</label>
+							<select name="area_id" class="form-control  area_id" >
+							</select>
+						</div>
                         </div>
                     </div>
 

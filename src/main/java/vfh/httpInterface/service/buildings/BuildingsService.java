@@ -84,7 +84,9 @@ public class BuildingsService {
 	 */
 	public Page<Map<String, Object>> findBuildingsList(PageRequest pageRequest, Map<String, Object> filter) {
         long total = buildingsMapper.count(filter);
+        
         filter.putAll(pageRequest.getMap());
+        
         List<Map<String, Object>> content = findBuildings(filter);
 
         return new Page<Map<String, Object>>(pageRequest, content, total);

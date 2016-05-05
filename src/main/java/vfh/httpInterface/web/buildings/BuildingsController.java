@@ -31,8 +31,20 @@ public class BuildingsController {
     private BuildingsService buildingsService;
     @RequestMapping("list")
     public Page<Map<String, Object>> list(PageRequest pageRequest, @RequestParam Map<String, Object> filter,Model model) {
-    	model.addAttribute("buildingsStates", VariableUtils.getVariables(BuildingsState.class));
 
+    	model.addAttribute("buildingsStates", VariableUtils.getVariables(BuildingsState.class));
+    	if(null != filter.get("city_id") || "" != filter.get("city_id")){
+    		model.addAttribute("city_id", filter.get("city_id"));
+    	}else{
+    		model.addAttribute("city_id", "wu");
+    	}
+    	if(null != filter.get("area_id") || "" != filter.get("area_id")){
+    		 model.addAttribute("area_id", filter.get("area_id"));
+
+    	}else{
+    		model.addAttribute("area_id", "wu");
+    	}
+       
     	return buildingsService.findBuildingsList(pageRequest,filter);
     }
     @RequestMapping("insert")
