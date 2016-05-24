@@ -266,7 +266,7 @@
 			AND b.area_id LIKE #{filter.area_id}
 		</if>
 		AND b.status=0
-		ORDER BY a.create_time desc
+		ORDER BY a.update_time desc
 	    <if test="filter.first != null and filter.last != null">
 			LIMIT	#{filter.first},#{filter.last}
 		</if>

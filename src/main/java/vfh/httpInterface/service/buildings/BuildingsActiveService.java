@@ -221,7 +221,7 @@ public class BuildingsActiveService {
 	            File uploadfile = new File(DEFAULT_USER_UPLOAD_PORTRAIT_PATH +buildings_id + "/hdt/" +  id +"/"+ tempName);// 上传地址
 
 				if (uploadfile.isFile() && uploadfile.exists()) {  //文件夹中存在文件则表示已经入库过，则不再入库记录
-
+					
 				}else {
 					
 					// 图片信息入库
@@ -256,7 +256,10 @@ public class BuildingsActiveService {
 	            //添加水印
 				pressImage(originalPicPath,fileType);
 	            
-	            
+				//每上传一次活动图 就更新一次更新时间
+				entity.clear();
+				entity.put("id", id);
+				buildingActiveMapper.update(entity);
 //	            String portraitPath = DEFAULT_USER_UPLOAD_PORTRAIT_PATH +id+ File.separator + "huxingtu" + File.separator+ shi + File.separator;
 //	            String originalPicPath = uploadfile.getAbsolutePath();
 //	            
