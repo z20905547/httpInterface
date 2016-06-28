@@ -213,4 +213,65 @@ public class BuildingsService {
 	    return returnMap;
 	}
 	
+	
+	//按条件查询楼盘坐标
+	public Map<String, Object> findZuobiao(Map<String, Object> filter){
+		returnMap.clear();
+		//输入参数当前页，每页记录数，城市id
+		if("111".equals(filter.get("city_id"))) {
+			filter.put("city_id", "");
+		}
+		if("222".equals(filter.get("active_price"))) {
+			filter.put("active_price1", "");
+		}else if ("4000".equals(filter.get("active_price"))){
+			filter.put("active_price1", "0");
+			filter.put("active_price2", "4000");
+		}else if ("6000".equals(filter.get("active_price"))){
+			filter.put("active_price1", "4000");
+			filter.put("active_price2", "6000");
+		}
+		else if ("8000".equals(filter.get("active_price"))){
+			filter.put("active_price1", "6000");
+			filter.put("active_price2", "8000");
+		}else if ("10000".equals(filter.get("active_price"))){
+			filter.put("active_price1", "8000");
+			filter.put("active_price2", "10000");
+		}else if ("11000".equals(filter.get("active_price"))){
+			filter.put("active_price1", "10000");
+			filter.put("active_price2", "50000");
+		}
+		if("333".equals(filter.get("acreage"))) {
+			filter.put("acreage1", "");
+		}else if ("50".equals(filter.get("acreage"))){
+			filter.put("acreage1", "0");
+			filter.put("acreage2", "50");
+		}else if ("70".equals(filter.get("acreage"))){
+			filter.put("acreage1", "50");
+			filter.put("acreage2", "70");
+		}else if ("90".equals(filter.get("acreage"))){
+			filter.put("acreage1", "70");
+			filter.put("acreage2", "90");
+		}else if ("110".equals(filter.get("acreage"))){
+			filter.put("acreage1", "90");
+			filter.put("acreage2", "110");
+		}else if ("150".equals(filter.get("acreage"))){
+			filter.put("acreage1", "110");
+			filter.put("acreage2", "150");
+		}
+		if("444".equals(filter.get("shi"))) {
+			filter.put("shi", "");
+		}
+		List<Map<String, Object>> buildingsDetailList=buildingsMapper.findZuobiao(filter);
+		if(StringUtil.isNotEmptyList(buildingsDetailList)){
+			returnMap.put("returnCode", "000000");
+    		returnMap.put("data",buildingsDetailList);
+    		returnMap.put("returnMsg", "获取坐标信息成功！");
+    	}else{
+    		returnMap.put("returnCode", "1111");
+    		returnMap.put("returnMsg", "获取坐标信息失败！");
+    	}
+		
+		
+	    return returnMap;
+	}
 }
