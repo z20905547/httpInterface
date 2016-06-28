@@ -92,5 +92,14 @@ public interface BuildingsMapper {
 	 * @create 2016年2月25日
 	 */
 	public Map<String, Object> getMoreDetail(@Param("buildingsId")Long buildingsId,@Param("pid")Long pid);
+	/**
+	 * TODO 按条件查询楼盘坐标及其他信息
+	 * @author harry
+	 * <b> 有问题请联系qq:359705093</b>
+	 * @param filter
+	 * @return
+	 * @create 2016年2月2日
+	 */
+	public List<Map<String, Object>> findZuobiao(@Param("filter")Map<String, Object> filter);
 	
 }

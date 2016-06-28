@@ -24,6 +24,7 @@ public class HttpBuildingsController {
 	@RequestMapping("/getBuildingsDetailList")
 	@ResponseBody
 	public void getBuildingsDetailList(HttpServletRequest request,HttpServletResponse response){
+		
 		Map res = new HashMap();
 		Map params = RequestParamUtil.requestToMap(request);
 		Map m =  buildingsService.findDetailList(params);
@@ -44,6 +45,24 @@ public class HttpBuildingsController {
 		
 		Map res = new HashMap();
 		Map m =  buildingsService.findBulidingsDetail(buildingsId,pid);
+		if("000000".equals(m.get("returnCode"))){
+			res.put("data", m.get("data"));
+			res.put("statusCode","0000");
+		}else{
+			res.put("statusCode","1111");
+		}
+		res.put("returnMsg",m.get("returnMsg"));
+		RequestParamUtil.responseWriter(request, response, res);
+	}
+	@RequestMapping("/findListByselect")
+	@ResponseBody
+	public void findListByselect(HttpServletRequest request,HttpServletResponse response){
+		
+		Map res = new HashMap();
+		Map params = RequestParamUtil.requestToMap(request);
+
+		
+		Map m =  buildingsService.findZuobiao(params);
 		if("000000".equals(m.get("returnCode"))){
 			res.put("data", m.get("data"));
 			res.put("statusCode","0000");
