@@ -345,6 +345,10 @@
        <if test="filter.city_id != null and filter.city_id != ''">
 		AND b.city_id= #{filter.city_id}
        </if>
+       <if test="filter.buildings_name != null and filter.buildings_name != ''">
+          <bind name="filter.buildings_name" value=" '%' + filter.buildings_name + '%' " />
+		AND b.buildings_name LIKE #{filter.buildings_name}
+       </if>
        <if test="filter.active_price1 != null and filter.active_price1 != ''">
 		AND a.active_price BETWEEN #{filter.active_price1} AND #{filter.active_price2}
        </if>
