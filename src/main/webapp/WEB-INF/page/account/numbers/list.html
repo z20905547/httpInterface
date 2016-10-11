@@ -92,7 +92,7 @@
                                 <#else>
                                 <td>女</td>
                                 </#if>
-                                <td>${r.knum!''}</td>
+                                <td>${r.knum?substring(0,9)}**</td>
                                 <td>${r.kage!''}</td>
                                 <td>${r.laidianrq!''}</td>
                                 <td>${r.kwxh!''}</td>

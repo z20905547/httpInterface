@@ -257,7 +257,7 @@ public class BuildingsActiveService {
 				pressImage(originalPicPath,fileType);
 	            
 				//每上传一次活动图 就更新一次更新时间
-				entity.clear();
+				//entity.clear();
 				entity.put("id", id);
 				buildingActiveMapper.update(entity);
 //	            String portraitPath = DEFAULT_USER_UPLOAD_PORTRAIT_PATH +id+ File.separator + "huxingtu" + File.separator+ shi + File.separator;
