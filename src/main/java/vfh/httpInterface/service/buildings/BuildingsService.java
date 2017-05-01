@@ -249,6 +249,18 @@ public class BuildingsService {
 		returnMap.clear();
 		//输入参数当前页，每页记录数，城市id
 		Map<String, Object> buildingsDetail=buildingsMapper.getMoreDetail(buildingsId,pid);
+		
+		if(null != buildingsDetail.get("recodetime") ){
+			String recodetime = buildingsDetail.get("recodetime").toString();
+
+			recodetime = recodetime.substring(0,19);
+			
+			buildingsDetail.put("recodetime", recodetime);
+		}else {
+			buildingsDetail.put("latestnews", "wu");
+		}
+		
+		
 		if(StringUtil.isNotEmptyMap(buildingsDetail)){
     		returnMap.put("returnCode", "000000");
     		returnMap.put("data",buildingsDetail);

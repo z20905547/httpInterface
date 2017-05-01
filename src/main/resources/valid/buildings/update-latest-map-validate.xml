@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<validate-mapper name="insert-latest">
+<validate-mapper name="update-latest">
 
     <key name="latestnews" alias="活动名称">
         <notEmpty />

@@ -1,0 +1,85 @@
+<#include "*/basic/default.html"/>
+
+<#macro title>
+添加活动
+</#macro>
+
+<#macro head>
+<link rel="stylesheet" type="text/css" href="${base}/resource/css/umeditor.min.css">
+<link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/jquery-datetimepicker/2.4.5/jquery.datetimepicker.min.css">
+<script type="text/javascript" src="//cdn.bootcss.com/jquery-datetimepicker/2.4.5/jquery.datetimepicker.min.js"></script> 
+<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=E991373d74352818824a24dea57f156c"></script>
+<script type="text/javascript" src="http://api.map.baidu.com/library/CityList/1.2/src/CityList_min.js"></script>
+<script type="text/javascript" charset="utf-8" src="${base}/resource/script/umeditor.config.js"></script>
+<script type="text/javascript" charset="utf-8" src="${base}/resource/script/umeditor.min.js"></script>
+<script type="text/javascript">
+	$(document).ready(
+			function() {
+			//	$.datepicker.setDefaults($.datepicker.regional["zh-CN"]);
+				$(".datePicker").datetimepicker({
+					lang:'ch',
+					format:"Y-m-d H:m:s"
+			       });
+				//富文本编辑器
+				var um = UM.getEditor('active_detail');
+			
+			});
+</script>
+
+   //开始日期必须大于等于当前日期
+   //截止日期必须大于开始时间
+</script>
+</#macro>
+
+<#macro body>
+<div class="data-content">
+
+<!--     <ol class="breadcrumb"> -->
+<!--         <li><span class="glyphicon glyphicon-user"></span></li> -->
+<!--         <li><a href="${base}/account/user/list">用户管理</a></li> -->
+<!--         <li class="active">添加用户</li> -->
+<!--     </ol> -->
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title"><span class="glyphicon glyphicon-edit"></span> 添加活动《${buildingsName}》</h3>
+        </div>
+        <form action="${base}/buildings/latest/update" id="create-active-form" method="post">
+            <div class="panel-body">
+
+<input type="hidden" name="id" value="${entity.id!''}"/>
+<input type="hidden" name="buildings_id" value="${buildings_id}"/>
+<input type="hidden" name="buildingsName" value="${buildingsName}"/>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <label for="latestnews">活动名称:</label>
+                            <input type="textarea" rows="3" cows="10" class="form-control required" id="latestnews" name="latestnews" value="${entity.latestnews!''}">
+                        </div>
+                    </div>
+                </div>
+  
+            </div>
+
+            <div class="panel-footer">
+
+                
+                <button type="submit" class="btn btn-success">
+                    <span class="glyphicon glyphicon-ok"></span> 保存
+                </button>
+
+                <button type="reset" class="btn btn-warning">
+                    <span class="glyphicon glyphicon-trash"></span> 重置
+                </button>
+               
+
+                <button type="button" class="btn btn-default" onclick="history.back();">
+                    <span class="glyphicon glyphicon-backward"></span> 返回
+                </button>
+
+            </div>
+        </form>
+    </div>
+</div>
+</#macro>
+

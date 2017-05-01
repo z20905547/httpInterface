@@ -66,6 +66,17 @@ public class AccountService implements InitializingBean{
      */
     public static final String DEFAULT_USER_UPLOAD_PORTRAIT_PATH = "." + File.separator + "upload_portrait" + File.separator;
 
+    
+    /**
+     * 同时上传一份至前台页面可以显示的图片的文件夹路径  本地路径 调试通过后 要将本地路径换成正式环境路径
+     */
+   // public static final String NEW_USER_UPLOAD_PORTRAIT_PATH = "./src/main/webapp/resource/upload_buildings/user/" ;
+   
+  //正式环境 路径
+  	 public static final String NEW_USER_UPLOAD_PORTRAIT_PATH = "/vfh/apache-tomcat-7.0.67/webapps/management/resource/upload_buildings/user/" ;
+  	 
+    
+    
     //----------------------------------- 用户管理 ----------------------------------------//
 
     /**
@@ -193,10 +204,24 @@ public class AccountService implements InitializingBean{
         String portraitPath = file.getAbsolutePath() + File.separator;
         String originalPicPath = portraitPath + PortraitSize.BIG.getName();
 
-        IOUtils.copy(is, new FileOutputStream(originalPicPath));
+     //   IOUtils.copy(is, new FileOutputStream(originalPicPath));
 
-        scaleImage(originalPicPath, portraitPath, PortraitSize.MIDDLE);
-        scaleImage(originalPicPath, portraitPath, PortraitSize.SMALL);
+      //  scaleImage(originalPicPath, portraitPath, PortraitSize.MIDDLE);
+      //  scaleImage(originalPicPath, portraitPath, PortraitSize.SMALL);
+        
+        //再传一份至前台能显示的文件夹
+        String	originalPicPath2="";
+        File uploadfile = new File(NEW_USER_UPLOAD_PORTRAIT_PATH +entity.get("id")  + File.separator);// 上传地址
+        
+        if (!uploadfile.exists() || !uploadfile.isDirectory()) {
+            
+        	uploadfile.mkdirs();
+        	
+
+			
+        }
+        originalPicPath2 = NEW_USER_UPLOAD_PORTRAIT_PATH +entity.get("id")  +"/"+ "tx.jpg";
+        IOUtils.copy(is, new FileOutputStream(originalPicPath2));
     }
 
     /**
