@@ -317,7 +317,7 @@
 		tj_name, b.resource_path logo_path,b.resource_name
 		logo_name,c.resource_path ad_path,c.resource_name ad_name,
 		d.first_price,d.first_price,d.discount_price,e.active_name,e.active_detail,e.active_price,e.end_date,
-		e.start_date,e.active_jianjie
+		e.start_date,e.active_jianjie,k.id AS newsid,k.latestnews latestnews,k.user_id user_id,k.nickname nickname,k.recodetime recodetime,k.user_phone 
 		FROM
 		tb_buildings a
 		left join
@@ -331,6 +331,8 @@
 		LEFT
 		JOIN tb_building_resource f ON f.buildings_id=a.id AND f.sm_type=33
 		AND f.pid=#{pid}
+		LEFT
+		JOIN tb_latest_news k ON k.id=(SELECT MAX(t.id) FROM tb_latest_news t WHERE t.builds_id=#{buildingsId}) 
 		WHERE
 		a.id = #{buildingsId}
 	</select>

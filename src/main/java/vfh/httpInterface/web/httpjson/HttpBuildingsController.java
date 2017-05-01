@@ -1,5 +1,7 @@
 package vfh.httpInterface.web.httpjson;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -34,7 +36,8 @@ public class HttpBuildingsController {
 		}else{
 			res.put("statusCode","1111");
 		}
-		res.put("returnMsg",m.get("returnMsg"));
+		
+
 		RequestParamUtil.responseWriter(request, response, res);
 	}
 	@RequestMapping("/getBuildingsDetail")
@@ -52,6 +55,7 @@ public class HttpBuildingsController {
 			res.put("statusCode","1111");
 		}
 		res.put("returnMsg",m.get("returnMsg"));
+			
 		RequestParamUtil.responseWriter(request, response, res);
 	}
 	@RequestMapping("/findListByselect")
