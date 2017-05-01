@@ -4,7 +4,7 @@
 
     <key name="email" alias="手机号码">
         <notEmpty />
-        <length max="11" />
+        <length max="64" />
     </key>
 
     <key name="nickname" alias="昵称">
