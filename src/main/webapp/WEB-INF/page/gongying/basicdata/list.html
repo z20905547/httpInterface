@@ -7,9 +7,8 @@
 <#macro head>
 
 <script type="text/javascript">
-
 	$(document).ready(
-		
+
 			function() {
 				$(".blocklink").on("click",function(){
 		    		var actionUrl=$(this).attr("data-href");
@@ -106,18 +105,18 @@
                 <h4 class="modal-title"><span class="glyphicon glyphicon-search"></span> 内容查询</h4>
             </div>
 
-            <form id="buildings-search-form" action="${base}/buildings/buildings/list" method="post" >
+            <form id="basicdata-search-form" action="${base}/gongying/basicdata/list" method="post" >
 <input type="hidden" id="pageNumber" name="pageNumber" value="0"/>
                 <div class="modal-body">
 
                     <div class="form-group">
                         <div class="row">
                             <div class="col-xs-6">
-                                <label for="username">楼盘名称:</label>
+                                <label for="buildings_name">楼盘名称:</label>
                                 <input type="text" class="form-control" id="buildings_name" name="buildings_name" value="${RequestParameters.buildings_name!''}">
                             </div>
                             <div class="col-xs-6">
-                                <label for="nickname">开发商名称:</label>
+                                <label for="developer_company">开发商名称:</label>
                                 <input type="text" class="form-control" id="developer_company" name="developer_company" value="${RequestParameters.developer_company!''}">
                             </div>
                            <div class="col-xs-4">
@@ -167,7 +166,7 @@
     </div>
     </#if>
 
-    <form id="buildings-list-form" action="${base}/buildings/buildings/delete" valid="false" method="post">
+    <form id="buildings-list-form" action="${base}/gongying/basicdata/delete" valid="false" method="post">
         <div class="panel panel-default">
 
             <div class="panel-heading">
@@ -208,30 +207,32 @@
                                     </#list>
                                 </td>
                                 <td>
-                                    <@shiro.hasPermission name="buildings:edit">
+                                   
                                     <a class="btn btn-default btn-sm" title="修改信息" href="${base}/buildings/buildings/edit?id=${r.id}">
                                         <span class="glyphicon glyphicon-edit"></span>
                                     </a>
-                                    </@shiro.hasPermission>
-                                    <@shiro.hasPermission name="price:list">
+                                    
+                                
                                     <a class="btn btn-default btn-sm blocklink" title="编辑价格" href="javascript:void(0)" data-href="${base}/buildings/price/list" data-building-id="${r.id}" data-building-name="${r.buildings_name}">
                                         <span class="glyphicon glyphicon-usd"></span>
                                     </a>
-                                    </@shiro.hasPermission>
-                                    <@shiro.hasPermission name="house:list">
+                                   
+                                    
                                     <a class="btn btn-default btn-sm blocklink" title="编辑户型" href="javascript:void(0)" data-href="${base}/buildings/house/list" data-building-id="${r.id}" data-building-name="${r.buildings_name}">
                                         <span class="glyphicon glyphicon-home"></span>
                                     </a>
-                                    </@shiro.hasPermission>
+                                    
                                     <a class="btn btn-default btn-sm blocklink" title="编辑图片" href="javascript:void(0)" data-href="${base}/buildings/house/picEdit" data-building-id="${r.id}" data-building-name="${r.buildings_name}">
                                         <span class="glyphicon glyphicon-picture"></span>
                                     </a>
-                                    <a class="btn btn-default btn-sm blocklink" title="活动添加" href="javascript:void(0)" data-href="${base}/buildings/active/list" data-building-id="${r.id}" data-building-name="${r.buildings_name}">
+                                <!--    <a class="btn btn-default btn-sm blocklink" title="活动添加" href="javascript:void(0)" data-href="${base}/buildings/active/list" data-building-id="${r.id}" data-building-name="${r.buildings_name}">
                                         <span class="glyphicon glyphicon-time"></span>
-                                    </a>
-                                    <a class="btn btn-default btn-sm blocklink" title="活动最新动态" href="javascript:void(0)" data-href="${base}/buildings/latest/list2" data-building-id="${r.id}" data-building-name="${r.buildings_name}">
+                                    </a> 
+                                 -->  
+                                    <a class="btn btn-default btn-sm blocklink" title="其他数据管理" href="javascript:void(0)" data-href="${base}/gongying/basicdata/list2" data-building-id="${r.id}" data-building-name="${r.buildings_name}">
                                         <span class="glyphicon glyphicon-bell"></span>
                                     </a>
+                                   
                                 </td>
                             </tr>
                             </#list>
@@ -262,7 +263,7 @@
 
         </div>
 
-        <@pagination 'buildings-search-form' page />
+        <@pagination 'basicdata-search-form' page />
 
     </form>
 

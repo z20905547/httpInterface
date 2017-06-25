@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="vfh.httpInterface.dao.gongying.GongyingBasicDataMapper" >
+  <sql id="Base_Column_List" >
+    id, build_id, is_contract, contract_start, contract_end, channel_name, channel_num, zhiyeguwen_name,zhiyeguwen_num,commission_all,commission_out,deal_prize,is_up,last_author,last_date                                   
+  </sql>
+    <select id="get" resultType="hashmap">  
+        SELECT 
+          <include refid="Base_Column_List" />     
+        FROM
+          gy_baseicdata
+        WHERE 
+          id = #{id}
+   </select>
+   <delete id="delete" >
+    delete from gy_baseicdata
+    where id = #{id}
+  </delete>
+  <insert id="insert" useGeneratedKeys="true" keyProperty="entity.id" >
+	insert into gy_baseicdata ( build_id, is_contract, contract_start, contract_end, channel_name, channel_num,zhiyeguwen_name,zhiyeguwen_num,commission_all,commission_out,deal_prize,is_up,last_author,last_date)
+	values ( #{entity.buildings_id}, #{entity.is_contract}, #{entity.contract_start},#{entity.contract_end},#{entity.channel_name}, #{entity.channel_num}, #{entity.zhiyeguwen_name}, #{entity.zhiyeguwen_num}, #{entity.commission_all}, #{entity.commission_out}, #{entity.deal_prize}, #{entity.is_up},  
+	#{entity.last_author}, now()
+	)
+  </insert>
+  <select id="count" resultType="long">
+    select count(*) from gy_baseicdata 
+     WHERE
+           build_id = #{filter.buildings_id} 
+        
+  </select>
+  <update id="update">
+        update gy_baseicdata
+	    <set >
+	      <if test="entity.is_contract != null and entity.is_contract != ''" >
+	        is_contract = #{entity.is_contract},
+	      </if>
+	      <if test="entity.contract_start != null and entity.contract_start != ''" >
+	        contract_start = #{entity.contract_start},
+	      </if>
+	      <if test="entity.contract_end != null and entity.contract_end != ''" >
+	        contract_end = #{entity.contract_end},
+	      </if>	      
+	      <if test="entity.channel_name != null and entity.channel_name != ''" >
+	        channel_name = #{entity.channel_name},
+	      </if>
+	      <if test="entity.zhiyeguwen_name != null and entity.zhiyeguwen_name != ''" >
+	        zhiyeguwen_name = #{entity.zhiyeguwen_name},
+	      </if>	     
+	      <if test="entity.zhiyeguwen_num != null and entity.zhiyeguwen_num != ''" >
+	        zhiyeguwen_num = #{entity.zhiyeguwen_num},
+	      </if>
+	      <if test="entity.commission_all != null and entity.commission_all != ''" >
+	        commission_all = #{entity.commission_all},
+	      </if>
+	      <if test="entity.deal_prize != null and entity.deal_prize != ''" >
+	        deal_prize = #{entity.deal_prize},
+	      </if>
+	      <if test="entity.is_up != null and entity.is_up != ''" >
+	        is_up = #{entity.is_up},
+	      </if>
+	      <if test="entity.last_author != null and entity.last_author != ''" >
+	        last_author = #{entity.last_author},
+	      </if>
+	        last_date = now() 
+	      
+
+	    </set>
+        WHERE
+          id = #{entity.id} 
+    </update>
+    <update id="updateActiveData">
+        update tb_building_active
+	    <set >
+	        update_time = now()
+	    </set>
+        WHERE
+          build_id = #{entity.buildings_id} 
+    </update>
+    
+    <select id="find" resultType="hashmap">
+        SELECT
+             <include refid="Base_Column_List" />     
+        FROM
+          gy_baseicdata 
+        WHERE
+             build_id = #{filter.buildings_id}
+    </select>
+ 
+</mapper>

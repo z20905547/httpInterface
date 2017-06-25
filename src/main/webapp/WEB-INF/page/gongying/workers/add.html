@@ -1,0 +1,145 @@
+<#include "*/basic/default.html"/> <#macro title> 添加楼盘 </#macro> 
+<#macro head>
+
+</#macro> <#macro body>
+<div class="data-content">
+
+	<!--     <ol class="breadcrumb"> -->
+	<!--         <li><span class="glyphicon glyphicon-user"></span></li> -->
+	<!--         <li><a href="${base}/account/user/list">用户管理</a></li> -->
+	<!--         <li class="active">添加用户</li> -->
+	<!--     </ol> -->
+
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<h3 class="panel-title">
+				<span class="glyphicon glyphicon-edit"></span> 添加合作商
+			</h3>
+		</div>
+		<form action="${base}/gongying/partners/insert"
+			id="create-user-form" method="post">
+			<div class="panel-body">
+
+				<div class="form-group">
+					<div class="row">
+						<div class="col-xs-4">
+							<label for="buildings_name">机构名称:</label> <input type="text"
+								class="form-control required" 
+								id="p_name" name="p_name" >
+						</div>
+						<div class="col-xs-4">
+							<label for="faren">机构法人:</label> <input type="text"
+								class="form-control" maxlength="16" id="faren"
+								name="faren" placeholder="法人姓名">
+						</div>
+						<div class="col-xs-4">
+							<label for="faren_num">法人电话:</label> <input type="text"
+								class="form-control" maxlength="16" id="faren_num"
+								name="faren_num" placeholder="法人电话">
+						</div>
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="row">
+						<div class="col-xs-4">
+							<label for="province_id">省/市:</label>
+							<select name="province_id" class="form-control  province_id required" >
+							</select>
+						</div>
+						<div class="col-xs-4">
+							<label for="city_id">市/县:</label>
+							<select name="city_id" class="form-control required city_id" >
+							</select>
+						</div>
+						<div class="col-xs-4">
+							<label for="area_id">县/区:</label>
+							<select name="area_id" class="form-control required area_id" >
+							</select>
+						</div>
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="row">
+						<div class="col-xs-6">
+							<label for="partners_docking_name">机构对接人:</label>
+							<input type="text" class="form-control" maxlength="100"
+								id="partners_docking_name" name="partners_docking_name" placeholder="机构对接人姓名">
+						</div>
+						<div class="col-xs-6">
+							<label for="partners_docking_num">对接电话:</label> <input type="text"
+								class="form-control " maxlength="100" id="partners_docking_num"
+								name="partners_docking_num"  placeholder="机构对接人电话">
+						</div>
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="row">
+						<div class="col-xs-6 open_date">
+							<label for="p_start">合作开始时间:</label> <input type="text"
+								class="datePicker form-control dateISO" autocomplete="off"
+								id="p_start" name="p_start" >
+						</div>
+						<div class="col-xs-6 deliverDate">
+							<label for="p_end">合作结束时间:</label> <input type="text"
+								class="datePicker form-control dateISO" autocomplete="off"
+								id="p_end" name="p_end" >
+						</div>
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="row">
+						<div class="col-xs-6">
+							<label for="floorSpace">详细地址:</label>
+							
+								<input type="text" class="form-control" id="Detail_address"
+									name="Detail_address"> 
+							
+						</div>
+						<div class="col-xs-6">
+							<label for="gongying_docking">共赢对接人:</label>
+							
+								<input type="text" class="form-control"
+									id="gongying_docking" name="gongying_docking"> 
+							   
+						</div>
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="row">
+						<div class="col-xs-6 ">
+							<label for="partners_mark">机构编码:</label>
+								<input type="text" class="form-control"
+									id="partners_mark" name="partners_mark" placeholder="机构名称首字母+年月日时分 ，如：GYLM201706181858"> 
+						</div>
+						<div class="col-xs-6 ">
+							<label for="remark">其他备注:</label>						
+								<input type="text" class="form-control"
+									id="remark" name="remark"> 
+						</div>
+						
+					</div>
+				</div>
+
+			<div class="panel-footer">
+
+
+				<button type="submit" class="btn btn-success">
+					<span class="glyphicon glyphicon-ok"></span> 保存
+				</button>
+
+				<button type="reset" class="btn btn-warning">
+					<span class="glyphicon glyphicon-trash"></span> 重置
+				</button>
+	
+
+				<button type="button" class="btn btn-default"
+					onclick="history.back();">
+					<span class="glyphicon glyphicon-backward"></span> 返回
+				</button>
+
+			</div>
+		</form>
+	</div>
+</div>
+</#macro>
+
