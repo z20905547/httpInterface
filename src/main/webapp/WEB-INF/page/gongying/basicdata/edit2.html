@@ -1,0 +1,176 @@
+<#include "*/basic/default.html"/>
+
+<#macro title>
+添加活动
+</#macro>
+
+<#macro head>
+<script type="text/javascript">
+	$(document).ready(
+			function() {
+			//	$.datepicker.setDefaults($.datepicker.regional["zh-CN"]);
+				$(".datePicker").datetimepicker({
+					lang:'ch',
+					format:"Y-m-d"
+			       });
+				
+			
+			});
+</script>
+
+   //开始日期必须大于等于当前日期
+   //截止日期必须大于开始时间
+</script>
+</#macro>
+
+<#macro body>
+<div class="data-content">
+
+<!--     <ol class="breadcrumb"> -->
+<!--         <li><span class="glyphicon glyphicon-user"></span></li> -->
+<!--         <li><a href="${base}/account/user/list">用户管理</a></li> -->
+<!--         <li class="active">添加用户</li> -->
+<!--     </ol> -->
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title"><span class="glyphicon glyphicon-edit"></span> 添加活动《${buildingsName}》</h3>
+        </div>
+        <form action="${base}/gongying/basicdata/update2" id="create-active-form" method="post">
+            <div class="panel-body">
+
+<input type="hidden" name="id" value="${entity.id!''}"/>
+<input type="hidden" name="buildings_id" value="${buildings_id}"/>
+<input type="hidden" name="buildingsName" value="${buildingsName}"/>
+  
+  <div class="form-group">
+					<div class="row">
+						<div class="col-xs-6">
+					<label for="is_contract">是否签约:</label>								
+					   <select class="form-control "  id="is_contract" name="is_contract" >  
+                          
+                           <option value="1" <#if entity.is_contract?? && entity.is_contract==1>selected="selected"</#if> >
+                                                                                    已签约    
+                           </option>
+                           <option value="2" <#if entity.is_contract?? && entity.is_contract==2>selected="selected"</#if> >
+                                                                                    未签约   
+                           </option>
+                           <option value="3" <#if entity.is_contract?? && entity.is_contract==3>selected="selected"</#if> >
+                                                                                    已签未拿回    
+                           </option>
+                           <option value="0" <#if entity.is_contract?? && entity.is_contract==0>selected="selected"</#if> >
+                                                                                    不确定   
+                           </option>   
+                       </select> 
+						</div>
+						 <div class="col-xs-6">
+                            <label for="is_up">上线状态:</label>
+                         <select class="form-control "  id="is_up" name="is_up">  
+                            <option value="1" <#if entity.is_up?? && entity.is_up=='1'>selected="selected"</#if> >
+                                                                                    已上线   
+                           </option> 
+                           <option value="0" <#if entity.is_up?? && entity.is_up=='0'>selected="selected"</#if> >
+                                                                                    已下线   
+                           </option> 
+                       </select> 
+                            
+                        </div>
+					</div>
+				</div> 
+				<div class="form-group">
+					<div class="row">
+						<div class="col-xs-6 open_date">
+							<label for="contract_start">合同开始时间:</label> <input type="text"
+								class="datePicker form-control dateISO" autocomplete="off"
+								id="contract_start" name="contract_start"  value="${entity.contract_start!''}">
+						</div>
+						<div class="col-xs-6 deliverDate">
+							<label for="contract_end">合同结束时间:</label> <input type="text"
+								class="datePicker form-control dateISO" autocomplete="off"
+								id="contract_end" name="contract_end" value="${entity.contract_end!''}">
+						</div>
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="row">
+						<div class="col-xs-6">
+							<label for="channel_name">渠道经理姓名:</label> <input type="text"
+								class="form-control" 
+								id="channel_name" name="channel_name" value="${entity.channel_name!''}">
+						</div>
+						<div class="col-xs-6">
+                         <label for="channel_num">渠道经理电话:</label> <input type="text"
+								class="form-control" 
+								id="channel_num" name="channel_num" value="${entity.channel_num!''}"> 
+                                                 
+                        </div>
+					</div>
+				</div> 
+				<div class="form-group">
+					<div class="row">
+						<div class="col-xs-6">
+							<label for="zhiyeguwen_name">置业顾问姓名:</label> <input type="text"
+								class="form-control" 
+								id="zhiyeguwen_name" name="zhiyeguwen_name" value="${entity.zhiyeguwen_name!''}" >
+						</div>
+						<div class="col-xs-6">
+                         <label for="zhiyeguwen_num">置业顾问电话:</label> <input type="text"
+								class="form-control" 
+								id="zhiyeguwen_num" name="zhiyeguwen_num" value="${entity.zhiyeguwen_num!''}"> 
+                                                   
+                        </div>
+					</div>
+				</div> 				
+				<div class="form-group">
+					<div class="row">
+						<div class="col-xs-6">
+							<label for="commission_all">总佣金点:</label> <input type="text"
+								class="form-control" 
+								id="commission_all" name="commission_all" value="${entity.commission_all!''}" >
+						</div>
+						<div class="col-xs-6">
+                         <label for="commission_out">外放点数:</label> <input type="text"
+								class="form-control" 
+								id="commission_out" name="commission_out" value="${entity.commission_out!''}" > 
+                                                   
+                        </div>
+					</div>
+				</div> 					
+								<div class="form-group">
+					<div class="row">
+						<div class="col-xs-6">
+							<label for="deal_prize">成交奖励:</label> <input type="text"
+								class="form-control" 
+								id="deal_prize" name="deal_prize" value="${entity.deal_prize!''}" >
+						</div>
+						
+					</div>
+				</div> 	
+  
+  
+  
+  
+            </div>
+
+            <div class="panel-footer">
+
+                
+                <button type="submit" class="btn btn-success">
+                    <span class="glyphicon glyphicon-ok"></span> 保存
+                </button>
+
+                <button type="reset" class="btn btn-warning">
+                    <span class="glyphicon glyphicon-trash"></span> 重置
+                </button>
+               
+
+                <button type="button" class="btn btn-default" onclick="history.back();">
+                    <span class="glyphicon glyphicon-backward"></span> 返回
+                </button>
+
+            </div>
+        </form>
+    </div>
+</div>
+</#macro>
+

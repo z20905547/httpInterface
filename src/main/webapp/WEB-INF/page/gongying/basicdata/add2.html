@@ -1,0 +1,164 @@
+<#include "*/basic/default.html"/>
+
+<#macro title>
+添加最新动态
+</#macro>
+
+<#macro head>
+
+<link rel="stylesheet" type="text/css" href="${base}/resource/css/umeditor.min.css">
+<link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/jquery-datetimepicker/2.4.5/jquery.datetimepicker.min.css">
+<script type="text/javascript" src="//cdn.bootcss.com/jquery-datetimepicker/2.4.5/jquery.datetimepicker.min.js"></script> 
+<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=E991373d74352818824a24dea57f156c"></script>
+<script type="text/javascript" src="http://api.map.baidu.com/library/CityList/1.2/src/CityList_min.js"></script>
+<script type="text/javascript" charset="utf-8" src="${base}/resource/script/umeditor.config.js"></script>
+<script type="text/javascript" charset="utf-8" src="${base}/resource/script/umeditor.min.js"></script>
+<script type="text/javascript">
+	$(document).ready(
+			function() {
+			//	$.datepicker.setDefaults($.datepicker.regional["zh-CN"]);
+				$(".datePicker").datetimepicker({
+					lang:'ch',
+					format:"Y-m-d"
+			       });
+			
+				
+			
+			});
+</script>
+</#macro>
+
+<#macro body>
+<div class="data-content">
+
+<!--     <ol class="breadcrumb"> -->
+<!--         <li><span class="glyphicon glyphicon-user"></span></li> -->
+<!--         <li><a href="${base}/account/user/list">用户管理</a></li> -->
+<!--         <li class="active">添加用户</li> -->
+<!--     </ol> -->
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title"><span class="glyphicon glyphicon-edit"></span> 添加最新动态《${buildingsName}》</h3>
+        </div>
+        <form action="${base}/gongying/basicdata/insert2" id="create-active-form" method="post">
+            <div class="panel-body">
+<input type="hidden" name="buildings_id" value="${buildings_id}"/>
+<input type="hidden" name="buildingsName" value="${buildingsName}"/>
+
+			<div class="form-group">
+					<div class="row">
+						<div class="col-xs-6">
+					<label for="is_contract">是否签约:</label>								
+					   <select class="form-control "  id="is_contract" name="is_contract">  
+                           <option value ="0" selected>不确定</option>
+                           <option value ="1">已签约</option>
+                           <option value ="2">未签约</option>  
+                           <option value ="3">已签未拿回</option>    
+                       </select> 
+						</div>
+						 <div class="col-xs-6">
+                            <label for="is_up">上线状态:</label>
+                         <select class="form-control "  id="is_up" name="is_up">  
+                           <option value ="0" selected>已下线</option>
+                           <option value ="1">已上线</option>  
+                       </select> 
+                            
+                        </div>
+					</div>
+				</div> 
+				<div class="form-group">
+					<div class="row">
+						<div class="col-xs-6 open_date">
+							<label for="contract_start">合同开始时间:</label> <input type="text"
+								class="datePicker form-control dateISO" autocomplete="off"
+								id="contract_start" name="contract_start" >
+						</div>
+						<div class="col-xs-6 deliverDate">
+							<label for="contract_end">合同结束时间:</label> <input type="text"
+								class="datePicker form-control dateISO" autocomplete="off"
+								id="contract_end" name="contract_end" >
+						</div>
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="row">
+						<div class="col-xs-6">
+							<label for="channel_name">渠道经理姓名:</label> <input type="text"
+								class="form-control" 
+								id="channel_name" name="channel_name" >
+						</div>
+						<div class="col-xs-6">
+                         <label for="channel_num">渠道经理电话:</label> <input type="text"
+								class="form-control" 
+								id="channel_num" name="channel_num" > 
+                                                 
+                        </div>
+					</div>
+				</div> 
+				<div class="form-group">
+					<div class="row">
+						<div class="col-xs-6">
+							<label for="zhiyeguwen_name">置业顾问姓名:</label> <input type="text"
+								class="form-control" 
+								id="zhiyeguwen_name" name="zhiyeguwen_name" >
+						</div>
+						<div class="col-xs-6">
+                         <label for="zhiyeguwen_num">置业顾问电话:</label> <input type="text"
+								class="form-control" 
+								id="zhiyeguwen_num" name="zhiyeguwen_num" > 
+                                                   
+                        </div>
+					</div>
+				</div> 				
+				<div class="form-group">
+					<div class="row">
+						<div class="col-xs-6">
+							<label for="commission_all">总佣金点:</label> <input type="text"
+								class="form-control" 
+								id="commission_all" name="commission_all" >
+						</div>
+						<div class="col-xs-6">
+                         <label for="commission_out">外放点数:</label> <input type="text"
+								class="form-control" 
+								id="commission_out" name="commission_out" > 
+                                                   
+                        </div>
+					</div>
+				</div> 					
+								<div class="form-group">
+					<div class="row">
+						<div class="col-xs-6">
+							<label for="deal_prize">成交奖励:</label> <input type="text"
+								class="form-control" 
+								id="deal_prize" name="deal_prize" >
+						</div>
+						
+					</div>
+				</div> 	
+				
+				             
+            </div>
+
+            <div class="panel-footer">
+
+                
+                <button type="submit" class="btn btn-success">
+                    <span class="glyphicon glyphicon-ok"></span> 保存
+                </button>
+
+                <button type="reset" class="btn btn-warning">
+                    <span class="glyphicon glyphicon-trash"></span> 重置
+                </button>
+               
+
+                <button type="button" class="btn btn-default" onclick="history.back();">
+                    <span class="glyphicon glyphicon-backward"></span> 返回
+                </button>
+
+            </div>
+        </form>
+    </div>
+</div>
+</#macro>
+

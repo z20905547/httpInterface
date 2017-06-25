@@ -1,87 +1,58 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="vfh.httpInterface.dao.buildings.BuildingsMapper">
+<mapper namespace="vfh.httpInterface.dao.gongying.GongyingPartnersMapper">
 	<sql id="Base_Column_List">
-		id,province_id, city_id, area_id, map_x, map_y,
-		developer_company,
-		buildings_name,
-		query_keyword,
-		create_time,
-		update_time, status,
-		open_date, deliver_date, server_phone_num,
-		address,building_count,
-		floor_space, building_space, house_count,
-		green_rate,
-		decoration_condition,
-		util_type,
-		parking_count,floor_detail,buildings_detail,main_door,around_peitao,internal_peitao,traffic,wuye_fee,property_company,wuye_type,project_features,ratio,right_years,yushouzhenghao,dianping
-	</sql>
+		id,p_name, faren, faren_num, partners_docking_name, partners_docking_num,
+		partners_mark,
+		province_id,
+		city_id,
+		area_id, Detail_address,
+		gongying_docking, record_time, remark,
+		p_start,p_end
+		</sql>
 	<select id="get" resultType="hashmap">
 		SELECT
 		<include refid="Base_Column_List" />
 		FROM
-		tb_buildings
+		gy_partners
 		WHERE
 		id = #{id}
 	</select>
 
 	<delete id="delete">
-		delete from tb_buildings
+		delete from gy_partners
 		where id = #{id}
 	</delete>
 	<insert id="insert" useGeneratedKeys="true" keyProperty="entity.id">
 		insert
-		into tb_buildings ( province_id,city_id, area_id,
-		map_x, map_y,
-		buildings_name,
-		query_keyword, create_time,
-		status, open_date,
-		deliver_date,
-		server_phone_num, address,building_count, floor_space,
-		building_space,
-		house_count, green_rate, decoration_condition,
-		util_type,
-		parking_count,floor_detail,buildings_detail,main_door,around_peitao,internal_peitao,traffic,wuye_fee,developer_company,property_company,wuye_type,project_features,ratio,right_years,yushouzhenghao,dianping
-		)
-		values ( #{entity.proId},#{entity.cityId}, #{entity.areaId},
-		#{entity.mapX},
-		#{entity.mapY},
-		#{entity.buildings_name},
-		#{entity.queryKeyword},
+		into gy_partners ( p_name, faren, faren_num, partners_docking_name, partners_docking_num,
+		partners_mark,
+		province_id,
+		city_id,
+		area_id, Detail_address,
+		gongying_docking, record_time, remark,
+		p_start,p_end)
+		values ( #{entity.p_name},#{entity.faren}, #{entity.faren_num},
+		#{entity.partners_docking_name},
+		#{entity.partners_docking_num},
+		#{entity.partners_mark},
+		#{entity.province_id},
+		#{entity.city_id},
+		#{entity.area_id},
+		#{entity.Detail_address},
+		#{entity.gongying_docking},
 		now(),
-		#{entity.status}, #{entity.open_date},
-		#{entity.deliver_date},
-		#{entity.server_phone_num}, #{entity.address},
-		#{entity.buildingCount}, #{entity.floorSpace},
-		#{entity.buildingSpace}, #{entity.house_count}, #{entity.greenRate},
-		#{entity.decoration_condition}, #{entity.utilType},
-		#{entity.parkingCount},
-		#{entity.floorDetail},
-		#{entity.buildingsDetail},
-		#{entity.main_door},#{entity.around_peitao},#{entity.internal_peitao},
-		#{entity.traffic},#{entity.wuye_fee},#{entity.developer_company},
-		#{entity.property_company}, #{entity.wuye_type},
-		#{entity.project_features}, #{entity.ratio}, #{entity.right_years},
-		#{entity.yushouzhenghao},
-		#{entity.dianping}
+		#{entity.remark}, #{entity.p_start},
+		#{entity.p_end}
 		)
 	</insert>
 	<select id="count" resultType="long">
-		select count(*) from tb_buildings
+		select count(*) from gy_partners
 		WHERE
 		id>0
-		<if test="filter.buildings_name != null and filter.buildings_name != ''">
-			<bind name="filter.buildings_name" value=" '%' + filter.buildings_name + '%' " />
-			AND buildings_name LIKE #{filter.buildings_name}
-		</if>
-
-		<if
-			test="filter.developer_company != null and filter.developer_company != ''">
-			<bind name="filter.developer_company" value=" '%' + filter.developer_company + '%' " />
-			AND developer_company LIKE #{filter.developer_company}
-		</if>
-		<if test="filter.proId != null and filter.proId != ''">
-			AND province_id=#{filter.proId}
+		
+		<if test="filter.province_id != null and filter.province_id != ''">
+			AND province_id=#{filter.province_id}
 		</if>
 		<if test="filter.city_id != null and filter.city_id != ''">
 			<bind name="filter.city_id" value=" '%' + filter.city_id + '%' " />
@@ -95,113 +66,54 @@
 	</select>
 	<update id="update">
 		UPDATE
-		tb_buildings
+		gy_partners
 		<set>
-			<if test="entity.proId != null">
-				city_id = #{entity.proId},
+			<if test="entity.province_id != null">
+				province_id = #{entity.province_id},
 			</if>
-			<if test="entity.cityId != null">
-				city_id = #{entity.cityId},
+			<if test="entity.city_id != null">
+				city_id = #{entity.city_id},
 			</if>
-			<if test="entity.areaId != null">
-				area_id = #{entity.areaId},
+			<if test="entity.area_id != null">
+				area_id = #{entity.area_id},
 			</if>
-			<if test="entity.mapX != null">
-				map_x = #{entity.mapX},
+			<if test="entity.p_name != null">
+				p_name = #{entity.p_name},
 			</if>
-			<if test="entity.mapX != null">
-				map_y = #{entity.mapY},
+			<if test="entity.faren != null">
+				faren = #{entity.faren},
 			</if>
-			<if test="entity.developer_company != null">
-				developer_company = #{entity.developer_company},
+			<if test="entity.faren_num != null">
+				faren_num = #{entity.faren_num},
 			</if>
-			<if test="entity.buildings_name != null">
-				buildings_name = #{entity.buildings_name},
+			<if test="entity.partners_docking_name != null">
+				partners_docking_name = #{entity.partners_docking_name},
 			</if>
-			<if test="entity.query_keyword != null">
-				query_keyword = #{entity.query_keyword},
+			<if test="entity.partners_docking_num != null">
+				partners_docking_num = #{entity.partners_docking_num},
 			</if>
-			<if test="entity.create_time != null">
-				create_time = #{entity.create_time},
+			<if test="entity.partners_mark != null">
+				partners_mark = #{entity.partners_mark},
 			</if>
-			<if test="entity.update_time != null">
-				update_time = #{entity.update_time},
+			<if test="entity.Detail_address != null">
+				Detail_address = #{entity.Detail_address},
 			</if>
-			<if test="entity.status != null">
-				status = #{entity.status},
+			<if test="entity.gongying_docking != null">
+				gongying_docking = #{entity.gongying_docking},
 			</if>
-			<if test="entity.open_date != null">
-				open_date = #{entity.open_date},
+			<if test="entity.record_time != null">
+				record_time = #{entity.record_time},
 			</if>
-			<if test="entity.deliver_date != null">
-				deliver_date = #{entity.deliver_date},
+			<if test="entity.remark != null">
+				remark = #{entity.remark},
 			</if>
-			<if test="entity.server_phone_num != null">
-				server_phone_num = #{entity.server_phone_num},
+			<if test="entity.p_start != null">
+				p_start = #{entity.p_start},
 			</if>
-			<if test="entity.address != null">
-				address = #{entity.address},
+			<if test="entity.p_end != null">
+				p_end = #{entity.p_end}
 			</if>
-			<if test="entity.building_count != null">
-				building_count = #{entity.building_count},
-			</if>
-			<if test="entity.floor_space != null">
-				floor_space = #{entity.floor_space},
-			</if>
-			<if test="entity.building_space != null">
-				building_space = #{entity.building_space},
-			</if>
-			<if test="entity.house_count != null">
-				house_count = #{entity.house_count},
-			</if>
-			<if test="entity.green_rate != null">
-				green_rate = #{entity.green_rate},
-			</if>
-			<if test="entity.decoration_condition != null">
-				decoration_condition = #{entity.decoration_condition},
-			</if>
-			<if test="entity.util_type != null">
-				util_type = #{entity.util_type},
-			</if>
-			<if test="entity.parking_count != null">
-				parking_count = #{entity.parking_count},
-			</if>
-			<if test="entity.floor_detail != null">
-				floor_detail = #{entity.floor_detail},
-			</if>
-			<if test="entity.main_door != null">
-				main_door = #{entity.main_door},
-			</if>
-			<if test="entity.around_peitao != null">
-				around_peitao = #{entity.around_peitao},
-			</if>
-			<if test="entity.internal_peitao != null">
-				internal_peitao = #{entity.internal_peitao},
-			</if>
-			<if test="entity.traffic != null">
-				traffic = #{entity.traffic},
-			</if>
-			<if test="entity.wuye_fee != null">
-				wuye_fee = #{entity.wuye_fee},
-			</if>
-			<if test="entity.property_company != null">
-				property_company = #{entity.property_company},
-			</if>
-			<if test="entity.ratio != null">
-				ratio = #{entity.ratio},
-			</if>
-			<if test="entity.right_years != null">
-				right_years = #{entity.right_years},
-			</if>
-			<if test="entity.buildings_detail != null">
-				buildings_detail = #{entity.buildings_detail},
-			</if>
-			<if test="entity.ratio != null">
-				yushouzhenghao = #{entity.yushouzhenghao},
-			</if>
-			<if test="entity.ratio != null">
-				dianping = #{entity.dianping}
-			</if>
+			
 		</set>
 		WHERE
 		id = #{entity.id}
@@ -210,21 +122,21 @@
 		SELECT
 		<include refid="Base_Column_List" />
 		FROM
-		tb_buildings
+		gy_partners
 		WHERE
 		id>0
-		<if test="filter.buildings_name != null and filter.buildings_name != ''">
-			<bind name="filter.buildings_name" value=" '%' + filter.buildings_name + '%' " />
-			AND buildings_name LIKE #{filter.buildings_name}
+		<if test="filter.p_name != null and filter.p_name != ''">
+			<bind name="filter.p_name" value=" '%' + filter.p_name + '%' " />
+			AND p_name LIKE #{filter.p_name}
 		</if>
 
 		<if
-			test="filter.developer_company != null and filter.developer_company != ''">
-			<bind name="filter.developer_company" value=" '%' + filter.developer_company + '%' " />
-			AND developer_company LIKE #{filter.developer_company}
+			test="filter.p_name != null and filter.p_name != ''">
+			<bind name="filter.p_name" value=" '%' + filter.p_name + '%' " />
+			AND p_name LIKE #{filter.p_name}
 		</if>
-		<if test="filter.proId != null and filter.proId != ''">
-			AND province_id=#{filter.proId}
+		<if test="filter.province_id != null and filter.province_id != ''">
+			AND province_id=#{filter.province_id}
 		</if>
 		<if test="filter.city_id != null and filter.city_id != ''">
 			<bind name="filter.city_id" value=" '%' + filter.city_id + '%' " />

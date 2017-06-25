@@ -1,0 +1,122 @@
+<#include "*/basic/default.html"/> <#macro title> 添加楼盘 </#macro> 
+<#macro head>
+
+</#macro> <#macro body>
+<div class="data-content">
+
+	<!--     <ol class="breadcrumb"> -->
+	<!--         <li><span class="glyphicon glyphicon-user"></span></li> -->
+	<!--         <li><a href="${base}/account/user/list">用户管理</a></li> -->
+	<!--         <li class="active">添加用户</li> -->
+	<!--     </ol> -->
+
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<h3 class="panel-title">
+				<span class="glyphicon glyphicon-edit"></span> 编辑员工
+			</h3>
+		</div>
+		<form action="${base}/gongying/workers/update"
+			id="create-user-form" method="post">
+			<div class="panel-body">
+<input type="hidden" name="id" value="${entity.id}"/>
+				<div class="form-group">
+					<div class="row">
+						<div class="col-xs-4">
+							<label for="worker_name">姓名:</label> <input type="text"
+								class="form-control required" 
+								id="worker_name" name="worker_name" value="${entity.worker_name!''}" >
+						</div>
+						<div class="col-xs-4">
+					<label for="worker_sex">性别:</label>								
+					   <select class="form-control "  id="worker_sex" name="worker_sex" >  
+                          
+                           <option value="1" <#if entity.worker_sex?? && entity.worker_sex==1>selected="selected"</#if> >
+                                                                                    男   
+                           </option>
+                           <option value="2" <#if entity.worker_sex?? && entity.worker_sex==2>selected="selected"</#if> >
+                                                                                    女   
+                           </option>
+                           
+                       </select> 
+						</div>
+						<div class="col-xs-4">
+							<label for="worker_age">年龄:</label> <input type="text"
+								class="form-control" maxlength="16" id="worker_age"
+								name="worker_age"  value="${entity.worker_age!''}">
+						</div>
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="row">
+						<div class="col-xs-6">
+							<label for="user_name">用户名:</label>
+							<input type="text" class="form-control" maxlength="100"
+								id="user_name" name="user_name"  value="${entity.user_name!''}">
+						</div>
+						<div class="col-xs-6">
+							<label for="password">密码:</label> <input type="text"
+								class="form-control " minlength="6" id="password"
+								name="password" value="${entity.password!''}">
+						</div>
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="row">
+						<div class="col-xs-6">
+							<label for="worker_shenfenzheng">身份证:</label>
+							<input type="text" class="form-control" maxlength="100"
+								id="worker_shenfenzheng" name="worker_shenfenzheng" value="${entity.worker_shenfenzheng!''}">
+						</div>
+						<div class="col-xs-6">
+							<label for="worker_email">邮箱:</label> <input type="text"
+								class="form-control " maxlength="100" id="worker_email"
+								name="worker_email"   value="${entity.worker_email!''}">
+						</div>
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="row">
+						<div class="col-xs-6">
+							<label for="wechat">微信:</label>
+							<input type="text" class="form-control" maxlength="100"
+								id="wechat" name="wechat"  value="${entity.wechat!''}">
+						</div>
+						<div class="col-xs-6">
+							<label for="remark">员工标识:</label>								
+					   <select class="form-control "  id="remark" name="remark" >  
+                          
+                           <option value="1" <#if entity.remark?? && entity.remark==1>selected="selected"</#if> >
+                                                                                    共赢员工   
+                           </option>
+                           <option value="2" <#if entity.remark?? && entity.remark==2>selected="selected"</#if> >
+                                                                                    其他公司员工   
+                           </option>
+                           
+                       </select> 
+						</div>
+					</div>
+				</div>
+			<div class="panel-footer">
+
+
+				<button type="submit" class="btn btn-success">
+					<span class="glyphicon glyphicon-ok"></span> 保存
+				</button>
+
+				<button type="reset" class="btn btn-warning">
+					<span class="glyphicon glyphicon-trash"></span> 重置
+				</button>
+	
+
+				<button type="button" class="btn btn-default"
+					onclick="history.back();">
+					<span class="glyphicon glyphicon-backward"></span> 返回
+				</button>
+
+			</div>
+		</form>
+	</div>
+</div>
+</#macro>
+

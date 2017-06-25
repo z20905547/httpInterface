@@ -7,9 +7,9 @@
 <#macro head>
 
 <script type="text/javascript">
-
 	$(document).ready(
-		
+			
+			
 			function() {
 				$(".blocklink").on("click",function(){
 		    		var actionUrl=$(this).attr("data-href");
@@ -19,7 +19,7 @@
 		    		
 		    	});
 				//省市下拉框
-				var proObj=$(".proId");
+				var proObj=$(".province_id");
 				var cityObj=$(".city_id");
 				var areaObj=$(".area_id");
 				
@@ -106,23 +106,23 @@
                 <h4 class="modal-title"><span class="glyphicon glyphicon-search"></span> 内容查询</h4>
             </div>
 
-            <form id="buildings-search-form" action="${base}/buildings/buildings/list" method="post" >
+            <form id="partners-search-form" action="${base}/gongying/partners/list" method="post" >
 <input type="hidden" id="pageNumber" name="pageNumber" value="0"/>
                 <div class="modal-body">
 
                     <div class="form-group">
                         <div class="row">
                             <div class="col-xs-6">
-                                <label for="username">楼盘名称:</label>
-                                <input type="text" class="form-control" id="buildings_name" name="buildings_name" value="${RequestParameters.buildings_name!''}">
+                                <label for="p_name">机构名称:</label>
+                                <input type="text" class="form-control" id="p_name" name="p_name" value="${RequestParameters.p_name!''}">
                             </div>
                             <div class="col-xs-6">
-                                <label for="nickname">开发商名称:</label>
-                                <input type="text" class="form-control" id="developer_company" name="developer_company" value="${RequestParameters.developer_company!''}">
+                                <label for="faren">法人姓名:</label>
+                                <input type="text" class="form-control" id="faren" name="faren" value="${RequestParameters.faren!''}">
                             </div>
                            <div class="col-xs-4">
-							<label for="proId">省/市:</label>
-							<select name="proId" class="form-control  proId " >
+							<label for="province_id">省/市:</label>
+							<select name="province_id" class="form-control  province_id " >
 							</select>
 						</div>
 						<div class="col-xs-4">
@@ -167,7 +167,7 @@
     </div>
     </#if>
 
-    <form id="buildings-list-form" action="${base}/buildings/buildings/delete" valid="false" method="post">
+    <form id="partners-list-form" action="${base}/gongying/partners/delete" valid="false" method="post">
         <div class="panel panel-default">
 
             <div class="panel-heading">
@@ -179,10 +179,12 @@
                     <thead>
                         <tr>
                             <th><input type="checkbox" id="selectAll"></th>
-                            <th>楼盘名称</th>
-                            <th>开盘日期</th>
-                            <th>交房日期</th>
-                            <th>状态</th>
+                            <th>合作商名称</th>
+                            <th>机构编码</th>
+                            <th>机构对接人</th>
+                            <th>对接人电话</th>
+                            <th>合作开始时间</th>
+                            <th>合作截止时间</th>
                             <th>操作</th>
                         </tr>
                     </thead>
@@ -196,41 +198,18 @@
                             <#list page.content as r>
                             <tr>
                                 <td><input type="checkbox" name="ids" value="${r.id}"></td>
-                                <td>${r.buildings_name!''}</td>
-                                <td>${r.open_date!''}</td>
-                                <td>${r.deliver_date!''}</td>
+                                <td>${r.p_name!''}</td>
+                                <td>${r.partners_mark!''}</td>
+                                <td>${r.partners_docking_name!''}</td>
+                                <td>${r.partners_docking_num!''}</td>
+                                <td>${r.p_start!''}</td>
+                                <td>${r.p_end!''}</td>
                                 <td>
-                                    <#list buildingsStates as s>
-                                        <#if s.value = r.status>
-                                            ${s.key}
-                                            <#break />
-                                        </#if>
-                                    </#list>
-                                </td>
-                                <td>
-                                    <@shiro.hasPermission name="buildings:edit">
-                                    <a class="btn btn-default btn-sm" title="修改信息" href="${base}/buildings/buildings/edit?id=${r.id}">
+                                    <a class="btn btn-default btn-sm" title="修改信息" href="${base}/gongying/partners/edit?id=${r.id}">
                                         <span class="glyphicon glyphicon-edit"></span>
                                     </a>
-                                    </@shiro.hasPermission>
-                                    <@shiro.hasPermission name="price:list">
-                                    <a class="btn btn-default btn-sm blocklink" title="编辑价格" href="javascript:void(0)" data-href="${base}/buildings/price/list" data-building-id="${r.id}" data-building-name="${r.buildings_name}">
-                                        <span class="glyphicon glyphicon-usd"></span>
-                                    </a>
-                                    </@shiro.hasPermission>
-                                    <@shiro.hasPermission name="house:list">
-                                    <a class="btn btn-default btn-sm blocklink" title="编辑户型" href="javascript:void(0)" data-href="${base}/buildings/house/list" data-building-id="${r.id}" data-building-name="${r.buildings_name}">
-                                        <span class="glyphicon glyphicon-home"></span>
-                                    </a>
-                                    </@shiro.hasPermission>
-                                    <a class="btn btn-default btn-sm blocklink" title="编辑图片" href="javascript:void(0)" data-href="${base}/buildings/house/picEdit" data-building-id="${r.id}" data-building-name="${r.buildings_name}">
-                                        <span class="glyphicon glyphicon-picture"></span>
-                                    </a>
-                                    <a class="btn btn-default btn-sm blocklink" title="活动添加" href="javascript:void(0)" data-href="${base}/buildings/active/list" data-building-id="${r.id}" data-building-name="${r.buildings_name}">
-                                        <span class="glyphicon glyphicon-time"></span>
-                                    </a>
-                                    <a class="btn btn-default btn-sm blocklink" title="活动最新动态" href="javascript:void(0)" data-href="${base}/buildings/latest/list2" data-building-id="${r.id}" data-building-name="${r.buildings_name}">
-                                        <span class="glyphicon glyphicon-bell"></span>
+                                    <a class="btn btn-default btn-sm" title="共赢员工" href="${base}/gongying/workers/list?p_id=${r.id}">
+                                        <span class="glyphicon glyphicon-user"></span>
                                     </a>
                                 </td>
                             </tr>
@@ -247,13 +226,13 @@
                     <span class="glyphicon glyphicon-search"></span> 查询 
                 </a>
 
-                <@shiro.hasPermission name="user:insert">
-                <a href="${base}/buildings/buildings/add" class="btn btn-primary">
+                
+                <a href="${base}/gongying/partners/add" class="btn btn-primary">
                     <span class="glyphicon glyphicon-plus"></span> 添加
                 </a>
-                </@shiro.hasPermission>
+                
 
-                <@shiro.hasPermission name="user:delete">
+                <@shiro.hasPermission name="partners:delete">
                 <button type="button" class="btn btn-danger" onclick="submitDeleteForm();">
                     <span class="glyphicon glyphicon-remove"></span> 删除
                 </button>
@@ -262,7 +241,7 @@
 
         </div>
 
-        <@pagination 'buildings-search-form' page />
+        <@pagination 'partners-search-form' page />
 
     </form>
 
