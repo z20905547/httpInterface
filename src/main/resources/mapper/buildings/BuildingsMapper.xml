@@ -14,7 +14,7 @@
 		green_rate,
 		decoration_condition,
 		util_type,
-		parking_count,floor_detail,buildings_detail,main_door,around_peitao,internal_peitao,traffic,wuye_fee,property_company,wuye_type,project_features,ratio,right_years,yushouzhenghao,dianping
+		parking_count,floor_detail,buildings_detail,main_door,around_peitao,internal_peitao,traffic,wuye_fee,property_company,wuye_type,project_features,ratio,right_years,yushouzhenghao,dianping,build_author
 	</sql>
 	<select id="get" resultType="hashmap">
 		SELECT
@@ -41,7 +41,7 @@
 		building_space,
 		house_count, green_rate, decoration_condition,
 		util_type,
-		parking_count,floor_detail,buildings_detail,main_door,around_peitao,internal_peitao,traffic,wuye_fee,developer_company,property_company,wuye_type,project_features,ratio,right_years,yushouzhenghao,dianping
+		parking_count,floor_detail,buildings_detail,main_door,around_peitao,internal_peitao,traffic,wuye_fee,developer_company,property_company,wuye_type,project_features,ratio,right_years,yushouzhenghao,dianping,build_author
 		)
 		values ( #{entity.proId},#{entity.cityId}, #{entity.areaId},
 		#{entity.mapX},
@@ -63,7 +63,8 @@
 		#{entity.property_company}, #{entity.wuye_type},
 		#{entity.project_features}, #{entity.ratio}, #{entity.right_years},
 		#{entity.yushouzhenghao},
-		#{entity.dianping}
+		#{entity.dianping},
+		#{entity.build_author}
 		)
 	</insert>
 	<select id="count" resultType="long">
@@ -74,7 +75,6 @@
 			<bind name="filter.buildings_name" value=" '%' + filter.buildings_name + '%' " />
 			AND buildings_name LIKE #{filter.buildings_name}
 		</if>
-
 		<if
 			test="filter.developer_company != null and filter.developer_company != ''">
 			<bind name="filter.developer_company" value=" '%' + filter.developer_company + '%' " />
@@ -90,7 +90,9 @@
 		<if test="filter.area_id != null and filter.area_id != ''">
 			AND area_id LIKE #{filter.area_id}
 		</if>
-
+		<if test="filter.build_author != null and filter.build_author != ''">
+			AND build_author LIKE #{filter.build_author}
+		</if>
 
 	</select>
 	<update id="update">
@@ -232,6 +234,9 @@
 		</if>
 		<if test="filter.area_id != null and filter.area_id != ''">
 			AND area_id LIKE #{filter.area_id}
+		</if>
+		<if test="filter.build_author != null and filter.build_author != ''">
+			AND build_author LIKE #{filter.build_author}
 		</if>
 		ORDER BY id DESC
 		<if test="filter.first != null and filter.last != null">

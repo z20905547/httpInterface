@@ -15,22 +15,22 @@
             children.prop("checked", checkbox.is(":checked"));
         });
         $(".blocklink").on("click",function(){
-    		var actionUrl=$(this).attr("data-href");
-    		var buildings_id=$(this).attr("data-building-id");
-    		var buildingsName=$(this).attr("data-building-name");
-    		$("<form action='"+actionUrl+"' method='post'>").append("<input name='buildings_id' value='"+buildings_id+"'/><input name='buildingsName' value='"+buildingsName+"'/>").submit().remove();
+        	var actionUrl=$(this).attr("data-href");
+    		var travel_id=$(this).attr("data-travel-id");
+    		
+    		$("<form action='"+actionUrl+"' method='post'>").append("<input name='travel_id' value='"+travel_id+"'/>").submit().remove();
     		
     	});
     });
 
     function submitDeleteForm() {
-        var length = $("#buildings-list-form").find("input[type='checkbox'][id!='selectAll']:checked").length;
+        var length = $("#travel-list-form").find("input[type='checkbox'][id!='selectAll']:checked").length;
         if (length == 0) {
             return ;
         }
         bootbox.confirm("确定要删除选中的" + length + "条记录吗？", function (result) {
             if (result) {
-                $("#buildings-list-form").submit();
+                $("#travel-list-form").submit();
             }
         });
     }
@@ -51,7 +51,7 @@
                 <h4 class="modal-title"><span class="glyphicon glyphicon-search"></span> 内容查询</h4>
             </div>
 
-            <form id="basicdata-list-form" action="${base}/gongying/basicdata/list" method="post">
+            <form id="basicdata-travel2-form" action="${base}/gongying/travel/list2" method="post">
          <input type="hidden" id="pageNumber" name="pageNumber" value="0"/>
                 <div class="modal-body">
 
@@ -106,30 +106,21 @@
     </div>
     </#if>
 
-    <form id="price-list-form" action="${base}/buildings/active/delete" valid="false" method="post">
+    <form id="travel-list-form" action="${base}/gongying/travel/delete2?travel_id=${travel_id!''}" valid="false" method="post">
         <div class="panel panel-default">
 
             <div class="panel-heading">
-                <h3 class="panel-title"><span class="glyphicon glyphicon-flag"></span> 基础数据管理《${buildingsName}》</h3>
+                <h3 class="panel-title"><span class="glyphicon glyphicon-flag"></span> 旅居楼盘</h3>
             </div>
-<input type="hidden" name="buildingsId" value="${buildings_id}"/>
-<input type="hidden" name="buildingsName" value="${buildingsName}"/>
+
 <input type="hidden" id="pageNumber" name="pageNumber" value="0"/>
             <div class="table-container">
                 <table class="table table-hover table-striped">
                     <thead>
                         <tr>
                             <th><input type="checkbox" id="selectAll"></th>
-                            <th></th>
-                            <th>录入员工</th>
-                            <th>录入时间</th>
-                            <th>原始佣金</th>
-                            <th>展示佣金</th>
-                            <th>成交奖励</th>
-                            <th>渠道经理</th>
-                            <th>置业顾问</th>
-                            <th>是否签约</th>
-                            <th>上线状态</th>
+                            <th>旅居楼盘</th>
+                            <th>是否生效</th>
                             <th>操作</th>
                         </tr>
                     </thead>
@@ -142,36 +133,20 @@
                         <#else>
                             <#list page.content as r>
                             <tr>
-                                <td><input type="checkbox" name="ids" value="${r.id}"></td>
-                                <td>${r.buildingsName!''}</td>
-                                <td>${r.last_author!''}</td>
-                                <td>${r.last_date!''}</td>
-                                <td>${r.commission_all!''}</td>
-                                <td>${r.commission_out!''}</td>
-                                <td>${r.deal_prize!''}</td>
-                                <td>${r.channel_num!''}</td>
-                                <td>${r.zhiyeguwen_num!''}</td>
-                                <td>${r.is_contract!''}</td>
+                                <td><input type="checkbox" name="ids" value="${r.tb_id}"></td>
+                                <td>${r.buildings_name!''}</td>
+                                <#if r.is_up == 1>
+                                <td>已生效</td>
+                                <#elseif r.is_up == 0>
+                                <td>已失效</td>
+                                </#if>
                                 
-                                <#if r.is_contract == 0>
-                                <td>不确定</td>
-                                <#elseif r.is_contract == 1>
-                                <td>已签</td>
-                                <#elseif r.is_contract == 2>
-                                <td>未签</td>
-                                <#elseif r.is_contract == 3>
-                                <td>未拿回</td>
-                                </#if>
-                                <#if r.is_up == "0">
-                                <td>未上线</td>
-                                <#elseif r.is_up == "1">
-                                <td>已上线</td>
-                                </#if>
                                 <td>
-                                    <a class="btn btn-default btn-sm" href="${base}/gongying/basicdata/edit2?id=${r.id}&buildingsName=${buildingsName}&buildings_id=${buildings_id}">
+                                <!--  
+                                    <a class="btn btn-default btn-sm" href="${base}/gongying/travel/edit2?id=${r.id}&buildings_name=${r.buildings_name}">
                                         <span class="glyphicon glyphicon-edit"></span>
                                     </a>
-
+                                  -->
                                 </td>
                             </tr>
                             </#list>
@@ -188,16 +163,16 @@
                 </a>
          -->    
                
-                <a data-href="${base}/gongying/basicdata/add2" data-building-id="${buildings_id}" data-building-name="${buildingsName}" class="btn btn-primary blocklink">
+                <a data-href="${base}/gongying/travel/add2" data-travel-id="${travel_id!''}"   class="btn btn-primary blocklink">
                     <span class="glyphicon glyphicon-plus"></span> 添加
                 </a>
              
 
-              <!-- 
+               
                 <button type="button" class="btn btn-danger" onclick="submitDeleteForm();">
                     <span class="glyphicon glyphicon-remove"></span> 删除
                 </button>
-                --> 
+               
                <button type="button" class="btn btn-default" onclick="history.back();">
                     <span class="glyphicon glyphicon-backward"></span> 返回
                 </button>
@@ -205,7 +180,7 @@
 
         </div>
 
-        <@pagination 'basicdata-list-form' page />
+        <@pagination 'basicdata-travel2-form' page />
 
     </form>
 

@@ -1,0 +1,255 @@
+<#include "*/basic/default.html"/> <#macro title> 添加楼盘 </#macro> 
+<#macro head>
+
+<link rel="stylesheet" type="text/css" href="${base}/resource/css/umeditor.min.css">
+<link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/jquery-datetimepicker/2.4.5/jquery.datetimepicker.min.css">
+<script type="text/javascript" src="//cdn.bootcss.com/jquery-datetimepicker/2.4.5/jquery.datetimepicker.min.js"></script> 
+<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=E991373d74352818824a24dea57f156c"></script>
+<script type="text/javascript" src="http://api.map.baidu.com/library/CityList/1.2/src/CityList_min.js"></script>
+<script type="text/javascript" charset="utf-8" src="${base}/resource/script/umeditor.config.js"></script>
+<script type="text/javascript" charset="utf-8" src="${base}/resource/script/umeditor.min.js"></script>
+<script type="text/javascript" src="${base}/resource/script/area.js"></script>
+<script type="text/javascript">
+	$(document).ready(
+			function() {
+			
+				//省市下拉框
+				
+				var proObj=$(".c_jd_name");
+			
+				
+				getSubList(proObj);
+				
+			});
+	
+
+	function getSubList(obj){
+		obj.html("");
+		obj.val("");
+		obj.append("<option value='${entity.c_jd_id!''}' selected>${entity.c_jd_name!''}</option>");
+		var url="/management/jsondata/area/getSubUserList";
+		var params={parentId:1};
+		$.ajax({
+			type: 'get',
+			url:url,
+			async: false,
+			dataType: 'jsonp',
+			data:params,
+			success:function(data){
+				if(data.statusCode=="0000"){
+					var sublist=data.data;
+					for(var i=0;i<sublist.length;i++){
+						
+							obj.append("<option value='"+sublist[i].id+"' >"+sublist[i].worker_name+"</option>");
+						
+					}
+				}
+				
+			},
+			error:function(data){
+				alert("网络错误");
+			}
+		});
+	}
+</script>
+</#macro> <#macro body>
+<div class="data-content">
+
+	<!--     <ol class="breadcrumb"> -->
+	<!--         <li><span class="glyphicon glyphicon-user"></span></li> -->
+	<!--         <li><a href="${base}/account/user/list">用户管理</a></li> -->
+	<!--         <li class="active">添加用户</li> -->
+	<!--     </ol> -->
+
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<h3 class="panel-title">
+				<span class="glyphicon glyphicon-edit"></span> 订单审核 接待人员分配
+			</h3>
+		</div>
+		<form action="${base}/gongying/customer/update"
+			id="create-user-form" method="post">
+			<div class="panel-body">
+<input type="hidden" name="customer_id" value="${entity.customer_id!''}"/>
+				<div class="form-group">
+					<div class="row">
+						<div class="col-xs-4">
+							<label for="c_name">客户姓名:</label> <input type="text"
+								disabled="disabled" class="form-control" 
+								id="c_name" name="c_name" value="${entity.c_name!''}" >
+						</div>
+						<div class="col-xs-4">
+					<label for="c_sex">性别:</label>								
+					   <select disabled="disabled" class="form-control "  id="c_sex" name="c_sex" >  
+                          
+                           <option value="1" <#if entity.c_sex?? && entity.c_sex=="1">selected="selected"</#if> >
+                                                                                    男   
+                           </option>
+                           <option value="2" <#if entity.c_sex?? && entity.c_sex=="2">selected="selected"</#if> >
+                                                                                    女   
+                           </option>
+                           
+                       </select> 
+						</div>
+						<div class="col-xs-4">
+							<label for="c_phone">客户手机:</label> <input type="text"
+								disabled="disabled" class="form-control" maxlength="16" id="c_phone"
+								name="c_phone"  value="${entity.c_phone!''}">
+						</div>
+					</div>
+				</div>
+
+				<div class="form-group">
+					<div class="row">
+						<div class="col-xs-4">
+							<label for="order_id">订单编号:</label> <input type="text"
+								disabled="disabled" class="form-control" 
+								id="order_id" name="order_id" value="${entity.order_id!''}" >
+						</div>
+						<div class="col-xs-4">
+					<label for="c_level">客户质量:</label>								
+					   <select class="form-control "  id="c_level" name="c_level" >  
+                          
+                           <option value="1" <#if entity.c_level?? && entity.c_level=="1">selected="selected"</#if> >
+                                                                                   准客   
+                           </option>
+                           <option value="2" <#if entity.c_level?? && entity.c_level=="2">selected="selected"</#if> >
+                                                                                    水客   
+                           </option>
+                            <option value="3" <#if entity.c_level?? && entity.c_level=="3">selected="selected"</#if> >
+                                                                                    一般客户   
+                           </option>
+                           
+                       </select> 
+						</div>
+						<div class="col-xs-4">
+							<label for="c_num">客户其他电话:</label> <input type="text"
+								class="form-control" maxlength="16" id="c_num"
+								name="c_num"  value="${entity.c_num!''}">
+						</div>
+					</div>
+				</div>
+				
+				<div class="form-group">
+					<div class="row">
+						<div class="col-xs-4">
+							<label for="c_createtime">下单时间:</label> <input type="text"
+								disabled="disabled" class="form-control" 
+								id="c_createtime" name="c_createtime" value="${entity.c_createtime!''}" >
+						</div>
+						<div class="col-xs-4">
+					<label for="c_type">交易类型:</label>								
+					   <select class="form-control "  id="c_type" name="c_type" >  
+                          
+                           <option value="1" <#if entity.c_type?? && entity.c_type=="1">selected="selected"</#if> >
+                                                                                    求购新房   
+                           </option>
+                           <option value="2" <#if entity.c_type?? && entity.c_type=="2">selected="selected"</#if> >
+                                                                                    求购二手房   
+                           </option>
+                           <option value="3" <#if entity.c_type?? && entity.c_type=="3">selected="selected"</#if> >
+                                                                                    求租   
+                           </option>
+                           <option value="4" <#if entity.c_type?? && entity.c_type=="4">selected="selected"</#if> >
+                                                                                   出租   
+                           </option>
+                           <option value="5" <#if entity.c_type?? && entity.c_type=="5">selected="selected"</#if> >
+                                                                                    出售   
+                           </option>
+                       </select> 
+						</div>
+						<div class="col-xs-4">
+							<label for="c_user">审核员:</label> <input type="text"
+								disabled="disabled" class="form-control" maxlength="16" id="c_user"
+								name="c_user"  value="${entity.c_user!''}">
+						</div>
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="row">
+						<div class="col-xs-6">
+							<label for="c_uptime">审核时间:</label> <input type="text"
+								disabled="disabled" class="form-control" 
+								id="c_uptime" name="c_uptime" value="${entity.c_uptime!''}" >
+						</div>
+						<div class="col-xs-6">
+					<label for="c_status">审核结果:</label>								
+					   <select class="form-control "  id="c_status" name="c_status" >  
+                          
+                           <option value="1" <#if entity.c_status?? && entity.c_status=="1">selected="selected"</#if> >
+                                                                                    待共赢审核  
+                           </option>
+                           <option value="2" <#if entity.c_status?? && entity.c_status=="2">selected="selected"</#if> >
+                                                                                    审核通过！已安排置业顾问接待   
+                           </option>
+                           <option value="3" <#if entity.c_status?? && entity.c_status=="3">selected="selected"</#if> >
+                                                                                    审核未通过！   
+                           </option>
+                       </select> 
+						</div>
+					</div>
+				</div>
+				
+				<div class="form-group">
+					<div class="row">
+						<div class="col-xs-6">
+							<label for="c_tj_name">推荐人姓名:</label> <input type="text"
+								disabled="disabled" class="form-control" 
+								id="c_tj_name" name="c_tj_name" value="${entity.c_tj_name!''}" >
+						</div>
+					    <div class="col-xs-6">
+							<label for="c_tj_phone">推荐人电话:</label> <input type="text"
+								disabled="disabled" class="form-control" 
+								id="c_tj_phone" name="c_tj_phone" value="${entity.c_tj_phone!''}" >
+						</div>
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="row">					
+					<div class="col-xs-6">
+							<label for="c_jd_name">置业顾问姓名:</label>
+							<select name="c_jd_name" class="form-control  c_jd_name " >
+							</select>
+						</div>
+					    <div class="col-xs-6">
+							<label for="c_jd_phone">置业顾问电话:</label> <input type="text"
+								disabled="disabled" class="form-control" 
+								id="c_jd_phone" name="c_jd_phone" value="${entity.c_jd_phone!''}" >
+						</div>
+					
+					</div>
+									<div class="form-group">
+					<div class="row">					
+				
+					    <div class="col-xs-12">
+							<label for="c_note">备注:</label> <input type="text"
+								class="form-control" 
+								id="c_note" name="c_note" value="${entity.c_note!''}" >
+						</div>
+					
+					</div>
+
+	</div>
+				</div>
+
+			<div class="panel-footer">
+				<button type="submit" class="btn btn-success">
+					<span class="glyphicon glyphicon-ok"></span> 保存
+				</button>
+
+				<button type="reset" class="btn btn-warning">
+					<span class="glyphicon glyphicon-trash"></span> 重置
+				</button>
+	
+
+				<button type="button" class="btn btn-default"
+					onclick="history.back();">
+					<span class="glyphicon glyphicon-backward"></span> 返回
+				</button>
+
+			</div>
+		</form>
+	</div>
+</div>
+</#macro>
+

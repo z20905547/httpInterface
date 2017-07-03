@@ -35,4 +35,19 @@ public class HttpAreaController {
 		res.put("returnMsg",m.get("returnMsg"));
 		RequestParamUtil.responseWriter(request, response, res);
 	}
+	@RequestMapping("/getSubUserList")
+	@ResponseBody
+	public void getSubUserList(HttpServletRequest request,HttpServletResponse response){
+		Map res = new HashMap();
+		Map params = RequestParamUtil.requestToMap(request);
+		Map m =  areaService.getUserList(params);
+		if("000000".equals(m.get("returnCode"))){
+			res.put("data", m.get("data"));
+			res.put("statusCode","0000");
+		}else{
+			res.put("statusCode","1111");
+		}
+		res.put("returnMsg",m.get("returnMsg"));
+		RequestParamUtil.responseWriter(request, response, res);
+	}
 }

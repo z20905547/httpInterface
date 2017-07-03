@@ -12,6 +12,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import vfh.httpInterface.commons.Page;
 import vfh.httpInterface.commons.PageRequest;
+import vfh.httpInterface.commons.SessionVariable;
 import vfh.httpInterface.commons.VariableUtils;
 import vfh.httpInterface.commons.enumeration.FieldType;
 import vfh.httpInterface.commons.enumeration.entity.BuildingsState;
@@ -50,6 +51,14 @@ public class BuildingsController {
     @RequestMapping("insert")
     public String insert(@RequestParam Map<String, Object> entity,
                          RedirectAttributes redirectAttributes) {
+
+    	Map<String,Object> user = SessionVariable.getCurrentSessionVariable().getUser();
+
+
+    	String build_author = user.get("nickname").toString();
+
+    	
+    	entity.put("build_author", build_author);
     	buildingsService.insertBuildings(entity);
         redirectAttributes.addFlashAttribute("success", "新增楼盘成功");
         return "redirect:/buildings/buildings/list";

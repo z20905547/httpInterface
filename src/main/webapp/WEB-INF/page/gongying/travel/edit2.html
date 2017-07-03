@@ -1,0 +1,89 @@
+<#include "*/basic/default.html"/>
+
+<#macro title>
+添加活动
+</#macro>
+
+<#macro head>
+<script type="text/javascript">
+	$(document).ready(
+			function() {
+			//	$.datepicker.setDefaults($.datepicker.regional["zh-CN"]);
+				$(".datePicker").datetimepicker({
+					lang:'ch',
+					format:"Y-m-d"
+			       });
+				
+			
+			});
+</script>
+
+   //开始日期必须大于等于当前日期
+   //截止日期必须大于开始时间
+</script>
+</#macro>
+
+<#macro body>
+<div class="data-content">
+
+<!--     <ol class="breadcrumb"> -->
+<!--         <li><span class="glyphicon glyphicon-user"></span></li> -->
+<!--         <li><a href="${base}/account/user/list">用户管理</a></li> -->
+<!--         <li class="active">添加用户</li> -->
+<!--     </ol> -->
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title"><span class="glyphicon glyphicon-edit"></span> 修改旅居楼盘</h3>
+        </div>
+        <form action="${base}/gongying/basicdata/update2" id="create-active-form" method="post">
+            <div class="panel-body">
+
+<input type="hidden" name="id" value="${entity.id!''}"/>
+  
+  <div class="form-group">
+					<div class="row">
+						<div class="col-xs-6">
+							<label for="channel_name">旅居楼盘名称:</label> <input type="text"
+								class="form-control" 
+								id="channel_name" name="channel_name" value="${entity.channel_name!''}">
+						</div>
+						 <div class="col-xs-6">
+                            <label for="is_up">上线状态:</label>
+                         <select class="form-control "  id="is_up" name="is_up">  
+                            <option value="1" <#if entity.is_up?? && entity.is_up=='1'>selected="selected"</#if> >
+                                                                                    已上线   
+                           </option> 
+                           <option value="0" <#if entity.is_up?? && entity.is_up=='0'>selected="selected"</#if> >
+                                                                                    已下线   
+                           </option> 
+                       </select> 
+                            
+                        </div>
+					</div>
+				</div> 
+  
+            </div>
+
+            <div class="panel-footer">
+
+                
+                <button type="submit" class="btn btn-success">
+                    <span class="glyphicon glyphicon-ok"></span> 保存
+                </button>
+
+                <button type="reset" class="btn btn-warning">
+                    <span class="glyphicon glyphicon-trash"></span> 重置
+                </button>
+               
+
+                <button type="button" class="btn btn-default" onclick="history.back();">
+                    <span class="glyphicon glyphicon-backward"></span> 返回
+                </button>
+
+            </div>
+        </form>
+    </div>
+</div>
+</#macro>
+

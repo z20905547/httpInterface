@@ -20,4 +20,6 @@ public interface AreaMapper {
 	public long count(@Param("filter")Map<String,Object> filter);
 	public List<Map<String, Object>> find(@Param("filter")Map<String, Object> filter);
 	public List<Map<String, Object>> findByParentId(@Param("parentId")Long parentId);
+	public List<Map<String, Object>> findUser(@Param("parentId")Long parentId);
+
 }

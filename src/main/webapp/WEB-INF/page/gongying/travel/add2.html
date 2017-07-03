@@ -1,0 +1,83 @@
+<#include "*/basic/default.html"/>
+
+<#macro title>
+添加旅居楼盘
+</#macro>
+
+<#macro head>
+
+<script type="text/javascript">
+	$(document).ready(
+			function() {
+			//	$.datepicker.setDefaults($.datepicker.regional["zh-CN"]);
+				$(".datePicker").datetimepicker({
+					lang:'ch',
+					format:"Y-m-d"
+			       });
+			
+				
+			
+			});
+</script>
+</#macro>
+
+<#macro body>
+<div class="data-content">
+
+<!--     <ol class="breadcrumb"> -->
+<!--         <li><span class="glyphicon glyphicon-user"></span></li> -->
+<!--         <li><a href="${base}/account/user/list">用户管理</a></li> -->
+<!--         <li class="active">添加用户</li> -->
+<!--     </ol> -->
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title"><span class="glyphicon glyphicon-edit"></span> 添加旅居楼盘</h3>
+        </div>
+        <form action="${base}/gongying/travel/insert2" id="create-active-form" method="post">
+            <div class="panel-body">
+<input type="hidden" name="travel_id" value="${travel_id!''}"/>
+
+			<div class="form-group">
+					<div class="row">
+						<div class="col-xs-6">
+							<label for="buildings_name">旅居楼盘名称:</label> <input type="text"
+								class="form-control" 
+								id="buildings_name" name="buildings_name" >
+						</div>
+						 <div class="col-xs-6">
+                            <label for="is_up">是否生效:</label>
+                         <select class="form-control "  id="is_up" name="is_up">  
+                           <option value ="0" >失效</option>
+                           <option value ="1" selected>生效</option>  
+                       </select> 
+                            
+                        </div>
+					</div>
+				</div> 	
+				
+				             
+            </div>
+
+            <div class="panel-footer">
+
+                
+                <button type="submit" class="btn btn-success">
+                    <span class="glyphicon glyphicon-ok"></span> 保存
+                </button>
+
+                <button type="reset" class="btn btn-warning">
+                    <span class="glyphicon glyphicon-trash"></span> 重置
+                </button>
+               
+
+                <button type="button" class="btn btn-default" onclick="history.back();">
+                    <span class="glyphicon glyphicon-backward"></span> 返回
+                </button>
+
+            </div>
+        </form>
+    </div>
+</div>
+</#macro>
+

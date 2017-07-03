@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="vfh.httpInterface.dao.gongying.GongyingTravelMapper" >
+  <sql id="Base_Column_List" >
+    id, travel_name, travel_route, travel_describe, travel_details, travel_commission, create_date, tr_is_up                                 
+  </sql>
+    <select id="get" resultType="hashmap">  
+        SELECT 
+          <include refid="Base_Column_List" />     
+        FROM
+          gy_basicdata_travel
+        WHERE 
+          id = #{id}
+   </select>
+   <delete id="delete" >
+    delete from gy_basicdata_travel
+    where id = #{id}
+  </delete>
+  <insert id="insert" useGeneratedKeys="true" keyProperty="entity.id" >
+	insert into gy_basicdata_travel ( travel_name, travel_route, travel_describe, travel_details,travel_commission, create_date, tr_is_up)
+	values ( #{entity.travel_name}, #{entity.travel_route}, #{entity.travel_describe},#{entity.travel_details},#{entity.travel_commission},now(), #{entity.tr_is_up}
+	)
+  </insert>
+  <select id="count" resultType="long">
+    select count(*) from gy_basicdata_travel 
+     WHERE
+     id>0
+        <if test="filter.travel_name != null and filter.travel_name != ''">
+			<bind name="filter.travel_name" value=" '%' + filter.travel_name + '%' " />
+			AND travel_name LIKE #{filter.travel_name}
+		</if>
+  </select>
+  <update id="update">
+        update gy_basicdata_travel
+	    <set >
+	      <if test="entity.travel_name != null and entity.travel_name != ''" >
+	        travel_name = #{entity.travel_name},
+	      </if>
+	      <if test="entity.travel_route != null and entity.travel_route != ''" >
+	        travel_route = #{entity.travel_route},
+	      </if>
+	      <if test="entity.travel_describe != null and entity.travel_describe != ''" >
+	        travel_describe = #{entity.travel_describe},
+	      </if>	      
+	      <if test="entity.travel_details != null and entity.travel_details != ''" >
+	        travel_details = #{entity.travel_details},
+	      </if>
+     	  <if test="entity.travel_commission != null and entity.travel_commission != ''" >
+	        travel_commission = #{entity.travel_commission},
+	      </if>
+	      <if test="entity.tr_is_up != null and entity.tr_is_up != ''" >
+	        tr_is_up = #{entity.tr_is_up},
+	      </if>
+	         create_date = now()
+	    </set>
+        WHERE
+          id = #{entity.id} 
+    </update>
+    <update id="updateActiveData">
+        update tb_building_active
+	    <set >
+	        update_time = now()
+	    </set>
+        WHERE
+          build_id = #{entity.buildings_id} 
+    </update>
+    
+    <select id="find" resultType="hashmap">
+        SELECT
+       <include refid="Base_Column_List" />     
+               FROM
+          gy_basicdata_travel
+      
+            WHERE
+		id>0
+		<if test="filter.travel_name != null and filter.travel_name != ''">
+			<bind name="filter.travel_name" value=" '%' + filter.travel_name + '%' " />
+			AND travel_name LIKE #{filter.travel_name}
+		</if>
+		ORDER BY id DESC
+		<if test="filter.first != null and filter.last != null">
+			LIMIT #{filter.first},#{filter.last}
+		</if>
+    </select>
+ 
+ 
+ 
+ 
+ <select id="get2" resultType="hashmap">  
+        SELECT 
+          id,build_id,travel_id,is_up    
+        FROM
+          gy_travel_build
+        WHERE 
+          id = #{id}
+   </select>
+   <delete id="delete2" >
+    delete from gy_travel_build
+    where id = #{id}
+  </delete>
+  <insert id="insert2" useGeneratedKeys="true" keyProperty="entity.id" >
+	INSERT INTO gy_travel_build ( build_id ,travel_id,is_up ) SELECT  id build_id,#{entity.travel_id},#{entity.is_up} FROM `tb_buildings` a  WHERE a.`buildings_name` = #{entity.buildings_name}
+	
+  </insert>
+  <select id="count2" resultType="long">
+    select count(*) from gy_travel_build 
+     WHERE
+     id>0
+        <if test="filter.is_up != null and filter.is_up != ''">
+			<bind name="filter.is_up" value=" '%' + filter.is_up + '%' " />
+			AND is_up LIKE #{filter.is_up}
+		</if>
+  </select>
+  <update id="update2">
+        update gy_travel_build
+	    <set >
+	      <if test="entity.travel_name != null and entity.travel_name != ''" >
+	        travel_name = #{entity.travel_name},
+	      </if>
+	      <if test="entity.travel_route != null and entity.travel_route != ''" >
+	        travel_route = #{entity.travel_route},
+	      </if>
+	      <if test="entity.travel_describe != null and entity.travel_describe != ''" >
+	        travel_describe = #{entity.travel_describe},
+	      </if>	      
+	      <if test="entity.travel_details != null and entity.travel_details != ''" >
+	        travel_details = #{entity.travel_details},
+	      </if>
+     	  <if test="entity.travel_commission != null and entity.travel_commission != ''" >
+	        travel_commission = #{entity.travel_commission},
+	      </if>
+	      <if test="entity.tr_is_up != null and entity.tr_is_up != ''" >
+	        tr_is_up = #{entity.tr_is_up},
+	      </if>
+	         create_date = now()
+	    </set>
+        WHERE
+          id = #{entity.id} 
+    </update>
+    <update id="updateActiveData2">
+        update tb_building_active
+	    <set >
+	        update_time = now()
+	    </set>
+        WHERE
+          build_id = #{entity.buildings_id} 
+    </update>
+    
+    <select id="find2" resultType="hashmap">
+        SELECT a.id id, b.id tb_id  , c.`id` buildings_id ,c.`buildings_name`  buildings_name ,b.`is_up` is_up
+          FROM `gy_basicdata_travel` a  ,`gy_travel_build` b , `tb_buildings` c 
+           WHERE 
+            a.`id`=b.`travel_id` 
+              AND b.`build_id`= c.id 
+            
+		<if test="filter.travel_id != null and filter.travel_id != ''">
+			<bind name="filter.travel_id" value="filter.travel_id" />
+			AND b.`travel_id` = #{filter.travel_id}
+		</if>
+		ORDER BY b.`id` DESC
+
+    </select>
+</mapper>

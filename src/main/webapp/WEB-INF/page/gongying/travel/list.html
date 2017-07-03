@@ -16,9 +16,9 @@
 				$(".blocklink").on("click",function(){
 				
 		    		var actionUrl=$(this).attr("data-href");
-		    		var buildingsId=$(this).attr("data-building-id");
-		    		var buildingsName=$(this).attr("data-building-name");
-		    		$("<form action='"+actionUrl+"' method='post'>").append("<input name='buildingsId' value='"+buildingsId+"'/><input name='buildingsName' value='"+buildingsName+"'/>").submit().remove();
+		    		var travel_id=$(this).attr("data-id");
+		    		
+		    		$("<form action='"+actionUrl+"' method='post'>").append("<input name='travel_id' value='"+travel_id+"'/>").submit().remove();
 		    		
 		    	});
 
@@ -42,23 +42,15 @@
                 <h4 class="modal-title"><span class="glyphicon glyphicon-search"></span> 内容查询</h4>
             </div>
 
-            <form id="workers-search-form" action="${base}/gongying/workers/list" method="post" >
+            <form id="travel-search-form" action="${base}/gongying/travel/list" method="post" >
 <input type="hidden" id="pageNumber" name="pageNumber" value="0"/>
                 <div class="modal-body">
 
                     <div class="form-group">
                         <div class="row">
                             <div class="col-xs-4">
-                                <label for="p_name">所属机构:</label>
-                                <input type="text" class="form-control" id="p_name" name="p_name" value="${RequestParameters.p_name!''}">
-                            </div>
-                            <div class="col-xs-4">
-                                <label for="worker_name">姓名:</label>
-                                <input type="text" class="form-control" id="worker_name" name="worker_name" value="${RequestParameters.worker_name!''}">
-                            </div>
-                             <div class="col-xs-4">
-                                <label for="user_name">用户名/手机号:</label>
-                                <input type="text" class="form-control" id="user_name" name="user_name" value="${RequestParameters.user_name!''}">
+                                <label for="travel_name">路线名称:</label>
+                                <input type="text" class="form-control" id="travel_name" name="travel_name" value="${RequestParameters.travel_name!''}">
                             </div>
                         </div>
                     </div>
@@ -92,7 +84,7 @@
     </div>
     </#if>
 
-    <form id="workers-list-form" action="${base}/gongying/workers/delete" valid="false" method="post">
+    <form id="workers-list-form" action="${base}/gongying/travel/delete" valid="false" method="post">
         <div class="panel panel-default">
 
             <div class="panel-heading">
@@ -104,12 +96,10 @@
                     <thead>
                         <tr>
                             <th><input type="checkbox" id="selectAll"></th>
-                            <th>姓名</th>
-                            <th>性别</th>
-                            <th>年龄</th>
-                            <th>用户名</th>
-                            <th>所属机构</th>
-                            <th>机构编码</th>
+                            <th>绿线名称</th>
+                            <th>路线城市</th>
+                             <th>佣金范围</th>
+                            <th>是否生效</th>
                             <th>操作</th>
                         </tr>
                     </thead>
@@ -123,22 +113,17 @@
                             <#list page.content as r>
                             <tr>
                                 <td><input type="checkbox" name="ids" value="${r.id}"></td>
-                                <td>${r.worker_name!''}</td>
-                                
-                                <#if r.worker_sex == 1>
-                                <td>男</td>
-                                <#elseif r.worker_sex == 2>
-                                <td>女</td>
-                                </#if>
-                                <td>${r.worker_age!''}</td>
-                                <td>${r.user_name!''}</td>
-                                <td>${r.p_name!''}</td>
-                                <td>${r.partners_mark!''}</td>
+                                <td>${r.travel_name!''}</td>
+                                <td>${r.travel_route!''}</td>
+                                <td>${r.travel_commission!''}</td>
+                                <td>${r.tr_is_up!''}</td>
                                 <td>
-                                    <a class="btn btn-default btn-sm" title="修改信息" href="${base}/gongying/workers/edit?id=${r.id}">
+                                    <a class="btn btn-default btn-sm" title="修改信息" href="${base}/gongying/travel/edit?id=${r.id}">
                                         <span class="glyphicon glyphicon-edit"></span>
                                     </a>
-
+                                    <a class="btn btn-default btn-sm blocklink" title="添加楼盘" href="javascript:void(0)" data-href="${base}/gongying/travel/list2" data-id="${r.id}" >
+                                        <span class="glyphicon glyphicon-home"></span>
+                                    </a>
                                 </td>
                             </tr>
                             </#list>
@@ -153,17 +138,17 @@
                 <a class="btn btn-info" data-toggle="modal" data-target="#search-modal">
                     <span class="glyphicon glyphicon-search"></span> 查询 
                 </a>
+                               
+                <a href="${base}/gongying/travel/add" class="btn btn-primary">
+                    <span class="glyphicon glyphicon-plus"></span> 添加
+                </a>
 				<button type="button" class="btn btn-default"
 					onclick="history.back();">
 					<span class="glyphicon glyphicon-backward"></span> 返回
 				</button>
-               <!-- 
-                <a href="${base}/gongying/workers/add" class="btn btn-primary">
-                    <span class="glyphicon glyphicon-plus"></span> 添加
-                </a>
-                
 
                 
+                <!-- 
                 <button type="button" class="btn btn-danger" onclick="submitDeleteForm();">
                     <span class="glyphicon glyphicon-remove"></span> 删除
                 </button>
@@ -172,7 +157,7 @@
 
         </div>
 
-        <@pagination 'workers-search-form' page />
+        <@pagination 'travel-search-form' page />
 
     </form>
 

@@ -46,4 +46,23 @@ public class AreaService {
         return returnMap;
         
     }
+	
+	public Map<String, Object> getUserList(Map params) {
+		returnMap.clear();
+		long parentId=1;
+    		List<Map<String, Object>> areaList=areaMapper.findUser(parentId);
+    		if(StringUtil.isNotEmptyList(areaList)){
+        		returnMap.put("returnCode", "000000");
+        		returnMap.put("data",areaList);
+        		returnMap.put("returnMsg", "获取城市列表成功！");
+        	}else{
+        		returnMap.put("returnCode", "1111");
+        		returnMap.put("returnMsg", "获取用户信息失败！");
+        	}
+    	
+    	
+    	
+        return returnMap;
+        
+    }
 }

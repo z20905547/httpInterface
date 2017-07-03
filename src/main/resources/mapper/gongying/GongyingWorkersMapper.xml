@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="vfh.httpInterface.dao.gongying.GongyingWorkersMapper" >
   <sql id="Base_Column_List" >
-    id, p_id, worker_name, worker_sex, worker_age, partners_mark, user_name, worker_shenfenzheng,worker_email,wechat,remark,password,record_time                                  
+    id, p_id, worker_name, worker_sex, worker_age, partners_mark, user_name, worker_shenfenzheng,worker_email,wechat,remark,password,record_time,is_right                                  
   </sql>
     <select id="get" resultType="hashmap">  
         SELECT 
@@ -17,8 +17,8 @@
     where id = #{id}
   </delete>
   <insert id="insert" useGeneratedKeys="true" keyProperty="entity.id" >
-	insert into gy_all_worker ( p_id, worker_name, worker_sex, worker_age, partners_mark, user_name, worker_shenfenzheng,worker_email,wechat,remark,password,record_time)
-	values ( #{entity.p_id}, #{entity.worker_name}, #{entity.worker_sex},#{entity.worker_age},#{entity.partners_mark}, #{entity.user_name}, #{entity.worker_shenfenzheng}, #{entity.worker_email}, #{entity.wechat}, #{entity.remark}, #{entity.password},  now()
+	insert into gy_all_worker ( p_id, worker_name, worker_sex, worker_age, partners_mark, user_name, worker_shenfenzheng,worker_email,wechat,remark,password,record_time,is_right)
+	values ( #{entity.p_id}, #{entity.worker_name}, #{entity.worker_sex},#{entity.worker_age},#{entity.partners_mark}, #{entity.user_name}, #{entity.worker_shenfenzheng}, #{entity.worker_email}, #{entity.wechat}, #{entity.remark}, #{entity.password},  now(),#{entity.is_right}
 	)
   </insert>
   <select id="count" resultType="long">
@@ -40,6 +40,10 @@
 		<if test="filter.user_name != null and filter.user_name != ''">
 			<bind name="filter.user_name" value=" '%' + filter.user_name + '%' " />
 			AND user_name LIKE #{filter.user_name}
+		</if>
+		<if test="filter.is_right != null and filter.is_right != ''">
+			<bind name="filter.is_right" value=" '%' + filter.is_right + '%' " />
+			AND is_right LIKE #{filter.is_right}
 		</if>
   </select>
   <update id="update">
@@ -72,9 +76,10 @@
 	      <if test="entity.wechat != null and entity.wechat != ''" >
 	        wechat = #{entity.wechat},
 	      </if>
+	      <if test="entity.is_right != null and entity.is_right != ''" >
+	        is_right = #{entity.is_right},
+	      </if>
 	        record_time = now() 
-	      
-
 	    </set>
         WHERE
           id = #{entity.id} 
@@ -112,6 +117,14 @@
 		<if test="filter.p_id != null and filter.p_id != ''">
 			<bind name="filter.p_id" value=" '%' + filter.p_id + '%' " />
 			AND a.p_id LIKE #{filter.p_id}
+		</if>
+		<if test="filter.is_right != null and filter.is_right != ''">
+			<bind name="filter.is_right" value=" '%' + filter.is_right + '%' " />
+			AND a.is_right LIKE #{filter.is_right}
+		</if>
+		ORDER BY id DESC
+		<if test="filter.first != null and filter.last != null">
+			LIMIT #{filter.first},#{filter.last}
 		</if>
     </select>
  

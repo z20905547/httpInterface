@@ -125,4 +125,15 @@
           
          order by area_id
    </select>
+   
+      <select id="findUser" resultType="hashmap">
+        SELECT
+           id, p_id, worker_name, worker_sex, worker_age, partners_mark, user_name, worker_shenfenzheng,worker_email,wechat,remark,password,record_time,is_right   
+        FROM
+          gy_all_worker
+        WHERE
+         remark = '1'
+         order by id desc
+    </select>
+        
 </mapper>
