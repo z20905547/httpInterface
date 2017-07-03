@@ -1,0 +1,194 @@
+<#include "*/basic/default.html"/> <#macro title> 添加楼盘 </#macro> 
+<#macro head>
+<link rel="stylesheet" type="text/css" href="${base}/resource/css/umeditor.min.css">
+<link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/jquery-datetimepicker/2.4.5/jquery.datetimepicker.min.css">
+<script type="text/javascript" src="//cdn.bootcss.com/jquery-datetimepicker/2.4.5/jquery.datetimepicker.min.js"></script> 
+<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=E991373d74352818824a24dea57f156c"></script>
+<script type="text/javascript" src="http://api.map.baidu.com/library/CityList/1.2/src/CityList_min.js"></script>
+<script type="text/javascript" charset="utf-8" src="${base}/resource/script/umeditor.config.js"></script>
+<script type="text/javascript" charset="utf-8" src="${base}/resource/script/umeditor.min.js"></script>
+<script type="text/javascript" src="${base}/resource/script/area.js"></script>
+<script type="text/javascript">
+	$(document).ready(
+			function() {
+			//	$.datepicker.setDefaults($.datepicker.regional["zh-CN"]);
+				$(".datePicker").datetimepicker({
+					lang:'ch',
+					format:"Y-m-d"
+			       });
+				//富文本编辑器
+				var um = UM.getEditor('travel_describe');
+				//富文本编辑器
+				var um = UM.getEditor('travel_details');
+
+				//百度地图API功能
+				var um = UM.getEditor('traffic');
+				//百度地图API功能
+				var map = new BMap.Map("l-map"); // 创建地图实例
+				var point = new BMap.Point(110.350165, 20.036658); // 创建点坐标
+				map.centerAndZoom(point, 19); // 初始化地图，设置中心点坐标和地图级别
+				map.enableScrollWheelZoom();
+				map.addControl(new BMap.NavigationControl()); //添加默认缩放平移控件
+				map.addControl(new BMap.MapTypeControl()); //添加地图类型控件
+				function showInfo(e) {
+					$("#mapX").val(e.point.lng);
+					$("#mapY").val(e.point.lat);
+					map.clearOverlays();
+					//alert(e.point.lng + ", " + e.point.lat);
+					var marker = new BMap.Marker(new BMap.Point(e.point.lng,
+							e.point.lat)); // 创建点
+
+					map.addOverlay(marker);
+				}
+
+				map.addEventListener("click", showInfo);
+
+				// 创建CityList对象，并放在citylist_container节点内
+				var myCl = new BMapLib.CityList({
+					container : "citylist_container",
+					map : map
+				});
+
+				// 给城市点击时，添加相关操作
+				myCl.addEventListener("cityclick", function(e) {
+					// 修改当前城市显示
+					document.getElementById("curCity").innerHTML = e.name;
+
+					// 点击后隐藏城市列表
+					document.getElementById("cityList").style.display = "none";
+				});
+				// 给“更换城市”链接添加点击操作
+				document.getElementById("curCityText").onclick = function() {
+					var cl = document.getElementById("cityList");
+					if (cl.style.display == "none") {
+						cl.style.display = "";
+					} else {
+						cl.style.display = "none";
+					}
+				};
+				// 给城市列表上的关闭按钮添加点击操作
+				document.getElementById("popup_close").onclick = function() {
+					var cl = document.getElementById("cityList");
+					if (cl.style.display == "none") {
+						cl.style.display = "";
+					} else {
+						cl.style.display = "none";
+					}
+				};
+				//省市下拉框
+				var proObj=$(".proId");
+				var cityObj=$(".cityId");
+				var areaObj=$(".areaId");
+				
+				getSubList(100000,460000,proObj);
+				getSubList(460000,460100,cityObj);
+				getSubList(460100,0,areaObj);
+				proObj.on("change",function(){
+					getSubList($(this).val(),0,cityObj)
+					getSubList(0,0,areaObj)
+				});
+				cityObj.on("change",function(){
+					getSubList($(this).val(),0,areaObj)
+				});
+			});
+</script>
+</#macro> <#macro body>
+<div class="data-content">
+
+	<!--     <ol class="breadcrumb"> -->
+	<!--         <li><span class="glyphicon glyphicon-user"></span></li> -->
+	<!--         <li><a href="${base}/account/user/list">用户管理</a></li> -->
+	<!--         <li class="active">添加用户</li> -->
+	<!--     </ol> -->
+
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<h3 class="panel-title">
+				<span class="glyphicon glyphicon-edit"></span> 添加旅居路线
+			</h3>
+		</div>
+		<form action="${base}/gongying/travel/insert"
+			id="create-user-form" method="post">
+			<div class="panel-body">
+
+				<div class="form-group">
+					<div class="row">
+						<div class="col-xs-6">
+							<label for="travel_name">路线名称:</label> <input type="text"
+								class="form-control required" 
+								id="travel_name" name="travel_name" value="${entity.travel_name!''}">
+						</div>
+						<div class="col-xs-6">
+							<label for="travel_route">路线城市:</label> <input type="text"
+								class="form-control" maxlength="16" id="travel_route"
+								name="travel_route" value="${entity.travel_name!''}">
+						</div>
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="row">
+						<div class="col-xs-6">
+							<label for="travel_commission">佣金:</label>
+							<input type="text" class="form-control" maxlength="100"
+								id="travel_commission" name="travel_commission" value="${entity.travel_commission!''}" >
+						</div>
+						<div class="col-xs-6">
+                            <label for="tr_is_up">上线状态:</label>
+                         <select class="form-control "  id="tr_is_up" name="tr_is_up">  
+                            <option value="1" <#if entity.tr_is_up?? && entity.tr_is_up==1>selected="selected"</#if> >
+                                                                                    已上线   
+                           </option> 
+                           <option value="0" <#if entity.tr_is_up?? && entity.tr_is_up==0>selected="selected"</#if> >
+                                                                                    已下线   
+                           </option> 
+                       </select> 
+                            
+                        </div>
+						
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="row">
+						<div class="col-xs-12">
+							<label for="travel_describe">路线概况:</label>
+							<script type="text/plain" class="form-control"
+								id="travel_describe" name="travel_describe"
+								style="width: 100%; height: 240px;">${entity.travel_describe!''}"
+                            </script>
+						</div>
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="row">
+						<div class="col-xs-12">
+							<label for="travel_details">路线详情:</label>
+							<script type="text/plain" class="form-control"
+								id="travel_details" name="travel_details"
+								style="width: 100%; height: 240px; " >${entity.travel_details!''}
+                            </script>
+						</div>
+					</div>
+				</div>
+			<div class="panel-footer">
+
+
+				<button type="submit" class="btn btn-success">
+					<span class="glyphicon glyphicon-ok"></span> 保存
+				</button>
+
+				<button type="reset" class="btn btn-warning">
+					<span class="glyphicon glyphicon-trash"></span> 重置
+				</button>
+	
+
+				<button type="button" class="btn btn-default"
+					onclick="history.back();">
+					<span class="glyphicon glyphicon-backward"></span> 返回
+				</button>
+
+			</div>
+		</form>
+	</div>
+</div>
+</#macro>
+

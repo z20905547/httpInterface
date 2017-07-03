@@ -42,24 +42,41 @@
                 <h4 class="modal-title"><span class="glyphicon glyphicon-search"></span> 内容查询</h4>
             </div>
 
-            <form id="workers-search-form" action="${base}/gongying/workers/list" method="post" >
+            <form id="customer-search-form" action="${base}/gongying/customer/list" method="post" >
 <input type="hidden" id="pageNumber" name="pageNumber" value="0"/>
                 <div class="modal-body">
 
                     <div class="form-group">
                         <div class="row">
-                            <div class="col-xs-4">
-                                <label for="p_name">所属机构:</label>
-                                <input type="text" class="form-control" id="p_name" name="p_name" value="${RequestParameters.p_name!''}">
+                            <div class="col-xs-6">
+                                <label for="c_name">客户姓名:</label>
+                                <input type="text" class="form-control" id="c_name" name="c_name" value="${RequestParameters.c_name!''}">
                             </div>
-                            <div class="col-xs-4">
-                                <label for="worker_name">姓名:</label>
+                            <div class="col-xs-6">
+                                <label for="c_phone">客户手机:</label>
+                                <input type="text" class="form-control" id="c_phone" name="c_phone" value="${RequestParameters.c_phone!''}">
+                            </div>
+                            
+                        </div>
+                         <div class="row">
+                            <div class="col-xs-6">
+                                <label for="worker_name">接待置业顾问:</label>
                                 <input type="text" class="form-control" id="worker_name" name="worker_name" value="${RequestParameters.worker_name!''}">
                             </div>
-                             <div class="col-xs-4">
-                                <label for="user_name">用户名/手机号:</label>
-                                <input type="text" class="form-control" id="user_name" name="user_name" value="${RequestParameters.user_name!''}">
-                            </div>
+                            <div class="col-xs-6">
+                            <label for="c_status">订单状态:</label>
+                         <select class="form-control "  id="c_status" name="c_status">  
+
+                           <option value ="1">待共赢审核</option>  
+                           <option value ="2">审核通过，正在安排接置业顾问接待</option>
+                           <option value ="3">审核未通过</option>  
+                           <option value ="4">置业顾问接单，对接客户中</option>  
+                           <option value ="5">对接客户结束 已成交</option>  
+                           <option value ="6">对接客户结束 未成交</option>  
+  
+                       </select> 
+                            
+                        </div>
                         </div>
                     </div>
 
@@ -92,7 +109,7 @@
     </div>
     </#if>
 
-    <form id="workers-list-form" action="${base}/gongying/workers/delete" valid="false" method="post">
+    <form id="log-list-form" action="${base}/gongying/log/delete" valid="false" method="post">
         <div class="panel panel-default">
 
             <div class="panel-heading">
@@ -103,14 +120,10 @@
                 <table class="table table-hover table-striped">
                     <thead>
                         <tr>
-                            <th><input type="checkbox" id="selectAll"></th>
-                            <th>姓名</th>
-                            <th>性别</th>
-                            <th>年龄</th>
-                            <th>用户名</th>
-                            <th>所属机构</th>
-                            <th>机构编码</th>
-                            <th>操作</th>
+                            <th></th>
+                            <th>记录时间</th>
+                            <th>创建者</th>
+                            <th>记录内容</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -122,24 +135,12 @@
                         <#else>
                             <#list page.content as r>
                             <tr>
-                                <td><input type="checkbox" name="ids" value="${r.id}"></td>
-                                <td>${r.worker_name!''}</td>
-                                
-                                <#if r.worker_sex == 1>
-                                <td>男</td>
-                                <#elseif r.worker_sex == 2>
-                                <td>女</td>
-                                </#if>
-                                <td>${r.worker_age!''}</td>
-                                <td>${r.user_name!''}</td>
-                                <td>${r.p_name!''}</td>
-                                <td>${r.partners_mark!''}</td>
-                                <td>
-                                    <a class="btn btn-default btn-sm" title="修改信息" href="${base}/gongying/workers/edit?id=${r.id}">
-                                        <span class="glyphicon glyphicon-edit"></span>
-                                    </a>
-
-                                </td>
+                                <td></td>
+                               
+                               <td>${r.log_createtime!''}</td>
+                               <td>${r.log_username!''}</td>
+                               <td>${r.log_content!''}</td>
+                              
                             </tr>
                             </#list>
 
@@ -150,14 +151,19 @@
             </div> 
 
             <div class="panel-footer">    
-                <a class="btn btn-info" data-toggle="modal" data-target="#search-modal">
-                    <span class="glyphicon glyphicon-search"></span> 查询 
-                </a>
-				<button type="button" class="btn btn-default"
+                <button type="button" class="btn btn-default"
 					onclick="history.back();">
 					<span class="glyphicon glyphicon-backward"></span> 返回
 				</button>
-               <!-- 
+                <!--
+                <a class="btn btn-info" data-toggle="modal" data-target="#search-modal">
+                    <span class="glyphicon glyphicon-search"></span> 查询 
+                </a>
+				  <button type="button" class="btn btn-default"
+					onclick="history.back();">
+					<span class="glyphicon glyphicon-backward"></span> 返回
+				</button>
+              
                 <a href="${base}/gongying/workers/add" class="btn btn-primary">
                     <span class="glyphicon glyphicon-plus"></span> 添加
                 </a>
@@ -172,7 +178,7 @@
 
         </div>
 
-        <@pagination 'workers-search-form' page />
+        <@pagination 'log-search-form' page />
 
     </form>
 

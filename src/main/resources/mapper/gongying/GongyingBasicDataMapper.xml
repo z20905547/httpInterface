@@ -84,6 +84,10 @@
           gy_baseicdata 
         WHERE
              build_id = #{filter.buildings_id}
+       ORDER BY id DESC
+		<if test="filter.first != null and filter.last != null">
+			LIMIT #{filter.first},#{filter.last}
+		</if>
     </select>
  
 </mapper>

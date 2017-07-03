@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="vfh.httpInterface.dao.gongying.GongyingCustomerMapper" >
+  <sql id="Base_Column_List" >
+    customer_id,order_id,c_name,c_phone,c_area,c_uptime,c_sex,c_num,c_level,c_status,c_type,c_note,c_createtime,c_user,c_jd_name,c_tj_phone,c_jd_id,c_tj_id,p_tj_name,p_tj_id,c_jd_phone                                 
+  </sql>
+    <select id="get" resultType="hashmap">  
+        SELECT 
+          <include refid="Base_Column_List" />     
+        FROM
+          gy_customer_order
+        WHERE 
+          customer_id = #{customer_id}
+   </select>
+   <delete id="delete" >
+    delete from gy_customer_order
+    where order_id = #{order_id}
+  </delete>
+  <insert id="insert" useGeneratedKeys="true" keyProperty="entity.customer_id" >
+	insert into gy_customer_order ( order_id,c_name,c_phone,c_area,c_sex,c_num,c_level,c_type,c_note,c_createtime,c_user,c_jd_name,c_tj_phone,c_status,c_jd_id,c_tj_id,p_tj_name,p_tj_id)
+	values ( #{entity.order_id}, #{entity.c_name}, #{entity.c_phone},#{entity.c_area},#{entity.c_sex}, #{entity.c_num}, #{entity.c_level}, #{entity.c_type}, 
+	#{entity.c_note},now(), #{entity.c_user}, #{entity.c_jd_name}, #{entity.c_tj_phone}, #{entity.c_status} , #{entity.c_status} , #{entity.c_jd_id} , #{entity.p_tj_name} , #{entity.p_tj_id} 
+	)
+  </insert>
+  <select id="count" resultType="long">
+    select count(*) from gy_customer_order 
+     WHERE
+     customer_id>0
+        <if test="filter.order_id != null and filter.order_id != ''">
+			<bind name="filter.order_id" value=" '%' + filter.order_id + '%' " />
+			AND order_id LIKE #{filter.order_id}
+		</if>
+		<if test="filter.c_name != null and filter.c_name != ''">
+			<bind name="filter.c_name" value=" '%' + filter.c_name + '%' " />
+			AND c_name LIKE #{filter.c_name}
+		</if>
+		<if test="filter.c_phone != null and filter.c_phone != ''">
+			<bind name="filter.c_phone" value=" '%' + filter.c_phone + '%' " />
+			AND c_phone LIKE #{filter.c_phone}
+		</if>
+		<if test="filter.c_status != null and filter.c_status != ''">
+			<bind name="filter.c_status" value=" '%' + filter.c_status + '%' " />
+			AND c_status LIKE #{filter.c_status}
+		</if>
+		<if test="filter.c_jd_name != null and filter.c_jd_name != ''">
+			<bind name="filter.c_jd_name" value=" '%' + filter.c_jd_name + '%' " />
+			AND c_jd_name LIKE #{filter.c_jd_name}
+		</if>
+		<if test="filter.c_jd_phone != null and filter.c_jd_phone != ''">
+			<bind name="filter.c_jd_phone" value=" '%' + filter.c_jd_phone + '%' " />
+			AND c_jd_phone LIKE #{filter.c_jd_phone}
+		</if>
+		<if test="filter.c_tj_name != null and filter.c_tj_name != ''">
+			<bind name="filter.c_tj_name" value=" '%' + filter.c_tj_name + '%' " />
+			AND c_tj_name LIKE #{filter.c_tj_name}
+		</if>
+		<if test="filter.c_tj_phone != null and filter.c_tj_phone != ''">
+			<bind name="filter.c_tj_phone" value=" '%' + filter.c_tj_phone + '%' " />
+			AND c_tj_phone LIKE #{filter.c_tj_phone}
+		</if>
+  </select>
+  <update id="update">
+         UPDATE  
+         gy_customer_order a  INNER JOIN 
+          ( SELECT b.worker_name worker_name ,b.user_name  user_name FROM  gy_all_worker b  where b.id = #{entity.c_jd_name} ) c 
+          ON 
+          customer_id = #{entity.customer_id}
+         <set > 
+         a.c_jd_name = c.worker_name , 
+         a.c_jd_phone =c.user_name,
+        <if test="entity.c_status != null and entity.c_status != ''" >
+	        c_status = #{entity.c_status},
+	    </if>
+	    c_uptime = now(),
+	     <if test="entity.c_user != null and entity.c_user != ''" >
+	        c_user = #{entity.c_user},
+	      </if>	           
+	      <if test="entity.c_tj_name != null and entity.c_tj_name != ''" >
+	        c_tj_name = #{entity.c_tj_name},
+	      </if>
+	      <if test="entity.c_tj_phone != null and entity.c_tj_phone != ''" >
+	        c_tj_phone = #{entity.c_tj_phone},
+	      </if>
+
+	      <if test="entity.c_note != null and entity.c_note != ''" >
+	        c_note = #{entity.c_note},
+	      </if>
+	      <if test="entity.c_num != null and entity.c_num != ''" >
+	        c_num = #{entity.c_num},
+	      </if>
+	      <if test="entity.p_tj_id != null and entity.p_tj_id != ''" >
+	        p_tj_id = #{entity.p_tj_id},
+	      </if>
+	      <if test="entity.c_jd_name != null and entity.c_jd_name != ''" >
+	        c_jd_id = #{entity.c_jd_name},
+	      </if>
+	    </set>
+   
+    </update>
+    <update id="updateActiveData">
+        update tb_building_active
+	    <set >
+	        update_time = now()
+	    </set>
+        WHERE
+          build_id = #{entity.buildings_id} 
+    </update>
+    
+    <select id="find" resultType="hashmap">
+        SELECT
+       <include refid="Base_Column_List" />   
+       FROM
+          gy_customer_order
+      
+            WHERE
+		customer_id>0
+		 
+		<if test="filter.order_id != null and filter.order_id != ''">
+			<bind name="filter.order_id" value=" '%' + filter.order_id + '%' " />
+			AND order_id LIKE #{filter.order_id}
+		</if>
+		<if test="filter.c_name != null and filter.c_name != ''">
+			<bind name="filter.c_name" value=" '%' + filter.c_name + '%' " />
+			AND c_name LIKE #{filter.c_name}
+		</if>
+		<if test="filter.c_phone != null and filter.c_phone != ''">
+			<bind name="filter.c_phone" value=" '%' + filter.c_phone + '%' " />
+			AND c_phone LIKE #{filter.c_phone}
+		</if>
+		<if test="filter.c_status != null and filter.c_status != ''">
+			<bind name="filter.c_status" value=" '%' + filter.c_status + '%' " />
+			AND c_status LIKE #{filter.c_status}
+		</if>
+		<if test="filter.c_jd_name != null and filter.c_jd_name != ''">
+			<bind name="filter.c_jd_name" value=" '%' + filter.c_jd_name + '%' " />
+			AND c_jd_name LIKE #{filter.c_jd_name}
+		</if>
+		<if test="filter.c_jd_phone != null and filter.c_jd_phone != ''">
+			<bind name="filter.c_jd_phone" value=" '%' + filter.c_jd_phone + '%' " />
+			AND c_jd_phone LIKE #{filter.c_jd_phone}
+		</if>
+		<if test="filter.c_tj_name != null and filter.c_tj_name != ''">
+			<bind name="filter.c_tj_name" value=" '%' + filter.c_tj_name + '%' " />
+			AND c_tj_name LIKE #{filter.c_tj_name}
+		</if>
+		<if test="filter.c_tj_phone != null and filter.c_tj_phone != ''">
+			<bind name="filter.c_tj_phone" value=" '%' + filter.c_tj_phone + '%' " />
+			AND c_tj_phone LIKE #{filter.c_tj_phone}
+		</if>
+		
+		ORDER BY customer_id DESC
+		<if test="filter.first != null and filter.last != null">
+			LIMIT #{filter.first},#{filter.last}
+		</if>
+    </select>
+ 
+</mapper>
