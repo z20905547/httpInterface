@@ -124,8 +124,7 @@
                             <th>订单编号</th>
                             <th>客户姓名</th>
                             <th>客户手机</th>
-                            <th>客户性别</th>
-                            <th>客户质量</th>
+                           
                             <th>推荐机构</th>
                             <th>推荐人姓名</th>
                             <th>推荐人电话</th>
@@ -149,18 +148,8 @@
                                <td>${r.order_id!''}</td>
                                <td>${r.c_name!''}</td>
                                <td>${r.c_phone!''}</td>
-                               <#if r.c_sex == "1">
-                                <td>男</td>
-                                <#elseif r.c_sex == "2">
-                                <td>女</td>
-                                </#if>
-                                <#if r.c_level == "1">
-                                <td>准客</td>
-                                <#elseif r.c_level == "2">
-                                <td>不确定</td>
-                                <#elseif r.c_level == "3">
-                                <td>一般客户</td>
-                                </#if>
+                               
+                                
                                <td>${r.p_tj_name!''}</td>
                                <td>${r.c_tj_name!''}</td>
                                <td>${r.c_tj_phone!''}</td>

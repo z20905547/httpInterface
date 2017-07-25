@@ -1,5 +1,6 @@
 package vfh.httpInterface.service.gongying;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import vfh.httpInterface.commons.Page;
 import vfh.httpInterface.commons.PageRequest;
+import vfh.httpInterface.commons.StringUtil;
 import vfh.httpInterface.commons.VariableUtils;
 import vfh.httpInterface.dao.gongying.GongyingCustomerMapper;
 
@@ -30,9 +32,9 @@ public class GongyingCustomerService {
 	@Autowired 
 	private GongyingCustomerMapper gongyingCustomerMapper;
 
+	Map<String, Object> returnMap=new HashMap<String, Object>();
 	
-	
-	public void insertBuildingsActive(
+	public void insertCustomer(
 			 Map<String, Object> entity) {
 
 		gongyingCustomerMapper.insert(entity);
@@ -66,4 +68,28 @@ public class GongyingCustomerService {
 		return new Page<Map<String, Object>>(pageRequest, content, total);
 	}
 	
+	public  Map<String, Object> findOrderList(
+			Map<String, Object> filter) {
+		returnMap.clear();
+		Map<String, Object> pagedata=new HashMap<String, Object>();
+
+		List<Map<String, Object>> OrderList=gongyingCustomerMapper
+				.find(filter);
+
+		if(StringUtil.isNotEmptyList(OrderList)){
+			//pagedata.put("total", total);
+			
+			pagedata.put("list", OrderList);
+    		returnMap.put("customer_id", OrderList.get(0).get("customer_id"));
+    		returnMap.put("returnCode", "000000");
+    		returnMap.put("data",pagedata);
+    		returnMap.put("returnMsg", "获取用户订单成功！");
+    	}else{
+    		returnMap.put("returnCode", "1111");
+    		returnMap.put("returnMsg", "获取用户订单失败！");
+    	}
+		
+		
+	    return returnMap;
+	}
 	}

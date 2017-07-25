@@ -6,20 +6,40 @@
   </sql>
     <select id="get" resultType="hashmap">  
         SELECT 
-          <include refid="Base_Column_List" />     
+          *     
+        FROM
+          gy_all_worker a ,gy_partners b
+        WHERE 
+          a.id = #{id}
+          and a.p_id=b.id
+   </select>
+       <select id="checkLogin" resultType="hashmap">  
+        SELECT 
+          *     
         FROM
           gy_all_worker
         WHERE 
-          id = #{id}
+          user_name = #{user_name} and
+          password = #{password}
    </select>
+          <select id="getByPhone" resultType="hashmap">  
+        SELECT 
+          count(*) ct     
+        FROM
+          gy_all_worker
+        WHERE 
+          user_name = #{user_name}
+   </select>
+   
+   
    <delete id="delete" >
     delete from gy_all_worker
     where id = #{id}
   </delete>
   <insert id="insert" useGeneratedKeys="true" keyProperty="entity.id" >
-	insert into gy_all_worker ( p_id, worker_name, worker_sex, worker_age, partners_mark, user_name, worker_shenfenzheng,worker_email,wechat,remark,password,record_time,is_right)
-	values ( #{entity.p_id}, #{entity.worker_name}, #{entity.worker_sex},#{entity.worker_age},#{entity.partners_mark}, #{entity.user_name}, #{entity.worker_shenfenzheng}, #{entity.worker_email}, #{entity.wechat}, #{entity.remark}, #{entity.password},  now(),#{entity.is_right}
-	)
+	INSERT INTO gy_all_worker ( p_id, worker_name, worker_sex, worker_age, partners_mark, user_name, worker_shenfenzheng,worker_email,wechat,remark,PASSWORD,record_time,is_right) values (
+	 #{entity.p_id}, #{entity.worker_name}, #{entity.worker_sex},#{entity.worker_age},#{entity.partners_mark}, #{entity.user_name}, #{entity.worker_shenfenzheng}, #{entity.worker_email}, #{entity.wechat}, #{entity.remark}, #{entity.password},  now(),'1')
+	
   </insert>
   <select id="count" resultType="long">
     select count(*) from gy_all_worker 
@@ -127,5 +147,10 @@
 			LIMIT #{filter.first},#{filter.last}
 		</if>
     </select>
- 
+    
+    <select id="findListByPmark" resultType="hashmap">
+    
+    Select * from  gy_partners where partners_mark= #{partners_mark}
+    </select>
+    
 </mapper>

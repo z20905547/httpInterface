@@ -82,8 +82,32 @@
 			LIMIT #{filter.first},#{filter.last}
 		</if>
     </select>
+    
+        <select id="find4" resultType="hashmap">
+        SELECT
+       <include refid="Base_Column_List" />     
+               FROM
+          gy_basicdata_travel
+            WHERE
+		tr_is_up= '1'
+		ORDER BY id DESC
+
+    </select>
  
- 
+     <select id="find3" resultType="hashmap">
+        SELECT a.id id, b.id tb_id  , c.`id` buildings_id ,c.`buildings_name`  buildings_name ,b.`is_up` is_up, c.id build_id,c.`buildings_name` buildings_name ,a.`travel_commission`,a.`travel_describe`,a.`travel_details`,a.`travel_name`,a.`travel_route`
+          FROM `gy_basicdata_travel` a  ,`gy_travel_build` b , `tb_buildings` c 
+           WHERE 
+            a.`id`=b.`travel_id` 
+              AND b.`build_id`= c.id 
+              AND a.tr_is_up= '1'
+              AND b.is_up= '1'
+		<if test="filter.travel_id != null and filter.travel_id != ''">
+			<bind name="filter.travel_id" value="filter.travel_id" />
+			AND b.`travel_id` = #{filter.travel_id}
+		</if>
+		ORDER BY b.`id` DESC
+    </select>
  
  
  <select id="get2" resultType="hashmap">  
@@ -147,16 +171,30 @@
     </update>
     
     <select id="find2" resultType="hashmap">
-        SELECT a.id id, b.id tb_id  , c.`id` buildings_id ,c.`buildings_name`  buildings_name ,b.`is_up` is_up
+        SELECT a.id id, b.id tb_id  , c.`id` buildings_id ,c.`buildings_name`  buildings_name ,b.`is_up` is_up,a.travel_route
           FROM `gy_basicdata_travel` a  ,`gy_travel_build` b , `tb_buildings` c 
            WHERE 
             a.`id`=b.`travel_id` 
               AND b.`build_id`= c.id 
-            
+
 		<if test="filter.travel_id != null and filter.travel_id != ''">
 			<bind name="filter.travel_id" value="filter.travel_id" />
 			AND b.`travel_id` = #{filter.travel_id}
 		</if>
+		ORDER BY b.`id` DESC
+
+    </select>
+        <select id="get3" resultType="hashmap">
+        SELECT a.id id,a.travel_name,a.`travel_commission`,a.`travel_describe`,a.`travel_details`,a.`travel_route`, b.id tb_id  , c.`id` buildings_id ,c.`buildings_name`  buildings_name ,b.`is_up` is_up, d.id acid,c.id buildings_id
+          FROM `gy_basicdata_travel` a  ,`gy_travel_build` b , `tb_buildings` c ,tb_building_active d
+           WHERE 
+            a.`id`=b.`travel_id` 
+              AND b.`build_id`= c.id 
+              AND a.tr_is_up= '1'
+              AND b.is_up= '1'
+		      AND d.`buildings_id` = c.id 
+			AND b.`travel_id` = #{travel_id}
+		
 		ORDER BY b.`id` DESC
 
     </select>

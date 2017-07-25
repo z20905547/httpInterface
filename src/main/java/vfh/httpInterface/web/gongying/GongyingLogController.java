@@ -40,7 +40,7 @@ public class GongyingLogController {
     	
     	entity.put("last_author", last_author);
     	
-    	gongyingLogService.insertBuildingsActive(entity);
+    	gongyingLogService.insertLog(entity);
     //	gongyingBasicDataService.updateBuildingsActiveUpdata(entity);
         redirectAttributes.addFlashAttribute("success", "新增成功");
         redirectAttributes.addAttribute("buildingsId", entity.get("buildings_id"));
