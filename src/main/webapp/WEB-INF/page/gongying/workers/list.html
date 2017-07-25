@@ -105,7 +105,7 @@
                         <tr>
                             <th><input type="checkbox" id="selectAll"></th>
                             <th>姓名</th>
-                            <th>性别</th>
+  
                             <th>年龄</th>
                             <th>用户名</th>
                             <th>所属机构</th>
@@ -125,11 +125,7 @@
                                 <td><input type="checkbox" name="ids" value="${r.id}"></td>
                                 <td>${r.worker_name!''}</td>
                                 
-                                <#if r.worker_sex == 1>
-                                <td>男</td>
-                                <#elseif r.worker_sex == 2>
-                                <td>女</td>
-                                </#if>
+
                                 <td>${r.worker_age!''}</td>
                                 <td>${r.user_name!''}</td>
                                 <td>${r.p_name!''}</td>

@@ -13,6 +13,7 @@ import vfh.httpInterface.commons.Page;
 import vfh.httpInterface.commons.PageRequest;
 import vfh.httpInterface.commons.SessionVariable;
 import vfh.httpInterface.service.gongying.GongyingCustomerService;
+import vfh.httpInterface.service.gongying.GongyingLogService;
 
 
 
@@ -21,6 +22,8 @@ import vfh.httpInterface.service.gongying.GongyingCustomerService;
 public class GongyingCustomerController {
     @Autowired
     private GongyingCustomerService gongyingCustomerService;
+	@Autowired 
+	private GongyingLogService gongyingLogService;
     @RequestMapping("list")
     public Page<Map<String, Object>> list(PageRequest pageRequest, @RequestParam Map<String, Object> filter,Model model) {
     	Map<String,Object> user = SessionVariable.getCurrentSessionVariable().getUser();
@@ -40,7 +43,7 @@ public class GongyingCustomerController {
     	
     	entity.put("last_author", last_author);
     	
-    	gongyingCustomerService.insertBuildingsActive(entity);
+    	gongyingCustomerService.insertCustomer(entity);
     //	gongyingBasicDataService.updateBuildingsActiveUpdata(entity);
         redirectAttributes.addFlashAttribute("success", "新增成功");
         redirectAttributes.addAttribute("buildingsId", entity.get("buildings_id"));
@@ -55,8 +58,24 @@ public class GongyingCustomerController {
     	Map<String,Object> user = SessionVariable.getCurrentSessionVariable().getUser();
     	String c_user = user.get("nickname").toString();
     	entity.put("c_user", c_user);
-    	
+
     	gongyingCustomerService.updateBuildingsActive(entity);
+    	// 共赢审核人员审核
+    	String  log_content = "";
+    	String c_jd_name ="";
+    	if(null!= entity.get("c_status") && entity.get("c_status").equals("2") ){
+    		
+    		log_content = "审核通过 已安排置业顾问对接客户";
+    	}
+    	if(null!= entity.get("c_status") && entity.get("c_status").equals("3") ){
+    		
+    		log_content = "审核不通过："+entity.get("c_note");
+    	}
+    	entity.put("log_content", log_content);
+    	entity.put("log_type", "2");
+    	entity.put("log_userid", user.get("id").toString());
+    	entity.put("log_username", c_user);
+    	 gongyingLogService.insertLog(entity);
         redirectAttributes.addFlashAttribute("success", "修改成功");
         return "redirect:/gongying/customer/list";
     }

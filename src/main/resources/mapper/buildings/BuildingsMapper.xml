@@ -248,8 +248,9 @@
 		b.server_phone_num,a.*,
 		c.resource_name,
 		d.first_price ,
-		d.discount_price  
-		FROM  tb_building_active a ,tb_buildings b ,tb_building_resource c,tb_building_price d,
+		d.discount_price ,
+		e.commission_out  commission_out 
+		FROM  tb_building_active a ,tb_buildings b ,tb_building_resource c,tb_building_price d,gy_baseicdata e,
 		(SELECT c.building_id id FROM tb_building_house_type c WHERE c.id>0 
 		<if test="filter.shi != null and filter.shi != ''">
 		AND c.shi= #{filter.shi}
@@ -281,7 +282,8 @@
 		
 		AND c.sm_type =30 
 		AND c.buildings_id=b.id
-		
+		AND e.build_id= b.id
+        AND e.is_up='1'
 		AND b.status=0
 		ORDER BY a.update_time desc
 		<if test="filter.first != null and filter.last != null">

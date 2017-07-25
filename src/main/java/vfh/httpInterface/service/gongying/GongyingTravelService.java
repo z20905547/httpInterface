@@ -1,6 +1,7 @@
 package vfh.httpInterface.service.gongying;
 
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -13,6 +14,7 @@ import org.springframework.ui.Model;
 
 import vfh.httpInterface.commons.Page;
 import vfh.httpInterface.commons.PageRequest;
+import vfh.httpInterface.commons.StringUtil;
 import vfh.httpInterface.commons.VariableUtils;
 import vfh.httpInterface.dao.gongying.GongyingTravelMapper;
 
@@ -35,7 +37,7 @@ public class GongyingTravelService {
 	
 	@Autowired 
 	private GongyingTravelMapper gongyingTravelMapper;
-
+	Map<String, Object> returnMap=new HashMap<String, Object>();
 	
 	
 	public void insertBuildingsActive(
@@ -60,7 +62,31 @@ public class GongyingTravelService {
 		gongyingTravelMapper.delete(id);
 	}
 
+	
+	public Map<String, Object>  getRoadList( Map<String, Object> filter) {
 
+		returnMap.clear();
+		Map<String, Object> pagedata=new HashMap<String, Object>();
+
+		List<Map<String, Object>> LogList=gongyingTravelMapper
+				.find4(filter);
+		if(StringUtil.isNotEmptyList(LogList)){
+			//pagedata.put("total", total);
+			pagedata.put("list", LogList);
+    		returnMap.put("returnCode", "000000");
+    		returnMap.put("data",pagedata);
+    		returnMap.put("returnMsg", "获取日志成功！");
+    	}else{
+    		returnMap.put("returnCode", "1111");
+    		returnMap.put("returnMsg", "获取日志失败！");
+    	}
+		
+		
+	    return returnMap;
+		
+	}
+	
+	
 	public Page<Map<String, Object>> findBasicDataList(
 			PageRequest pageRequest, Map<String, Object> filter, Model model) {
 
@@ -106,7 +132,23 @@ public class GongyingTravelService {
 
 		return new Page<Map<String, Object>>(pageRequest, content, total);
 	}
-	
+	public Map<String, Object> getRoadDetailById(long travel_id) {
+		returnMap.clear();
+		Map<String, Object> pagedata=new HashMap<String, Object>();
+		List<Map<String, Object>> content = gongyingTravelMapper.get3(travel_id);
+
+		if(StringUtil.isNotEmptyList(content)){
+			pagedata.put("list", content);
+			returnMap.put("returnCode", "0000");
+			returnMap.put("data",pagedata);
+			returnMap.put("returnMsg", "获取用户信息成功！");
+    	}else{
+    		returnMap.put("returnCode", "1111");
+    		returnMap.put("returnMsg", "获取用户信息失败！");
+    	}
+		
+		return returnMap;
+	}
 	public void deletetravelsList(List<Long> ids) {
 
 		for(Long id : ids) {

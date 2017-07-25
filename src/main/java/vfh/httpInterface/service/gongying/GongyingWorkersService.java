@@ -36,6 +36,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import vfh.httpInterface.commons.Page;
 import vfh.httpInterface.commons.PageRequest;
+import vfh.httpInterface.commons.StringUtil;
 import vfh.httpInterface.commons.VariableUtils;
 import vfh.httpInterface.dao.resourse.ResourseDao;
 import vfh.httpInterface.service.resource.ResourceService;
@@ -59,10 +60,10 @@ public class GongyingWorkersService {
 	
 	@Autowired 
 	private GongyingWorkersMapper gongyingWorkersMapper;
-
+	Map<String, Object> returnMap=new HashMap<String, Object>();
 	
 	
-	public void insertBuildingsActive(
+	public void insertworkers(
 			 Map<String, Object> entity) {
 
 		gongyingWorkersMapper.insert(entity);
@@ -78,7 +79,35 @@ public class GongyingWorkersService {
 	public Map<String, Object> getBuildingsActive(Long id) {
 		return gongyingWorkersMapper.get(id);
 	}
+	
+	public Map<String, Object> getByPhone(String user_name) {
+		return gongyingWorkersMapper.getByPhone(user_name);
+	}
+	
+	public Map<String, Object> checkLogin(String user_name,String password) {
+		returnMap.clear();
+		Map<String, Object> workers = gongyingWorkersMapper.checkLogin(user_name,password);
 
+		if(StringUtil.isNotEmptyMap(workers)){
+
+			returnMap.put("returnCode", "0000");
+			returnMap.put("data",workers);
+			returnMap.put("returnMsg", "获取用户信息成功！");
+    	}else{
+    		returnMap.put("returnCode", "1111");
+    		returnMap.put("returnMsg", "获取用户信息失败！");
+    	}
+		
+		
+		return returnMap;
+	}
+	
+	public List<Map<String, Object>> getByPmark(String partners_mark) {
+		
+		 List<Map<String, Object>> content =  gongyingWorkersMapper.findListByPmark(partners_mark);
+		 return content;
+	}
+	
 	public void deleteBuildingsActive(Map<String, Object> entity) {
 		Long id = VariableUtils.typeCast(entity.get("id"), Long.class);
 		gongyingWorkersMapper.delete(id);
@@ -95,5 +124,21 @@ public class GongyingWorkersService {
 
 		return new Page<Map<String, Object>>(pageRequest, content, total);
 	}
-	
+	public Map<String, Object> getWorkerInfoById(long worker_id) {
+		returnMap.clear();
+		Map<String, Object> workers = gongyingWorkersMapper.get(worker_id);
+
+		if(StringUtil.isNotEmptyMap(workers)){
+
+			returnMap.put("returnCode", "0000");
+			returnMap.put("data",workers);
+			returnMap.put("returnMsg", "获取用户信息成功！");
+    	}else{
+    		returnMap.put("returnCode", "1111");
+    		returnMap.put("returnMsg", "获取用户信息失败！");
+    	}
+		
+		
+		return returnMap;
+	}
 	}
