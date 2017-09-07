@@ -249,6 +249,7 @@
 		c.resource_name,
 		d.first_price ,
 		d.discount_price ,
+		b.* ,
 		e.commission_out  commission_out 
 		FROM  tb_building_active a ,tb_buildings b ,tb_building_resource c,tb_building_price d,gy_baseicdata e,
 		(SELECT c.building_id id FROM tb_building_house_type c WHERE c.id>0 
