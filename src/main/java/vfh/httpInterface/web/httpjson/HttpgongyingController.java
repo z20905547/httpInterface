@@ -85,12 +85,12 @@ public class HttpgongyingController {
 				
 			
 			}
-		 else  {
-		    if("" != request.getParameter("partners_mark") || request.getParameter("partners_mark") != null){
+		 else  
+		    if("" != request.getParameter("partners_mark") && request.getParameter("partners_mark") != null){
 				if(request.getParameter("partners_mark").equals("GYLM2017")){
 					remark = "1";
 				}
-			}
+			
 		    id  =	 Integer.parseInt(gongyingWorkersService.getByPmark(partners_mark).get(0).get("id").toString());
 			
 		   	params.put("p_id", id);
@@ -103,6 +103,19 @@ public class HttpgongyingController {
 			res.put("statusCode","0000");
 			JSONObject jsonObj = JSONObject.fromObject(res); 
 			RequestParamUtil.responseWriter(request, response, jsonObj);
+		} else {
+			
+				if(""!=request.getParameter("remark") && request.getParameter("remark") !=null &&"0".equals(request.getParameter("remark"))){
+			params.put("p_id", 0);
+			params.put("user_name", request.getParameter("user_name"));
+			params.put("password", request.getParameter("password"));
+			
+			params.put("remark", "0");
+			gongyingWorkersService.insertworkers(params);
+			res.put("statusCode","0000");
+			JSONObject jsonObj = JSONObject.fromObject(res); 
+			RequestParamUtil.responseWriter(request, response, jsonObj);
+				}
 		}
 	}
 	
