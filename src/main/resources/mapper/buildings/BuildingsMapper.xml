@@ -225,6 +225,10 @@
 			<bind name="filter.developer_company" value=" '%' + filter.developer_company + '%' " />
 			AND developer_company LIKE #{filter.developer_company}
 		</if>
+		<if test="filter.wuye_type != null and filter.wuye_type != ''">
+			<bind name="filter.wuye_type" value=" '%' + filter.wuye_type + '%' " />
+			AND b.wuye_type LIKE #{filter.wuye_type}
+		</if>
 		<if test="filter.proId != null and filter.proId != ''">
 			AND province_id=#{filter.proId}
 		</if>
@@ -273,6 +277,10 @@
           <bind name="filter.buildings_name" value=" '%' + filter.buildings_name + '%' " />
 		AND b.buildings_name LIKE #{filter.buildings_name}
        </if>
+       <if test="filter.wuye_type != null and filter.wuye_type != ''">
+			<bind name="filter.wuye_type" value=" '%' + filter.wuye_type + '%' " />
+			AND b.wuye_type LIKE #{filter.wuye_type}
+		</if>
        <if test="filter.active_price1 != null and filter.active_price1 != ''">
 		AND a.active_price BETWEEN #{filter.active_price1} AND #{filter.active_price2}
        </if>
@@ -310,6 +318,10 @@
 		<if test="filter.buildings_name != null and filter.buildings_name != ''">
 			<bind name="filter.buildings_name" value=" '%' + filter.buildings_name + '%' " />
 			AND b.buildings_name LIKE #{filter.buildings_name}
+		</if>
+		<if test="filter.wuye_type != null and filter.wuye_type != ''">
+			<bind name="filter.wuye_type" value=" '%' + filter.wuye_type + '%' " />
+			AND b.wuye_type LIKE #{filter.wuye_type}
 		</if>
 		<if test="filter.city_id != null and filter.city_id != ''">
 			AND b.city_id LIKE #{filter.city_id}
