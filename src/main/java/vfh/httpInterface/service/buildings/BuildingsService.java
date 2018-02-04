@@ -238,6 +238,163 @@ public class BuildingsService {
 	    return returnMap;
 	}
 	/**
+	 * 查询最热楼盘
+	 */
+	public Map<String, Object> findHotList(Map<String, Object> filter){
+		returnMap.clear();
+		Map<String, Object> pagedata=new HashMap<String, Object>();
+		//查总条数
+		if("undefined".equals(filter.get("buildings_name"))  || "请输入楼盘名称".equals(filter.get("buildings_name"))) filter.put("buildings_name", "");
+		if("undefined".equals(filter.get("proId"))) filter.put("proId", "");
+		if("undefined".equals(filter.get("city_id"))) filter.put("city_id", "");
+		if("undefined".equals(filter.get("area_id"))) filter.put("area_id", "");
+		
+		if("111".equals(filter.get("city_id"))) {
+			filter.put("city_id", "");
+		}
+		if("222".equals(filter.get("active_price"))) {
+			filter.put("active_price1", "");
+		}else if ("4000".equals(filter.get("active_price"))){
+			filter.put("active_price1", "0");
+			filter.put("active_price2", "4000");
+		}else if ("6000".equals(filter.get("active_price"))){
+			filter.put("active_price1", "4000");
+			filter.put("active_price2", "6000");
+		}
+		else if ("8000".equals(filter.get("active_price"))){
+			filter.put("active_price1", "6000");
+			filter.put("active_price2", "8000");
+		}else if ("10000".equals(filter.get("active_price"))){
+			filter.put("active_price1", "8000");
+			filter.put("active_price2", "10000");
+		}else if ("11000".equals(filter.get("active_price"))){
+			filter.put("active_price1", "10000");
+			filter.put("active_price2", "50000");
+		}
+		if("333".equals(filter.get("acreage"))) {
+			filter.put("acreage1", "");
+		}else if ("50".equals(filter.get("acreage"))){
+			filter.put("acreage1", "0");
+			filter.put("acreage2", "50");
+		}else if ("70".equals(filter.get("acreage"))){
+			filter.put("acreage1", "50");
+			filter.put("acreage2", "70");
+		}else if ("90".equals(filter.get("acreage"))){
+			filter.put("acreage1", "70");
+			filter.put("acreage2", "90");
+		}else if ("110".equals(filter.get("acreage"))){
+			filter.put("acreage1", "90");
+			filter.put("acreage2", "110");
+		}else if ("150".equals(filter.get("acreage"))){
+			filter.put("acreage1", "110");
+			filter.put("acreage2", "150");
+		}
+		if("444".equals(filter.get("shi"))) {
+			filter.put("shi", "");
+		}
+		
+
+		//long total = buildingsMapper.findDetailCount(filter);
+		if(StringUtil.isNotEmptyObject(filter.get("first"))&&StringUtil.isNotEmptyObject(filter.get("last"))){
+			filter.put("first", Integer.parseInt(filter.get("first").toString()));
+			filter.put("last", Integer.parseInt(filter.get("last").toString()));
+		}
+		
+		List<Map<String, Object>> buildingsHotList=buildingsMapper.findHotList(filter);
+		if(StringUtil.isNotEmptyList(buildingsHotList)){
+			
+			pagedata.put("list", buildingsHotList);
+    		returnMap.put("returnCode", "000000");
+    		returnMap.put("data",pagedata);
+    		returnMap.put("returnMsg", "获取楼盘列表！");
+    	}else{
+    		returnMap.put("returnCode", "1111");
+    		returnMap.put("returnMsg", "获取楼盘列表失败！");
+    	}
+		
+		return returnMap;
+	}
+	
+	/**
+	 * 查询最新楼盘
+	 */
+	public Map<String, Object> findNewList(Map<String, Object> filter){
+		returnMap.clear();
+		Map<String, Object> pagedata=new HashMap<String, Object>();
+		//查总条数
+		if("undefined".equals(filter.get("buildings_name"))  || "请输入楼盘名称".equals(filter.get("buildings_name"))) filter.put("buildings_name", "");
+		if("undefined".equals(filter.get("proId"))) filter.put("proId", "");
+		if("undefined".equals(filter.get("city_id"))) filter.put("city_id", "");
+		if("undefined".equals(filter.get("area_id"))) filter.put("area_id", "");
+		
+		if("111".equals(filter.get("city_id"))) {
+			filter.put("city_id", "");
+		}
+		if("222".equals(filter.get("active_price"))) {
+			filter.put("active_price1", "");
+		}else if ("4000".equals(filter.get("active_price"))){
+			filter.put("active_price1", "0");
+			filter.put("active_price2", "4000");
+		}else if ("6000".equals(filter.get("active_price"))){
+			filter.put("active_price1", "4000");
+			filter.put("active_price2", "6000");
+		}
+		else if ("8000".equals(filter.get("active_price"))){
+			filter.put("active_price1", "6000");
+			filter.put("active_price2", "8000");
+		}else if ("10000".equals(filter.get("active_price"))){
+			filter.put("active_price1", "8000");
+			filter.put("active_price2", "10000");
+		}else if ("11000".equals(filter.get("active_price"))){
+			filter.put("active_price1", "10000");
+			filter.put("active_price2", "50000");
+		}
+		if("333".equals(filter.get("acreage"))) {
+			filter.put("acreage1", "");
+		}else if ("50".equals(filter.get("acreage"))){
+			filter.put("acreage1", "0");
+			filter.put("acreage2", "50");
+		}else if ("70".equals(filter.get("acreage"))){
+			filter.put("acreage1", "50");
+			filter.put("acreage2", "70");
+		}else if ("90".equals(filter.get("acreage"))){
+			filter.put("acreage1", "70");
+			filter.put("acreage2", "90");
+		}else if ("110".equals(filter.get("acreage"))){
+			filter.put("acreage1", "90");
+			filter.put("acreage2", "110");
+		}else if ("150".equals(filter.get("acreage"))){
+			filter.put("acreage1", "110");
+			filter.put("acreage2", "150");
+		}
+		if("444".equals(filter.get("shi"))) {
+			filter.put("shi", "");
+		}
+		
+
+		
+		//long total = buildingsMapper.findDetailCount(filter);
+		if(StringUtil.isNotEmptyObject(filter.get("first"))&&StringUtil.isNotEmptyObject(filter.get("last"))){
+			filter.put("first", Integer.parseInt(filter.get("first").toString()));
+			filter.put("last", Integer.parseInt(filter.get("last").toString()));
+		}
+		
+		List<Map<String, Object>> buildingsNewList=buildingsMapper.findNewList(filter);
+		if(StringUtil.isNotEmptyList(buildingsNewList)){
+			
+			pagedata.put("list", buildingsNewList);
+    		returnMap.put("returnCode", "000000");
+    		returnMap.put("data",pagedata);
+    		returnMap.put("returnMsg", "获取楼盘列表！");
+    	}else{
+    		returnMap.put("returnCode", "1111");
+    		returnMap.put("returnMsg", "获取楼盘列表失败！");
+    	}
+		
+		return returnMap;
+	}
+	
+	/**
 	 * TODO 查询楼盘详情
 	 * @author harry
 	 * <b> 有问题请联系qq:359705093</b>

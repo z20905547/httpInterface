@@ -130,6 +130,7 @@
                             <th>置业顾问</th>
                             <th>是否签约</th>
                             <th>上线状态</th>
+                         
                             <th>操作</th>
                         </tr>
                     </thead>
@@ -167,6 +168,8 @@
                                 <#elseif r.is_up == "1">
                                 <td>已上线</td>
                                 </#if>
+                                
+                              
                                 <td>
                                     <a class="btn btn-default btn-sm" href="${base}/gongying/basicdata/edit2?id=${r.id}&buildingsName=${buildingsName}&buildings_id=${buildings_id}">
                                         <span class="glyphicon glyphicon-edit"></span>
