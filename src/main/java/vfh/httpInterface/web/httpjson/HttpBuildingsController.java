@@ -40,6 +40,44 @@ public class HttpBuildingsController {
 
 		RequestParamUtil.responseWriter(request, response, res);
 	}
+	@RequestMapping("/getBuildingsDetailList2")
+	@ResponseBody
+	public void getBuildingsDetailList2(HttpServletRequest request,HttpServletResponse response){
+		
+		Map res = new HashMap();
+		Map params = RequestParamUtil.requestToMap(request);
+		params.put("is_hot", "1");
+		Map m =  buildingsService.findHotList(params);
+		if("000000".equals(m.get("returnCode"))){
+			res.put("data", m.get("data"));
+			//System.out.println("is_hot"+m.get("data").toString());
+			res.put("statusCode","0000");
+		}else{
+			res.put("statusCode","1111");
+		}
+		
+
+		RequestParamUtil.responseWriter(request, response, res);
+	}
+//	@RequestMapping("/getBuildingsDetailList3")
+//	@ResponseBody
+//	public void getBuildingsDetailList3(HttpServletRequest request,HttpServletResponse response){
+//		
+//		Map res = new HashMap();
+//		Map params = RequestParamUtil.requestToMap(request);
+//		params.put("is_new", "1");
+//		Map m =  buildingsService.findNewList(params);
+//		if("000000".equals(m.get("returnCode"))){
+//			res.put("data3", m.get("data"));
+//			System.out.println("new"+m.get("data").toString());
+//			res.put("statusCode","0000");
+//		}else{
+//			res.put("statusCode","1111");
+//		}
+//		
+//
+//		RequestParamUtil.responseWriter(request, response, res);
+//	}
 	@RequestMapping("/getBuildingsDetail")
 	@ResponseBody
 	public void getBuildingsDetail(HttpServletRequest request,HttpServletResponse response,@RequestParam(required = false)Long buildingsId,@RequestParam(required = false)Long pid){

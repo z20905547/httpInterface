@@ -44,6 +44,36 @@
 <input type="hidden" name="buildingsName" value="${buildingsName}"/>
   
   <div class="form-group">
+		<div class="row">
+						<div class="col-xs-6">
+					<label for="is_contract">是否最新:</label>								
+					   <select class="form-control "  id="is_new" name="is_new" >  
+                          
+                             <option value="0" <#if entity.is_new?? && entity.is_new==0>selected="selected"</#if> >
+                                                                                    非最新   
+                           </option>
+                           <option value="1" <#if entity.is_new?? && entity.is_new==1>selected="selected"</#if> >
+                                                                                      最新    
+                           </option>
+                         
+                            
+                       </select> 
+						</div>
+						 <div class="col-xs-6">
+                            <label for="is_hot">是否最热:</label>
+                         <select class="form-control "  id="is_hot" name="is_hot">  
+                             <option value="0" <#if entity.is_hot?? && entity.is_hot==0>selected="selected"</#if> >
+                                                                                    非最热   
+                           </option> 
+                            <option value="1" <#if entity.is_hot?? && entity.is_hot==1>selected="selected"</#if> >
+                                                                                    最热  
+                           </option> 
+                         
+                       </select> 
+                            
+                        </div>
+					</div>
+				</div>   
 					<div class="row">
 						<div class="col-xs-6">
 					<label for="is_contract">是否签约:</label>								
