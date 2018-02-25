@@ -89,7 +89,38 @@ var um = UM.getEditor('Content');
         <form action="${base}/account/notice/update" id="create-notice-form" method="post">
          <input type="hidden" id="Id" name="Id" value="${entity.Id!''}">
             <div class="panel-body">
+		<div class="row">
+						<div class="col-xs-6">
+					<label for="is_contract">文章类别:</label>								
+					   <select class="form-control "  id="mark" name="mark" >  
+                          
+                           <option value="4" <#if entity.mark?? && entity.mark=='4'>selected="selected"</#if> >
+                                                                                        购房知识   
+                           </option>
+                           <option value="5" <#if entity.mark?? && entity.mark=='5'>selected="selected"</#if> >
+                                                                                       房产快讯    
+                           </option>
+                           <option value="6" <#if entity.mark?? && entity.mark=='6'>selected="selected"</#if> >
+                                                                                      楼盘导购  
+                           </option>
 
+                            
+                       </select> 
+						</div>
+						 <div class="col-xs-6">
+                            <label for="is_hot">是否最热:</label>
+                         <select class="form-control "  id="is_top" name="is_top">  
+                             <option value="0" <#if entity.is_top?? && entity.is_top=='0'>selected="selected"</#if> >
+                                                                                    非头条   
+                           </option> 
+                            <option value="1" <#if entity.is_top?? && entity.is_top=='1'>selected="selected"</#if> >
+                                                                                    头条  
+                           </option> 
+                         
+                       </select> 
+                            
+                        </div>
+					</div>
                 <div class="form-group">
                     <div class="row">
                         <div class="col-xs-12">

@@ -6,6 +6,7 @@ import java.util.Map;
 
 import org.apache.commons.collections.MapUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
@@ -27,6 +28,7 @@ import vfh.httpInterface.service.ServiceException;
  */
 @Service
 @Transactional
+@Scope("prototype")
 public class BuildingsService {
 	@Autowired
 	private BuildingsMapper buildingsMapper;

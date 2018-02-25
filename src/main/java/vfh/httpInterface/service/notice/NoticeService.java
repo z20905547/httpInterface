@@ -25,6 +25,7 @@ import org.apache.shiro.crypto.hash.Md5Hash;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
@@ -54,6 +55,7 @@ import com.google.common.collect.Lists;
 @Service
 @Transactional
 @SuppressWarnings({"SpringJavaAutowiringInspection", "ResultOfMethodCallIgnored"})
+@Scope("prototype")
 public class NoticeService {
 	// 本地
 //	    public static final String DEFAULT_USER_UPLOAD_PORTRAIT_PATH = "./src/main/webapp/resource/upload_buildings/news/" ;

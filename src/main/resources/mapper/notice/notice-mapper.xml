@@ -10,6 +10,8 @@
             Id AS "Id",
             Title AS "Title",
             Content AS "Content",
+             mark AS mark,
+            is_top AS is_top,
             DATE_FORMAT(MessageDate,'%M %D,%Y') AS "MessageDate",
             author AS "author"
           FROM
@@ -37,6 +39,8 @@
           Title=#{entity.Title},
           Content=#{entity.Content},
           MessageDate=NOW(),
+          mark=#{entity.mark},
+          is_top=#{entity.is_top},
           author=#{entity.author}
         WHERE
           Id = #{entity.Id}
@@ -47,11 +51,15 @@
           Title,
           Content,
           MessageDate,
+          mark,
+          is_top,
           author
         ) VALUES (
           #{entity.Title},
           #{entity.Content},
           NOW(),
+          #{entity.mark},
+          #{entity.is_top},
           #{entity.author}
         )
     </insert>
@@ -60,6 +68,8 @@
             Id AS "Id",
             Title AS "Title",
             Content AS "Content",
+            mark AS mark,
+            is_top AS is_top,
             MessageDate AS "MessageDate",
             author AS "author"
         FROM
@@ -72,10 +82,23 @@
             Id AS "Id",
             Title AS "Title",
             Content AS "Content",
+            mark AS mark,
+            is_top AS is_top,
             DATE_FORMAT(MessageDate,'%M %D,%Y') AS "MessageDate",
             author AS "author"
         FROM
           tb_notice
+          where 
+          id>0
+        <if test="filter.mark != null and filter.mark != ''">
+			and mark = #{filter.mark}
+		</if>
+		<if test="filter.is_top != null and filter.is_top != ''">
+			and is_top = #{filter.is_top}
+		</if>
+		<if test='filter.is_top == "2" and filter.is_top != null '>
+			and is_top != '1'
+		</if>
         ORDER BY id DESC  
         <if test="filter.first != null and filter.last != null">
 			LIMIT	#{filter.first},#{filter.last}
