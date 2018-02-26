@@ -12,12 +12,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import vfh.httpInterface.commons.RequestParamUtil;
-import vfh.httpInterface.service.buildings.BuildingsService;
 import vfh.httpInterface.service.notice.NoticeService;
+import org.springframework.context.annotation.Scope;
+
 
 @Controller
 @RequestMapping("/jsondata/notice")
 @SuppressWarnings(value={"rawtypes","unchecked"})
+@Scope("prototype")
 public class HttpNoticeController {
 	@Autowired
     private NoticeService noticeService;
