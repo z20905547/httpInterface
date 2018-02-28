@@ -90,7 +90,7 @@
           tb_notice
           where 
           id>0
-        <if test="filter.mark != null and filter.mark != ''">
+        <if test="filter.mark != null and filter.mark != '' and filter.mark != 'undefined'">
 			and mark = #{filter.mark}
 		</if>
 		<if test="filter.is_top != null and filter.is_top != ''">
