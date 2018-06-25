@@ -1,5 +1,5 @@
 <#include "*/basic/default.html"/>
-
+<script type="text/javascript" src="${base}/resource/script/area.js"></script>
 <#macro title>
 公告管理
 </#macro>
@@ -14,23 +14,80 @@
 
             children.prop("checked", checkbox.is(":checked"));
         });
+        
+        
+    	//省市下拉框
+		var proObj=$(".proId");
+		var cityObj=$(".cityId");
+		var areaObj=$(".areaId");
+		
+		getSubList(100000,460000,proObj);
+		getSubList(460000,460100,cityObj);
+		getSubList(460100,0,areaObj);
+		proObj.on("change",function(){
+			getSubList($(this).val(),0,cityObj)
+			getSubList(0,0,areaObj)
+		});
+		cityObj.on("change",function(){
+			getSubList($(this).val(),0,areaObj)
+		}); 
+        
     });
 
-    function submitDeleteForm() {
-        var length = $("#user-list-form").find("input[type='checkbox'][id!='selectAll']:checked").length;
-        if (length == 0) {
-            return ;
-        }
-        bootbox.confirm("确定要删除选中的" + length + "条记录吗？", function (result) {
-            if (result) {
-                $("#user-list-form").submit();
-            }
-        });
-    }   
+ 
     
     
 </script>
 </#macro>
+<div class="modal fade" id="search-modal" role="dialog" aria-hidden="true">
+
+    <div class="modal-dialog">
+
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title"><span class="glyphicon glyphicon-search"></span> 内容查询</h4>
+            </div>
+
+            <form id="notice-list-form" action="${base}/account/notice/list" method="post" >
+<input type="hidden" id="pageNumber" name="pageNumber" value="0"/>
+                <div class="modal-body">
+
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <label for="Title">文章名称:</label>
+                                <input type="text" class="form-control" id="Title" name="Title" >
+                            </div>
+                          
+                           <div class="col-xs-6">
+							<label for="proId">省/市:</label>
+							<select name="proId" class="form-control  proId " >
+							</select>
+						</div>
+						<div class="col-xs-6">
+							<label for="city_id">市/县:</label>
+							<select name="cityId" class="form-control  cityId" >
+							</select>
+						</div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-success">
+                        <span class="glyphicon glyphicon-ok"></span> 确定
+                    </button>
+                    <button type="reset" class="btn btn-warning">
+                        <span class="glyphicon glyphicon-trash"></span> 重置
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 
 <#macro body>
 
@@ -48,7 +105,7 @@
     </div>
     </#if>
 
-    <form id="notice-list-form" action="${base}/account/notice/delete" valid="false" method="post">
+    <form id="notice-list-form" action="${base}/account/notice/list" valid="false" method="post">
         <input type="hidden" id="pageNumber" name="pageNumber" value="0"/>
         <div class="panel panel-default">
 
