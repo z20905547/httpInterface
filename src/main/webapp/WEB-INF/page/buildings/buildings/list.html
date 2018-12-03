@@ -8,15 +8,17 @@
 
 <script type="text/javascript">
 
+
 	$(document).ready(
 		
 			function() {
+				
 				$(".blocklink").on("click",function(){
 		    		var actionUrl=$(this).attr("data-href");
 		    		var buildingsId=$(this).attr("data-building-id");
 		    		var buildingsName=$(this).attr("data-building-name");
-		    		$("<form action='"+actionUrl+"' method='post'>").append("<input name='buildingsId' value='"+buildingsId+"'/><input name='buildingsName' value='"+buildingsName+"'/>").submit().remove();
-		    		
+		    		var form = $("<form   action='"+actionUrl+"' method='post'>").append("<input name='buildingsId' value='"+buildingsId+"'/><input name='buildingsName' value='"+buildingsName+"'/>");
+		    		$(document.body).append(form); $(form).submit().remove();
 		    	});
 				//省市下拉框
 				var proObj=$(".proId");
