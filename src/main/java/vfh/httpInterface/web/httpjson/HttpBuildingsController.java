@@ -83,7 +83,26 @@ public class HttpBuildingsController {
 
 		RequestParamUtil.responseWriter(request, response, res);
 	}
+	@RequestMapping("/getBuildingsDetailList_Top")
+	@ResponseBody
+	public void getBuildingsDetailList_Top(HttpServletRequest request,
+			HttpServletResponse response) {
 
+		Map res = new HashMap();
+		Map params = RequestParamUtil.requestToMap(request);
+		//params.put("is_top", "1");
+		//params.put("top_type", "1");
+		Map m = buildingsService.findTopList(params);
+		if ("000000".equals(m.get("returnCode"))) {
+			res.put("data", m.get("data"));
+			//System.out.println("new" + m.get("data").toString());
+			res.put("statusCode", "0000");
+		} else {
+			res.put("statusCode", "1111");
+		}
+
+		RequestParamUtil.responseWriter(request, response, res);
+	}
 	@RequestMapping("/getBuildingsDetail")
 	@ResponseBody
 	public void getBuildingsDetail(HttpServletRequest request,

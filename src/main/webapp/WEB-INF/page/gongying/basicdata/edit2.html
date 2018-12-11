@@ -46,6 +46,50 @@
   <div class="form-group">
 		<div class="row">
 						<div class="col-xs-6">
+					<label for="is_top">是否置顶:</label>								
+					   <select class="form-control "  id="is_top" name="is_top" >  
+                          
+                             <option value="0" <#if entity.is_top?? && entity.is_top==0>selected="selected"</#if> >
+                                                                                           不置顶   
+                           </option>
+                           <option value="1" <#if entity.is_top?? && entity.is_top==1>selected="selected"</#if> >
+                                                                                     置顶    
+                           </option>
+                         
+                            
+                       </select> 
+						</div>
+						 <div class="col-xs-6">
+                            <label for="top_type">置顶类型:</label>
+                         <select class="form-control "  id="top_type" name="top_type">  
+                             <option value="1" <#if entity.top_type?? && entity.top_type==1>selected="selected"</#if> >
+                                                                                    热销楼盘   
+                           </option> 
+                            <option value="2" <#if entity.top_type?? && entity.top_type==2>selected="selected"</#if> >
+                                                                                    一线海景  
+                           </option> 
+                          <option value="3" <#if entity.top_type?? && entity.top_type==3>selected="selected"</#if> >
+                                                                                   精品别墅  
+                           </option> 
+                            <option value="4" <#if entity.top_type?? && entity.top_type==4>selected="selected"</#if> >
+                                                                                   海口周边  
+                           </option> 
+                            <option value="5" <#if entity.top_type?? && entity.top_type==5>selected="selected"</#if> >
+                                                                                   三亚周边  
+                           </option> 
+                            <option value="6" <#if entity.top_type?? && entity.top_type==6>selected="selected"</#if> >
+                                                                                    其他  
+                           </option> 
+                            <option value="7" <#if entity.top_type?? && entity.top_type==7>selected="selected"</#if> >
+                                                                                    其他  
+                           </option> 
+                           
+                       </select> 
+                            
+                        </div>
+					</div>
+							<div class="row">
+						<div class="col-xs-6">
 					<label for="is_contract">是否最新:</label>								
 					   <select class="form-control "  id="is_new" name="is_new" >  
                           

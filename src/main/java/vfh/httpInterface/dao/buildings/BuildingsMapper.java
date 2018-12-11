@@ -75,6 +75,7 @@ public interface BuildingsMapper {
 	public List<Map<String, Object>> findDetailList(@Param("filter")Map<String, Object> filter);
 	public List<Map<String, Object>> findHotList(@Param("filter")Map<String, Object> filter);
 	public List<Map<String, Object>> findNewList(@Param("filter")Map<String, Object> filter);
+	public List<Map<String, Object>> findTopList(@Param("filter")Map<String, Object> filter);
 	/**
 	 * TODO 多表联合查询所有符合条件的详细楼盘的数量
 	 * @author harry

@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="vfh.httpInterface.dao.gongying.GongyingBasicDataMapper" >
   <sql id="Base_Column_List" >
-    id, build_id, is_contract, contract_start, contract_end, channel_name, channel_num, zhiyeguwen_name,zhiyeguwen_num,commission_all,commission_out,deal_prize,is_up,last_author,last_date,is_hot,is_new                                 
+    id, build_id, is_contract, contract_start, contract_end, channel_name, channel_num, zhiyeguwen_name,zhiyeguwen_num,commission_all,commission_out,deal_prize,is_up,last_author,last_date,is_hot,is_new,is_top, top_type                              
   </sql>
     <select id="get" resultType="hashmap">  
         SELECT 
@@ -19,7 +19,7 @@
   <insert id="insert" useGeneratedKeys="true" keyProperty="entity.id" >
 	insert into gy_baseicdata ( build_id, is_contract, contract_start, contract_end, channel_name, channel_num,zhiyeguwen_name,zhiyeguwen_num,commission_all,commission_out,deal_prize,is_up,last_author,last_date,is_hot,is_new   )
 	values ( #{entity.buildings_id}, #{entity.is_contract}, #{entity.contract_start},#{entity.contract_end},#{entity.channel_name}, #{entity.channel_num}, #{entity.zhiyeguwen_name}, #{entity.zhiyeguwen_num}, #{entity.commission_all}, #{entity.commission_out}, #{entity.deal_prize}, #{entity.is_up},  
-	#{entity.last_author}, now(), #{entity.is_hot}, #{entity.is_new}
+	#{entity.last_author}, now(), #{entity.is_hot}, #{entity.is_new}, #{entity.is_top}, #{entity.top_type}
 	)
   </insert>
   <select id="count" resultType="long">
@@ -57,6 +57,12 @@
 	      </if>
 	      <if test="entity.is_up != null and entity.is_up != ''" >
 	        is_up = #{entity.is_up},
+	      </if>
+	      <if test="entity.is_top != null and entity.is_top != ''" >
+	        is_top = #{entity.is_top},
+	      </if>
+	      <if test="entity.top_type != null and entity.top_type != ''" >
+	        top_type = #{entity.top_type},
 	      </if>
 	      <if test="entity.last_author != null and entity.last_author != ''" >
 	        last_author = #{entity.last_author},
