@@ -414,6 +414,67 @@
 			LIMIT #{filter.first},#{filter.last}
 		</if>
 	</select>
+	<select id="findTopList" resultType="hashmap">
+		SELECT b.buildings_name,e.is_top,
+		b.server_phone_num,a.*,
+		c.resource_name,
+		d.first_price ,
+		d.discount_price ,
+		b.* ,
+		e.commission_out  commission_out 
+		FROM  tb_building_active a ,tb_buildings b ,tb_building_resource c,tb_building_price d,gy_baseicdata e,
+		(SELECT c.building_id id FROM tb_building_house_type c WHERE c.id>0 
+		<if test="filter.shi != null and filter.shi != ''">
+		AND c.shi= #{filter.shi}
+		</if> 
+		
+		<if test="filter.acreage1 != null and filter.acreage1 != ''">
+		AND c.acreage BETWEEN #{filter.acreage1} AND #{filter.acreage2}
+		</if>
+		 GROUP BY
+		 c.building_id) n
+
+		WHERE a.buildings_id=b.id
+       <if test="filter.city_id != null and filter.city_id != ''">
+		AND b.city_id= #{filter.city_id}
+       </if>
+       <if test="filter.is_top != null and filter.is_top != ''">
+		AND e.is_top= #{filter.is_top}
+       </if>
+       <if test="filter.top_type != null and filter.top_type != ''">
+		AND e.top_type= #{filter.top_type}
+       </if>
+      <if test="filter.area_id != null and filter.area_id != ''">
+			AND b.area_id LIKE #{filter.area_id}
+	  </if>
+	   <if test="filter.proId != null and filter.proId != ''">
+			AND b.province_id=#{filter.proId}
+	   </if>
+       <if test="filter.buildings_name != null and filter.buildings_name != ''">
+          <bind name="filter.buildings_name" value=" '%' + filter.buildings_name + '%' " />
+		AND b.buildings_name LIKE #{filter.buildings_name}
+       </if>
+       <if test="filter.wuye_type != null and filter.wuye_type != ''">
+			<bind name="filter.wuye_type" value=" '%' + filter.wuye_type + '%' " />
+			AND b.wuye_type LIKE #{filter.wuye_type}
+		</if>
+       <if test="filter.active_price1 != null and filter.active_price1 != ''">
+		AND a.active_price BETWEEN #{filter.active_price1} AND #{filter.active_price2}
+       </if>
+		AND a.buildings_id=n.id
+		
+		AND d.building_id=b.id
+		
+		AND c.sm_type =30 
+		AND c.buildings_id=b.id
+		AND e.build_id= b.id
+        AND e.is_up='1'
+		AND b.status=0
+		ORDER BY a.update_time desc
+		<if test="filter.first != null and filter.last != null">
+			LIMIT #{filter.first},#{filter.last}
+		</if>
+	</select>
 	<select id="findDetailCount" resultType="long">
 		SELECT count(*)
 		FROM tb_building_active a
