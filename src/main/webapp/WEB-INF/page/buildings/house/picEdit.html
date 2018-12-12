@@ -171,7 +171,23 @@
 				</div>
 			</div>
 		</form>
-		
+		<form enctype="multipart/form-data"
+			action="${base}/buildings/house/picInsert" id="create-user-form"
+			method="post">
+			<div class="panel-body">
+				<input type="hidden" name="buildings_id" value="${buildings_id}" />
+				<input type="hidden" name="sm_type" value="34" />
+				<div class="form-group">
+					<div class="row">
+						<div class="col-xs-12">
+							<label for="acreage">top图（项目不置顶就不用传）:</label> <input type="file"
+								name="image34" id="image34" multiple class="file-loading"
+								value="" />
+						</div>
+					</div>
+				</div>
+			</div>
+		</form>
 		
 		<form enctype="multipart/form-data"
 			action="${base}/buildings/house/picInsert" id="create-user-form"
