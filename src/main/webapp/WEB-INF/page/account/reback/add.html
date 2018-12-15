@@ -16,12 +16,7 @@
 <script type="text/javascript">
 
 $(document).ready(function () {
-    $("#selectAll").click(function () {
-        var checkbox = $(this),
-                children = checkbox.parents("table").find("tbody input[type='checkbox']");
 
-        children.prop("checked", checkbox.is(":checked"));
-    });
     $.datepicker.setDefaults($.datepicker.regional["zh-CN"]);
 	$(".datePicker").datetimepicker({
   	   showSecond: true,

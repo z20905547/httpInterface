@@ -5,26 +5,22 @@
 </#macro>
 
 <#macro head>
+<link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/jquery-ui-timepicker-addon/1.5.5/jquery-ui-timepicker-addon.min.css">
 <link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/jqueryui/1.10.4/css/jquery-ui.min.css">
 <script type="text/javascript" src="//cdn.bootcss.com/jqueryui/1.10.4/jquery-ui.min.js"></script>
 <script type="text/javascript" src="//cdn.bootcss.com/jqueryui/1.10.4/i18n/jquery-ui-i18n.min.js"></script>
+<script type="text/javascript" src="//cdn.bootcss.com/jquery-ui-timepicker-addon/1.5.5/jquery-ui-timepicker-addon.min.js"></script>
+<script type="text/javascript" src="//cdn.bootcss.com/jquery-ui-timepicker-addon/1.6.1/i18n/jquery-ui-timepicker-zh-CN.js"></script>
 
 <script type="text/javascript">
 
 $(document).ready(function () {
-    $("#selectAll").click(function () {
-        var checkbox = $(this),
-                children = checkbox.parents("table").find("tbody input[type='checkbox']");
-
-        children.prop("checked", checkbox.is(":checked"));
-    });
     $.datepicker.setDefaults($.datepicker.regional["zh-CN"]);
-
-    	$( ".datePicker" ).datepicker({
-        	altField: "#laidianrq",
-            altFormat: "yy-mm-dd"
-        });
-
+	$(".datePicker").datetimepicker({
+  	   showSecond: true,
+  	  timeFormat: 'HH:mm:ss'
+    });  
+    	
 });
 
 </script>
@@ -66,11 +62,11 @@ $(document).ready(function () {
                     <div class="row">
                         <div class="col-xs-6">
                             <label for="knum">客户手机:</label>
-                            <input type="text" class="form-control required" maxlength="11" minlength="11" id="knum"  name="knum">
+                            <input type="text" class="form-control required" maxlength="20" minlength="1" id="knum"  name="knum">
                         </div>
                  <div class="col-xs-6 laidianrq">
                             <label for="laidianrq">来电时间:</label>
-                            <input type="text" class="datePicker form-control " autocomplete="off" id="laidianrq" name="laidianrq" readonly>
+                            <input type="text" class="datePicker form-control required " autocomplete="off" id="laidianrq" name="laidianrq" readonly>
                         </div>
                     </div>
                 </div>
@@ -79,11 +75,11 @@ $(document).ready(function () {
                     <div class="row">
                         <div class="col-xs-6">
                             <label for="kwxh">客户微信:</label>
-                            <input type="text" class="form-control required" maxlength="20" minlength="20" id="kwxh"  name="kwxh">
+                            <input type="text" class="form-control " maxlength="20" minlength="20" id="kwxh"  name="kwxh">
                         </div>
                         <div class="col-xs-6">
                             <label for="laiyuanqd">来源渠道:</label>
-                           <input type="text" class="form-control required" maxlength="20" minlength="20" id="laiyuanqd"  name="laiyuanqd">
+                           <input type="text" class="form-control " maxlength="20" minlength="20" id="laiyuanqd"  name="laiyuanqd">
                         </div>
                     </div>
                 </div>
@@ -92,13 +88,13 @@ $(document).ready(function () {
                     <div class="row">
                         <div class="col-xs-6">
                             <label for="dilily">地理来源:</label>
-                            <input type="text" class="form-control required" maxlength="20" minlength="20" id="dilily"  name="dilily">
+                            <input type="text" class="form-control " maxlength="20" minlength="20" id="dilily"  name="dilily">
                         </div>
                         <div class="col-xs-6">
                             <label for="status">客户状态:</label>
-                       <select id="status" name="status" class="form-control required">  
-                           <option value ="1">成交</option>  
+                       <select id="status" name="status" class="form-control ">  
                            <option value ="2">维护中</option>  
+                           <option value ="1">成交</option>  
                            <option value ="3">放弃</option>  
                        </select> 
                        </div>
@@ -108,12 +104,12 @@ $(document).ready(function () {
                     <div class="row">
                         <div class="col-xs-6">
                             <label for="dilily">客户年龄（大概）:</label>
-                            <input type="text" class="form-control required" maxlength="20" minlength="20" id="kage"  name="kage">
+                            <input type="text" class="form-control " maxlength="20" minlength="20" id="kage"  name="kage">
                         </div>
                  
                         <div class="col-xs-6">
                             <label for="dilily">客户需求:</label>
-                            <input type="text" class="form-control required" maxlength="20" minlength="200" id="requirement"  name="requirement">
+                            <input type="text" class="form-control " maxlength="20" minlength="200" id="requirement"  name="requirement">
                         </div>
                      </div>
                 </div>
@@ -121,8 +117,16 @@ $(document).ready(function () {
                     <div class="row">
                         <div class="col-xs-6">
                             <label for="dilily">具体目标楼盘:</label>
-                            <input type="text" class="form-control required" maxlength="200"  id="targetbuild"  name="targetbuild">
+                            <input type="text" class="form-control " maxlength="200"  id="targetbuild"  name="targetbuild">
                         </div>
+                             <div class="col-xs-6">
+                            <label for="c_level">客户状态:</label>
+                       <select id="c_level" name="c_level" class="form-control ">  
+                           <option value ="1">准客</option>  
+                           <option value ="2">水客</option>  
+                           <option value ="3">不确定</option>  
+                       </select> 
+                       </div>
                     </div>
                 </div>
             </div>

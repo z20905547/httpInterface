@@ -67,11 +67,29 @@ public class NumbersService {
      * @param entity 用户实体 Map
      * @param groupIds 关联的组主键 ID 集合
      */
-    public void insertNumber(@MapValid("insert-numbers") Map<String, Object> entity) {
+    public Integer insertNumber(@MapValid("insert-numbers") Map<String, Object> entity) {
 
+    	
     	NumbersDao.insert(entity);
+
+    	return Integer.parseInt(entity.get("id").toString());
     }
 
+   
+    /**
+    * 新增中间表数据
+    *
+    * @param entity 用户实体 Map
+    * @param groupIds 关联的组主键 ID 集合
+    */
+   public void  insertMiddle(@MapValid("insert-numbers") Map<String, Object> entity) {
+
+   	
+   	NumbersDao.insertMiddle(entity);
+
+   	//return Integer.parseInt(entity.get("id").toString());
+   }
+    
     /**
      * 查询用户
      *
@@ -81,11 +99,24 @@ public class NumbersService {
      * @return 用户实体 Map 的分页对象
      */
     public Page<Map<String, Object>> findnumbers(PageRequest pageRequest, Map<String, Object> filter) {
+		returnMap.clear();
+		Map<String, Object> pagedata=new HashMap<String, Object>();
+		long total = NumbersDao.count(filter);
+		if(StringUtil.isNotEmptyObject(filter.get("first"))&&StringUtil.isNotEmptyObject(filter.get("last"))){
+			filter.put("first", Integer.parseInt(filter.get("first").toString()));
+			filter.put("last", Integer.parseInt(filter.get("last").toString()));
+			
+		}
     	
-    	
-        long total = NumbersDao.count(filter);
+       
         filter.putAll(pageRequest.getMap());
-        List<Map<String, Object>> content = findnumbers(filter);
+        Map<String,Object> user = SessionVariable.getCurrentSessionVariable().getUser();
+    	String staff = (String) user.get("username");
+    	String userId = user.get("id").toString();
+    	filter.put("userId", userId);
+        filter.putAll(pageRequest.getMap());
+        List<Map<String, Object>> content = NumbersDao.find(filter);
+     
         return new Page<Map<String, Object>>(pageRequest, content, total);
     }
     
@@ -97,15 +128,31 @@ public class NumbersService {
      *
      * @return 用户实体 Map 集合
      */
-    public List<Map<String, Object>> findnumbers(Map<String, Object> filter) {
-    	Map<String,Object> user = SessionVariable.getCurrentSessionVariable().getUser();
-    	String staff = (String) user.get("username");
-    	if(staff != null && staff.equals("admin")) {
-    		 return NumbersDao.findall(filter);
-    	} else
-    		filter.put("staff", staff);
-        return NumbersDao.find(filter);
-    }
+//    public  List<Map<String, Object>> findnumbers(PageRequest pageRequest, Map<String, Object> filter) {
+//		returnMap.clear();
+//		Map<String, Object> pagedata=new HashMap<String, Object>();
+//		long total = NumbersDao.count(filter);
+//		if(StringUtil.isNotEmptyObject(filter.get("first"))&&StringUtil.isNotEmptyObject(filter.get("last"))){
+//			filter.put("first", Integer.parseInt(filter.get("first").toString()));
+//			filter.put("last", Integer.parseInt(filter.get("last").toString()));
+//		}
+//    	
+//    	Map<String,Object> user = SessionVariable.getCurrentSessionVariable().getUser();
+//    	String staff = (String) user.get("username");
+//    	String userId = user.get("id").toString();;
+////    	if(staff != null && staff.equals("admin")) {
+////    		 return NumbersDao.findall(filter);
+////    	} else
+//    	//	filter.put("staff", staff);
+//    	   
+//       // return NumbersDao.find(filter);
+//    	 filter.put("userId", userId);
+//        filter.putAll(pageRequest.getMap());
+//        List<Map<String, Object>> content = NumbersDao.find(filter);
+//        return new Page<Map<String, Object>>(pageRequest, content, total);
+//        
+//        
+//    }
    
     
     /**

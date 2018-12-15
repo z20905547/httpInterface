@@ -12,30 +12,8 @@
     </key>
     <key name="knum" alias="客户手机号">
                 <notEmpty />
-        <length min="11" max="11" />
+        <length min="1" max="20" />
        
     </key>
-    <key name="laidianrq" alias="来电日期">
-         <notEmpty />
-       
-    </key>
-    <key name="laiyuanqd" alias="来源渠道">
-         <notEmpty />
-       
-    </key>
-    <key name="dilily" alias="地理来源">
-         <notEmpty />
-    </key>
-    <key name="staff" alias="员工帐号">
-         <notEmpty />
-    </key>
-    <key name="status" alias="来电状态">
-         <notEmpty />      
-    </key>
-        <key name="targetbuild" alias="具体目标楼盘">
-         <notEmpty />      
-    </key>
-        <key name="requirement" alias="用户需求">
-         <notEmpty />      
-    </key>
+ 
 </validate-mapper>
