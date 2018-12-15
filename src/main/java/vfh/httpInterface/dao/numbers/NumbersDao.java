@@ -26,7 +26,10 @@ public interface NumbersDao {
      *
      * @param entity 组实体 Map
      */
-    public void insert(@Param("entity")Map<String,Object> entity);
+    public Integer insert(@Param("entity")Map<String,Object> entity);
+    
+    //新增中间表数据
+    public void insertMiddle(@Param("entity")Map<String,Object> entity);
     /**
      * 统计订单记录
      *

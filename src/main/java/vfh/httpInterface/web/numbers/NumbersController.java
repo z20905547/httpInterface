@@ -75,8 +75,11 @@ public class NumbersController {
 
     	Map<String,Object> user = SessionVariable.getCurrentSessionVariable().getUser();
     	String staff = (String) user.get("username");
+    	String u_id = String.valueOf(user.get("id"));
     	entity.put("staff", staff);
-    	numbersService.insertNumber(entity);
+    	entity.put("u_id", u_id);
+    	if(numbersService.insertNumber(entity)>0){numbersService.insertMiddle(entity);};
+    	
         redirectAttributes.addFlashAttribute("success", "新增成功");
 
         return "redirect:/account/numbers/list";

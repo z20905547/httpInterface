@@ -52,7 +52,8 @@
     </div>
     </#if>
 
-    <form id="user-list-form" action="${base}/account/notice/delete" valid="false" method="post">
+    <form id="number-list-form" action="${base}/account/numbers/list" valid="false" method="post">
+    <input type="hidden" id="pageNumber" name="pageNumber" value="0"/>
         <div class="panel panel-default">
 
             <div class="panel-heading">
@@ -71,6 +72,7 @@
                             <th>客户微信</th>
                             <th>来源渠道</th>
                             <th>客户状态</th>
+                            <th>客户质量</th>
                             <th>客户需求</th>
                             <th>目标楼盘</th>
                             <th>操作</th>
@@ -104,6 +106,13 @@
                                 <#else>
                                 <td>放弃</td>
                                  </#if>
+                                 <#if r.c_level?? && r.c_level == 1>
+                                <td>准客</td>
+                                <#elseif r.c_level?? && r.c_level == 2>
+                                <td>水客</td>
+                                <#else>
+                                <td>不确定</td>
+                                 </#if>
                                 <td>${r.requirement!''}</td>
                                 <td>${r.targetbuild!''}</td>
                                 <td>
@@ -133,16 +142,11 @@
                 </a>
                 </@shiro.hasPermission>
 
-                <@shiro.hasPermission name="notice:delete">
-                <button type="button" class="btn btn-danger" onclick="submitDeleteForm();">
-                    <span class="glyphicon glyphicon-remove"></span> 删除
-                </button>
-                </@shiro.hasPermission>
             </div>
 
         </div>
 
-        <@pagination 'user-search-form' page />
+        <@pagination 'number-list-form' page />
 
     </form>
 

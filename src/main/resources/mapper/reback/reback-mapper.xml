@@ -19,12 +19,16 @@
         INSERT INTO td_reback(
           pid,
           redate,
-          reresult
+          reresult,
+          u_id,
+          u_name
           
         ) VALUES (
           #{entity.pid},
           #{entity.redate},
-          #{entity.reresult}
+          #{entity.reresult},
+          #{entity.u_id},
+          #{entity.u_name}
           
         )
     </insert>

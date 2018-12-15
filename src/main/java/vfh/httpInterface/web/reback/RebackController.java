@@ -74,7 +74,11 @@ public class RebackController {
     public String insert(@RequestParam Map<String, Object> entity,
                          @RequestParam(required=false)List<Long> id,
                          RedirectAttributes redirectAttributes) {
-
+    	Map<String,Object> user = SessionVariable.getCurrentSessionVariable().getUser();
+    	String staff = (String) user.get("nickname");
+    	String userId = user.get("id").toString();
+    	entity.put("u_id", userId);
+    	entity.put("u_name", staff);
     	rebackService.insert(entity);
         redirectAttributes.addFlashAttribute("success", "新增成功");
         String pid = (String) entity.get("pid");

@@ -17,7 +17,7 @@
     where id = #{id}
   </delete>
   <insert id="insert" useGeneratedKeys="true" keyProperty="entity.id" >
-	insert into gy_baseicdata ( build_id, is_contract, contract_start, contract_end, channel_name, channel_num,zhiyeguwen_name,zhiyeguwen_num,commission_all,commission_out,deal_prize,is_up,last_author,last_date,is_hot,is_new   )
+	insert into gy_baseicdata ( build_id, is_contract, contract_start, contract_end, channel_name, channel_num,zhiyeguwen_name,zhiyeguwen_num,commission_all,commission_out,deal_prize,is_up,last_author,last_date,is_hot,is_new,is_top,top_type  )
 	values ( #{entity.buildings_id}, #{entity.is_contract}, #{entity.contract_start},#{entity.contract_end},#{entity.channel_name}, #{entity.channel_num}, #{entity.zhiyeguwen_name}, #{entity.zhiyeguwen_num}, #{entity.commission_all}, #{entity.commission_out}, #{entity.deal_prize}, #{entity.is_up},  
 	#{entity.last_author}, now(), #{entity.is_hot}, #{entity.is_new}, #{entity.is_top}, #{entity.top_type}
 	)
