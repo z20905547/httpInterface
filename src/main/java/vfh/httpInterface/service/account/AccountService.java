@@ -352,6 +352,29 @@ public class AccountService implements InitializingBean{
         List<Map<String, Object>> content = findUsers(filter);
         return new Page<Map<String, Object>>(pageRequest, content, total);
     }
+    /**
+     * 查询用户
+     *
+     * @param pageRequest 分页请求参数
+     * @param filter 查询条件
+     *
+     * @return 用户实体 Map 的分页对象
+     */
+    public Map<String, Object> findUsers2(Map<String, Object> filter) {
+        
+    	returnMap.clear();
+
+    		List<Map<String, Object>> UsersList=findUsers(filter);
+    		if(StringUtil.isNotEmptyList(UsersList)){
+        		returnMap.put("returnCode", "000000");
+        		returnMap.put("data",UsersList);
+        		returnMap.put("returnMsg", "获取用户成功！");
+        	}else{
+        		returnMap.put("returnCode", "1111");
+        		returnMap.put("returnMsg", "获取用户信息失败！");
+        	}
+    	    return returnMap;
+    }
 
     //----------------------------------- 组管理 ----------------------------------------//
 

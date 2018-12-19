@@ -47,4 +47,23 @@ public class HttpAccountController {
 		RequestParamUtil.responseWriter(request, response, res);
 	}
     
+	
+	@RequestMapping("/list")
+	@ResponseBody
+	public void list(HttpServletRequest request,HttpServletResponse response){
+		Map res = new HashMap();
+		Map params = RequestParamUtil.requestToMap(request);
+		
+		Map m =  accountService.findUsers2(params);
+		System.out.println("OOOOOOOOOOOO");
+		System.out.println(m.get("returnCode"));
+		if("000000".equals(m.get("returnCode"))){
+			res.put("data", m.get("data"));
+			res.put("statusCode","0000");
+		}else{
+			res.put("statusCode","1111");
+		}
+		res.put("returnMsg",m.get("returnMsg"));
+		RequestParamUtil.responseWriter(request, response, res);
+	}
 }

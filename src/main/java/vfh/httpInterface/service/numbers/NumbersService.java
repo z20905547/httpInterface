@@ -100,6 +100,26 @@ public class NumbersService {
      */
     public Page<Map<String, Object>> findnumbers(PageRequest pageRequest, Map<String, Object> filter) {
 		returnMap.clear();
+
+    	
+       
+        filter.putAll(pageRequest.getMap());
+        Map<String,Object> user = SessionVariable.getCurrentSessionVariable().getUser();
+    	String staff = (String) user.get("username");
+    	String userId = user.get("id").toString();
+    	String u_id = (String) filter.get("u_name");
+    	//String u_id = (String) filter.get("id");
+    	
+ 
+    	
+    	if("admin".equals(staff) && null !=u_id){
+    		filter.put("userId", u_id);
+    	}else {
+    		filter.put("userId", userId);
+    	}
+    
+    	
+    	
 		Map<String, Object> pagedata=new HashMap<String, Object>();
 		long total = NumbersDao.count(filter);
 		if(StringUtil.isNotEmptyObject(filter.get("first"))&&StringUtil.isNotEmptyObject(filter.get("last"))){
@@ -108,12 +128,6 @@ public class NumbersService {
 			
 		}
     	
-       
-        filter.putAll(pageRequest.getMap());
-        Map<String,Object> user = SessionVariable.getCurrentSessionVariable().getUser();
-    	String staff = (String) user.get("username");
-    	String userId = user.get("id").toString();
-    	filter.put("userId", userId);
         filter.putAll(pageRequest.getMap());
         List<Map<String, Object>> content = NumbersDao.find(filter);
      
