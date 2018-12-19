@@ -1,43 +1,157 @@
 <#include "*/basic/default.html"/>
 
+
 <#macro title>
 公告管理
 </#macro>
+<link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/jquery-ui-timepicker-addon/1.5.5/jquery-ui-timepicker-addon.min.css">
+<link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/jqueryui/1.10.4/css/jquery-ui.min.css">
+<script type="text/javascript" src="//cdn.bootcss.com/jqueryui/1.10.4/jquery-ui.min.js"></script>
+<script type="text/javascript" src="//cdn.bootcss.com/jqueryui/1.10.4/i18n/jquery-ui-i18n.min.js"></script>
+<script type="text/javascript" src="//cdn.bootcss.com/jquery-ui-timepicker-addon/1.5.5/jquery-ui-timepicker-addon.min.js"></script>
+<script type="text/javascript" src="//cdn.bootcss.com/jquery-ui-timepicker-addon/1.6.1/i18n/jquery-ui-timepicker-zh-CN.js"></script>
 
 <#macro head>
 <script type="text/javascript">
 
-    $(document).ready(function () {
-        $("#selectAll").click(function () {
-            var checkbox = $(this),
-                    children = checkbox.parents("table").find("tbody input[type='checkbox']");
 
-            children.prop("checked", checkbox.is(":checked"));
-        });
-    });
 
-    function submitDeleteForm() {
-        var length = $("#user-list-form").find("input[type='checkbox'][id!='selectAll']:checked").length;
-        if (length == 0) {
-            return ;
-        }
-        bootbox.confirm("确定要删除选中的" + length + "条记录吗？", function (result) {
-            if (result) {
-                $("#user-list-form").submit();
-            }
-        });
-    }   
+
+$(document).ready(
+		function() {
+		
+			//
+			
+			var proObj=$(".u_name");
+		
+			
+			getSubList(proObj);
+			
+			
+			$.datepicker.setDefaults($.datepicker.regional["zh-CN"]);
+			$(".datePicker").datetimepicker({
+		  	   showSecond: false,
+		  	  timeFormat: 'HH:mm:ss'
+		    });  
+		}
+		
+		
+		
+		);
+
+
+function getSubList(obj){
+	
+	obj.html("");
+	obj.val("");
+
+	var url="/httpInterface/jsondata/account/list";
+	var params={parentId:1};
+	$.ajax({
+		type: 'get',
+		url:url,
+		async: false,
+		dataType: 'jsonp',
+		data:params,
+		success:function(data){
+			
+			if(data.statusCode=="0000"){
+				var sublist=data.data;
+				
+				for(var i=0;i<sublist.length;i++){
+					    
+					if(sublist[i].u_id==sublist[i].id){
+						
+						obj.append("<option value='"+sublist[i].id+"' selected>"+sublist[i].nickname+"</option>");
+					}else{
+						obj.append("<option value='"+sublist[i].id+"' >"+sublist[i].nickname+"</option>");
+					}
+					
+					
+						
+					
+				}
+				
+			}
+			
+		},
+		error:function(data){
+			alert("网络错误");
+		}
+	});
+}
     
-    
+</script>
+<script>
+var obj=document.all.u_name;
+obj.attachEvent('onchange',saveSelectedIndex)
+function saveSelectedIndex()
+{
+	obj.setAttribute("sSelectValue",obj.selectedIndex);
+	obj.save("oSltIndex");
+}
+window.attachEvent('onload',loadSelectedIndex)
+function loadSelectedIndex()
+{
+	obj.load("oSltIndex");
+	obj.selectedIndex=obj.getAttribute("sSelectValue");
+}
 </script>
 
 
-
-
 </#macro>
-
+<style>
+.tm.datePicker {z-index: 9999 !important;}
+#ui-datepicker-div {z-index:2500 !important;}
+</style>
 <#macro body>
+<div class="modal fade" id="search-modal" role="dialog" aria-hidden="true">
 
+    <div class="modal-dialog">
+
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title"><span class="glyphicon glyphicon-search"></span> 内容查询</h4>
+            </div>
+
+            <form id="number-search-form" action="${base}/account/numbers/list" method="post" >
+<input type="hidden" id="pageNumber" name="pageNumber" value="0"/>
+                <div class="modal-body">
+
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-xs-4">
+                                <label for="u_name">员工姓名:</label>
+                                <select name="u_name" id="u_name" class="form-control  u_name " >
+							</select> </div>
+                            <div class="col-xs-4 tm">
+                                <label for="creat_date">录入客户日期:</label>
+                               <input type="text" class="datePicker form-control  " autocomplete="off" id="creat_date" name="creat_date" >
+
+                            </div>
+                            <div class="col-xs-4 tm">
+                                <label for="redate">回访客户日期:</label>
+                                <input type="text" class=" form-control datePicker" autocomplete="off" id="redate" name="redate" >
+                         </div>
+                         </div>
+                    </div>
+
+                </div>
+
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-success">
+                        <span class="glyphicon glyphicon-ok"></span> 确定
+                    </button>
+                    <button type="reset" class="btn btn-warning">
+                        <span class="glyphicon glyphicon-trash"></span> 重置
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 <div class="data-content">
 <!--
     <ol class="breadcrumb">
@@ -146,7 +260,7 @@
 
         </div>
 
-        <@pagination 'number-list-form' page />
+        <@pagination 'number-search-form' page />
 
     </form>
 

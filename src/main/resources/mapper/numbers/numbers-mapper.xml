@@ -53,7 +53,6 @@
           c_name,
           uc_startdate,
           uc_enddate,
-         
           author_id,
           author_name,
           creat_date
@@ -64,7 +63,6 @@
           #{entity.kname},
           NOW(),
           "2050-12-30 00:00:00",
-        
           #{entity.u_id},
           #{entity.staff},
           NOW()
@@ -88,6 +86,10 @@
 		<if test="filter.userId != null and filter.userId != ''">
 			AND b.u_id=#{filter.userId}
 		</if>
+		<if test="filter.creat_date != null and filter.creat_date != ''">
+			AND TO_DAYS(b.creat_date)=TO_DAYS(#{filter.creat_date})
+		</if>
+
 		ORDER BY b.`uc_startdate` DESC
 		<if test="filter.first != null and filter.last != null">
 			LIMIT #{filter.first},#{filter.last}
@@ -130,6 +132,9 @@
               
 		<if test="filter.userId != null and filter.userId != ''">
 			AND b.u_id=#{filter.userId}
+		</if>
+		<if test="filter.creat_date != null and filter.creat_date != ''">
+			AND TO_DAYS(b.creat_date)=TO_DAYS(#{filter.creat_date})
 		</if>
 		ORDER BY b.`uc_startdate` DESC
 

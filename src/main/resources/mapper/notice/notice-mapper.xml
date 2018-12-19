@@ -52,15 +52,10 @@
           mark=#{entity.mark},
           is_top=#{entity.is_top},
           author=#{entity.author},
-          	<if test="entity.province_id != null">
-				 province_id=#{entity.province_id},
-			</if>
-			<if test="entity.city_id != null">
-				 city_id=#{entity.cityId},
-			</if>
-			<if test="entity.area_id != null">
-				area_id=#{entity.areaId}
-			</if>
+          province_id=#{entity.province_id},
+		  city_id=#{entity.cityId},
+		  area_id=#{entity.areaId}
+		
         WHERE
           Id = #{entity.Id}
     </update>
