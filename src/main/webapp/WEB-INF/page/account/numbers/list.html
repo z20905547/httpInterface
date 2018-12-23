@@ -57,10 +57,12 @@ function getSubList(obj){
 			
 			if(data.statusCode=="0000"){
 				var sublist=data.data;
+				var u_id = $(" #u_id ").val();
+				
 				
 				for(var i=0;i<sublist.length;i++){
 					    
-					if(sublist[i].u_id==sublist[i].id){
+					if(u_id==sublist[i].id){
 						
 						obj.append("<option value='"+sublist[i].id+"' selected>"+sublist[i].nickname+"</option>");
 					}else{
@@ -122,19 +124,16 @@ function loadSelectedIndex()
 
                     <div class="form-group">
                         <div class="row">
-                            <div class="col-xs-4">
+                            <div class="col-xs-6">
                                 <label for="u_name">员工姓名:</label>
                                 <select name="u_name" id="u_name" class="form-control  u_name " >
 							</select> </div>
-                            <div class="col-xs-4 tm">
+                            <div class="col-xs-6 tm">
                                 <label for="creat_date">录入客户日期:</label>
                                <input type="text" class="datePicker form-control  " autocomplete="off" id="creat_date" name="creat_date" >
 
                             </div>
-                            <div class="col-xs-4 tm">
-                                <label for="redate">回访客户日期:</label>
-                                <input type="text" class=" form-control datePicker" autocomplete="off" id="redate" name="redate" >
-                         </div>
+                       
                          </div>
                     </div>
 
@@ -200,6 +199,7 @@ function loadSelectedIndex()
                         </tr>
                         <#else>
                             <#list page.content as r>
+                             <input type="hidden" id="u_id" name="u_id" value="${r.u_id!''}"/>
                             <tr>
                                 <td><input type="checkbox" name="id" value="${r.id}"></td>
                                 <td>${r.kname!''}</td>

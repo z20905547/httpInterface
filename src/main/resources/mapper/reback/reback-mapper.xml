@@ -25,7 +25,7 @@
           
         ) VALUES (
           #{entity.pid},
-          #{entity.redate},
+          now(),
           #{entity.reresult},
           #{entity.u_id},
           #{entity.u_name}

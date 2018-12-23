@@ -7,9 +7,7 @@
         <length min="1" max="50" />
     </key>
 
-    <key name="redate" alias="回访时间">
-         <notEmpty /> 
-    </key>
+
      <key name="reresult" alias="回访结果">
          <notEmpty /> 
     </key>
