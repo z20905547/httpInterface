@@ -66,7 +66,7 @@
                             <th></th>
                             <th>回访日期</th>
                             <th>回访结果</th>
-                            <th>操作</th>
+                           
                         </tr>
                     </thead>
                     <tbody>
@@ -81,13 +81,7 @@
                                 <td></td>
                                 <td>${r.redate!''} </td>
                                  <td>${r.reresult!''}</td>
-                                <td>
-                                    <@shiro.hasPermission name="reback:list">
-                                    <a class="btn btn-default btn-sm" href="${base}/account/reback/edit?id=${r.id}">
-                                        <span class="glyphicon glyphicon-edit"></span>
-                                    </a>
-                                    </@shiro.hasPermission>
-                                </td>
+                             
                             </tr>
                             </#list>
 
