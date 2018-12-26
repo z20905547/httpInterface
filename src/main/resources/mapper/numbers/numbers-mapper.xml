@@ -131,7 +131,7 @@
 			AND b.u_id=#{filter.userId}
 		</if>
 		<if test="filter.creatdate != null and filter.creatdate != ''">
-			AND TO_DAYS(b.creatdate)=TO_DAYS(#{filter.creatdate})
+			AND TO_DAYS(a.creatdate)=TO_DAYS(#{filter.creatdate})
 		</if>
 
 		ORDER BY b.`uc_startdate` DESC
