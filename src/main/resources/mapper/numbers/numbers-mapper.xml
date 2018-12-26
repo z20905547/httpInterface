@@ -23,7 +23,8 @@
           targetbuild,
           staff,
           c_level,
-          u_id
+          u_id,
+          is_top
         ) VALUES (
           #{entity.kname},
           #{entity.ksex},
@@ -39,11 +40,50 @@
           #{entity.targetbuild},
           #{entity.staff},
           #{entity.c_level},
-           #{entity.u_id}
+           #{entity.u_id},
+           #{entity.is_top}
         )
 
     </insert>
-    
+      <update id="update">
+
+		UPDATE
+		td_numbers
+		<set>
+			<if test="entity.ksex != null">
+				ksex = #{entity.ksex},
+			</if>
+			<if test="entity.kwxh != null">
+				kwxh = #{entity.kwxh},
+			</if>
+			<if test="entity.laiyuanqd != null">
+				laiyuanqd = #{entity.laiyuanqd},
+			</if>
+			<if test="entity.dilily != null">
+				dilily = #{entity.dilily},
+			</if>
+			<if test="entity.status != null">
+				status = #{entity.status},
+			</if>
+			<if test="entity.kage != null">
+				kage = #{entity.kage},
+			</if>
+			<if test="entity.targetbuild != null">
+				targetbuild = #{entity.targetbuild},
+			</if>
+			
+			<if test="entity.c_level != null">
+				c_level = #{entity.c_level},
+			</if>
+			<if test="entity.is_top != null">
+				is_top = #{entity.is_top}
+			</if>
+
+    	</set>
+		WHERE
+		id = #{entity.id}
+		
+		</update>
     
         <insert id="insertMiddle" useGeneratedKeys="true" keyProperty="entity.id">
         INSERT INTO td_uc_middle(
@@ -82,7 +122,9 @@
               AND b.`c_id` = a.id 
               AND NOW() between b.`uc_startdate` and b.`uc_enddate`
               
-              
+       <if test="filter.knum != null and filter.knum != ''">
+			AND a.knum=#{filter.knum}
+		</if>   
 		<if test="filter.userId != null and filter.userId != ''">
 			AND b.u_id=#{filter.userId}
 		</if>
@@ -117,6 +159,30 @@
         ORDER BY id DESC
     </select>
     
+    
+        <select id="getNumByID" resultType="hashmap">
+        SELECT
+            id AS "id",
+            kname AS "kname",
+            ksex AS "ksex",
+            kage AS "kage",
+            knum AS "knum",
+            laidianrq AS "laidianrq",
+            kwxh AS "kwxh",
+            laiyuanqd AS "laiyuanqd",
+            dilily AS "dilily",
+            status AS "status",
+            remark AS "remark",
+            requirement AS "requirement",
+            targetbuild AS "targetbuild",
+            staff AS "staff"
+        FROM
+          td_numbers
+        where 
+           Id = #{Id} 
+          
+        ORDER BY id DESC
+    </select>
       <select id="count" resultType="long">
         SELECT 
             count(*)

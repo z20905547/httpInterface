@@ -135,6 +135,15 @@ function loadSelectedIndex()
                             </div>
                        
                          </div>
+                           <div class="row">
+                            <div class="col-xs-6">
+                                <label for="knum">客户电话:</label>
+                               <input type="text" class="form-control  " autocomplete="off" id="knum" name="knum" >
+
+							</select> </div>
+                           
+                       
+                         </div>
                     </div>
 
                 </div>
@@ -180,14 +189,9 @@ function loadSelectedIndex()
                             <th>客户姓名</th>
                             <th>客户性别</th>
                             <th>客户电话</th>
-                            <th>客户年龄</th>
-                            <th>来电日期</th>
+                            <th>是否置顶</th>
                             <th>客户微信</th>
-                            <th>来源渠道</th>
-                            <th>客户状态</th>
-                            <th>客户质量</th>
-                            <th>客户需求</th>
-                            <th>目标楼盘</th>
+                            <th>来电日期</th>
                             <th>操作</th>
                         </tr>
                     </thead>
@@ -208,11 +212,18 @@ function loadSelectedIndex()
                                 <#else>
                                 <td>女</td>
                                 </#if>
-                                <td>${r.knum?substring(0,9)}**</td>
-                                <td>${r.kage!''}</td>
-                                <td>${r.laidianrq!''}</td>
+                              <!-- <td>${r.knum?substring(0,9)}**</td> -->  
+                              <td>${r.knum}</td> 
+                              <#if r.is_top == 1>
+                                <td>已置顶</td>
+                                <#else>
+                                <td>未置顶</td>
+                                </#if>
+                                <!--<td>${r.kage!''}</td> 
+                                <td>${r.laidianrq!''}</td>--> 
                                 <td>${r.kwxh!''}</td>
-                                <td>${r.laiyuanqd!''}</td>
+                                <td>${r.laidianrq!''}</td>
+                                <!-- <td>${r.laiyuanqd!''}</td>
                                 <#if r.status == 2>
                                 <td>维护中</td>
                                 <#elseif r.status == 1>
@@ -228,13 +239,16 @@ function loadSelectedIndex()
                                 <td>不确定</td>
                                  </#if>
                                 <td>${r.requirement!''}</td>
-                                <td>${r.targetbuild!''}</td>
+                                <td>${r.targetbuild!''}</td> -->
                                 <td>
-                                    <@shiro.hasPermission name="reback:list">
-                                    <a class="btn btn-default btn-sm" href="${base}/account/reback/list?id=${r.id}">
+                                  
+                                    <a class="btn btn-default btn-sm" href="${base}/account/numbers/edit?id=${r.id}">
                                         <span class="glyphicon glyphicon-edit"></span>
                                     </a>
-                                    </@shiro.hasPermission>
+                                      <a class="btn btn-default btn-sm" href="${base}/account/reback/list?id=${r.id}">
+                                        <span class="glyphicon glyphicon-comment"></span>
+                                    </a>
+                                   
                                 </td>
                             </tr>
                             </#list>
