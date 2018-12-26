@@ -37,7 +37,10 @@
             id AS "id",
             pid AS "pid",
             redate AS "redate",
-            reresult AS "reresult"
+            reresult AS "reresult",
+            u_id AS "u_id",
+            u_name AS "u_name"
+            
         FROM
           td_reback
           WHERE

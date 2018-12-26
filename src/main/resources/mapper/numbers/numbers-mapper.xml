@@ -24,7 +24,8 @@
           staff,
           c_level,
           u_id,
-          is_top
+          is_top,
+          creatdate
         ) VALUES (
           #{entity.kname},
           #{entity.ksex},
@@ -41,7 +42,8 @@
           #{entity.staff},
           #{entity.c_level},
            #{entity.u_id},
-           #{entity.is_top}
+           #{entity.is_top},
+           now()
         )
 
     </insert>
@@ -128,8 +130,8 @@
 		<if test="filter.userId != null and filter.userId != ''">
 			AND b.u_id=#{filter.userId}
 		</if>
-		<if test="filter.creat_date != null and filter.creat_date != ''">
-			AND TO_DAYS(b.creat_date)=TO_DAYS(#{filter.creat_date})
+		<if test="filter.creatdate != null and filter.creatdate != ''">
+			AND TO_DAYS(b.creatdate)=TO_DAYS(#{filter.creatdate})
 		</if>
 
 		ORDER BY b.`uc_startdate` DESC
@@ -175,7 +177,8 @@
             remark AS "remark",
             requirement AS "requirement",
             targetbuild AS "targetbuild",
-            staff AS "staff"
+            staff AS "staff",
+            is_top AS "is_top"
         FROM
           td_numbers
         where 
@@ -199,8 +202,8 @@
 		<if test="filter.userId != null and filter.userId != ''">
 			AND b.u_id=#{filter.userId}
 		</if>
-		<if test="filter.creat_date != null and filter.creat_date != ''">
-			AND TO_DAYS(b.creat_date)=TO_DAYS(#{filter.creat_date})
+		<if test="filter.creatdate != null and filter.creatdate != ''">
+			AND TO_DAYS(a.creatdate)=TO_DAYS(#{filter.creatdate})
 		</if>
 		ORDER BY b.`uc_startdate` DESC
 

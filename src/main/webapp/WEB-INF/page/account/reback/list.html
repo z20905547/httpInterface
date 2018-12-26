@@ -65,6 +65,7 @@
                     <thead>
                         <tr>
                             <th></th>
+                            <th>录入员工</th>
                             <th>回访日期</th>
                             <th>回访结果</th>
                            
@@ -73,6 +74,9 @@
                     <tbody>
 
                         <#if page.content?size == 0>
+                         
+                        
+                        
                         <tr>
                             <td colspan="6"> 没有记录</td>
                         </tr>
@@ -80,6 +84,7 @@
                             <#list page.content as r>
                             <tr>
                                 <td></td>
+                                <td>${r.u_name!''} </td>
                                 <td>${r.redate!''} </td>
                                  <td  ><a href="" data-toggle="modal" data-target="#myModal${r.id!''}">${r.reresult?substring(0,5)}**</a></td>
                              <div class="modal fade" id="myModal${r.id!''}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">

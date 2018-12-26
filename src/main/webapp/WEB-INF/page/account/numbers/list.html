@@ -45,7 +45,7 @@ function getSubList(obj){
 	obj.html("");
 	obj.val("");
 
-	var url="/management/jsondata/account/list";
+	var url="/httpInterface/jsondata/account/list";
 	var params={parentId:1};
 	$.ajax({
 		type: 'get',
@@ -129,8 +129,8 @@ function loadSelectedIndex()
                                 <select name="u_name" id="u_name" class="form-control  u_name " >
 							</select> </div>
                             <div class="col-xs-6 tm">
-                                <label for="creat_date">录入客户日期:</label>
-                               <input type="text" class="datePicker form-control  " autocomplete="off" id="creat_date" name="creat_date" >
+                                <label for="creatdate">录入客户日期:</label>
+                               <input type="text" class="datePicker form-control  " autocomplete="off" id="creatdate" name="creatdate" >
 
                             </div>
                        
@@ -190,8 +190,10 @@ function loadSelectedIndex()
                             <th>客户性别</th>
                             <th>客户电话</th>
                             <th>是否置顶</th>
+                            <th>来源渠道</th>
                             <th>客户微信</th>
                             <th>来电日期</th>
+                            <th>录入日期</th>
                             <th>操作</th>
                         </tr>
                     </thead>
@@ -219,12 +221,13 @@ function loadSelectedIndex()
                                 <#else>
                                 <td>未置顶</td>
                                 </#if>
+                                <td>${r.laiyuanqd!''}</td>
                                 <!--<td>${r.kage!''}</td> 
                                 <td>${r.laidianrq!''}</td>--> 
                                 <td>${r.kwxh!''}</td>
                                 <td>${r.laidianrq!''}</td>
-                                <!-- <td>${r.laiyuanqd!''}</td>
-                                <#if r.status == 2>
+                             
+                                 <!-- <#if r.status == 2>
                                 <td>维护中</td>
                                 <#elseif r.status == 1>
                                 <td>成交</td>
@@ -240,6 +243,7 @@ function loadSelectedIndex()
                                  </#if>
                                 <td>${r.requirement!''}</td>
                                 <td>${r.targetbuild!''}</td> -->
+                                 <td>${r.creatdate!''}</td>
                                 <td>
                                   
                                     <a class="btn btn-default btn-sm" href="${base}/account/numbers/edit?id=${r.id}">
