@@ -134,7 +134,16 @@ public class NumbersService {
         return new Page<Map<String, Object>>(pageRequest, content, total);
     }
     
-    
+    /**
+     * update
+     *
+     * @param entity 用户实体 Map
+     * @param groupIds 关联的组主键 ID 集合
+     */
+    public void updateNumber(Map<String, Object> entity) {
+ 	NumbersDao.update(entity);
+
+    }
     /**
      * 查询用户
      *

@@ -93,14 +93,31 @@ public class NumbersController {
      * @return 用户实体 Map
      */
     @RequestMapping({"edit","add"})
-    public void createOrEdit(@RequestParam(required = false)Long Id,Model model) {
+    public void createOrEdit(@RequestParam(required = false)Long id,Model model) {
 
-        if (Id != null) {
-            model.addAttribute("entity", numbersService.getNumByID(Id));
+        if (id != null) {
+        	model.addAttribute("id", id);
+            model.addAttribute("entity", numbersService.getNumByID(id));
         }
 
     }
     
+    @RequestMapping("update")
+    public String update(@RequestParam Map<String, Object> entity,
+                         @RequestParam(required=false)List<Long> groupIds,
+                         RedirectAttributes redirectAttributes) {
+
+    	Map<String,Object> user = SessionVariable.getCurrentSessionVariable().getUser();
+    	String staff = (String) user.get("username");
+    	String u_id = String.valueOf(user.get("id"));
+    	entity.put("staff", staff);
+    	entity.put("u_id", u_id);
+    	numbersService.updateNumber(entity);
+    	
+        redirectAttributes.addFlashAttribute("success", "修改成功");
+
+        return "redirect:/account/numbers/list";
+    }
     
 
 }

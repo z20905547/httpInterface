@@ -1,0 +1,184 @@
+<#include "*/basic/default.html"/>
+
+<#macro title>
+添加公告
+</#macro>
+
+<#macro head>
+
+<script type="text/javascript">
+
+
+
+</script>
+</#macro>
+
+<#macro body>
+<div class="data-content">
+<!--  
+    <ol class="breadcrumb">
+        <li><span class="glyphicon glyphicon-user"></span></li>
+        <li><a href="${base}/account/numbers/list">客户管理</a></li>
+        <li class="active">添加客户</li>
+    </ol>
+-->
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title"><span class="glyphicon glyphicon-edit"></span> 客户修改</h3>
+        </div>
+        <form action="${base}/account/numbers/update" id="create-notice-form" method="post">
+        <input type="hidden" id="id" name="id" value="${entity.id!''}">
+            <div class="panel-body">
+
+              <div class="form-group">
+                    <div class="row">
+                        <div class="col-xs-6">
+                            <label for="kname">客户姓名:</label>
+                            <input type="text" class="form-control required" maxlength="16" minlength="6" id="kname" name="kname" value="${entity.kname!''}" disabled="disabled" >
+                        </div>
+                        <div class="col-xs-6">
+                            <label for="ksex">客户性别:</label>
+                       <select class="form-control required"  id="ksex" name="ksex"  > 
+                       
+                           <option value="0" <#if entity.ksex?? && entity.ksex==0>selected="selected"</#if> >
+                                                                                   男   
+                           </option> 
+                            <option value="1" <#if entity.ksex?? && entity.ksex==1>selected="selected"</#if> >
+                                                                                    女  
+                           </option> 
+                        
+                          
+                       </select> 
+                    </div>
+                    </div>
+                </div>
+
+              <div class="form-group">
+                    <div class="row">
+                        <div class="col-xs-6">
+                            <label for="knum">客户手机:</label>
+                            <input type="text" class="form-control required" maxlength="20" minlength="1" id="knum"  name="knum" value="${entity.knum!''}" readonly>
+                        </div>
+                 <div class="col-xs-6 laidianrq">
+                            <label for="laidianrq">来电时间:</label>
+                            <input type="text" class="datePicker form-control required " autocomplete="off" id="laidianrq" name="laidianrq" value="${entity.laidianrq!''}" readonly>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-xs-6">
+                            <label for="kwxh">客户微信:</label>
+                            <input type="text" class="form-control " maxlength="20" minlength="20" id="kwxh"  name="kwxh" value="${entity.kwxh!''}" >
+                        </div>
+                        <div class="col-xs-6">
+                            <label for="laiyuanqd">来源渠道:</label>
+                           <input type="text" class="form-control " maxlength="20" minlength="20" id="laiyuanqd"  name="laiyuanqd" value="${entity.laiyuanqd!''}" >
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-xs-6">
+                            <label for="dilily">地理来源:</label>
+                            <input type="text" class="form-control " maxlength="20" minlength="20" id="dilily"  name="dilily" value="${entity.dilily!''}" >
+                        </div>
+                        <div class="col-xs-6">
+                            <label for="status">客户状态:</label>
+                       <select id="status" name="status" class="form-control " >  
+                           <option value="2" <#if entity.status?? && entity.status==2>selected="selected"</#if> >
+                                                                                   维护中   
+                           </option> 
+                            <option value="1" <#if entity.status?? && entity.status==1>selected="selected"</#if> >
+                                                                                    成交  
+                           </option> 
+                          <option value="3" <#if entity.status?? && entity.status==3>selected="selected"</#if> >
+                                                                                    放弃  
+                           </option> 
+                       
+                       
+ 
+                       </select> 
+                       </div>
+                    </div>
+                </div>
+                 <div class="form-group">
+                    <div class="row">
+                        <div class="col-xs-6">
+                            <label for="kage">客户年龄（大概）:</label>
+                            <input type="text" class="form-control " maxlength="20" minlength="20" id="kage"  name="kage" value="${entity.kage!''}" >
+                        </div>
+                 
+                        <div class="col-xs-6">
+                            <label for="requirement">客户需求:</label>
+                            <input type="text" class="form-control " maxlength="20" minlength="200" id="requirement"  name="requirement" value="${entity.kage!''}" >
+                        </div>
+                     </div>
+                </div>
+                 <div class="form-group">
+                    <div class="row">
+                        <div class="col-xs-6">
+                            <label for="targetbuild">具体目标楼盘:</label>
+                            <input type="text" class="form-control " maxlength="200"  id="targetbuild"  name="targetbuild" value="${entity.targetbuild!''}" >
+                        </div>
+                             <div class="col-xs-6">
+                            <label for="c_level">客户状态:</label>
+                       <select id="c_level" name="c_level" class="form-control ">  
+                           <option value="1" <#if entity.c_level?? && entity.c_level==1>selected="selected"</#if> >
+                                                                                  准客   
+                           </option> 
+                            <option value="2" <#if entity.c_level?? && entity.c_level==2>selected="selected"</#if> >
+                                                                                    水客 
+                           </option> 
+                          <option value="3" <#if entity.c_level?? && entity.c_level==3>selected="selected"</#if> >
+                                                                                 不确定  
+                           </option> 
+                       
+                        
+                       </select> 
+                       </div>
+                    </div>
+                </div>
+                   <div class="form-group">
+                    <div class="row">
+                       
+                             <div class="col-xs-6">
+                            <label for="is_top">是否置顶:</label>
+                       <select id="is_top" name="is_top" class="form-control ">  
+                            <option value="0" <#if entity.is_top?? && entity.is_top=='1'>selected="selected"</#if> >
+                                                                                  不置顶   
+                           </option> 
+                            <option value="1" <#if entity.is_top?? && entity.is_top=='2'>selected="selected"</#if> >
+                                                                                    置顶 
+                           </option> 
+                                                      
+                       </select> 
+                       </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel-footer">
+
+                <@shiro.hasPermission name="numbers:insert">
+                <button type="submit" class="btn btn-success">
+                    <span class="glyphicon glyphicon-ok"></span> 保存
+                </button>
+
+                <button type="reset" class="btn btn-warning">
+                    <span class="glyphicon glyphicon-trash"></span> 重置
+                </button>
+                </@shiro.hasPermission>
+
+                <button type="button" class="btn btn-default" onclick="history.back();">
+                    <span class="glyphicon glyphicon-backward"></span> 返回
+                </button>
+
+            </div>
+        </form>
+    </div>
+</div>
+</#macro>
+

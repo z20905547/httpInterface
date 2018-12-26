@@ -45,7 +45,7 @@ public interface NumbersDao {
      * @param entity 组实体 Map
      */
     public List<Map<String, Object>> find(@Param("filter")Map<String, Object> filter);
-    
+    public void update(@Param("entity")Map<String,Object> entity);
     /**
      * 查询列表 专供管理员查询 staff==“admin”
      *
