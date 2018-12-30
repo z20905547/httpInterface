@@ -52,7 +52,7 @@
           mark=#{entity.mark},
           is_top=#{entity.is_top},
           author=#{entity.author},
-          province_id=#{entity.province_id},
+          province_id=#{entity.proId},
 		  city_id=#{entity.cityId},
 		  area_id=#{entity.areaId}
 		
