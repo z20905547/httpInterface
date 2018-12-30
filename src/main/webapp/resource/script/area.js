@@ -6,8 +6,8 @@ function getSubList(pid,id,obj){
 	if(!pid){
 		return;
 	}
-	//var url="/management/jsondata/area/getSubAreaList";
-	var url="/httpInterface/jsondata/area/getSubAreaList";
+	var url="/management/jsondata/area/getSubAreaList";
+	//var url="/httpInterface/jsondata/area/getSubAreaList";
 	var params={parentId:pid};
 	$.ajax({
 		type: 'get',
