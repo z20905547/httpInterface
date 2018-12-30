@@ -49,22 +49,23 @@ var um = UM.getEditor('Content');
 
 		});
         
-		//省市下拉框
-		var proObj=$(".proId");
-		var cityObj=$(".cityId");
-		var areaObj=$(".areaId");
-		
-		getSubList(100000,460000,proObj);
-		getSubList(460000,460100,cityObj);
-		getSubList(460100,0,areaObj);
-		proObj.on("change",function(){
-			getSubList($(this).val(),0,cityObj)
-			getSubList(0,0,areaObj)
-		});
-		cityObj.on("change",function(){
-			getSubList($(this).val(),0,areaObj)
-		});
         
+	      //省市下拉框
+			var proObj=$(".proId");
+			var cityObj=$(".cityId");
+			var areaObj=$(".areaId");
+			
+			getSubList(100000,460000,proObj);
+			getSubList(460000,460100,cityObj);
+			getSubList(460100,0,areaObj);
+			proObj.on("change",function(){
+				getSubList($(this).val(),0,cityObj)
+				getSubList(0,0,areaObj)
+			});
+			cityObj.on("change",function(){
+				getSubList($(this).val(),0,areaObj)
+			});
+	    
     });
     
 
@@ -87,7 +88,7 @@ var um = UM.getEditor('Content');
 
     <div class="panel panel-default">
         <div class="panel-heading">
-            <h3 class="panel-title"><span class="glyphicon glyphicon-edit"></span> 添加公告</h3>
+            <h3 class="panel-title"><span class="glyphicon glyphicon-edit"></span> 添加文章</h3>
         </div>
         
                <form enctype="multipart/form-data" action="${base}/account/notice/update" id="create-user-form" method="post">
@@ -153,12 +154,12 @@ var um = UM.getEditor('Content');
 					<div class="row">
 						<div class="col-xs-6">
 							<label for="proId">省/市:</label>
-							<select name="proId" class="form-control  proId required" >
+							<select name="proId" id="proId" class="form-control  proId required" >
 							</select>
 						</div>
 						<div class="col-xs-6">
 							<label for="cityId">市/县:</label>
-							<select name="cityId" class="form-control required cityId" >
+							<select name="cityId" id="cityId"  class="form-control required cityId" >
 							</select>
 						</div>
 					</div>
