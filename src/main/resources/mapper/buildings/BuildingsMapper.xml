@@ -297,7 +297,7 @@
 		AND e.build_id= b.id
         AND e.is_up='1'
 		AND b.status=0
-		ORDER BY a.update_time desc
+		ORDER BY e.list_top desc,a.update_time desc
 		<if test="filter.first != null and filter.last != null">
 			LIMIT #{filter.first},#{filter.last}
 		</if>
