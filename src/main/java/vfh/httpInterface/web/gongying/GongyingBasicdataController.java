@@ -57,6 +57,7 @@ public class GongyingBasicdataController {
     @RequestMapping(value="update2")
     public String update(@RequestParam Map<String, Object> entity,
                          RedirectAttributes redirectAttributes) {
+
     	gongyingBasicDataService.updateBuildingsActive(entity);
     	//gongyingBasicDataService.updateBuildingsActiveUpdata(entity);
         redirectAttributes.addFlashAttribute("success", "修改成功");

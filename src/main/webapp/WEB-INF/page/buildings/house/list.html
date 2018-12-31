@@ -20,7 +20,7 @@
     		var id=$(this).attr("data-house-id");
     		var shi=$(this).attr("data-shi");
     		var buildingsName=$(this).attr("data-building-name");
-    			var form = $("<form   action='"+actionUrl+"' method='post'>").append("<input name='id' value='"+id+"'/><input name='buildingsName' value='"+buildingsName+"'/><input name='shi' value='"+shi+"'/><input name='bid' value='"+bid+"'/>"");
+    		var form = $("<form   action='"+actionUrl+"' method='post'>").append("<input name='id' value='"+id+"'/><input name='buildingsName' value='"+buildingsName+"'/><input name='shi' value='"+shi+"'/><input name='bid' value='"+bid+"'/>");
     		$(document.body).append(form); $(form).submit().remove();
     	});
     });

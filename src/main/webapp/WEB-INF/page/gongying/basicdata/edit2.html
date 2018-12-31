@@ -217,7 +217,20 @@
 								class="form-control" 
 								id="deal_prize" name="deal_prize" value="${entity.deal_prize!''}" >
 						</div>
-						
+						<div class="col-xs-6">
+					<label for="list_top">首页列表置顶:</label>								
+					   <select class="form-control "  id="list_top" name="list_top" >  
+                          
+                             <option value="0" <#if entity.list_top?? && entity.list_top==0>selected="selected"</#if> >
+                                                                                           不置顶   
+                           </option>
+                           <option value="1" <#if entity.list_top?? && entity.list_top==1>selected="selected"</#if> >
+                                                                                     置顶    
+                           </option>
+                         
+                            
+                       </select> 
+						</div>
 					</div>
 				</div> 	
   
