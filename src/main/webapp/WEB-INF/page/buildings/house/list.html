@@ -20,7 +20,10 @@
     		var id=$(this).attr("data-house-id");
     		var shi=$(this).attr("data-shi");
     		var buildingsName=$(this).attr("data-building-name");
-    		var form = $("<form   action='"+actionUrl+"' method='post'>").append("<input name='id' value='"+id+"'/><input name='buildingsName' value='"+buildingsName+"'/><input name='shi' value='"+shi+"'/><input name='bid' value='"+bid+"'/>");
+    		var buildings_id=$(this).attr("data-building-id");
+    		var big_type=$(this).attr("data-big-type");
+    		var sm_type=$(this).attr("data-sm-type");
+    		var form = $("<form   action='"+actionUrl+"' method='post'>").append("<input name='id' value='"+id+"'/><input name='buildingsName' value='"+buildingsName+"'/><input name='shi' value='"+shi+"'/><input name='bid' value='"+bid+"'/><input name='bigType' value='"+big_type+"'/><input name='smType' value='"+sm_type+"'/><input name='buildingsId' value='"+bid+"'/>");
     		$(document.body).append(form); $(form).submit().remove();
     	});
     });
@@ -100,6 +103,9 @@
                                     </a>
                                     <a class="btn btn-default btn-sm blocklink" title="编辑图片" href="javascript:void(0)" data-href="${base}/buildings/house/hxtEdit?buildings_id=${buildingsId}" data-house-id="${r.id}" data-shi="${r.shi}" data-building-name="${buildingsName}">
                                         <span class="glyphicon glyphicon-picture"></span>
+                                    </a>
+                                     <a class="btn btn-default btn-sm blocklink" title="删除图片" href="javascript:void(0)" data-href="${base}/buildings/resource/list" data-building-id="${buildingsId}" data-big-type="1"  data-sm-type="${r.shi}" >
+                                        <span class="glyphicon glyphicon-remove"></span>
                                     </a>
                                 </td>
                             </tr>

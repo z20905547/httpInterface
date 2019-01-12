@@ -1,0 +1,110 @@
+<#include "*/basic/default.html"/>
+
+<#macro title>
+用户管理
+</#macro>
+
+<#macro head>
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        $("#selectAll").click(function () {
+            var checkbox = $(this),
+                    children = checkbox.parents("table").find("tbody input[type='checkbox']");
+
+            children.prop("checked", checkbox.is(":checked"));
+        });
+    });
+
+    function submitDeleteForm() {
+        var length = $("#pic-list-form").find("input[type='checkbox'][id!='selectAll']:checked").length;
+        if (length == 0) {
+            return ;
+        }
+        bootbox.confirm("确定要删除选中的" + length + "条记录吗？", function (result) {
+            if (result) {
+                $("#pic-list-form").submit();
+            }
+        });
+    }
+
+</script>
+</#macro>
+
+<#macro body>
+
+
+<div class="data-content">
+
+    <ol class="breadcrumb">
+        <li class="active"><span class="glyphicon glyphicon-user"></span></li>
+        <li class="active"> 图片管理</li>
+    </ol>
+
+    <#if success?has_content>
+    <div class="alert alert-success fade in">
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+        <span class="glyphicon glyphicon-ok"></span> ${success}
+    </div>
+    </#if>
+
+    <form id="pic-list-form" action="${base}/buildings/resource/delete" valid="false" method="post">
+     <input type="hidden" id="pageNumber" name="pageNumber" value="0">
+      <input type="hidden" id="buildingsId" name="buildingsId" value=${buildingsId}>
+       <input type="hidden" id="bigType" name="bigType" value=${bigType}>
+        <input type="hidden" id="smType" name="smType" value=${smType}>
+        <div class="panel panel-default">
+
+            <div class="panel-heading">
+                <h3 class="panel-title"><span class="glyphicon glyphicon-user"></span> 图片管理</h3>
+            </div>
+
+            <div class="table-container">
+                <table class="table table-hover table-striped">
+                    <thead>
+                         <th><input type="checkbox" id="selectAll"></th>
+                            <th>ID</th>
+                            <th>图片</th>
+                         
+                    </thead>
+                    <tbody>
+
+                        <#if page.content?size == 0>
+                        <tr>
+                            <td colspan="6"> 没有记录</td>
+                        </tr>
+                        <#else>
+                         <#list page.content as r>
+                            <tr>
+                            <td><input type="checkbox" name="ids" value="${r.id}"></td>
+                                <td>${r.id}</td>
+                                <td style="width:200px;height:150px"><img style="width:200px;height:150px" src="http://www.vfhui.com:8080/management${r.resource_path}${r.resource_name}"></td>
+                              
+                            </tr>
+                          </#list>
+
+                        </#if>
+
+                    </tbody>
+                </table>
+            </div>
+           <div class="panel-footer">
+   
+                <button type="button" class="btn btn-danger" onclick="submitDeleteForm();">
+                    <span class="glyphicon glyphicon-remove"></span> 删除
+                </button>
+                 <button type="button" class="btn btn-default" onclick="history.back();">
+                    <span class="glyphicon glyphicon-backward"></span> 返回
+                </button>
+            </div>
+        </div>
+
+        <@pagination 'pic-list-form' page />
+
+    </form>
+
+</div>
+
+</#macro>
+
+

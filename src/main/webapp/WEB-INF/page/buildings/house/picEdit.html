@@ -17,6 +17,22 @@
 
 <script type="text/javascript">
 
+$(document).ready(
+		
+		function() {
+			
+			$(".blocklink").on("click",function(){
+	    		var actionUrl=$(this).attr("data-href");
+	    		var buildings_id=$(this).attr("data-building-id");
+	    		var big_type=$(this).attr("data-big-type");
+	    		var sm_type=$(this).attr("data-sm-type");
+	    		var form = $("<form   action='"+actionUrl+"' method='post'>").append("<input name='buildingsId' value='"+buildings_id+"'/><input name='bigType' value='"+big_type+"'/><input name='smType' value='"+sm_type+"'/>");
+	    		$(document.body).append(form); $(form).submit().remove();
+	    	});
+		});
+		
+
+
     $(document).ready(function () {
         //图片上传
 
@@ -71,9 +87,11 @@
 				<div class="form-group">
 					<div class="row">
 						<div class="col-xs-12">
-							<label for="acreage">实景图:</label> <input type="file"
-								name="image23" id="image23" multiple class="file-loading"
-								value="" />
+							<label for="acreage">实景图:   
+							      <a class="blocklink" title="编辑图片" href="javascript:void(0)" data-href="${base}/buildings/resource/list" data-building-id="${buildings_id}" data-big-type="2"  data-sm-type="23"  >
+                                                                                                   修改
+                                    </a>
+                <input type="file" 	name="image23" id="image23" multiple class="file-loading" value="" />
 						</div>
 					</div>
 				</div>
@@ -90,7 +108,9 @@
 				<div class="form-group">
 					<div class="row">
 						<div class="col-xs-12">
-							<label for="acreage">效果图:</label> <input type="file"
+							<label for="acreage">效果图:<a class="blocklink" title="编辑图片" href="javascript:void(0)" data-href="${base}/buildings/resource/list" data-building-id="${buildings_id}" data-big-type="2"  data-sm-type="21"  >
+                                                                                                   修改
+                                    </a></label> <input type="file"
 								name="image21" id="image21" multiple class="file-loading"
 								value="" />
 						</div>
@@ -109,7 +129,9 @@
 				<div class="form-group">
 					<div class="row">
 						<div class="col-xs-12">
-							<label for="acreage">样板间:</label> <input type="file"
+							<label for="acreage">样板间:<a class="blocklink" title="编辑图片" href="javascript:void(0)" data-href="${base}/buildings/resource/list" data-building-id="${buildings_id}" data-big-type="2"  data-sm-type="24"  >
+                                                                                                   修改
+                                    </a></label></label> <input type="file"
 								name="image24" id="image24" multiple class="file-loading"
 								value="" />
 						</div>
@@ -199,7 +221,9 @@
 				<div class="form-group">
 					<div class="row">
 						<div class="col-xs-12">
-							<label for="acreage">交通图:</label> <input type="file"
+							<label for="acreage">交通图:<a class="blocklink" title="编辑图片" href="javascript:void(0)" data-href="${base}/buildings/resource/list" data-building-id="${buildings_id}" data-big-type="2"  data-sm-type="22"  >
+                                                                                                   修改
+                                    </a></label></label> <input type="file"
 								name="image22" id="image22" multiple class="file-loading"
 								value="" />
 						</div>

@@ -105,4 +105,7 @@
 			LIMIT #{filter.first},#{filter.last}
 		</if>
 	</select>
+	    <delete id="delete">
+        DELETE FROM tb_building_resource WHERE id = #{id}
+    </delete>
 </mapper>
