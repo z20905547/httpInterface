@@ -13,14 +13,21 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.collections.MapUtils;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.ui.Model;
 
+import vfh.httpInterface.commons.Page;
+import vfh.httpInterface.commons.PageRequest;
 import vfh.httpInterface.commons.StringUtil;
+import vfh.httpInterface.commons.VariableUtils;
 import vfh.httpInterface.dao.resourse.ResourseDao;
+import vfh.httpInterface.service.ServiceException;
 
 /**
  * TODO 资源管理表
@@ -263,9 +270,45 @@ public class ResourceService {
 	 * @return
 	 * @create 2016年3月1日
 	 */
-	public List<Map<String, Object>> findResource(Map<String, Object> filter) {
-		return resourseDao.find(filter);
+	public Page<Map<String, Object>> findResource(PageRequest pageRequest,
+			Map<String, Object> filter, Model model) {
+		long total = resourseDao.count(filter);
+		List<Map<String, Object>> content = resourseDao
+				.find(filter);
+		return new Page<Map<String, Object>>(pageRequest, content, total);
+		
 	}
+    public Map<String, Object> getPic(Long id) {
+        return resourseDao.get(id);
+    }
+	 /**
+     * 删除图片
+     *
+     * @param ids 用户主键 ID 集合
+     */
+    public void deletePics(List<Long> ids) {
+        for(Long id : ids) {
+          //  Map<String, Object> entity = getPic(id);
+          //  System.out.println(entity.toString());
+          //  if (MapUtils.isNotEmpty(entity)) {
+            	deletePic(id);
+          //  }
+        }
+    }
+    
+    /**
+     * 删除图片
+     *
+     * 
+     */
+ 
+    public void deletePic(Long id) {
+
+
+       
+        
+        resourseDao.delete(id);
+    }
 	/**
 	 * TODO 封装列表
 	 * @author harry

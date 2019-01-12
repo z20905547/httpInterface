@@ -41,4 +41,6 @@ public interface ResourseDao {
 	 * @create 2016年3月1日
 	 */
 	public List<Map<String, Object>> find(@Param("filter")Map<String, Object> filter);
+	
+    public void delete(@Param("id")Long id);
 }

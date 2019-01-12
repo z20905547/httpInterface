@@ -29,6 +29,9 @@
 		<if test="filter.proId != null and filter.proId != ''">
 			AND province_id=#{filter.proId}
 		</if>
+		 <if test="filter.mark != null and filter.mark != '' and filter.mark != 'undefined'">
+			and mark = #{filter.mark}
+		</if>
 		<if test="filter.city_id != null and filter.city_id != ''">
 			<bind name="filter.city_id" value=" '%' + filter.city_id + '%' " />
 			AND city_id LIKE #{filter.city_id}
@@ -102,7 +105,7 @@
 			<bind name="filter.city_id" value=" '%' + filter.city_id + '%' " />
 			AND city_id LIKE #{filter.city_id}
 		</if>
-		ORDER BY id DESC  
+		ORDER BY is_top DESC, id DESC  
        
 		<if test="filter.first != null and filter.last != null">
 			LIMIT #{filter.first},#{filter.last}
@@ -125,10 +128,11 @@
         <if test="filter.mark != null and filter.mark != '' and filter.mark != 'undefined'">
 			and mark = #{filter.mark}
 		</if>
-		<if test="filter.is_top != null and filter.is_top != ''">
-			and is_top = #{filter.is_top}
+		<if test="filter.is_top != null and filter.is_top != '' and filter.is_top == 1">
+			and is_top = '1'
 		</if>
-		<if test='filter.is_top == "2" and filter.is_top != null '>
+				
+		<if test="filter.is_top != null and filter.is_top != '' and filter.is_top == 0">
 			and is_top != '1'
 		</if>
 		<if test="filter.proId != null and filter.proId != ''">
@@ -143,7 +147,7 @@
 		</if>
 		
 		
-        ORDER BY id DESC  
+        ORDER BY is_top DESC,id DESC  
         <if test="filter.first != null and filter.last != null">
 			LIMIT	#{filter.first},#{filter.last}
 		</if>
