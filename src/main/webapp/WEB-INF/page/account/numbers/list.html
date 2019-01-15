@@ -46,6 +46,7 @@ function getSubList(obj){
 	obj.val("");
 
 	var url="/management/jsondata/account/list";
+	//var url="/httpInterface/jsondata/account/list";
 	var params={parentId:1};
 	$.ajax({
 		type: 'get',
@@ -189,7 +190,7 @@ function loadSelectedIndex()
                             <th>客户姓名</th>
                             <th>客户性别</th>
                             <th>客户电话</th>
-                            <th>是否置顶</th>
+                            <th>重要级别</th>
                             <th>来源渠道</th>
                             <th>客户微信</th>
                             <th>来电日期</th>
@@ -215,12 +216,8 @@ function loadSelectedIndex()
                                 <td>女</td>
                                 </#if>
                               <!-- <td>${r.knum?substring(0,9)}**</td> -->  
-                              <td>${r.knum}</td> 
-                              <#if r.is_top == 1>
-                                <td>已置顶</td>
-                                <#else>
-                                <td>未置顶</td>
-                                </#if>
+                                <td>${r.knum}</td> 
+                                <td>${r.is_top!''}</td>
                                 <td>${r.laiyuanqd!''}</td>
                                 <!--<td>${r.kage!''}</td> 
                                 <td>${r.laidianrq!''}</td>--> 
