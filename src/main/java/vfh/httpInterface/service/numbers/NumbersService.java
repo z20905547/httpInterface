@@ -133,7 +133,39 @@ public class NumbersService {
      
         return new Page<Map<String, Object>>(pageRequest, content, total);
     }
-    
+    /**
+     * 查询公客
+     *
+     * @param pageRequest 分页请求参数
+     * @param filter 查询条件
+     *
+     * @return 用户实体 Map 的分页对象
+     */
+    public Page<Map<String, Object>> findnumbers_gk(PageRequest pageRequest, Map<String, Object> filter) {
+		returnMap.clear();
+
+    	
+       
+        filter.putAll(pageRequest.getMap());
+        Map<String,Object> user = SessionVariable.getCurrentSessionVariable().getUser();
+    	String staff = (String) user.get("username");
+    	String userId = user.get("id").toString();
+    	String u_id = (String) filter.get("u_name");
+    	//String u_id = (String) filter.get("id");
+
+		Map<String, Object> pagedata=new HashMap<String, Object>();
+		long total = NumbersDao.count_gk(filter);
+		if(StringUtil.isNotEmptyObject(filter.get("first"))&&StringUtil.isNotEmptyObject(filter.get("last"))){
+			filter.put("first", Integer.parseInt(filter.get("first").toString()));
+			filter.put("last", Integer.parseInt(filter.get("last").toString()));
+			
+		} 
+    	
+        filter.putAll(pageRequest.getMap());
+        List<Map<String, Object>> content = NumbersDao.find_gk(filter);
+     
+        return new Page<Map<String, Object>>(pageRequest, content, total);
+    }
     /**
      * update
      *
@@ -142,6 +174,34 @@ public class NumbersService {
      */
     public void updateNumber(Map<String, Object> entity) {
  	NumbersDao.update(entity);
+
+    }
+    
+    /**
+     * update
+     *
+     *私客定时变成公客
+     */
+    public void skTogk(Map<String, Object> entity) {
+ 	NumbersDao.skTogk(entity);
+
+    }
+    /**
+     * updateget
+     *更改is_get=1
+     */
+    public void putNumber(Map<String, Object> entity) {
+ 	NumbersDao.putNumber(entity);
+
+    }
+    /**
+     * 公客获取
+     *
+     * @param entity 用户实体 Map
+     * @param groupIds 关联的组主键 ID 集合
+     */
+    public void getNumber(Map<String, Object> entity) {
+ 	NumbersDao.get(entity);
 
     }
     /**
