@@ -57,7 +57,7 @@ public class NumbersController {
     public Page<Map<String, Object>> list(PageRequest pageRequest,
                                           @RequestParam Map<String, Object> filter,
                                           Model model) {
-    	numbersService.skTogk(filter);
+    //	numbersService.skTogk(filter);
         return numbersService.findnumbers(pageRequest,filter);
     }
     /**
