@@ -20,8 +20,12 @@ function add_info()
    var tag = "kehuliebiao";
    var reresult = $("#reresult").val();
 
-
-	window.location.href = "${base}/account/reback/insert?pid="+pid+"&tag="+tag+"&reresult="+reresult;
+    if(reresult.length > 10){
+    	window.location.href = "${base}/account/reback/insert?pid="+pid+"&tag="+tag+"&reresult="+reresult;
+    }else {
+    	alert("内容至少超过10个字！")
+    }
+	
     $("#rebackModal").on("hidden.bs.modal", function() {
         $(this).removeData("bs.modal");
     });
