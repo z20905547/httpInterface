@@ -13,9 +13,20 @@
 
 <#macro head>
 <script type="text/javascript">
+function add_info()
+{
+	
+   var pid = $("#pid").val();
+   var tag = "kehuliebiao";
+   var reresult = $("#reresult").val();
 
 
+	window.location.href = "${base}/account/reback/insert?pid="+pid+"&tag="+tag+"&reresult="+reresult;
+    $("#rebackModal").on("hidden.bs.modal", function() {
+        $(this).removeData("bs.modal");
+    });
 
+}
 
 $(document).ready(
 		function() {
@@ -108,6 +119,12 @@ function loadSelectedIndex()
 #ui-datepicker-div {z-index:2500 !important;}
 </style>
 <#macro body>
+
+
+
+
+
+
 <div class="modal fade" id="search-modal" role="dialog" aria-hidden="true">
 
     <div class="modal-dialog">
@@ -142,7 +159,11 @@ function loadSelectedIndex()
                                <input type="text" class="form-control  " autocomplete="off" id="knum" name="knum" >
 
 							 </div>
-                           
+                           <div class="col-xs-6">
+                                <label for="kname">客户姓名:</label>
+                               <input type="text" class="form-control  " autocomplete="off" id="kname" name="kname" >
+
+							 </div>
                        
                          </div>
                     </div>
@@ -193,8 +214,8 @@ function loadSelectedIndex()
                             <th>重要级别</th>
                             <th>来源渠道</th>
                             <th>客户微信</th>
-                            <th>来电日期</th>
-                            <th>录入日期</th>
+                            <th>最近回访</th>
+                            <th>回访内容</th>
                             <th>操作</th>
                         </tr>
                     </thead>
@@ -222,7 +243,7 @@ function loadSelectedIndex()
                                 <!--<td>${r.kage!''}</td> 
                                 <td>${r.laidianrq!''}</td>--> 
                                 <td>${r.kwxh!''}</td>
-                                <td>${r.laidianrq!''}</td>
+                                <td>${r.redate!''}</td>
                              
                                  <!-- <#if r.status == 2>
                                 <td>维护中</td>
@@ -239,17 +260,65 @@ function loadSelectedIndex()
                                 <td>不确定</td>
                                  </#if>
                                 <td>${r.requirement!''}</td>
-                                <td>${r.targetbuild!''}</td> -->
-                                 <td>${r.creatdate!''}</td>
+                                <td>${r.targetbuild!''}</td>--> 
+                                 <td><a href="" data-toggle="modal" data-target="#myModal${r.id!''}">${r.reresult?substring(0,9)}**</a></td>
+                                 <div class="modal fade" id="myModal${r.id!''}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="myModalLabel">回访详情</h4>
+            </div>
+            <div class="modal-body">${r.reresult!''}</div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+</div>
                                 <td>
-                                  
+                                 
                                     <a class="btn btn-default btn-sm" href="${base}/account/numbers/edit?id=${r.id}">
                                         <span class="glyphicon glyphicon-edit"></span>
                                     </a>
                                       <a class="btn btn-default btn-sm" href="${base}/account/reback/list?id=${r.id}">
                                         <span class="glyphicon glyphicon-comment"></span>
                                     </a>
-                                   
+                                    <a class="btn btn-default btn-sm" href="" data-toggle="modal" data-target="#rebackModal">
+                                        <span class="glyphicon glyphicon-plus"></span>
+                                    </a>
+   <div class="modal fade" id="rebackModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+
+    
+    <div class="modal-dialog">
+
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="myModalLabel">输入回访内容</h4>
+            </div>
+            <form action="${base}/account/reback/insert" id="create-reback-form" method="post">
+             <input type="hidden" id="pid" name="pid" value="${r.id!''}"/>
+            <input type="hidden" id="tag" name="tag" value="kehuliebiao"/>
+
+            <div class="modal-body">
+              <textarea  class="form-control" minlength="10"  id="reresult" name="reresult" cols="10" rows="10"  ></textarea>
+                
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭
+                </button>
+                <button type="button" onclick="add_info()" class="btn btn-primary">
+                                              提交更改
+                </button>
+            </div>
+            </form>
+            
+        </div><!-- /.modal-content -->
+        
+    </div><!-- /.modal -->
+
                                 </td>
                             </tr>
                             </#list>

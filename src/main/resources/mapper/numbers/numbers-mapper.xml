@@ -150,28 +150,35 @@
     </insert>
     
     <select id="find" resultType="hashmap">
-        SELECT 
-            a.*, b.*
+         
+  SELECT 
+            a.*, e.id r_id, e.redate redate, e.reresult reresult, e.u_id u_id, e.u_name u_name
         FROM 
-            `td_numbers` a ,
-            `td_uc_middle` b 
-            
-        WHERE 
-               b.`c_id` = a.id 
-              AND NOW() between b.`uc_startdate` and b.`uc_enddate`
-              
-       <if test="filter.knum != null and filter.knum != ''">
-       <bind name="filter.knum" value=" '%' + filter.knum + '%' " />
-			AND a.knum LIKE #{filter.knum}
-		</if>   
-		<if test="filter.userId != null and filter.userId != ''">
-			AND b.u_id=#{filter.userId}
-		</if>
-		<if test="filter.creatdate != null and filter.creatdate != ''">
-			AND TO_DAYS(a.creatdate)=TO_DAYS(#{filter.creatdate})
-		</if>	
+            `td_numbers` a ,(
+                 SELECT c.* FROM (  
+                 SELECT t.* FROM `td_reback` t WHERE t.`u_id` IN (SELECT b.`u_id` u_id FROM `td_uc_middle` b  WHERE NOW() BETWEEN b.`uc_startdate` AND b.`uc_enddate`) 
+                    
+		           <if test="filter.userId != null and filter.userId != ''">
+			          AND t.u_id=#{filter.userId}
+		           </if>
+		           	
 
-		ORDER BY  a.is_top DESC, b.`uc_startdate` DESC 
+                   ORDER BY t.`redate` DESC
+                 ) C GROUP BY c.pid  
+                 ) e WHERE a.`id`= e.pid
+                 
+                  <if test="filter.knum != null and filter.knum != ''">
+                    <bind name="filter.knum" value=" '%' + filter.knum + '%' " />
+			          AND a.knum LIKE #{filter.knum}
+		           </if> 
+                    <if test="filter.kname != null and filter.kname != ''">
+		            <bind name="filter.kname" value=" '%' + filter.kname + '%' " />
+			         AND a.kname LIKE #{filter.kname}
+		             </if>
+			         <if test="filter.creatdate != null and filter.creatdate != ''">
+				       AND TO_DAYS(t.creatdate)=TO_DAYS(#{filter.creatdate})
+			        </if>
+		ORDER BY  a.is_top DESC, a.`creatdate` DESC 
 		<if test="filter.first != null and filter.last != null">
 			LIMIT #{filter.first},#{filter.last}
 		</if>
@@ -185,6 +192,7 @@
             
         WHERE 
                b.`is_get` = '0'
+               AND a.status !='1'
               AND b.`c_id` = a.id 
               AND NOW() > b.`uc_enddate`
 		<if test="filter.first != null and filter.last != null">
@@ -268,6 +276,7 @@
             
         WHERE 
                b.`is_get` = '0'
+               AND a.status !='1'
               AND b.`c_id` = a.id 
               AND NOW() > b.`uc_enddate`
               ORDER BY b.`uc_startdate` DESC
@@ -292,8 +301,8 @@ SELECT a.* FROM `td_reback` a WHERE a.`u_id` IN (SELECT b.`u_id` u_id FROM `td_u
    <if test="filter.u_id != null and filter.u_id != ''">
        AND d.u_id=#{filter.u_id}
      </if>
- ) f 
-WHERE f.pid = e.`c_id` AND NOW() BETWEEN e.`uc_startdate` AND e.`uc_enddate`
+ ) f ,`td_numbers` t 
+WHERE f.pid = e.`c_id` AND NOW() BETWEEN e.`uc_startdate` AND e.`uc_enddate` AND t.id=e.c_id  AND T.`status` != '1'     
 
     </select>
     
@@ -302,8 +311,8 @@ SELECT id FROM  `td_uc_middle` e ,(
  SELECT * FROM (
  SELECT c.* FROM (  
 SELECT a.* FROM `td_reback` a WHERE a.`u_id` IN (SELECT b.`u_id` u_id FROM `td_uc_middle` b  WHERE NOW() BETWEEN b.`uc_startdate` AND b.`uc_enddate`) ORDER BY a.`redate` DESC
-) C GROUP BY c.pid ) d WHERE (TO_DAYS(NOW())-TO_DAYS(d.redate))>40 ) f 
-WHERE f.pid = e.`c_id` AND NOW() BETWEEN e.`uc_startdate` AND e.`uc_enddate`
+) C GROUP BY c.pid ) d WHERE (TO_DAYS(NOW())-TO_DAYS(d.redate))>40 ) f  ,`td_numbers` t 
+WHERE f.pid = e.`c_id` AND NOW() BETWEEN e.`uc_startdate` AND e.`uc_enddate` AND t.id=e.c_id  AND T.`status` != '1'     
 
     </select>
     
