@@ -185,4 +185,29 @@ public class NumbersController {
     	
         redirectAttributes.addFlashAttribute("success", "公客变更成功");
     }
+    @RequestMapping("skTogkByCID")
+    public String skTogkByCID(@RequestParam Map<String, Object> entity,
+                         @RequestParam(required=false)List<Long> groupIds,
+                         RedirectAttributes redirectAttributes) {
+
+    	Map<String,Object> user = SessionVariable.getCurrentSessionVariable().getUser();
+    	String staff = (String) user.get("username");
+    	String u_id = String.valueOf(user.get("id"));
+    	entity.put("staff", staff);
+    	entity.put("u_id", u_id);
+    	numbersService.skTogkByCID(entity);
+    	String pid = String.valueOf(entity.get("c_id"));
+		
+		String userId = u_id;
+    	entity.put("u_id", userId);
+    	entity.put("u_name", staff);
+    	entity.put("pid", pid);
+    	entity.put("reresult", "这个客户刚刚被我踢为公客，打家快抢啊！");
+	    rebackService.insert(entity);
+
+    	
+        redirectAttributes.addFlashAttribute("success", "公客变更成功");
+        return "redirect:/account/numbers/list";
+    }
+    
 }

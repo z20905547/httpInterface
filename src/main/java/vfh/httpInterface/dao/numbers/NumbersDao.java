@@ -66,6 +66,7 @@ public interface NumbersDao {
     public void putNumber(@Param("entity")Map<String,Object> entity);
     public void get(@Param("entity")Map<String,Object> entity);
     public void skTogk(@Param("entity")Map<String,Object> entity);
+    public void skTogkByCID(@Param("entity")Map<String,Object> entity);
     //获取全部到期的中间表的数据
     public List<Map<String, Object>> find_gkAll(@Param("entity")Map<String,Object> entity);
     //根据user_id 获取某一个员工到期的客户中间表的数据

@@ -187,6 +187,15 @@ public class NumbersService {
 
     }
     /**
+     * update
+     *
+     *私客定时变成公客 根据客户ID
+     */
+    public void skTogkByCID(Map<String, Object> entity) {
+ 	NumbersDao.skTogkByCID(entity);
+
+    }
+    /**
      * updateget
      *更改is_get=1
      */
