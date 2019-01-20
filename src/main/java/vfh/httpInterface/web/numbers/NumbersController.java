@@ -58,6 +58,13 @@ public class NumbersController {
                                           @RequestParam Map<String, Object> filter,
                                           Model model) {
     //	numbersService.skTogk(filter);
+    //	redirectAttributes.addFlashAttribute("success", "抢客成功");
+    	if(null != filter.get("creatdate")  && filter.get("creatdate") != "") {
+    		model.addAttribute("creatdate", filter.get("creatdate"));
+	    }
+    	if(null != filter.get("plan")  && filter.get("plan") != "") {
+    		model.addAttribute("plan", filter.get("plan"));
+	    }
         return numbersService.findnumbers(pageRequest,filter);
     }
     /**

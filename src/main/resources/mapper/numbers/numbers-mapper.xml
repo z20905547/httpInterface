@@ -151,19 +151,24 @@
     
     <select id="find" resultType="hashmap">
     
-   SELECT g.*,f.id r_id, f.redate redate, f.reresult reresult, f.kname kname ,f.ksex ksex,f.is_top is_top,f.laiyuanqd laiyuanqd,f.kwxh kwxh ,f.knum knum ,f.status status  FROM (
+   SELECT g.*,f.id r_id, f.redate redate, f.reresult reresult, f.kname kname ,f.ksex ksex,f.is_top is_top2,f.laiyuanqd laiyuanqd,f.kwxh kwxh ,f.knum knum ,f.status status  FROM (
 SELECT * FROM (
 SELECT c.id reback_id ,c.pid pid,c.reresult reresult,c.redate redate  FROM (  
 SELECT a.* FROM `td_reback` a WHERE a.id>0 
 
-                  <if test="filter.userId != null and filter.userId != ''">
+                   <if test="filter.userId != null and filter.userId != ''">
 			          AND a.u_id=#{filter.userId}
 		           </if>
 
                 ORDER BY a.`redate` DESC
               ) C GROUP BY c.pid ) d, `td_numbers` e WHERE d.pid=e.id AND e.status !='1'
 
- <if test="filter.knum != null and filter.knum != ''">
+
+                       
+                    <if test="filter.plan != null and filter.plan != ''">
+                    AND (TO_DAYS(NOW())-TO_DAYS(d.redate))>#{filter.plan}
+		           </if> 
+                   <if test="filter.knum != null and filter.knum != ''">
                     <bind name="filter.knum" value=" '%' + filter.knum + '%' " />
 			          AND e.knum LIKE #{filter.knum}
 		           </if> 
@@ -248,25 +253,42 @@ WHERE f.pid=g.c_id AND  NOW() BETWEEN g.`uc_startdate` AND g.`uc_enddate` ORDER 
         ORDER BY id DESC
     </select>
       <select id="count" resultType="long">
-        SELECT 
-            count(*)
-        FROM 
-            `td_numbers` a ,
-            `td_uc_middle` b 
-            
-        WHERE 
-              b.`u_id`=a.`u_id`
-              AND b.`c_id` = a.id 
-              AND NOW() between b.`uc_startdate` and b.`uc_enddate`
-              
-              
-		<if test="filter.userId != null and filter.userId != ''">
-			AND b.u_id=#{filter.userId}
-		</if>
-		<if test="filter.creatdate != null and filter.creatdate != ''">
-			AND TO_DAYS(a.creatdate)=TO_DAYS(#{filter.creatdate})
-		</if>
-		ORDER BY b.`uc_startdate` DESC
+          
+   SELECT count(*)  FROM (
+SELECT * FROM (
+SELECT c.id reback_id ,c.pid pid,c.reresult reresult,c.redate redate  FROM (  
+SELECT a.* FROM `td_reback` a WHERE a.id>0 
+
+                   <if test="filter.userId != null and filter.userId != ''">
+			          AND a.u_id=#{filter.userId}
+		           </if>
+
+                ORDER BY a.`redate` DESC
+              ) C GROUP BY c.pid ) d, `td_numbers` e WHERE d.pid=e.id AND e.status !='1'
+
+
+                       
+                    <if test="filter.plan != null and filter.plan != ''">
+                    AND (TO_DAYS(NOW())-TO_DAYS(d.redate))>#{filter.plan}
+		           </if> 
+                   <if test="filter.knum != null and filter.knum != ''">
+                    <bind name="filter.knum" value=" '%' + filter.knum + '%' " />
+			          AND e.knum LIKE #{filter.knum}
+		           </if> 
+                    <if test="filter.kname != null and filter.kname != ''">
+		            <bind name="filter.kname" value=" '%' + filter.kname + '%' " />
+			         AND e.kname LIKE #{filter.kname}
+		             </if>
+			         <if test="filter.creatdate != null and filter.creatdate != ''">
+				       AND TO_DAYS(e.creatdate)=TO_DAYS(#{filter.creatdate})
+			        </if>
+
+
+
+) f ,`td_uc_middle` g 
+WHERE f.pid=g.c_id AND  NOW() BETWEEN g.`uc_startdate` AND g.`uc_enddate` ORDER BY  f.is_top DESC, f.`creatdate` DESC 
+
+
 
     </select>
        <select id="count_gk" resultType="long">
