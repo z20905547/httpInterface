@@ -307,16 +307,16 @@ function loadSelectedIndex()
     </div><!-- /.modal -->
 </div>
                                 <td>
-                                  <a class="btn btn-default btn-sm" href="${base}/account/numbers/skTogkByCID?c_id=${r.c_id}&page=${page.number}">
+                                  <a class="btn btn-default btn-sm" title="踢入公客" href="${base}/account/numbers/skTogkByCID?c_id=${r.c_id}&page=${page.number}">
                                         <span class="glyphicon glyphicon-remove"></span>
                                     </a>
-                                    <a class="btn btn-default btn-sm" href="${base}/account/numbers/edit?id=${r.c_id}">
+                                    <a class="btn btn-default btn-sm" title="编辑修改" href="${base}/account/numbers/edit?id=${r.c_id}">
                                         <span class="glyphicon glyphicon-edit"></span>
                                     </a>
-                                      <a class="btn btn-default btn-sm" href="${base}/account/reback/list?id=${r.c_id}">
+                                      <a class="btn btn-default btn-sm" title="历史回访" href="${base}/account/reback/list?id=${r.c_id}">
                                         <span class="glyphicon glyphicon-comment"></span>
                                     </a>
-                                    <a class="btn btn-default btn-sm" href="" data-toggle="modal" data-target="#rebackModal${r.c_id!''}">
+                                    <a class="btn btn-default btn-sm" href="" data-toggle="modal" title="新增回访" data-target="#rebackModal${r.c_id!''}">
                                         <span class="glyphicon glyphicon-plus"></span>
                                     </a>
    <div class="modal fade" id="rebackModal${r.c_id!''}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
