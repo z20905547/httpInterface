@@ -18,12 +18,13 @@ function add_info(pid2)
 {
 	
    var pid = pid2;
-   alert(pid);
+  // alert(pid);
    var tag = "kehuliebiao";
    var reresult = $("#reresult"+pid).val();
+   var page = ${page.number};
 
     if(reresult.length > 10){
-    	window.location.href = "${base}/account/reback/insert?pid="+pid+"&tag="+tag+"&reresult="+reresult;
+    	window.location.href = "${base}/account/reback/insert?pid="+pid+"&tag="+tag+"&reresult="+reresult+"&page="+page;
     }else {
     	alert("内容至少超过10个字！")
     }
@@ -229,7 +230,7 @@ function loadSelectedIndex()
         <div class="panel panel-default">
 
             <div class="panel-heading">
-                <h3 class="panel-title"><span class="glyphicon glyphicon-user"></span> 客户管理</h3>
+                <h3 class="panel-title"><span class="glyphicon glyphicon-user"></span> 客户管理${page.number}</h3>
             </div>
             <div class="table-container">
                 <table class="table table-hover table-striped">
@@ -306,7 +307,7 @@ function loadSelectedIndex()
     </div><!-- /.modal -->
 </div>
                                 <td>
-                                  <a class="btn btn-default btn-sm" href="${base}/account/numbers/skTogkByCID?c_id=${r.c_id}">
+                                  <a class="btn btn-default btn-sm" href="${base}/account/numbers/skTogkByCID?c_id=${r.c_id}&page=${page.number}">
                                         <span class="glyphicon glyphicon-remove"></span>
                                     </a>
                                     <a class="btn btn-default btn-sm" href="${base}/account/numbers/edit?id=${r.c_id}">

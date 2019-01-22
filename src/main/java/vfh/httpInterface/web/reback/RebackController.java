@@ -82,8 +82,9 @@ public class RebackController {
     	rebackService.insert(entity);
         redirectAttributes.addFlashAttribute("success", "新增成功");
         String pid = (String) entity.get("pid");
+        String page = (String)entity.get("page");
         if(null!=entity.get("tag") && entity.get("tag") !=null && entity.get("tag").equals("kehuliebiao")){
-        	 return "redirect:/account/numbers/list";
+        	 return "redirect:/account/numbers/list?page="+page;
         }
         return "redirect:/account/reback/list?id="+pid;
     }
