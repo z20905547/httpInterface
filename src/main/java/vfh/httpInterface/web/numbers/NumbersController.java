@@ -65,6 +65,9 @@ public class NumbersController {
     	if(null != filter.get("plan")  && filter.get("plan") != "") {
     		model.addAttribute("plan", filter.get("plan"));
 	    }
+    	if(null != filter.get("page")  && filter.get("page") != "") {
+    		pageRequest.setPageNumber(Integer.parseInt((String)filter.get("page")));
+	    }
         return numbersService.findnumbers(pageRequest,filter);
     }
     /**
@@ -165,13 +168,17 @@ public class NumbersController {
     	entity.put("u_id", u_id);
     	numbersService.getNumber(entity);
     	numbersService.putNumber(entity);
-    	
+    	String c_id = (String)entity.get("c_id");
     	String userId = u_id;
     	entity.put("u_id", userId);
     	entity.put("u_name", staff);
     	entity.put("pid", entity.get("c_id"));
     	entity.put("reresult", "你获得了一个新公客客户，请尽快回访客户！祝你好运！");
     	rebackService.insert(entity);
+    	entity.clear();
+    	entity.put("id", c_id);
+    	entity.put("is_top", "11");
+    	numbersService.updateNumber(entity);
     	
         redirectAttributes.addFlashAttribute("success", "抢客成功");
 
@@ -188,7 +195,6 @@ public class NumbersController {
     	entity.put("staff", staff);
     	entity.put("u_id", u_id);
     	numbersService.skTogk(entity);
-
     	
         redirectAttributes.addFlashAttribute("success", "公客变更成功");
     }
@@ -204,17 +210,18 @@ public class NumbersController {
     	entity.put("u_id", u_id);
     	numbersService.skTogkByCID(entity);
     	String pid = String.valueOf(entity.get("c_id"));
-		
+    	String page = String.valueOf(entity.get("page"));
+    	
 		String userId = u_id;
     	entity.put("u_id", userId);
     	entity.put("u_name", staff);
     	entity.put("pid", pid);
     	entity.put("reresult", "这个客户刚刚被我踢为公客，打家快抢啊！");
 	    rebackService.insert(entity);
-
+	    entity.put("page", page);
     	
         redirectAttributes.addFlashAttribute("success", "公客变更成功");
-        return "redirect:/account/numbers/list";
+        return "redirect:/account/numbers/list?page="+page;
     }
     
 }
