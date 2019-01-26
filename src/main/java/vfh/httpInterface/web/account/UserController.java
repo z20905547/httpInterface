@@ -53,7 +53,9 @@ public class UserController {
                                           Model model) {
 
         model.addAttribute("states", VariableUtils.getVariables(State.class, State.DELETE.getValue()));
-
+    	if(null != filter.get("page")  && filter.get("page") != "") {
+    		pageRequest.setPageNumber(Integer.parseInt((String)filter.get("page")));
+	    }
         return accountService.findUsers(pageRequest,filter);
     }
 
@@ -108,7 +110,9 @@ public class UserController {
 
         accountService.updateUser(entity, groupIds == null ? Lists.<Long>newArrayList() : groupIds);
         redirectAttributes.addFlashAttribute("success", "修改成功");
-        return "redirect:/account/user/list";
+       
+        String page = String.valueOf(entity.get("page"));
+        return "redirect:/account/user/list?page="+page;
     }
 
     /**
@@ -132,11 +136,15 @@ public class UserController {
      *
      */
     @RequestMapping({"edit","add"})
-    public void createOrEdit(@RequestParam(required = false)Long id,Model model) {
+    public void createOrEdit(@RequestParam(required = false)Long id,Model model,Long page) {
 
         model.addAttribute("states", VariableUtils.getVariables(State.class, State.DELETE.getValue()));
         model.addAttribute("groups", accountService.findGroups(new HashMap<String, Object>()));
-
+//        System.out.println(page);
+//        model.addAttribute("page", page);
+        if (page != null) {
+        model.addAttribute("page", page);
+        }
         if (id != null) {
             model.addAttribute("entity", accountService.getUser(id));
             model.addAttribute("hasGroups", accountService.getUserGroups(id));

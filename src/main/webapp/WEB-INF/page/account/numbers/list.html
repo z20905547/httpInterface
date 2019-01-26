@@ -78,7 +78,10 @@ function getSubList(obj){
 				var sublist=data.data;
 				var u_id = $(" #u_id ").val();
 				
-				
+				//var u_id = ${u_name!''};
+				//var u_id = "5";
+				//var value = ${u_name!''}.val();
+				//if(${u_name!''}.length>0) u_id = ${u_name!''};
 				for(var i=0;i<sublist.length;i++){
 					    
 					if(u_id==sublist[i].id){
@@ -144,7 +147,8 @@ function loadSelectedIndex()
             </div>
 
             <form id="number-search-form" action="${base}/account/numbers/list" method="post" >
-<input type="hidden" id="pageNumber" name="pageNumber" value="0"/>
+             <input type="hidden" id="pageNumber" name="pageNumber" value="0"/>
+             
                 <div class="modal-body">
 
                     <div class="form-group">
@@ -227,10 +231,11 @@ function loadSelectedIndex()
 
     <form id="number-list-form" action="${base}/account/numbers/list" valid="false" method="post">
     <input type="hidden" id="pageNumber" name="pageNumber" value="0"/>
+    <input type="hidden" id="u_id" name="u_id" value="${u_name!''}"/>
         <div class="panel panel-default">
 
             <div class="panel-heading">
-                <h3 class="panel-title"><span class="glyphicon glyphicon-user"></span> 客户管理${page.number}</h3>
+                <h3 class="panel-title"><span class="glyphicon glyphicon-user"></span> 客户管理</h3>
             </div>
             <div class="table-container">
                 <table class="table table-hover table-striped">
@@ -256,7 +261,7 @@ function loadSelectedIndex()
                         </tr>
                         <#else>
                             <#list page.content as r>
-                             <input type="hidden" id="u_id" name="u_id" value="${r.u_id!''}"/>
+                             
                             <tr>
                                 <td><input type="checkbox" name="id" value="${r.id}"></td>
                                 <td>${r.kname!''}</td>

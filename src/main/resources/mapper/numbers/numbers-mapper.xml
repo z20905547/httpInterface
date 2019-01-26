@@ -161,7 +161,7 @@ SELECT a.* FROM `td_reback` a WHERE a.id>0
 		           </if>
 
                 ORDER BY a.`redate` DESC
-              ) C GROUP BY c.pid ) d, `td_numbers` e WHERE d.pid=e.id AND e.status !='1'
+              ) C GROUP BY c.pid ) d, `td_numbers` e WHERE d.pid=e.id 
 
 
                        
@@ -183,7 +183,13 @@ SELECT a.* FROM `td_reback` a WHERE a.id>0
 
 
 ) f ,`td_uc_middle` g 
-WHERE f.pid=g.c_id AND  NOW() BETWEEN g.`uc_startdate` AND g.`uc_enddate` ORDER BY  f.is_top DESC, f.`creatdate` DESC 
+WHERE f.pid=g.c_id AND  NOW() BETWEEN g.`uc_startdate` AND g.`uc_enddate`
+                  <if test="filter.userId != null and filter.userId != ''">
+			          AND g.u_id=#{filter.userId}
+		           </if> 
+
+
+ ORDER BY  f.is_top DESC, f.`creatdate` DESC 
 		<if test="filter.first != null and filter.last != null">
 			LIMIT #{filter.first},#{filter.last}
 		</if>
@@ -264,7 +270,7 @@ SELECT a.* FROM `td_reback` a WHERE a.id>0
 		           </if>
 
                 ORDER BY a.`redate` DESC
-              ) C GROUP BY c.pid ) d, `td_numbers` e WHERE d.pid=e.id AND e.status !='1'
+              ) C GROUP BY c.pid ) d, `td_numbers` e WHERE d.pid=e.id 
 
 
                        
@@ -286,7 +292,11 @@ SELECT a.* FROM `td_reback` a WHERE a.id>0
 
 
 ) f ,`td_uc_middle` g 
-WHERE f.pid=g.c_id AND  NOW() BETWEEN g.`uc_startdate` AND g.`uc_enddate` ORDER BY  f.is_top DESC, f.`creatdate` DESC 
+WHERE f.pid=g.c_id AND  NOW() BETWEEN g.`uc_startdate` AND g.`uc_enddate` 
+                  <if test="filter.userId != null and filter.userId != ''">
+			          AND g.u_id=#{filter.userId}
+		           </if> 
+		           ORDER BY  f.is_top DESC, f.`creatdate` DESC 
 
 
 

@@ -53,6 +53,7 @@ public class HttpAccountController {
 	public void list(HttpServletRequest request,HttpServletResponse response){
 		Map res = new HashMap();
 		Map params = RequestParamUtil.requestToMap(request);
+		params.put("state", "1");
 		
 		Map m =  accountService.findUsers2(params);
 
