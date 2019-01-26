@@ -45,7 +45,7 @@
             </div>
 
             <form id="user-search-form" action="${base}/account/user/list" method="post">
-
+             <input type="hidden" id="pageNumber" name="pageNumber" value="0"/>
                 <div class="modal-body">
 
                     <div class="form-group">
@@ -111,6 +111,8 @@
     </#if>
 
     <form id="user-list-form" action="${base}/account/user/delete" valid="false" method="post">
+    <input type="hidden" id="pageNumber" name="pageNumber" value="0"/>
+     <input type="hidden" id="page" name="page" value="${page.number}"/>
         <div class="panel panel-default">
 
             <div class="panel-heading">
@@ -152,7 +154,7 @@
                                 </td>
                                 <td>
                                     <@shiro.hasPermission name="user:edit">
-                                    <a class="btn btn-default btn-sm" href="${base}/account/user/edit?id=${r.id}">
+                                    <a class="btn btn-default btn-sm" href="${base}/account/user/edit?id=${r.id}&page=${page.number}">
                                         <span class="glyphicon glyphicon-edit"></span>
                                     </a>
                                     </@shiro.hasPermission>

@@ -45,9 +45,14 @@
                     <thead>
                         <tr>
                             <th></th>
+                            <th>前任销售</th>
                             <th>客户姓名</th>
                             <th>客户性别</th>
                              <th>客户电话</th>
+                              <th>客户来源</th>
+                               <th>地理来源</th>
+                              <th>客户需求</th>
+                              <th>客户等级</th>
                             <th>操作</th>
                         </tr>
                     </thead>
@@ -61,6 +66,7 @@
                             <#list page.content as r>
                             <tr>
                                 <td><input type="checkbox" name="id" value="${r.id}"></td>
+                                <td>${r.u_name!''}</td>
                                 <td>${r.kname!''}</td>
                                  <#if r.ksex == 0>
                                 <td>男</td>
@@ -68,6 +74,8 @@
                                 <td>女</td>
                                 </#if>
                               <td>${r.knum?substring(0,9)}**</td> 
+                              <td>${r.laiyuanqd!''}</td>
+                              <td>${r.dilily!''}</td>
                                <!--  <td>${r.knum}</td> 
                                 <td>${r.is_top!''}</td>
                                 <td>${r.laiyuanqd!''}</td>
@@ -83,22 +91,26 @@
                                 <#else>
                                 <td>放弃</td>
                                  </#if>
-                                 <#if r.c_level?? && r.c_level == 1>
-                                <td>准客</td>
-                                <#elseif r.c_level?? && r.c_level == 2>
-                                <td>水客</td>
-                                <#else>
-                                <td>不确定</td>
-                                 </#if>
-                                <td>${r.requirement!''}</td>
+                                 
+                               
                                 <td>${r.targetbuild!''}</td> 
                                  <td>${r.creatdate!''}</td>-->
+                                 <#if r.c_level?? && r.c_level == 1>
+                                <td>A</td>
+                                <#elseif r.c_level?? && r.c_level == 2>
+                                <td>B</td>
+                                <#else>
+                                <td>C</td>
+                                 </#if>
+                                  <td>${r.requirement!''}</td>
                                 <td>
                                   
                                     <a class="btn btn-default btn-sm" title="获取公客" href="${base}/account/numbers/get?m_id=${r.m_id}&u_id=${r.u_id}&u_name=${r.u_name}&c_id=${r.c_id}&c_name=${r.kname}">
                                         <span class="glyphicon glyphicon-ok"></span>
                                     </a>
-                                   
+                                     <a class="btn btn-default btn-sm" title="回访历史" href="${base}/account/reback/list?id=${r.c_id}">
+                                        <span class="glyphicon glyphicon-comment"></span>
+                                    </a>
                                 </td>
                             </tr>
                             </#list>

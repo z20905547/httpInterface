@@ -62,6 +62,9 @@ public class NumbersController {
     	if(null != filter.get("creatdate")  && filter.get("creatdate") != "") {
     		model.addAttribute("creatdate", filter.get("creatdate"));
 	    }
+    	if(null != filter.get("u_name")  && filter.get("u_name") != "") {
+    		model.addAttribute("u_name", filter.get("u_name"));
+	    }
     	if(null != filter.get("plan")  && filter.get("plan") != "") {
     		model.addAttribute("plan", filter.get("plan"));
 	    }
