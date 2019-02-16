@@ -326,7 +326,7 @@
         AND b.is_up='1'
 		AND b.status=0
 		
-		<if test="filter.price_updown != null and filter.price_updown != '' and filter.price_updown == '555' and filter.fresh_updown == '666'">
+		<if test="filter.price_updown == '555' and filter.fresh_updown == '666' ">
 			ORDER BY b.list_top desc
 		</if>
 		<if test="filter.price_updown != null and filter.price_updown != '' and filter.price_updown == 'price_up'">
@@ -336,10 +336,10 @@
 			 ORDER BY  b.active_price desc
 		</if>
 		<if test="filter.fresh_updown != null and filter.fresh_updown != '' and filter.fresh_updown == 'fresh_up'">
-			ORDER BY  b.update_time asc
+			ORDER BY b.list_top desc, b.update_time asc
 		</if>
 		<if test="filter.fresh_updown != null and filter.fresh_updown != '' and filter.fresh_updown == 'fresh_down'">
-			ORDER BY  b.update_time desc
+			ORDER BY b.list_top desc, b.update_time desc
 		</if>
 		<if test="filter.first != null and filter.last != null">
 			LIMIT #{filter.first},#{filter.last}
@@ -438,7 +438,7 @@
        </if>
 		AND b.id=n.id
 		
-		AND d.building_id=b.id
+		
 		
 		AND c.sm_type =30 
 		AND c.buildings_id=b.id
@@ -452,7 +452,7 @@
 	</select>
 	<select id="findTopList" resultType="hashmap">
 		SELECT b.buildings_name,
-		b.server_phone_num,a.*,
+		b.server_phone_num,
 		c.resource_name,
 		b.* 
 		FROM  tb_buildings b ,tb_building_resource c,
@@ -544,8 +544,7 @@
 		a.*,a.id buildings_id, f.resource_path tj_path, f.resource_name
 		tj_name, b.resource_path logo_path,b.resource_name
 		logo_name,c.resource_path ad_path,c.resource_name ad_name,
-		d.first_price,d.first_price,d.discount_price,e.active_name,e.active_detail,e.active_price,e.end_date,
-		e.start_date,e.active_jianjie,k.id AS newsid,k.latestnews latestnews,k.user_id user_id,k.nickname nickname,k.recodetime recodetime,k.user_phone 
+		k.id AS newsid,k.latestnews latestnews,k.user_id user_id,k.nickname nickname,k.recodetime recodetime,k.user_phone 
 		FROM
 		tb_buildings a
 		left join
@@ -553,12 +552,10 @@
 		b.sm_type=30
 		left join tb_building_resource c on c.buildings_id=a.id
 		and c.big_type=3 and c.sm_type=31
-		left join tb_building_price d on
-		d.building_id=a.id
-		left join tb_building_active e on e.buildings_id=a.id and e.id=#{pid}
+		
 		LEFT
 		JOIN tb_building_resource f ON f.buildings_id=a.id AND f.sm_type=33
-		AND f.pid=#{pid}
+		AND f.pid=#{buildingsId}
 		LEFT
 		JOIN tb_latest_news k ON k.id=(SELECT MAX(t.id) FROM tb_latest_news t WHERE t.builds_id=#{buildingsId}) 
 		WHERE

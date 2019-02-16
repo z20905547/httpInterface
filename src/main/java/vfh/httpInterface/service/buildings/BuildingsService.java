@@ -492,10 +492,10 @@ public class BuildingsService {
 	 * @return
 	 * @create 2016年2月25日
 	 */
-	public Map<String, Object> findBulidingsDetail(Long buildingsId,Long pid){
+	public Map<String, Object> findBulidingsDetail(Long buildingsId){
 		returnMap.clear();
 		//输入参数当前页，每页记录数，城市id
-		Map<String, Object> buildingsDetail=buildingsMapper.getMoreDetail(buildingsId,pid);
+		Map<String, Object> buildingsDetail=buildingsMapper.getMoreDetail(buildingsId);
 		
 		if(null != buildingsDetail.get("recodetime") ){
 			String recodetime = buildingsDetail.get("recodetime").toString();
