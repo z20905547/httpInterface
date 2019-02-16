@@ -107,13 +107,13 @@ public class HttpBuildingsController {
 	@ResponseBody
 	public void getBuildingsDetail(HttpServletRequest request,
 			HttpServletResponse response,
-			@RequestParam(required = false) Long buildingsId,
-			@RequestParam(required = false) Long pid) {
+			@RequestParam(required = false) Long buildingsId
+			) {
 
 		Map params = RequestParamUtil.requestToMap(request);
 
 		Map res = new HashMap();
-		Map m = buildingsService.findBulidingsDetail(buildingsId, pid);
+		Map m = buildingsService.findBulidingsDetail(buildingsId);
 		if ("000000".equals(m.get("returnCode"))) {
 			res.put("data", m.get("data"));
 			res.put("statusCode", "0000");

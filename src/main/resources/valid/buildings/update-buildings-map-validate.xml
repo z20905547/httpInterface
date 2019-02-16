@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <validate-mapper name="update-buildings">
-    <key name="buildings_name" alias="楼盘名称">
-        <notEmpty />
-    </key>
+    
 
 </validate-mapper>

@@ -14,7 +14,7 @@
 		green_rate,
 		decoration_condition,
 		util_type,
-		parking_count,floor_detail,buildings_detail,main_door,around_peitao,internal_peitao,traffic,wuye_fee,property_company,wuye_type,project_features,ratio,right_years,yushouzhenghao,dianping,build_author
+		parking_count,floor_detail,buildings_detail,main_door,around_peitao,internal_peitao,traffic,wuye_fee,property_company,wuye_type,project_features,ratio,right_years,yushouzhenghao,dianping,build_author,is_up,is_new,is_hot,is_top,top_type,list_top,first_price,nomal_price,active_price,discount_price
 	</sql>
 	<select id="get" resultType="hashmap">
 		SELECT
@@ -126,9 +126,9 @@
 			<if test="entity.create_time != null">
 				create_time = #{entity.create_time},
 			</if>
-			<if test="entity.update_time != null">
-				update_time = #{entity.update_time},
-			</if>
+
+				update_time = now(),
+
 			<if test="entity.status != null">
 				status = #{entity.status},
 			</if>
@@ -198,12 +198,46 @@
 			<if test="entity.buildings_detail != null">
 				buildings_detail = #{entity.buildings_detail},
 			</if>
-			<if test="entity.ratio != null">
+			<if test="entity.yushouzhenghao != null">
 				yushouzhenghao = #{entity.yushouzhenghao},
 			</if>
-			<if test="entity.ratio != null">
-				dianping = #{entity.dianping}
+			<if test="entity.project_features != null">
+				project_features = #{entity.project_features},
 			</if>
+			<if test="entity.dianping != null">
+				dianping = #{entity.dianping},
+			</if>
+				<if test="entity.is_up != null">
+				is_up = #{entity.is_up},
+			</if>
+				<if test="entity.is_new != null">
+				is_new = #{entity.is_new},
+			</if>
+			<if test="entity.is_top != null">
+				is_top = #{entity.is_top},
+			</if>
+				<if test="entity.is_hot != null">
+				is_hot = #{entity.is_hot},
+			</if>
+				<if test="entity.top_type != null">
+				top_type = #{entity.top_type},
+			</if>
+				<if test="entity.list_top != null">
+				list_top = #{entity.list_top},
+			</if>
+				<if test="entity.first_price != null">
+				first_price = #{entity.first_price},
+			</if>
+							<if test="entity.nomal_price != null">
+				nomal_price = #{entity.nomal_price},
+			</if>
+			<if test="entity.discount_price != null">
+				discount_price = #{entity.discount_price},
+			</if>
+						<if test="entity.active_price != null">
+				active_price = #{entity.active_price}
+			</if>
+
 		</set>
 		WHERE
 		id = #{entity.id}
@@ -249,13 +283,10 @@
 	</select>
 	<select id="findDetailList" resultType="hashmap">
 		SELECT b.buildings_name,
-		b.server_phone_num,a.*,
+		b.server_phone_num,
 		c.resource_name,
-		d.first_price ,
-		d.discount_price ,
-		b.* ,
-		e.commission_out  commission_out 
-		FROM  tb_building_active a ,tb_buildings b ,tb_building_resource c,tb_building_price d,gy_baseicdata e,
+		b.* 
+		FROM  tb_buildings b ,tb_building_resource c,
 		(SELECT c.building_id id FROM tb_building_house_type c WHERE c.id>0 
 		<if test="filter.shi != null and filter.shi != ''">
 		AND c.shi= #{filter.shi}
@@ -267,7 +298,7 @@
 		 GROUP BY
 		 c.building_id) n
 
-		WHERE a.buildings_id=b.id
+		WHERE b.id>0
        <if test="filter.city_id != null and filter.city_id != ''">
 		AND b.city_id= #{filter.city_id}
        </if>
@@ -286,31 +317,41 @@
 			AND b.wuye_type LIKE #{filter.wuye_type}
 		</if>
        <if test="filter.active_price1 != null and filter.active_price1 != ''">
-		AND a.active_price BETWEEN #{filter.active_price1} AND #{filter.active_price2}
+		AND b.active_price BETWEEN #{filter.active_price1} AND #{filter.active_price2}
        </if>
-		AND a.buildings_id=n.id
-		
-		AND d.building_id=b.id
-		
+		AND b.id=n.id
+				
 		AND c.sm_type =30 
 		AND c.buildings_id=b.id
-		AND e.build_id= b.id
-        AND e.is_up='1'
+        AND b.is_up='1'
 		AND b.status=0
-		ORDER BY e.list_top desc,a.update_time desc
+		
+		<if test="filter.price_updown == '555' and filter.fresh_updown == '666' ">
+			ORDER BY b.list_top desc
+		</if>
+		<if test="filter.price_updown != null and filter.price_updown != '' and filter.price_updown == 'price_up'">
+			ORDER BY  b.active_price asc
+		</if>
+		<if test="filter.price_updown != null and filter.price_updown != '' and filter.price_updown == 'price_down'">
+			 ORDER BY  b.active_price desc
+		</if>
+		<if test="filter.fresh_updown != null and filter.fresh_updown != '' and filter.fresh_updown == 'fresh_up'">
+			ORDER BY b.list_top desc, b.update_time asc
+		</if>
+		<if test="filter.fresh_updown != null and filter.fresh_updown != '' and filter.fresh_updown == 'fresh_down'">
+			ORDER BY b.list_top desc, b.update_time desc
+		</if>
 		<if test="filter.first != null and filter.last != null">
 			LIMIT #{filter.first},#{filter.last}
 		</if>
 	</select>
 	<select id="findHotList" resultType="hashmap">
 		SELECT b.buildings_name,
-		b.server_phone_num,a.*,
+		b.server_phone_num,
 		c.resource_name,
-		d.first_price ,
-		d.discount_price ,
-		b.* ,
-		e.commission_out  commission_out 
-		FROM  tb_building_active a ,tb_buildings b ,tb_building_resource c,tb_building_price d,gy_baseicdata e,
+		b.* 
+
+		FROM  tb_buildings b ,tb_building_resource c,
 		(SELECT c.building_id id FROM tb_building_house_type c WHERE c.id>0 
 		<if test="filter.shi != null and filter.shi != ''">
 		AND c.shi= #{filter.shi}
@@ -321,9 +362,9 @@
 		 GROUP BY
 		 c.building_id) n
 
-		WHERE a.buildings_id=b.id
+		WHERE b.id>0
 		
-		AND e.is_hot= '1'
+		AND b.is_hot= '1'
        <if test="filter.city_id != null and filter.city_id != ''">
 		AND b.city_id= #{filter.city_id}
        </if>
@@ -342,31 +383,26 @@
 			AND b.wuye_type LIKE #{filter.wuye_type}
 		</if>
        <if test="filter.active_price1 != null and filter.active_price1 != ''">
-		AND a.active_price BETWEEN #{filter.active_price1} AND #{filter.active_price2}
+		AND b.active_price BETWEEN #{filter.active_price1} AND #{filter.active_price2}
        </if>
-		AND a.buildings_id=n.id
-		
-		AND d.building_id=b.id
-		
+
 		AND c.sm_type =30 
 		AND c.buildings_id=b.id
-		AND e.build_id= b.id
-        AND e.is_up='1'
+
+        AND b.is_up='1'
 		AND b.status=0
-		ORDER BY a.update_time desc
+		
 		<if test="filter.first != null and filter.last != null">
 			LIMIT #{filter.first},#{filter.last}
 		</if>
 	</select>
 	<select id="findNewList" resultType="hashmap">
 		SELECT b.buildings_name,
-		b.server_phone_num,a.*,
+		b.server_phone_num,
 		c.resource_name,
-		d.first_price ,
-		d.discount_price ,
-		b.* ,
-		e.commission_out  commission_out 
-		FROM  tb_building_active a ,tb_buildings b ,tb_building_resource c,tb_building_price d,gy_baseicdata e,
+		b.* 
+
+		FROM  tb_buildings b ,tb_building_resource c,
 		(SELECT c.building_id id FROM tb_building_house_type c WHERE c.id>0 
 		<if test="filter.shi != null and filter.shi != ''">
 		AND c.shi= #{filter.shi}
@@ -378,11 +414,11 @@
 		 GROUP BY
 		 c.building_id) n
 
-		WHERE a.buildings_id=b.id
+		WHERE b.id>0
        <if test="filter.city_id != null and filter.city_id != ''">
 		AND b.city_id= #{filter.city_id}
        </if>
-       AND e.is_new= '1'
+       AND b.is_new= '1'
       <if test="filter.area_id != null and filter.area_id != ''">
 			AND b.area_id LIKE #{filter.area_id}
 	  </if>
@@ -398,31 +434,28 @@
 			AND b.wuye_type LIKE #{filter.wuye_type}
 		</if>
        <if test="filter.active_price1 != null and filter.active_price1 != ''">
-		AND a.active_price BETWEEN #{filter.active_price1} AND #{filter.active_price2}
+		AND b.active_price BETWEEN #{filter.active_price1} AND #{filter.active_price2}
        </if>
-		AND a.buildings_id=n.id
+		AND b.id=n.id
 		
-		AND d.building_id=b.id
+		
 		
 		AND c.sm_type =30 
 		AND c.buildings_id=b.id
-		AND e.build_id= b.id
-        AND e.is_up='1'
+
+        AND b.is_up='1'
 		AND b.status=0
-		ORDER BY a.update_time desc
+
 		<if test="filter.first != null and filter.last != null">
 			LIMIT #{filter.first},#{filter.last}
 		</if>
 	</select>
 	<select id="findTopList" resultType="hashmap">
-		SELECT b.buildings_name,e.is_top,
-		b.server_phone_num,a.*,
+		SELECT b.buildings_name,
+		b.server_phone_num,
 		c.resource_name,
-		d.first_price ,
-		d.discount_price ,
-		b.* ,
-		e.commission_out  commission_out 
-		FROM  tb_building_active a ,tb_buildings b ,tb_building_resource c,tb_building_price d,gy_baseicdata e,
+		b.* 
+		FROM  tb_buildings b ,tb_building_resource c,
 		(SELECT c.building_id id FROM tb_building_house_type c WHERE c.id>0 
 		<if test="filter.shi != null and filter.shi != ''">
 		AND c.shi= #{filter.shi}
@@ -434,15 +467,15 @@
 		 GROUP BY
 		 c.building_id) n
 
-		WHERE a.buildings_id=b.id
+		WHERE b.id>0
        <if test="filter.city_id != null and filter.city_id != ''">
 		AND b.city_id= #{filter.city_id}
        </if>
        <if test="filter.is_top != null and filter.is_top != ''">
-		AND e.is_top= #{filter.is_top}
+		AND b.is_top= #{filter.is_top}
        </if>
        <if test="filter.top_type != null and filter.top_type != ''">
-		AND e.top_type= #{filter.top_type}
+		AND b.top_type= #{filter.top_type}
        </if>
       <if test="filter.area_id != null and filter.area_id != ''">
 			AND b.area_id LIKE #{filter.area_id}
@@ -459,18 +492,17 @@
 			AND b.wuye_type LIKE #{filter.wuye_type}
 		</if>
        <if test="filter.active_price1 != null and filter.active_price1 != ''">
-		AND a.active_price BETWEEN #{filter.active_price1} AND #{filter.active_price2}
+		AND b.active_price BETWEEN #{filter.active_price1} AND #{filter.active_price2}
        </if>
-		AND a.buildings_id=n.id
+		AND b.id=n.id
 		
-		AND d.building_id=b.id
+
 		
 		AND c.sm_type =30 
 		AND c.buildings_id=b.id
-		AND e.build_id= b.id
-        AND e.is_up='1'
+
+        AND b.is_up='1'
 		AND b.status=0
-		ORDER BY a.update_time desc
 		<if test="filter.first != null and filter.last != null">
 			LIMIT #{filter.first},#{filter.last}
 		</if>
@@ -512,8 +544,7 @@
 		a.*,a.id buildings_id, f.resource_path tj_path, f.resource_name
 		tj_name, b.resource_path logo_path,b.resource_name
 		logo_name,c.resource_path ad_path,c.resource_name ad_name,
-		d.first_price,d.first_price,d.discount_price,e.active_name,e.active_detail,e.active_price,e.end_date,
-		e.start_date,e.active_jianjie,k.id AS newsid,k.latestnews latestnews,k.user_id user_id,k.nickname nickname,k.recodetime recodetime,k.user_phone 
+		k.id AS newsid,k.latestnews latestnews,k.user_id user_id,k.nickname nickname,k.recodetime recodetime,k.user_phone 
 		FROM
 		tb_buildings a
 		left join
@@ -521,12 +552,10 @@
 		b.sm_type=30
 		left join tb_building_resource c on c.buildings_id=a.id
 		and c.big_type=3 and c.sm_type=31
-		left join tb_building_price d on
-		d.building_id=a.id
-		left join tb_building_active e on e.buildings_id=a.id and e.id=#{pid}
+		
 		LEFT
 		JOIN tb_building_resource f ON f.buildings_id=a.id AND f.sm_type=33
-		AND f.pid=#{pid}
+		AND f.pid=#{buildingsId}
 		LEFT
 		JOIN tb_latest_news k ON k.id=(SELECT MAX(t.id) FROM tb_latest_news t WHERE t.builds_id=#{buildingsId}) 
 		WHERE

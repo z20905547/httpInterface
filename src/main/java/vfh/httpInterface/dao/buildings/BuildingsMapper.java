@@ -93,7 +93,7 @@ public interface BuildingsMapper {
 	 * @return
 	 * @create 2016年2月25日
 	 */
-	public Map<String, Object> getMoreDetail(@Param("buildingsId")Long buildingsId,@Param("pid")Long pid);
+	public Map<String, Object> getMoreDetail(@Param("buildingsId")Long buildingsId);
 	/**
 	 * TODO 按条件查询楼盘坐标及其他信息
 	 * @author harry
