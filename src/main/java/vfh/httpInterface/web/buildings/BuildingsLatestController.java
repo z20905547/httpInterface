@@ -36,6 +36,8 @@ public class BuildingsLatestController {
 
     @Autowired
     private BuildingsLatestService buildingsLatestService;
+    @Autowired
+    private BuildingsService buildingsService;
     @RequestMapping("list2")
     public Page<Map<String, Object>> list(PageRequest pageRequest, @RequestParam Map<String, Object> filter,Model model) {
     	Map<String,Object> user = SessionVariable.getCurrentSessionVariable().getUser();
@@ -59,6 +61,8 @@ public class BuildingsLatestController {
     	String username = user.get("username").toString();
     	String nickname = user.get("nickname").toString();
     	String user_phone = user.get("email").toString();
+    	String buildings_id = entity.get("buildings_id").toString();
+    	String buildingsName = entity.get("buildingsName").toString();
     	
     	entity.put("nickname", nickname);
     	entity.put("username", username);
@@ -67,9 +71,13 @@ public class BuildingsLatestController {
     	
     	buildingsLatestService.insertBuildingsActive(entity);
     	buildingsLatestService.updateBuildingsActiveUpdata(entity);
+    	entity.clear();
+    	entity.put("id", buildings_id);
+
+    	buildingsService.updateBuildings(entity);
         redirectAttributes.addFlashAttribute("success", "新增活动成功");
-        redirectAttributes.addAttribute("buildingsId", entity.get("buildings_id"));
-        redirectAttributes.addAttribute("buildingsName", entity.get("buildingsName"));
+        redirectAttributes.addAttribute("buildingsId", buildings_id);
+        redirectAttributes.addAttribute("buildingsName", buildingsName);
         
         return "redirect:/buildings/latest/list2";
     }
@@ -78,9 +86,14 @@ public class BuildingsLatestController {
                          RedirectAttributes redirectAttributes) {
     	buildingsLatestService.updateBuildingsActive(entity);
     	buildingsLatestService.updateBuildingsActiveUpdata(entity);
+    	String buildings_id = entity.get("buildings_id").toString();
+    	String buildingsName = entity.get("buildingsName").toString();
+    	entity.clear();
+    	entity.put("id", buildings_id);
+    	buildingsService.updateBuildings(entity);
         redirectAttributes.addFlashAttribute("success", "修改价格成功");
-        redirectAttributes.addAttribute("buildingsId", entity.get("buildings_id"));
-        redirectAttributes.addAttribute("buildingsName", entity.get("buildingsName"));
+        redirectAttributes.addAttribute("buildingsId", buildings_id);
+        redirectAttributes.addAttribute("buildingsName", buildingsName);
         return "redirect:/buildings/latest/list2";
     }
     @RequestMapping({"edit","add"})

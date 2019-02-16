@@ -58,10 +58,10 @@ public class BuildingsService {
 	 * @create 2016年1月12日
 	 */
 	public void updateBuildings(@MapValid("update-buildings")Map<String, Object> entity){
-        if(entity.get("open_date").equals("")) entity.put("open_date", null);
-        if(entity.get("deliver_date").equals("")) entity.put("deliver_date", null);
-        if(entity.get("cityId").equals("--请选择--")) entity.put("cityId", null);
-        if(entity.get("areaId").equals("--请选择--")) entity.put("areaId", null);
+        if(null!=entity.get("open_date")&& entity.get("open_date").equals("")) entity.put("open_date", null);
+        if(null!=entity.get("deliver_date") && entity.get("deliver_date").equals(""))  entity.put("deliver_date", null);
+        if(null!= entity.get("deliver_date")&& entity.get("cityId").equals("--请选择--"))  entity.put("cityId", null);
+        if(null!=entity.get("deliver_date")&& entity.get("areaId").equals("--请选择--"))   entity.put("areaId", null);
 		buildingsMapper.update(entity);
 	}
 	/**
@@ -177,22 +177,34 @@ public class BuildingsService {
 		}
 		if("222".equals(filter.get("active_price"))) {
 			filter.put("active_price1", "");
-		}else if ("4000".equals(filter.get("active_price"))){
-			filter.put("active_price1", "0");
-			filter.put("active_price2", "4000");
-		}else if ("6000".equals(filter.get("active_price"))){
-			filter.put("active_price1", "4000");
-			filter.put("active_price2", "6000");
 		}
 		else if ("8000".equals(filter.get("active_price"))){
-			filter.put("active_price1", "6000");
+			filter.put("active_price1", "0");
 			filter.put("active_price2", "8000");
 		}else if ("10000".equals(filter.get("active_price"))){
 			filter.put("active_price1", "8000");
 			filter.put("active_price2", "10000");
-		}else if ("11000".equals(filter.get("active_price"))){
+		}else if ("12000".equals(filter.get("active_price"))){
 			filter.put("active_price1", "10000");
-			filter.put("active_price2", "50000");
+			filter.put("active_price2", "12000");
+		}else if ("15000".equals(filter.get("active_price"))){
+			filter.put("active_price1", "10000");
+			filter.put("active_price2", "15000");
+		}else if ("18000".equals(filter.get("active_price"))){
+			filter.put("active_price1", "15000");
+			filter.put("active_price2", "18000");
+		}else if ("20000".equals(filter.get("active_price"))){
+			filter.put("active_price1", "18000");
+			filter.put("active_price2", "20000");
+		}else if ("25000".equals(filter.get("active_price"))){
+			filter.put("active_price1", "20000");
+			filter.put("active_price2", "25000");
+		}else if ("30000".equals(filter.get("active_price"))){
+			filter.put("active_price1", "25000");
+			filter.put("active_price2", "30000");
+		}else if ("30000".equals(filter.get("active_price"))){
+			filter.put("active_price1", "30000");
+			filter.put("active_price2", "150000");
 		}
 		if("333".equals(filter.get("acreage"))) {
 			filter.put("acreage1", "");

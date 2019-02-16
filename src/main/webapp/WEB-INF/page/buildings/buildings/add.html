@@ -116,8 +116,7 @@
 		<form action="${base}/buildings/buildings/insert"
 			id="create-user-form" method="post">
 			<div class="panel-body">
-
-				<div class="form-group">
+<div class="form-group">
 					<div class="row">
 						<div class="col-xs-6">
 							<label for="buildings_name">楼盘名称:</label> <input type="text"
@@ -131,6 +130,75 @@
 						</div>
 					</div>
 				</div>
+			<div class="form-group">
+				<div class="row">
+						<div class="col-xs-6">
+					<label for="is_top">是否置顶:</label>								
+					   <select class="form-control "  id="is_top" name="is_top">  
+                           <option value ="1" >置顶</option>
+                           <option value ="0" selected>不置顶</option>
+   
+                       </select> 
+						</div>
+						 <div class="col-xs-6">
+                            <label for="top_type">置顶类型:</label>
+                         <select class="form-control "  id="top_type" name="top_type">  
+                           <option value ="1" selected>热销楼盘</option>
+                           <option value ="2">一线海景</option>  
+                            <option value ="3">精品别墅</option>  
+                             <option value ="4">海口周边</option>  
+                              <option value ="5">三亚周边</option>  
+                               <option value ="6">其他</option>  
+                               <option value ="7">其他</option>  
+                               <option value ="8">其他</option>  
+                               <option value ="9">其他</option>  
+                       </select> 
+                            
+                        </div>
+					</div>
+					</div>
+				<div class="form-group" >	
+				<div class="row" >
+						<div class="col-xs-6" >
+					<label for="is_contract">是否最新:</label>								
+					   <select class="form-control "  id="is_new" name="is_new">  
+                           <option value ="0" >最新</option>
+                           <option value ="1" selected>非最新</option>
+   
+                       </select> 
+						</div>
+						 <div class="col-xs-6">
+                            <label for="is_hot">是否最热:</label>
+                         <select class="form-control "  id="is_up" name="is_up">  
+                           <option value ="0" selected>非最热</option>
+                           <option value ="1">最热</option>  
+                       </select> 
+                            
+                        </div>
+					</div>
+					</div>
+			
+				<div class="form-group" >
+					<div class="row">
+												
+						 <div class="col-xs-6">
+                            <label for="is_up">上线状态:</label>
+                         <select class="form-control "  id="is_up" name="is_up">  
+                           <option value ="0" selected>已下线</option>
+                           <option value ="1">已上线</option>  
+                       </select> 
+                            
+                        </div>
+					<div class="col-xs-6">
+					<label for="list_top">首页列表置顶:</label>								
+					   <select class="form-control "  id="list_top" name="list_top">  
+                           <option value ="1" >置顶</option>
+                           <option value ="0" selected>不置顶</option>
+                       </select> 
+						</div>
+					</div>
+				</div> 	
+						
 				<div class="form-group">
 					<div class="row">
 						<div class="col-xs-4">
@@ -150,6 +218,23 @@
 						</div>
 					</div>
 				</div>
+				                <div class="form-group">
+                    <div class="row">
+                        <div class="col-xs-4">
+                            <label for="first_price">原价:</label>
+                            <input type="text" class="form-control number" id="first_price" name="first_price" placeholder="输入金额（可保留0-2位小数）">
+                        </div>
+                        <div class="col-xs-4">
+                            <label for="active_price">特价:</label>
+                            <input type="text" class="form-control required number" id="active_price" name="active_price" placeholder="输入金额（可保留0-2位小数）">
+                        </div>
+                        <div class="col-xs-4">
+                            <label for="discount_price">红包:</label>
+                            <input type="text" class="form-control number" id="discount_price" name="discount_price" placeholder="输入金额（可保留0-2位小数）">
+                        </div>
+
+                    </div>
+                </div>
 				<div class="form-group">
 					<div class="row">
 						<div class="col-xs-6">

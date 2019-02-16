@@ -215,11 +215,11 @@
                                         <span class="glyphicon glyphicon-edit"></span>
                                     </a>
                                     </@shiro.hasPermission>
-                                    <@shiro.hasPermission name="price:list">
+                                    <!--<@shiro.hasPermission name="price:list">
                                     <a class="btn btn-default btn-sm blocklink" title="编辑价格" href="javascript:void(0)" data-href="${base}/buildings/price/list" data-building-id="${r.id}" data-building-name="${r.buildings_name}">
                                         <span class="glyphicon glyphicon-usd"></span>
                                     </a>
-                                    </@shiro.hasPermission>
+                                    </@shiro.hasPermission>-->
                                     <@shiro.hasPermission name="house:list">
                                     <a class="btn btn-default btn-sm blocklink" title="编辑户型" href="javascript:void(0)" data-href="${base}/buildings/house/list" data-building-id="${r.id}" data-building-name="${r.buildings_name}">
                                         <span class="glyphicon glyphicon-home"></span>
@@ -228,15 +228,15 @@
                                     <a class="btn btn-default btn-sm blocklink" title="编辑图片" href="javascript:void(0)" data-href="${base}/buildings/house/picEdit" data-building-id="${r.id}" data-building-name="${r.buildings_name}">
                                         <span class="glyphicon glyphicon-picture"></span>
                                     </a>
-                                    <a class="btn btn-default btn-sm blocklink" title="活动添加" href="javascript:void(0)" data-href="${base}/buildings/active/list" data-building-id="${r.id}" data-building-name="${r.buildings_name}">
+                                    <!--<a class="btn btn-default btn-sm blocklink" title="活动添加" href="javascript:void(0)" data-href="${base}/buildings/active/list" data-building-id="${r.id}" data-building-name="${r.buildings_name}">
                                         <span class="glyphicon glyphicon-time"></span>
-                                    </a>
+                                    </a>-->
                                     <a class="btn btn-default btn-sm blocklink" title="活动最新动态" href="javascript:void(0)" data-href="${base}/buildings/latest/list2" data-building-id="${r.id}" data-building-name="${r.buildings_name}">
                                         <span class="glyphicon glyphicon-bell"></span>
                                     </a>
-                                    <a class="btn btn-default btn-sm blocklink" title="项目上下线" href="javascript:void(0)" data-href="${base}/gongying/basicdata/list2" data-building-id="${r.id}" data-building-name="${r.buildings_name}">
+                                    <!--  <a class="btn btn-default btn-sm blocklink" title="项目上下线" href="javascript:void(0)" data-href="${base}/gongying/basicdata/list2" data-building-id="${r.id}" data-building-name="${r.buildings_name}">
                                         <span class="glyphicon glyphicon-sort"></span>
-                                    </a>
+                                    </a>-->
                                 </td>
                             </tr>
                             </#list>
