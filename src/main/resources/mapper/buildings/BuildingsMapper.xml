@@ -327,7 +327,7 @@
 		AND b.status=0
 		
 		<if test="filter.price_updown == '555' and filter.fresh_updown == '666' ">
-			ORDER BY b.list_top desc
+			ORDER BY b.list_top desc, b.update_time desc
 		</if>
 		<if test="filter.price_updown != null and filter.price_updown != '' and filter.price_updown == 'price_up'">
 			ORDER BY  b.active_price asc
