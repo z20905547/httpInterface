@@ -246,17 +246,8 @@ head>
                         </div>
 						<div class="col-xs-6">
 					<label for="list_top">首页列表置顶:</label>								
-					   <select class="form-control "  id="list_top" name="list_top" >  
-                          
-                             <option value="0" <#if entity.list_top?? && entity.list_top==0>selected="selected"</#if> >
-                                                                                           不置顶   
-                           </option>
-                           <option value="1" <#if entity.list_top?? && entity.list_top==1>selected="selected"</#if> >
-                                                                                     置顶    
-                           </option>
-                         
-                            
-                       </select> 
+					  <input type="text" class="form-control number" id="list_top" name="list_top"  value="${entity.list_top!''}" placeholder="输入数字 数字越大置顶级别越靠前">
+                       
 						</div>
 					</div>
 				</div> 
