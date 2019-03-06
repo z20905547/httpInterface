@@ -66,6 +66,7 @@
 			return;
 		}
 		var url="/management/jsondata/area/getSubAreaList";
+		//var url="/httpInterface/jsondata/area/getSubAreaList";
 		var params={parentId:pid};
 		$.ajax({
 			type: 'get',
@@ -233,6 +234,9 @@
                                     </a>-->
                                     <a class="btn btn-default btn-sm blocklink" title="活动最新动态" href="javascript:void(0)" data-href="${base}/buildings/latest/list2" data-building-id="${r.id}" data-building-name="${r.buildings_name}">
                                         <span class="glyphicon glyphicon-bell"></span>
+                                    </a>
+                                     <a class="btn btn-default btn-sm blocklink" title="特价图片" href="javascript:void(0)" data-href="${base}/buildings/active/acPicEdit" data-building-id="${r.id}" data-building-name="${r.buildings_name}">
+                                        <span class="glyphicon glyphicon-text-width"></span>
                                     </a>
                                     <!--  <a class="btn btn-default btn-sm blocklink" title="项目上下线" href="javascript:void(0)" data-href="${base}/gongying/basicdata/list2" data-building-id="${r.id}" data-building-name="${r.buildings_name}">
                                         <span class="glyphicon glyphicon-sort"></span>

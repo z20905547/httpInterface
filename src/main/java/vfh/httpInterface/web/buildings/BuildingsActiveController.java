@@ -93,8 +93,8 @@ public class BuildingsActiveController {
 //    	}
     	//model.addAttribute("hxtsrc","");
         }else{
-        	model.addAttribute("buildings_id",filter.get("buildings_id").toString());
-        	 model.addAttribute("buildingsName",filter.get("buildingsName").toString());
+        	model.addAttribute("buildings_id",filter.get("buildingsId").toString());
+       	 model.addAttribute("buildingsName",filter.get("buildingsName").toString());
         }
     }
     @ResponseBody
