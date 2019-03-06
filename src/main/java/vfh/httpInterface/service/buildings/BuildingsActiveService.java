@@ -204,7 +204,7 @@ public class BuildingsActiveService {
 			Map<String, Object> entity = SessionVariable.getCurrentSessionVariable().getUser();
 			String originalPicPath  = null;
 			String resource_path = null;
-	        String id = request.getParameter("id");
+	      //  String id = request.getParameter("id");
 	       // String buildings_id = request.getParameter("buildings_id");
 	        Long buildings_id = Long.parseLong( request.getParameter("buildings_id"));
 			MultipartHttpServletRequest mRequest = (MultipartHttpServletRequest) request;//request强制转换注意
@@ -218,21 +218,21 @@ public class BuildingsActiveService {
 	            // 使用字符替换图片名称，防止乱码
 	            String tempName = "hdt" + fileType;
 
-	            File uploadfile = new File(DEFAULT_USER_UPLOAD_PORTRAIT_PATH +buildings_id + "/hdt/" +  id +"/"+ tempName);// 上传地址
+	            File uploadfile = new File(DEFAULT_USER_UPLOAD_PORTRAIT_PATH +buildings_id + "/hdt/" + tempName);// 上传地址
 
 				if (uploadfile.isFile() && uploadfile.exists()) {  //文件夹中存在文件则表示已经入库过，则不再入库记录
 					
 				}else {
 					
 					// 图片信息入库
-		            Long pid = Long.parseLong( id);
+		          //Long pid = Long.parseLong( id);
 					String big_type = "6";
-					resource_path = DEFAULT_USER_UPLOAD_PORTRAIT_PATH2 +buildings_id+ "/hdt/" +  id + "/";
+					resource_path = DEFAULT_USER_UPLOAD_PORTRAIT_PATH2 +buildings_id+ "/hdt/" ;
 					// 要保存文件的文件名
 					String resource_name = tempName;
 
 
-					entity.put("pid", pid);
+				//	entity.put("pid", pid);
 					entity.put("buildings_id", buildings_id);
 					entity.put("big_type", big_type);
 					entity.put("sm_type", "33");
@@ -246,9 +246,9 @@ public class BuildingsActiveService {
 	            	uploadfile.mkdirs();
 	            	
 	            	resource_path = DEFAULT_USER_UPLOAD_PORTRAIT_PATH2
-							+ buildings_id + "/hdt/" +  id + "/";
+							+ buildings_id + "/hdt/" ;
 					originalPicPath = DEFAULT_USER_UPLOAD_PORTRAIT_PATH
-							+ buildings_id+ "/hdt/" +  id + "/"
+							+ buildings_id+ "/hdt/" 
 							+ tempName;
 	            }
 	          
@@ -258,7 +258,7 @@ public class BuildingsActiveService {
 	            
 				//每上传一次活动图 就更新一次更新时间
 				//entity.clear();
-				entity.put("id", id);
+			//	entity.put("id", id);
 				buildingActiveMapper.update(entity);
 //	            String portraitPath = DEFAULT_USER_UPLOAD_PORTRAIT_PATH +id+ File.separator + "huxingtu" + File.separator+ shi + File.separator;
 //	            String originalPicPath = uploadfile.getAbsolutePath();

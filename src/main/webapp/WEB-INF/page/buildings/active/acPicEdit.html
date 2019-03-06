@@ -25,7 +25,7 @@
 		    var imageurl = $(this).attr("value");
 		    if (imageurl) {
 		        $(this).fileinput({
-		        	uploadUrl: "${base}/buildings/active/acPicInsert?id=${id}&buildings_id=${buildings_id}", 
+		        	uploadUrl: "${base}/buildings/active/acPicInsert?buildings_id=${buildings_id}", 
 		        	previewFileIcon: '<i class="fa fa-file"></i>',
 		            language : 'zh',
 		            
@@ -35,7 +35,7 @@
 		        });
 		    } else {
 		        $(this).fileinput({
-		        	uploadUrl: "${base}/buildings/active/acPicInsert?id=${id}&buildings_id=${buildings_id}",
+		        	uploadUrl: "${base}/buildings/active/acPicInsert?&buildings_id=${buildings_id}",
 		        	previewFileIcon: '<i class="fa fa-file"></i>',
 		            language : 'zh',
 		         
@@ -63,7 +63,7 @@
 
         <form enctype="multipart/form-data" action="${base}/buildings/active/acPicInsert" id="create-user-form" method="post">
             <div class="panel-body">
-<input type="hidden" name="id" value="${id}"/>
+
 <input type="hidden" name="buildings_id" value="${buildings_id}"/>                
                 <div class="form-group">
                     <div class="row">

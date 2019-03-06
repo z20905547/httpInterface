@@ -201,6 +201,9 @@
 			<if test="entity.yushouzhenghao != null">
 				yushouzhenghao = #{entity.yushouzhenghao},
 			</if>
+			<if test="entity.wuye_type != null">
+				wuye_type = #{entity.wuye_type},
+			</if>
 			<if test="entity.project_features != null">
 				project_features = #{entity.project_features},
 			</if>
