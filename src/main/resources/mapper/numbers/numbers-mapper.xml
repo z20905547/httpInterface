@@ -208,6 +208,7 @@ WHERE f.pid=g.c_id AND  NOW() BETWEEN g.`uc_startdate` AND g.`uc_enddate`
                AND a.status !='1'
               AND b.`c_id` = a.id 
               AND NOW() > b.`uc_enddate`
+              order by b.creat_date desc
 		<if test="filter.first != null and filter.last != null">
 			LIMIT #{filter.first},#{filter.last}
 		</if>
@@ -362,7 +363,8 @@ SELECT a.* FROM `td_reback` a WHERE a.`u_id` IN (SELECT b.`u_id` u_id FROM `td_u
 ) C GROUP BY c.pid ) d WHERE (TO_DAYS(NOW())-TO_DAYS(d.redate))>40  ) f 
 WHERE f.pid = e.`c_id` AND NOW() BETWEEN e.`uc_startdate` AND e.`uc_enddate`) k
 SET is_get = '0',
- uc_enddate = NOW() 
+ uc_enddate = NOW(),
+  creat_date = NOW() 
  WHERE g.id=k.id 
 		
 		</update>
@@ -372,6 +374,7 @@ SET is_get = '0',
 UPDATE 
 `td_uc_middle` a ,`td_numbers` b 
       SET  a.is_get = '0',
+      a.creat_date = NOW(), 
       a.uc_enddate = NOW() 
     WHERE  a.c_id= b.id AND b.status !=1 AND NOW() BETWEEN a.`uc_startdate` AND a.`uc_enddate` 
    <if test="entity.u_id != null and entity.u_id != ''">
