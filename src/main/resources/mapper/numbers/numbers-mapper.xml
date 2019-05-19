@@ -217,8 +217,7 @@ WHERE f.pid=g.c_id AND  NOW() BETWEEN g.`uc_startdate` AND g.`uc_enddate`
 			         AND a.kname LIKE #{filter.kname}
 		             </if> 
               
-              
-              order by b.creat_date desc
+               order by b.creat_date desc
 		<if test="filter.first != null and filter.last != null">
 			LIMIT #{filter.first},#{filter.last}
 		</if>
