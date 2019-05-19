@@ -208,6 +208,16 @@ WHERE f.pid=g.c_id AND  NOW() BETWEEN g.`uc_startdate` AND g.`uc_enddate`
                AND a.status !='1'
               AND b.`c_id` = a.id 
               AND NOW() > b.`uc_enddate`
+             <if test="filter.knum != null and filter.knum != ''">
+                    <bind name="filter.knum" value=" '%' + filter.knum + '%' " />
+			          AND a.knum LIKE #{filter.knum}
+		           </if> 
+                    <if test="filter.kname != null and filter.kname != ''">
+		            <bind name="filter.kname" value=" '%' + filter.kname + '%' " />
+			         AND a.kname LIKE #{filter.kname}
+		             </if> 
+              
+              
               order by b.creat_date desc
 		<if test="filter.first != null and filter.last != null">
 			LIMIT #{filter.first},#{filter.last}
