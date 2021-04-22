@@ -49,7 +49,7 @@
         <jetty.version>7.6.11.v20130520</jetty.version>
         <mysql.connector.version>5.1.33</mysql.connector.version>
         <freemarker.version>2.3.21</freemarker.version>
-        <shiro.version>1.2.3</shiro.version>
+        <shiro.version>1.7.1</shiro.version>
         <ehcache.version>2.6.8</ehcache.version>
         <selenium.version>2.44.0</selenium.version>
     </properties>
